@@ -61,14 +61,14 @@ site_install ()
 	cd $DOCROOT_PATH
 
 	# We disable email sending here so site-install does not return an error
-	drush site-install -y --site-name='My Drupal 8 Site'
+	PHP_OPTIONS="-d sendmail_path=`which true`" drush site-install -y --site-name='My Drupal 8 Site'
 }
 
 # Composer Install
 composer_install ()
 {
   cd $PROJECT_ROOT
-	composer global require hirak/prestissimo
+	composer global require hirak/prestissimo:"^0.3"
   composer install
 }
 
@@ -77,7 +77,7 @@ composer_install ()
 #-------------------------- Execution --------------------------------
 
 # Project initialization steps
-#composer_install
+composer_install
 fix_permissions
 init_settings
 time site_install
