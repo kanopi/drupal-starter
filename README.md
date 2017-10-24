@@ -10,7 +10,7 @@ Features:
 - [Drupal Composer](https://github.com/drupal-composer/drupal-project)
 - [Docksal](https://github.com/docksal/docksal) 
     - Containerized site instantiation via CLI: `fin init`
-    - [Docker](https://www.docker.com/) volumes allow File IO for native asset manipulation with no local device pollution.
+    - [Docker](https://www.docker.com/) volumes allow file I/O for native asset manipulation with no local device pollution.
 
 ## Setup instructions
 
