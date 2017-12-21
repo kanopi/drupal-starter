@@ -249,9 +249,7 @@ $databases = array();
  *   );
  * @endcode
  */
-$config_directories = array(
-  CONFIG_SYNC_DIRECTORY => dirname(DRUPAL_ROOT) . '/config',
-);
+$config_directories = array();
 
 /**
  * Settings:
@@ -783,5 +781,5 @@ $settings['entity_update_batch_size'] = 50;
  */
 #
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-  include $app_root . '/' . $site_path . '/settings.local.php';
+   include $app_root . '/' . $site_path . '/settings.local.php';
 }
