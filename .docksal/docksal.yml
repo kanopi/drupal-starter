@@ -1,0 +1,48 @@
+# Basic LAMP stack
+
+version: "2.1"
+
+services:
+  # Web
+  web:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: web
+    depends_on:
+      - cli
+
+  # DB
+  db:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: db
+
+  # CLI
+  cli:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: cli
+    environment:
+      - VIRTUAL_HOST
+    volumes:
+      - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
+
+  # SOLR
+  solr:
+    image: docksal/solr:1.0-solr3
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: solr
+
+  # Fake email
+  mail:
+    hostname: mail
+    image: mailhog/mailhog
+    expose:
+      - "80"
+    environment:
+      - MH_API_BIND_ADDR=0.0.0.0:80
+      - MH_UI_BIND_ADDR=0.0.0.0:80
+    labels:
+      - io.docksal.virtual-host=webmail.${VIRTUAL_HOST}
+    user: root
