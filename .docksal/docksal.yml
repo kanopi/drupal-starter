@@ -1,5 +1,3 @@
-# Basic LAMP stack
-
 version: "2.1"
 
 services:
@@ -10,6 +8,8 @@ services:
       service: web
     depends_on:
       - cli
+    environment:
+      - APACHE_FILE_PROXY
 
   # DB
   db:
@@ -27,13 +27,6 @@ services:
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
 
-  # SOLR
-  solr:
-    image: docksal/solr:1.0-solr3
-    extends:
-      file: ${HOME}/.docksal/stacks/services.yml
-      service: solr
-
   # Fake email
   mail:
     hostname: mail
@@ -46,3 +39,38 @@ services:
     labels:
       - io.docksal.virtual-host=webmail.${VIRTUAL_HOST}
     user: root
+
+  # PHPMyAdmin
+  pma:
+    hostname: pma
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+    labels:
+      - io.docksal.virtual-host=pma.${VIRTUAL_HOST}
+
+  # Log Router
+  logspout:
+    hostname: logspout
+    image: gliderlabs/logspout
+    expose:
+      - "80"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command:
+      syslog://syslog:514
+
+  # PimpMyLog Web Viewer
+  # Need logspout to use properly
+  syslog:
+    hostname: syslog
+    image: pbertera/syslogserver
+    expose:
+      - "80"
+    environment:
+      - SYSLOG_USERNAME=${SYSLOG_USERNAME:-admin}
+      - SYSLOG_PASSWORD=${SYSLOG_PASSWORD:-admin}
+    labels:
+      - io.docksal.virtual-host=syslog.${VIRTUAL_HOST}
