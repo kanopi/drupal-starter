@@ -1,0 +1,36 @@
+header{
+  @include background-img('../images/badcamp2018-bridge.jpg', cover, top center);
+  min-height: 900px;
+  color: $white;
+  @include breakpoint(small){
+    min-height: 0px;
+    @include background-img('../images/badcamp2018-bridge.jpg', cover, top center);
+  }
+
+  a{
+    color: $white;
+    &:hover,
+    &:active,
+    &.active{
+      color: $white;
+    }
+  }
+
+  .page-title-holder{
+    min-height: 300px;
+    font-family: $body-font-family;
+    font-size: 2rem;
+  }
+
+  .page-title{
+    color: $white;
+  }
+
+  .header-inner-outter{
+    @include background-img('../images/spotlights.svg', cover, bottom center);
+  }
+}
+
+.page-header{
+  position: relative;
+}

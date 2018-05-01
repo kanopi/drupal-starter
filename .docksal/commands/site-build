@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+# Abort if anything fails
+set -e
+
+SITE_DIRECTORY=${SITE_DIRECTORY:-default}
+
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
+
+cd ${DOCROOT_PATH}
+
+echo "Running Update.php..."
+${PROJECT_ROOT}/bin/drupal update:execute -y
+
+echo "Importing Configuration..."
+${PROJECT_ROOT}/bin/drupal config:import --yes
+
+echo "Running Drush Cache-Rebuild"
+${PROJECT_ROOT}/bin/drupal cr
+
+echo "Running Gulp Tasks on theme"
+cd ${PROJECT_ROOT}/web/themes/custom/site_theme
+npm i -g npm@latest
+npm install -g gulp
+npm install
+gulp sass
+${PROJECT_ROOT}/bin/drupal cr

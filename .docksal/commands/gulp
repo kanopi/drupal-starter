@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Run Gulp Commands on the theme
+##
+## Usage: fin gulp [arguments]
+##
+
+# Abort if anything fails
+set -e
+
+cd ${PROJECT_ROOT}/web/themes/custom/site_theme
+
+gulp "$@"
