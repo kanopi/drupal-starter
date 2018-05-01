@@ -1,0 +1,51 @@
+#block-mainnavigation{
+  float: right;
+  .menu {
+    &.menu-level-0 {
+      > li {
+        font-size: 24px;
+        font-weight: $global-weight-bold;
+        line-height: 1.33;
+        letter-spacing: normal;
+        text-align: center;
+
+        > a {
+          border: 3px solid transparent;
+        }
+
+        &:hover,
+        &.active {
+          color: white;
+          a{
+            color: $white;
+            &:hover{
+              color: $white;
+            }
+          }
+        }
+
+        .cta-loop{
+          border: 3px solid $white;
+          border-radius: 42px;
+        }
+
+        ul {
+          border-top: 3px solid $white;
+        }
+      }
+    }
+  }
+}
+
+.responsive-menu-button-wrap{
+  span{
+    color: white;
+    font-weight: 700;
+    font-size: 24px;
+    position: relative;
+    top: -6px;
+  }
+  .menu-icon{
+    vertical-align: top;
+  }
+}
