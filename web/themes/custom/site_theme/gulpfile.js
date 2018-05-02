@@ -9,17 +9,18 @@ var pngquant = require('imagemin-pngquant');
 var prefix = require('gulp-autoprefixer');
 var sassGlob = require('gulp-sass-glob');
 
-gulp.task('imagemin', function () {
-  return gulp.src('./images/*')
+gulp.task('imagemin', function (done) {
+  gulp.src('./images/*')
     .pipe(imagemin({
       progressive: true,
       svgoPlugins: [{removeViewBox: false}],
       use: [pngquant()]
     }))
     .pipe(gulp.dest('./images'));
+  done();
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', function (done) {
   gulp.src('./sass/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -35,24 +36,30 @@ gulp.task('sass', function () {
     .pipe(sourcemaps.write('./'))
     .pipe(sassGlob())
     .pipe(gulp.dest('./css'));
+  done();
 });
 
-gulp.task('uglify', function() {
+gulp.task('uglify', function(done) {
   gulp.src([
     './node_modules/foundation-sites/dist/js/foundation.js',
     './lib/*.js'
   ])
     .pipe(uglify('main.js'))
-    .pipe(gulp.dest('./js'))
+    .pipe(gulp.dest('./js'));
+  done();
 });
 
-gulp.task('watch', ['sass', 'uglify'], function(){
+gulp.task('watch', gulp.series('sass', 'uglify', function(done){
   livereload.listen();
   gulp.watch('./sass/**/*.scss', ['sass']);
   gulp.watch('./lib/*.js', ['uglify']);
   gulp.watch(['./css/styles.css', './**/*.twig', './js/*.js'], function (files){
       livereload.changed(files)
   });
-});
 
-gulp.task('default', ['sass', 'uglify']);
+  done();
+}));
+
+gulp.task('default', gulp.series('sass', 'uglify', function(done){
+  done();
+}));
