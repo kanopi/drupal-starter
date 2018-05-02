@@ -24,7 +24,8 @@ ${PROJECT_ROOT}/bin/drupal cr
 echo "Running Gulp Tasks on theme"
 cd ${PROJECT_ROOT}/web/themes/custom/site_theme
 npm i -g npm@latest
-npm install -g gulp
+npm i -g gulp-cli
+npm i -g gulp
 npm install
 gulp sass
 ${PROJECT_ROOT}/bin/drupal cr
