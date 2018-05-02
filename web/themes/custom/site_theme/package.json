@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "gulp-autoprefixer": "^3.0.2",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "^4.0",
     "gulp-imagemin": "^2.3.0",
     "gulp-sass": "^4",
     "gulp-uglifyjs": "^0.6.2",
