@@ -67,13 +67,28 @@ composer_install ()
   composer install
 }
 
+gulp_install ()
+{
+  cd ${PROJECT_ROOT}/web/themes/custom/site_theme
+  npm i -g npm@latest
+  npm i -g gulp
+  npm i -g gulp-cli
+  npm install
+  gulp sass
+}
+
+install_items ()
+{
+  time composer_install
+  time fix_permissions
+  time gulp_install
+  time site_install
+}
 #-------------------------- END: Functions --------------------------------
 
 #-------------------------- Execution --------------------------------
 
-# Project initialization steps
-composer_install
-fix_permissions
-time site_install
+time install_items
 
+# Project initialization steps
 #-------------------------- END: Execution --------------------------------
