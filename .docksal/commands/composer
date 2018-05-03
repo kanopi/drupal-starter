@@ -4,7 +4,7 @@
 
 ## Run project's Behat tests.
 ##
-## Usage: fin drupal-cli [arguments]
+## Usage: fin composer [arguments]
 ##
 
 # Abort if anything fails
@@ -12,4 +12,4 @@ set -e
 
 cd ${PROJECT_ROOT}
 
-bin/drupal "$@"
+composer "$@"
