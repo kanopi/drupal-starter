@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Initialize stack and site (full reset)
+##
+## Usage: fin refresh [environment id]
+
+ENVIRONMENT=${1:-prod}
+
+cd /var/www/${DOCROOT}
+
+DBFILE="/tmp/site.${ENVIRONMENT}.sql"
+if [ ! -f $DBFILE ] || [ ! -z $(find $DBFILE -mmin +60) ] ; then
+
+    if [ ! -f $DBFILE ]; then
+        echo "Database file does not exist."
+    elif [ ! -z $(find $DBFILE -mmin +60) ]; then
+        echo "Database file is older then 1 hours"
+    fi
+
+    echo "Exporting ${ENVIRONMENT} Database..."
+    drush @remote.${ENVIRONMENT} sql-dump > $DBFILE
+fi
+
+echo "Truncating Database..."
+drush sql-drop -y
+
+echo "Importing Database..."
+drush sql-cli < $DBFILE

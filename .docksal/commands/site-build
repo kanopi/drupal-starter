@@ -10,22 +10,26 @@ SITE_DIRECTORY=${SITE_DIRECTORY:-default}
 DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
 
+cd ${PROJECT_ROOT}
+echo "Running Composer Install..."
+composer install
+
 cd ${DOCROOT_PATH}
 
 echo "Running Update.php..."
-${PROJECT_ROOT}/bin/drupal update:execute -y
+drupal update:execute -y
 
 echo "Importing Configuration..."
-${PROJECT_ROOT}/bin/drupal config:import --yes
+drupal config:import --yes
 
 echo "Running Drush Cache-Rebuild"
-${PROJECT_ROOT}/bin/drupal cr
+drupal cr
 
 echo "Running Gulp Tasks on theme"
 cd ${PROJECT_ROOT}/web/themes/custom/site_theme
 npm i -g npm@latest
 npm i -g gulp-cli
-npm i -g gulp
+#npm i -g gulp
 npm install
 gulp sass
-${PROJECT_ROOT}/bin/drupal cr
+drupal cr
