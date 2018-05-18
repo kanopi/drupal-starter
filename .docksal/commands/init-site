@@ -54,9 +54,6 @@ site_install ()
 
 	# We disable email sending here so site-install does not return an error
 	PHP_OPTIONS="-d sendmail_path=`which true`" drush site-install -y --site-name='My Drupal 8 Site' --sites-subdir="default"
-
-	# Export Configuration to config folder.
-	drush cex -y
 }
 
 # Composer Install
@@ -93,13 +90,17 @@ sudo localedef -i en_US -f UTF-8 en_US.UTF-8
 mkdir ~/tmp
 
 count=$(ls -1 ${PROJECT_ROOT}/config/*.yml 2>/dev/null | wc -l)
+time install_items
+
+${PROJECT_ROOT}/.docksal/commands/site-build
 
 if [[ $count -gt 0 ]]; then
   ${PROJECT_ROOT}/.docksal/commands/refresh
 else
-  time install_items
+  cd $DOCROOT_PATH
+  # Export Configuration to config folder.
+  drush cex -y
 fi
 
-${PROJECT_ROOT}/.docksal/commands/site-build
 # Project initialization steps
 #-------------------------- END: Execution --------------------------------
