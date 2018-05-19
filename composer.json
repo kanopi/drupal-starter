@@ -96,6 +96,7 @@
     },
     "extra": {
         "enable-patching": true,
+        "installer-types": ["library", "drupal-library", "npm-asset", "bower-asset"],
         "patches": {
 
         },
