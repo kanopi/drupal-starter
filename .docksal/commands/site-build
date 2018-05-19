@@ -17,19 +17,18 @@ composer install
 cd ${DOCROOT_PATH}
 
 echo "Running Update.php..."
-drupal update:execute -y
+drush updatedb -y
 
 echo "Importing Configuration..."
-drupal config:import --yes
+drush cim --yes
 
 echo "Running Drush Cache-Rebuild"
-drupal cr
+drush cr
 
 echo "Running Gulp Tasks on theme"
 cd ${PROJECT_ROOT}/web/themes/custom/site_theme
 npm i -g npm@latest
 npm i -g gulp-cli
-#npm i -g gulp
 npm install
 gulp sass
-drupal cr
+drush cr

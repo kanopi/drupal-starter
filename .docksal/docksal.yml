@@ -23,7 +23,9 @@ services:
       file: ${HOME}/.docksal/stacks/services.yml
       service: cli
     environment:
-      - VIRTUAL_HOST
+      - LC_ALL=en_US.UTF-8
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US.UTF-8
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
 

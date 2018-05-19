@@ -76,10 +76,10 @@ gulp_install ()
 
 install_items ()
 {
-  time composer_install
-  time fix_permissions
-  time gulp_install
-  time site_install
+  composer_install
+  fix_permissions
+  gulp_install
+  site_install
 }
 #-------------------------- END: Functions --------------------------------
 
@@ -87,15 +87,16 @@ install_items ()
 
 sudo localedef -i en_US -f UTF-8 en_US.UTF-8
 
-mkdir ~/tmp
+if [[ ! -d ~/tmp ]]; then
+  mkdir ~/tmp
+fi
 
-count=$(ls -1 ${PROJECT_ROOT}/config/*.yml 2>/dev/null | wc -l)
 time install_items
 
-${PROJECT_ROOT}/.docksal/commands/site-build
-
+count=$(ls -1 ${PROJECT_ROOT}/config/*.yml 2>/dev/null | wc -l)
 if [[ $count -gt 0 ]]; then
   ${PROJECT_ROOT}/.docksal/commands/refresh
+  ${PROJECT_ROOT}/.docksal/commands/site-build
 else
   cd $DOCROOT_PATH
   # Export Configuration to config folder.
