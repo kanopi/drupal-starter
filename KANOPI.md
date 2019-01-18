@@ -7,16 +7,24 @@ This document is used to describe the development and continuous maintenance and
 Use this space to describe the project, timeline, and client.
 
 ## Team
-Add Kanopi and Client names and roles.
+### Client
+* Main point of contact:
+* Client timezone:
+
+### Kanopi
+* Project Manager:
+* UX/Design:
+* Development Team:
 
 ## Important Links
-[Github](link_url)
-[Google Drive](link_url)
-[Sketch Cloud](link_url)
-[Teamwork](link_url)
-[UXPin](link_url)
-[Zeplin](link_url)
-[etc](link_url)
+* [Dev Site](link_url)
+* [Github](link_url)
+* [Google Drive](link_url)
+* [Sketch Cloud](link_url)
+* [Teamwork](link_url)
+* [UXPin](link_url)
+* [Zeplin](link_url)
+* [etc](link_url)
 
 ## Development Notes
 Add notes as you go.  Which modules did you choose and why?  Did you try
