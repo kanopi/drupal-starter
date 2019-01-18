@@ -4,8 +4,10 @@ This is the Drupal Composer Project with docksal configuration to easily get a s
 
 Features:
 
-- Composer Project Drupal 8
-- `fin init`
+- Drupal 8 - Composer Install
+- Docksal Configuration
+- Basic CircleCI configuration
+- Project Readme
 
 ## Setup instructions
 
@@ -20,7 +22,7 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
 1. Clone this repo into your Projects directory
 
     ```
-    git clone https://github.com/kanopi/drupal8-composer-docksal.git drupal8
+    git clone https://github.com/kanopi/starter-8.git drupal8
     cd drupal8
     ```
 
@@ -32,7 +34,7 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
     fin init
     ```
 
-3. **On Windows** add `192.168.64.100  drupal8.docksal` to your hosts file
+3. **On Windows** add `fin hosts add` to your hosts file
 
 4. Point your browser to
 
@@ -42,7 +44,7 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
 
 When the automated install is complete the command line output will display the admin username and password.
 
-## More automation with 'fin init'
+## Easier setup with 'fin init'
 
 Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal/commands/init).  
 This script is meant to be modified per project. The one in this repo will give you a good example of advanced init script.
