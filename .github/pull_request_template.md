@@ -1,17 +1,19 @@
 ## Description
-As a developer, I need to start with a story.
+> As a developer, I need to start with a story.
 
 _A few sentences describing the overall goals of the pull request's commits.
 What is the current behavior of the app? What is the updated/expected behavior
 with this PR? **Include your acceptance critiera!** If your tasks were well-written, you can probably copy/paste some of this._
 
+## Acceptance Criteria
+
+
 ## Affected URL
-[link to relevant multidev or test site](insert link here)
+[link_to_relevant_multidev_or_test_site](insert_link_here)
 
 
 ## Related Tickets
-
-* [insert ticket name here](insert link here)
+[insert_ticket_name_here](insert_link_here)
 
 
 ## Steps to Validate
@@ -19,8 +21,8 @@ with this PR? **Include your acceptance critiera!** If your tasks were well-writ
 1. Include direct links to test sites -- specific nodes, admin screens, etc
 1. Be explicit
 
-## Deploy Notes
 
+## Deploy Notes
 _Notes regarding deployment of the contained body of work. These should note any
 new dependencies, new scripts, etc._
 
