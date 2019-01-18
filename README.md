@@ -1,5 +1,4 @@
-# Drupal 8 Composer / Docksal Edition
-
+# Project Starter - Drupal 8
 This is the Drupal Composer Project with docksal configuration to easily get a site started.
 
 Features:
