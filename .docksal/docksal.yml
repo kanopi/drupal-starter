@@ -15,32 +15,23 @@ services:
   db:
     extends:
       file: ${HOME}/.docksal/stacks/services.yml
-      service: db
+      service: mysql
 
   # CLI
   cli:
     extends:
       file: ${HOME}/.docksal/stacks/services.yml
       service: cli
-    environment:
-      - LC_ALL=en_US.UTF-8
-      - LANG=en_US.UTF-8
-      - LANGUAGE=en_US.UTF-8
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
+    environment:
+      - THEME_ROOT
 
   # Fake email
   mail:
-    hostname: mail
-    image: mailhog/mailhog
-    expose:
-      - "80"
-    environment:
-      - MH_API_BIND_ADDR=0.0.0.0:80
-      - MH_UI_BIND_ADDR=0.0.0.0:80
-    labels:
-      - io.docksal.virtual-host=webmail.${VIRTUAL_HOST}
-    user: root
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: mail
 
   # PHPMyAdmin
   pma:
@@ -52,27 +43,3 @@ services:
       - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
     labels:
       - io.docksal.virtual-host=pma.${VIRTUAL_HOST}
-
-  # Log Router
-  logspout:
-    hostname: logspout
-    image: gliderlabs/logspout
-    expose:
-      - "80"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    command:
-      syslog://syslog:514
-
-  # PimpMyLog Web Viewer
-  # Need logspout to use properly
-  syslog:
-    hostname: syslog
-    image: pbertera/syslogserver
-    expose:
-      - "80"
-    environment:
-      - SYSLOG_USERNAME=${SYSLOG_USERNAME:-admin}
-      - SYSLOG_PASSWORD=${SYSLOG_PASSWORD:-admin}
-    labels:
-      - io.docksal.virtual-host=syslog.${VIRTUAL_HOST}

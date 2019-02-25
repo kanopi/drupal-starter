@@ -10,6 +10,8 @@
 # Abort if anything fails
 set -e
 
-cd ${PROJECT_ROOT}/web/themes/custom/site_theme
+if [[ -n "${THEME_ROOT} "]]; then
+  cd ${PROJECT_ROOT}/${DOCROOT}/${THEME_ROOT}
+fi
 
 gulp "$@"
