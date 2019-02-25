@@ -4,7 +4,7 @@
 #
 defaults: &defaults
   docker:
-    - image: circleci/php:7.1-apache-node-browsers
+    - image: circleci/php:7.2-apache-node-browsers
   working_directory: ~/repo
 
 version: 2
@@ -36,33 +36,6 @@ jobs:
           root: ~/
           paths:
             - repo
-
-  build_sass:
-    docker:
-      - image: circleci/node:6-stretch
-    working_directory: ~/repo
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: Install Gulp
-          command: sudo npm install -g gulp-cli
-      - run:
-          name: Install NPM Packages
-          command: npm install
-          path: web/themes/custom/site_theme/
-      - run:
-          name: Compile CSS and JS files
-          command: gulp
-          path: web/themes/custom/site_theme/
-      - run:
-          name: Remove node_modules
-          command: rm -rf node_modules
-          path: web/themes/custom/site_theme/
-      - persist_to_workspace:
-          root: ~/
-          paths:
-              - repo
 
   deploy_test:
     <<: *defaults
