@@ -26,6 +26,7 @@ echo "Running Drush Cache-Rebuild"
 drush cr
 
 echo "Running Gulp Tasks on theme"
+
 cd ${PROJECT_ROOT}/web/themes/custom/site_theme
 npm i -g npm@latest
 npm i -g gulp-cli

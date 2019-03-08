@@ -12,7 +12,7 @@ Features:
 
 ### Step #1: Docksal environment setup
 
-**This is a one time setup - skip this if you already have a working Docksal environment.**  
+**This is a one time setup - skip this if you already have a working Docksal environment.**
 
 Follow [Docksal install instructions](https://docs.docksal.io/getting-started/setup/)
 
@@ -45,7 +45,7 @@ When the automated install is complete the command line output will display the 
 
 ## Easier setup with 'fin init'
 
-Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal/commands/init).  
+Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal/commands/init).
 This script is meant to be modified per project. The one in this repo will give you a good example of advanced init script.
 
 Some common tasks that can be handled by the init script:
@@ -55,3 +55,7 @@ Some common tasks that can be handled by the init script:
 - compile Sass
 - run DB updates, revert features, clear caches, etc.
 - enable/disable modules, update variables values
+
+## Modifying Docroot
+
+Modifying the docroot for a hosting company isn't complex although it will

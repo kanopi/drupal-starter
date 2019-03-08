@@ -51,27 +51,21 @@ fix_permissions ()
 site_install ()
 {
 	cd $DOCROOT_PATH
-
-	# We disable email sending here so site-install does not return an error
-	PHP_OPTIONS="-d sendmail_path=`which true`" drush site-install -y --site-name='My Drupal 8 Site' --sites-subdir="default"
+  drush site-install -y --site-name='My Drupal 8 Site' --sites-subdir="default" || true
 }
 
 # Composer Install
 composer_install ()
 {
   cd $PROJECT_ROOT
-  composer global require hirak/prestissimo:^0.3
   composer install
 }
 
 gulp_install ()
 {
-  cd ${PROJECT_ROOT}/web/themes/custom/site_theme
   npm i -g npm@latest
   npm i -g gulp
   npm i -g gulp-cli
-  npm install
-  gulp sass
 }
 
 install_items ()
@@ -84,8 +78,6 @@ install_items ()
 #-------------------------- END: Functions --------------------------------
 
 #-------------------------- Execution --------------------------------
-
-sudo localedef -i en_US -f UTF-8 en_US.UTF-8
 
 if [[ ! -d ~/tmp ]]; then
   mkdir ~/tmp
