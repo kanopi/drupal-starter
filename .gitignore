@@ -101,8 +101,5 @@ Thumbs.db
 ##########
 .sass-cache
 
-# Things in the core directory that Drupal 8 commits in the repository.
-!web/core/**/*.gz
-
 # Ignore composer bin directory
 /bin
