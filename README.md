@@ -1,4 +1,4 @@
-# [Project Website Name](https://www.google.com/)
+# [Project Website Name](https://example.com/)
 This is the Drupal Composer Project with docksal configuration to easily get a site started.
 
 Features:
