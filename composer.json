@@ -28,7 +28,7 @@
         "drupal/config_readonly": "^1",
         "drupal/config_sync": "^2",
         "drupal/console": "^1",
-        "drupal/core": "^8",
+        "drupal/core": "^8.5",
         "drush/drush": "^9",
         "joachim-n/composer-manifest": "^1.0",
         "oomphinc/composer-installers-extender": "^1.1",
