@@ -5,14 +5,40 @@
 # Abort if anything fails
 set -e
 
-SITE_DIRECTORY=${SITE_DIRECTORY:-default}
+#-------------------------- Settings ---------------------------------
 
+# PROJECT_ROOT and DOCROOT are set as env variables in cli
+SITE_DIRECTORY=${SITE_DIRECTORY:-default}
 DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
 
-cd ${PROJECT_ROOT}
-echo "Running Composer Install..."
-composer install
+#------------------------- END: Settings -----------------------------
+
+#-------------------------- Functions --------------------------------
+
+# Composer Install
+composer_install ()
+{
+  cd $PROJECT_ROOT
+  echo "Running Composer Install..."
+  composer install
+}
+
+gulp_install ()
+{
+  if [[ -n "${THEME_ROOT} "]]; then
+    cd ${PROJECT_ROOT}/${DOCROOT}/${THEME_ROOT}
+  fi
+  echo "Running Gulp Tasks on theme"
+  npm i -g npm@latest
+  npm i -g gulp-cli
+  npm install
+  gulp
+}
+
+#-------------------------- END: Functions --------------------------------
+
+time composer_install
 
 cd ${DOCROOT_PATH}
 
@@ -25,11 +51,8 @@ drush cim --yes
 echo "Running Drush Cache-Rebuild"
 drush cr
 
-echo "Running Gulp Tasks on theme"
+time gulp_install
 
-cd ${PROJECT_ROOT}/web/themes/custom/site_theme
-npm i -g npm@latest
-npm i -g gulp-cli
-npm install
-gulp sass
+cd ${DOCROOT_PATH}
+echo "Running Drush Cache-Rebuild (again)"
 drush cr
