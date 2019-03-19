@@ -22,8 +22,10 @@ SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
 # Fix file/folder permissions
 fix_permissions ()
 {
-	echo "Making site directory writable..."
+	echo "Making ${SITEDIR_PATH} writable..."
 	chmod 755 "${SITEDIR_PATH}"
+	echo "Making ${SITEDIR_PATH}/* writable..."  
+	chmod 755 "${SITEDIR_PATH}"/*
 }
 
 #-------------------------- END: Functions --------------------------------
