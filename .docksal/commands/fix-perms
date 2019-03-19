@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Fix Drupal site directory permissions
+##
+## Usage: fin fix-perms
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Settings --------------------------------
+
+# PROJECT_ROOT and DOCROOT are set as env variables in cli
+SITE_DIRECTORY="default"
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
+
+#-------------------------- END: Settings --------------------------------
+
+#-------------------------- Functions --------------------------------
+# Fix file/folder permissions
+fix_permissions ()
+{
+	echo "Making site directory writable..."
+	chmod 755 "${SITEDIR_PATH}"
+}
+
+#-------------------------- END: Functions --------------------------------
+
+#-------------------------- Execution --------------------------------
+fix_permissions
+
+#-------------------------- END: Execution --------------------------------
