@@ -26,7 +26,7 @@ composer_install ()
 
 gulp_install ()
 {
-  if [[ -n "${THEME_ROOT} "]]; then
+  if [[ -n "${THEME_ROOT} " ]]; then
     cd ${PROJECT_ROOT}/${DOCROOT}/${THEME_ROOT}
   fi
   echo "Running Gulp Tasks on theme"

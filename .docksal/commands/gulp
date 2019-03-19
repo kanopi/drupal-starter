@@ -10,7 +10,7 @@
 # Abort if anything fails
 set -e
 
-if [[ -n "${THEME_ROOT} "]]; then
+if [[ -n "${THEME_ROOT} " ]]; then
   cd ${PROJECT_ROOT}/${DOCROOT}/${THEME_ROOT}
 fi
 
