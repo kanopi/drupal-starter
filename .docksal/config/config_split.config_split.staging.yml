@@ -1,0 +1,14 @@
+langcode: en
+status: false
+dependencies: {  }
+id: staging
+label: Staging
+description: 'Configuration for use on shared staging environments.'
+folder: ../config/staging
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: -2
