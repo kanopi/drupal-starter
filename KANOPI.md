@@ -30,6 +30,14 @@ Use this space to describe the project, timeline, and client.
 Add notes as you go.  Which modules did you choose and why?  Did you try
 anything that failed?  Write ongoing stories about the project/releases here.
 
+* What was the site like before we took it on? 
+* What challenges was the client trying to solve?
+* What did we do from a tech standpoint to solve their challenges?
+* Are there any interesting development details to share?
+* Were there any key modules/themes/distributions used?
+  * If so, why were they chosen?
+* Were there any community contributions as part of this project?
+
 ## Documentation
 Describe how we're documenting this project.  In some cases, the answer is "all
 in code/annotations and nothing else".  In others it's a full
