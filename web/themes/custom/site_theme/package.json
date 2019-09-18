@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "gulp-autoprefixer": "^3.0.2",
-    "gulp": "^4.0",
+    "gulp": "^3.9.1",
     "gulp-imagemin": "^2.3.0",
     "gulp-sass": "^4",
     "gulp-uglifyjs": "^0.6.2",
@@ -17,7 +17,11 @@
     "gulp-clean-css": "^2.0.12",
     "gulp-livereload": "^3.8.1",
     "gulp-sass-glob": "^1.0.6",
-    "gulp-sourcemaps": "^1.6.0"
+    "gulp-sourcemaps": "^1.6.0",
+    "browser-sync": "^2.26.3",
+    "gulp-rename": "^1.4.0",
+    "breakpoint-sass": "^2.7.1",
+    "gulp-strip-css-comments": "^2.0.0"
   },
   "dependencies": {
     "font-awesome": "^4.7.0",

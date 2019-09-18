@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var livereload = require('gulp-livereload');
 var uglify = require('gulp-uglifyjs');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
@@ -8,6 +7,9 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var prefix = require('gulp-autoprefixer');
 var sassGlob = require('gulp-sass-glob');
+var bs = require('browser-sync').create();
+var rename = require('gulp-rename');
+var stripCssComments = require('gulp-strip-css-comments');
 
 gulp.task('imagemin', function (done) {
   gulp.src('./images/*')
@@ -17,26 +19,41 @@ gulp.task('imagemin', function (done) {
       use: [pngquant()]
     }))
     .pipe(gulp.dest('./images'));
-  done();
 });
 
-gulp.task('sass', function (done) {
-  gulp.src('./sass/**/*.scss')
+// Add browsersync.
+gulp.task('browser-sync', ['sass'], function() {
+  bs.init({
+    logPrefix: 'Dvele Local site',
+    baseDir: './',
+    open: false,
+    notify: true,
+    proxy: 'dvele.docksal',
+    host: 'dvele.docksal',
+    openBrowserAtStart: false,
+    reloadOnRestart: true,
+    ui: false,
+    port: 3050
+  });
+});
+
+gulp.task('sass', function () {
+  return gulp.src(['./sass/**/*.scss'])
     .pipe(sourcemaps.init())
+    .pipe(sassGlob())
     .pipe(sass({
       includePaths: [
-        './node_modules/susy/sass/',
         './node_modules/breakpoint-sass/stylesheets',
-        './node_modules/compass-sass-mixins/lib/'
       ],
-      errLogToConsole: true,
-      outputStyle: 'expanded'
+      outputStyle: 'expanded',
     }).on('error', sass.logError))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 7', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(sourcemaps.write('./'))
-    .pipe(sassGlob())
-    .pipe(gulp.dest('./css'));
-  done();
+    .pipe(gulp.dest('./css'))
+    .pipe(rename({ suffix: '.dev' }))
+    .pipe(stripCssComments())
+    .pipe(gulp.dest('./css-dev'))
+    .pipe(bs.reload({stream: true}))
 });
 
 gulp.task('uglify', function(done) {
@@ -46,20 +63,13 @@ gulp.task('uglify', function(done) {
   ])
     .pipe(uglify('main.js'))
     .pipe(gulp.dest('./js'));
-  done();
 });
 
-gulp.task('watch', gulp.series('sass', 'uglify', function(done){
-  livereload.listen();
-  gulp.watch('./sass/**/*.scss', ['sass']);
-  gulp.watch('./lib/*.js', ['uglify']);
-  gulp.watch(['./css/styles.css', './**/*.twig', './js/*.js'], function (files){
-      livereload.changed(files)
-  });
+// browser-sync watch.
+gulp.task('watch', ['browser-sync'], function () {
+  gulp.watch("./sass/**/*.scss", ['sass']).on('change', bs.reload);
+  gulp.watch("./templates/**/*.html.twig").on('change', bs.reload);
+  gulp.watch("./js/**/*.js").on('change', bs.reload);
+});
 
-  done();
-}));
-
-gulp.task('default', gulp.series('sass', 'uglify', function(done){
-  done();
-}));
+gulp.task('build', ['sass', 'uglify']);
