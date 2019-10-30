@@ -28,6 +28,9 @@ services:
       - LANGUAGE=en_US.UTF-8
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
+    ports:
+      - "3050:3050"
+      - "3051:3051"
 
   # Fake email
   mail:
