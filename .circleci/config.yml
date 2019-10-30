@@ -53,7 +53,7 @@ jobs:
           path: web/themes/custom/site_theme/
       - run:
           name: Compile CSS and JS files
-          command: gulp
+          command: gulp build
           path: web/themes/custom/site_theme/
       - run:
           name: Remove node_modules

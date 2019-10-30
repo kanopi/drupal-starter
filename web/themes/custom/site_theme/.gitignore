@@ -3,3 +3,4 @@ css/*
 js/*
 !js/.gitkeep
 node_modules
+*css.map

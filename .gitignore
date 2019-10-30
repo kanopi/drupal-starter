@@ -104,3 +104,4 @@ Thumbs.db
 
 # Ignore composer bin directory
 /bin
+*.map
