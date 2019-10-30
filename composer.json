@@ -30,7 +30,7 @@
         "drupal/config_sync": "2.0-alpha4",
         "drupal/console": "^1",
         "drupal/core": "~8.0",
-        "drush/drush": "~8.0|^9.0.0-beta7",
+        "drush/drush": "^9",
         "joachim-n/composer-manifest": "^1.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "webflo/drupal-finder": "^1.0.0",
