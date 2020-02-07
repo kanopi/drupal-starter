@@ -26,6 +26,9 @@ services:
       - LC_ALL=en_US.UTF-8
       - LANG=en_US.UTF-8
       - LANGUAGE=en_US.UTF-8
+      - PANTHEON_SITE
+      - PANTHEON_ENV
+      - DRUSH_OPTIONS_URI=${VIRTUAL_HOST}
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
     ports:
