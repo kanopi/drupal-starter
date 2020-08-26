@@ -1,0 +1,31 @@
+api_version: 1
+web_docroot: true
+php_version: 7.4
+workflows:
+  deploy_product:
+    after:
+      -
+        type: webphp
+        description: 'Run composer prepare-for-pantheon'
+        script: private/scripts/deploy_product/prepare-for-pantheon.php
+      -
+        type: webphp
+        description: 'Run composer install & drupal-scaffold'
+        script: private/scripts/deploy_product/composer-install.php
+  sync_code:
+    after:
+      - type: webphp
+        description: Push changes back to GitHub if needed
+        script: private/scripts/quicksilver/quicksilver-pushback/push-back-to-github.php
+      - type: webphp
+        description: Log to New Relic
+        script: private/scripts/sync_code/new_relic_deploy.php
+  # Log to New Relic when deploying to test or live.
+  deploy:
+    after:
+      - type: webphp
+        description: Log to New Relic
+        script: private/scripts/deploy/new_relic_deploy.php
+      - type: webphp
+        description: Import configuration from .yml files
+        script: private/scripts/drush_config_import/drush_config_import.php

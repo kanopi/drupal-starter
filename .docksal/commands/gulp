@@ -12,4 +12,4 @@ set -e
 
 cd ${PROJECT_ROOT}/web/themes/custom/site_theme
 
-gulp "$@"
+node_modules/.bin/gulp "$@"

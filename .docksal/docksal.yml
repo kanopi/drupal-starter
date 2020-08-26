@@ -3,19 +3,8 @@ version: "2.1"
 services:
   # Web
   web:
-    extends:
-      file: ${HOME}/.docksal/stacks/services.yml
-      service: web
-    depends_on:
-      - cli
     environment:
       - APACHE_FILE_PROXY
-
-  # DB
-  db:
-    extends:
-      file: ${HOME}/.docksal/stacks/services.yml
-      service: mysql
 
   # CLI
   cli:
@@ -23,9 +12,7 @@ services:
       file: ${HOME}/.docksal/stacks/services.yml
       service: cli
     environment:
-      - LC_ALL=en_US.UTF-8
-      - LANG=en_US.UTF-8
-      - LANGUAGE=en_US.UTF-8
+      - COMPOSER_MEMORY_LIMIT=-1
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
     ports:
@@ -34,16 +21,9 @@ services:
 
   # Fake email
   mail:
-    hostname: mail
-    image: mailhog/mailhog
-    expose:
-      - "80"
-    environment:
-      - MH_API_BIND_ADDR=0.0.0.0:80
-      - MH_UI_BIND_ADDR=0.0.0.0:80
-    labels:
-      - io.docksal.virtual-host=webmail.${VIRTUAL_HOST}
-    user: root
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: mail
 
   # PHPMyAdmin
   pma:
@@ -54,28 +34,19 @@ services:
       - PMA_USER=root
       - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
     labels:
-      - io.docksal.virtual-host=pma.${VIRTUAL_HOST}
+      - io.docksal.virtual-host=pma.${VIRTUAL_HOST},pma.${VIRTUAL_HOST}.*
+    dns:
+      - ${DOCKSAL_DNS1}
+      - ${DOCKSAL_DNS2}
 
-  # Log Router
-  logspout:
-    hostname: logspout
-    image: gliderlabs/logspout
-    expose:
-      - "80"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    command:
-      syslog://syslog:514
-
-  # PimpMyLog Web Viewer
-  # Need logspout to use properly
-  syslog:
-    hostname: syslog
-    image: pbertera/syslogserver
-    expose:
-      - "80"
-    environment:
-      - SYSLOG_USERNAME=${SYSLOG_USERNAME:-admin}
-      - SYSLOG_PASSWORD=${SYSLOG_PASSWORD:-admin}
+  # Selenium
+  browser:
+    hostname: browser
+    image: "${BROWSER_IMAGE:-selenium/standalone-chrome-debug}"
+    ports:
+      - "${BROWSER_PORT:-0}:5900"
     labels:
-      - io.docksal.virtual-host=syslog.${VIRTUAL_HOST}
+      - io.docksal.virtual-host=browser.${VIRTUAL_HOST},browser.${VIRTUAL_HOST}.*
+    dns:
+      - ${DOCKSAL_DNS1}
+      - ${DOCKSAL_DNS2}
