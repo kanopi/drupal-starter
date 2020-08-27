@@ -68,6 +68,9 @@ web/web.config
 ### to the Pantheon repository.
 ###
 
+# Used to store the behat screenshots
+tests/behat/screenshots/*
+
 # Ignore Drupal's file directory
 web/sites/default/files
 

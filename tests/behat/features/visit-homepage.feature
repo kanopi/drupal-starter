@@ -8,3 +8,4 @@ Feature: Visibility of the home page
     When I am on the homepage
     Then I should be on the homepage
     And the response status code should be 200
+    And I take a screenshot

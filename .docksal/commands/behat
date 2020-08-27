@@ -15,4 +15,4 @@ echo "::::::::::::::::::::::::::::::::::::::::::::::::"
 echo
 
 # Run the Behat tests
-./vendor/bin/behat --config=tests/behat/behat-docksal.yml --strict --colors  "$@"
+./vendor/bin/behat --config=tests/behat/behat-docksal.yml --colors  "$@"

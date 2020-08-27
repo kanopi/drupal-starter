@@ -1,5 +1,5 @@
 #
-# behat.yml file for testing on Pantheon.
+# behat.yml file for testing on Docksal.
 #
 default:
   suites:
@@ -15,26 +15,27 @@ default:
         - Drupal\DrupalExtension\Context\DrushContext
         - FailAid\Context\FailureContext
   extensions:
+    FailAid\Extension:
+      screenshot:
+        directory: /var/www/tests/behat/screenshots/
+        mode: default
+        autoClean: false
+        size: 1444x1280
+
     Behat\MinkExtension:
-      # URL of the site when accessed inside Docksal.
       base_url: http://web
-      # Configure browser to be used. Browser must be available on wd_host.
-      # Stick with chrome by default. It's 2x faster than firefox or phantomjs (your results may vary).
-      browser_name: chrome
-      default_session: selenium2
-      goutte: ~
-      selenium2:
-        wd_host: http://browser:4444/wd/hub
-        capabilities: {"browser": "chrome", "browserName": "chrome", "browserVersion": "ANY", "version": "ANY"}
+      sessions:
+        default:
+          chrome:
+            api_url: "http://browser:9222"
+            validate_certificate: false
 
     Drupal\DrupalExtension:
       blackbox: ~
-      api_driver: 'drush'
+      api_driver: 'drupal'
       drupal:
-        # Site docroot inside Docksal.
         drupal_root: /var/www/web
       drush:
-        # Site docroot inside Docksal.
         root: /var/www/web
 
     DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
