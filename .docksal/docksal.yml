@@ -43,12 +43,20 @@ services:
   browser:
     hostname: browser
     image: zenika/alpine-chrome
-    command: [chromium-browser, "--headless", "--disable-gpu", "--no-sandbox", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222"]
+    command:
+      - chromium-browser
+      - "--headless"
+      - "--disable-gpu"
+      - "--no-sandbox"
+      - "--remote-debugging-address=0.0.0.0"
+      - "--remote-debugging-port=9222"
+      - "--window-size=${BROWSER_SIZE:-1280,1696}"
     ports:
       - 9222
     labels:
       - io.docksal.virtual-host=browser.${VIRTUAL_HOST},browser.${VIRTUAL_HOST}.*
-      - io.docksal.virtual-port=9222
     dns:
       - ${DOCKSAL_DNS1}
       - ${DOCKSAL_DNS2}
+    extra_hosts:
+      - "${VIRTUAL_HOST}:web"
