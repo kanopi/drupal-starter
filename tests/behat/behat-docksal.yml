@@ -1,0 +1,41 @@
+#
+# behat.yml file for testing on Docksal.
+#
+default:
+  suites:
+    default:
+      paths:
+        - "%paths.base%/features"
+        - "%paths.base%/site-features"
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - FailAid\Context\FailureContext
+  extensions:
+    FailAid\Extension:
+      screenshot:
+        directory: /var/www/tests/behat/screenshots/
+        mode: default
+        autoClean: false
+        size: 1444x1280
+
+    Behat\MinkExtension:
+      base_url: http://web
+      sessions:
+        default:
+          chrome:
+            api_url: "http://browser:9222"
+            validate_certificate: false
+
+    Drupal\DrupalExtension:
+      blackbox: ~
+      api_driver: 'drupal'
+      drupal:
+        drupal_root: /var/www/web
+      drush:
+        root: /var/www/web
+
+    DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~

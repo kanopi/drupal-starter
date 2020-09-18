@@ -14,8 +14,8 @@ define('PANTHEON_DATABASE_DATABASE', 'default');
 define('PANTHEON_DATABASE_PREFIX', '');
 define('PANTHEON_DATABASE_BINDING', '2e2f43ea4d17492db93460e9975bb94a');
 
-define('PANTHEON_REDIS_HOST', '');
-define('PANTHEON_REDIS_PORT', '');
+define('PANTHEON_REDIS_HOST', 'redis');
+define('PANTHEON_REDIS_PORT', '6379');
 define('PANTHEON_REDIS_PASSWORD', '');
 define('PANTHEON_VALHALLA_HOST', 'valhalla-02.production.cluster-01.us-central1.internal.k8s.pantheon.io');
 define('PANTHEON_INDEX_HOST', getenv('PANTHEON_INDEX_HOST'));
@@ -93,3 +93,8 @@ $settings = array (
 
 // Legacy Drupal Settings Block
 $_SERVER['PRESSFLOW_SETTINGS'] = json_encode($settings);
+
+// Used for Bringing the Remote IP into the Container.
+// $_SERVER['REMOTE_ADDR'] = file_get_contents('https://api.ipify.org');
+
+// $_SERVER['HTTP_USER_AGENT_HTTPS'] = 'ON';

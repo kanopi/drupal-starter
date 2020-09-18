@@ -27,8 +27,6 @@ drush cr
 
 echo "Running Gulp Tasks on theme"
 cd ${PROJECT_ROOT}/web/themes/custom/site_theme
-npm i -g npm@latest
-npm i -g gulp-cli
 npm install
-gulp sass
+node_modules/.bin/gulp sass
 drush cr
