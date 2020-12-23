@@ -6,10 +6,16 @@
 /drush/contrib/
 /vendor/
 /web/core/
+/web/modules/.gitignore
 /web/modules/contrib/
+/web/themes/.gitignore
 /web/themes/contrib/
+/web/profiles/.gitignore
 /web/profiles/contrib/
+/web/private/scripts/quicksilver
 /web/.eslintrc.json
+/web/themes/custom/site_theme/css/
+/web/themes/custom/site_theme/js/
 
 # Ignore scaffold files
 web/.csslintrc
@@ -21,7 +27,6 @@ web/.htaccess
 web/.ht.router.php
 web/autoload.php
 web/index.php
-web/robots.txt
 web/sites/default/default.services.pantheon.preproduction.yml
 web/sites/default/default.services.yml
 web/sites/default/default.settings.php
@@ -30,6 +35,18 @@ web/sites/development.services.yml
 web/sites/example.settings.local.php
 web/sites/example.sites.php
 web/update.php
+web/web.config
+!web/libraries/.gitkeep
+web/libraries/*
+web/core
+
+web/.gitignore
+web/INSTALL.txt
+web/README.txt
+web/example.gitignore
+web/robots.txt
+web/sites/.gitignore
+web/sites/README.txt
 web/web.config
 
 # Add directories containing build assets below.
@@ -50,6 +67,9 @@ web/web.config
 ### are ignored in the GitHub repository, but committed
 ### to the Pantheon repository.
 ###
+
+# Used to store the behat screenshots
+tests/behat/screenshots/*
 
 # Ignore Drupal's file directory
 web/sites/default/files
@@ -105,3 +125,5 @@ Thumbs.db
 # Ignore composer bin directory
 /bin
 *.map
+/.drush-lock-update
+/.gitattributews

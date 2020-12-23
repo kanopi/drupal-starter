@@ -12,4 +12,4 @@ set -e
 
 cd ${PROJECT_ROOT}
 
-bin/drupal "$@"
+vendor/bin/drupal "$@"
