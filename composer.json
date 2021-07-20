@@ -30,7 +30,7 @@
     ],
     "require": {
         "php": ">=7.3",
-        "composer/installers": "^1.2",
+        "composer/installers": "^1.10",
         "cweagans/composer-patches": "^1.6",
         "dmore/chrome-mink-driver": "^2.7",
         "drupal/config_direct_save": "^1.0",
