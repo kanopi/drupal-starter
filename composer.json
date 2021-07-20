@@ -146,7 +146,9 @@
         "enable-patching": true,
         "installer-types": ["library", "drupal-library", "npm-asset", "bower-asset", "quicksilver-script"],
         "patches": {
-
+            "drupal/tour_ui": {
+                "Tour UI: Will changes from (core 9.2+) Tour hurt? - https://www.drupal.org/project/tour_ui/issues/3214357": "https://www.drupal.org/files/issues/2021-05-28/tour_ui-3214357-7.patch"
+            }
         },
         "build-env": {
             "install-cms": [
