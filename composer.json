@@ -17,6 +17,15 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/kanopi/launch_checklist"
+        },
+        ,
+        {
+            "type": "git",
+            "url": "https://github.com/kanopi/tour_enhancements"
         }
     ],
     "require": {
