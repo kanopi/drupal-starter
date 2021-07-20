@@ -1,6 +1,6 @@
 {
-    "name": "kanopi/drupal8-docksal",
-    "description": "Project template for Drupal 8 projects with composer and docksal",
+    "name": "kanopi/starter-8",
+    "description": "Project template for Drupal 9 projects with composer and docksal",
     "type": "project",
     "license": "GPL-2.0+",
     "authors": [
