@@ -19,10 +19,18 @@
             "url": "https://asset-packagist.org"
         },
         {
-            "type": "git",
-            "url": "https://github.com/kanopi/launch_checklist"
+            "type": "package",
+            "package": {
+                "name": "kanopi/launch_checklist",
+                "version": "1.0",
+                "type": "drupal-module",
+                "source": {
+                    "url": "https://github.com/kanopi/launch_checklist.git",
+                    "type": "git",
+                    "reference": "1.0"
+                }
+            }
         },
-        ,
         {
             "type": "git",
             "url": "https://github.com/kanopi/tour_enhancements"
@@ -43,7 +51,6 @@
         "drupal/core-recommended": "^9.0.0",
         "drupal/core-vendor-hardening": "^8.8",
         "drupal/ctools": "^3.7",
-        "drupal/devel": "^4.1",
         "drupal/editor_advanced_link": "^2.0",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/field_group": "^3.1",
@@ -67,7 +74,7 @@
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/launch_checklist": "^1.0",
         "kanopi/tour_enhancements": "^1.1",
-        "oomphinc/composer-installers-extender": "^2",
+        "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^8",
         "pantheon-systems/quicksilver-pushback": "^2",
         "rvtraveller/qs-composer-installer": "^1.1",
@@ -78,9 +85,10 @@
         "behat/behat": "^3.1",
         "behat/mink": "^1.7",
         "behat/mink-extension": "^2.2",
-        "dealerdirect/phpcodesniffer-composer-installer": "^^0.7",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
         "dmore/behat-chrome-extension": "^1.3",
         "drupal/coder": "^8.3.1",
+        "drupal/devel": "^4.1",
         "drupal/drupal-driver": "^2.1",
         "drupal/drupal-extension": "^4.1",
         "genesis/behat-fail-aid": "^2.1",
@@ -144,7 +152,7 @@
     },
     "extra": {
         "enable-patching": true,
-        "installer-types": ["library", "drupal-library", "npm-asset", "bower-asset", "quicksilver-script"],
+        "installer-types": ["drupal-library", "npm-asset", "bower-asset", "quicksilver-script"],
         "patches": {
             "drupal/tour_ui": {
                 "Tour UI: Will changes from (core 9.2+) Tour hurt? - https://www.drupal.org/project/tour_ui/issues/3214357": "https://www.drupal.org/files/issues/2021-05-28/tour_ui-3214357-7.patch"
