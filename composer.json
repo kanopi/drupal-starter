@@ -46,10 +46,9 @@
         "drupal/coffee": "^1.2",
         "drupal/config_filter": "^2.2",
         "drupal/config_split": "^2",
-        "drupal/core-composer-scaffold": "^9.0.0",
-        "drupal/core-project-message": "^9.0.0",
-        "drupal/core-recommended": "^9.0.0",
-        "drupal/core-vendor-hardening": "^8.8",
+        "drupal/core-composer-scaffold": "^9.2.0",
+        "drupal/core-recommended": "^9.2.0",
+        "drupal/core-vendor-hardening": "^9.2.0",
         "drupal/ctools": "^3.7",
         "drupal/editor_advanced_link": "^2.0",
         "drupal/entity_usage": "^2.0@beta",
@@ -82,26 +81,11 @@
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "behat/behat": "^3.1",
-        "behat/mink": "^1.7",
-        "behat/mink-extension": "^2.2",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
-        "dmore/behat-chrome-extension": "^1.3",
-        "drupal/coder": "^8.3.1",
+        "drupal/core-dev": "^9.2.0",
         "drupal/devel": "^4.1",
-        "drupal/drupal-driver": "^2.1",
-        "drupal/drupal-extension": "^4.1",
-        "genesis/behat-fail-aid": "^2.1",
-        "jcalderonzumba/mink-phantomjs-driver": "^0.3.1",
-        "mglaman/phpstan-drupal": "^0.12.9",
-        "mikey179/vfsstream": "^1.2",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^0.12.6",
         "phpunit/phpunit": "^9.5",
-        "squizlabs/php_codesniffer": "^3.4.0",
-        "symfony/css-selector": "^3.4.0",
-        "symfony/phpunit-bridge": "^5.2",
+        "symfony/phpunit-bridge": "^5.3",
         "weitzman/drupal-test-traits": "^1.5"
     },
     "conflict": {
@@ -121,33 +105,7 @@
     },
     "scripts": {
         "build-assets": [
-            "@prepare-for-pantheon",
-            "composer install --optimize-autoloader"
-        ],
-        "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
-        "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
-        "code-sniff": [
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/custom",
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/custom",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/custom",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/custom"
-        ],
-        "unit-test": "echo 'No unit test step defined.'",
-        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-create-project-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "composer install --optimize-autoloader --no-dev"
         ]
     },
     "extra": {
@@ -178,17 +136,6 @@
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
-        },
-        "drupal-scaffold": {
-            "allowed-packages": [
-                "pantheon-systems/drupal-integrations"
-            ],
-            "locations": {
-                "web-root": "./web"
-            },
-            "file-mapping": {
-                "[project-root]/.editorconfig": false
-            }
         }
     }
 }
