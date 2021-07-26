@@ -93,16 +93,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ]
-    },
     "scripts": {
         "build-assets": [
             "composer install --optimize-autoloader --no-dev"
@@ -110,20 +100,12 @@
     },
     "extra": {
         "enable-patching": true,
-        "installer-types": ["drupal-library", "npm-asset", "bower-asset", "quicksilver-script"],
-        "patches": {
-            "drupal/tour_ui": {
-                "Tour UI: Will changes from (core 9.2+) Tour hurt? - https://www.drupal.org/project/tour_ui/issues/3214357": "https://www.drupal.org/files/issues/2021-05-28/tour_ui-3214357-7.patch"
-            }
-        },
-        "build-env": {
-            "install-cms": [
-                "drush site-install standard --account-mail={account-mail} --account-name={account-name} --account-pass={account-pass} --site-mail={site-mail} --site-name={site-name} --yes",
-                "drush pm-enable config_direct_save simple_block --yes",
-                "drush pm-uninstall block_content --yes"
-            ],
-            "export-configuration": "drush config-export --yes"
-        },
+        "installer-types": [
+            "drupal-library",
+            "npm-asset",
+            "bower-asset",
+            "quicksilver-script"
+        ],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
             "web/libraries/{$name}": [
@@ -136,6 +118,29 @@
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "./web"
+            },
+            "allowed-packages": [
+                "pantheon-systems/drupal-integrations"
+            ],
+            "file-mapping": {
+                "[web-root]/.htaccess": false,
+                "[web-root]/robots.txt": false,
+                "[web-root]/sites/development.services.yml": false
+            }
+        },
+        "patches": {
+            "drupal/tour_ui": {
+                "Tour UI: Will changes from (core 9.2+) Tour hurt? - https://www.drupal.org/project/tour_ui/issues/3214357": "https://www.drupal.org/files/issues/2021-05-28/tour_ui-3214357-7.patch"
+            }
         }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
     }
 }
