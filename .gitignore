@@ -127,3 +127,16 @@ Thumbs.db
 *.map
 /.drush-lock-update
 /.gitattributews
+/.csslintrc
+/.editorconfig
+/.eslintignore
+/.eslintrc.json
+/.ht.router.php
+/.htaccess
+/INSTALL.txt
+/autoload.php
+/example.gitignore
+/index.php
+/robots.txt
+/update.php
+/web.config

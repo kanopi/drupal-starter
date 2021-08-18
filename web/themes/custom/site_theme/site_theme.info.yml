@@ -1,7 +1,8 @@
 name: Site Theme
 type: theme
 description: 'Basic Theme based off of Foundation Framework.'
-core: 8.x
+core_version_requirement: ^8 || ^9
+base theme: stable9
 libraries:
   - site_theme/global-css
   - site_theme/global-js

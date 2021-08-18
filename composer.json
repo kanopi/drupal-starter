@@ -1,6 +1,6 @@
 {
-    "name": "kanopi/drupal8-docksal",
-    "description": "Project template for Drupal 8 projects with composer and docksal",
+    "name": "kanopi/starter-8",
+    "description": "Project template for Drupal 9 projects with composer and docksal",
     "type": "project",
     "license": "GPL-2.0+",
     "authors": [
@@ -17,124 +17,95 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "kanopi/launch_checklist",
+                "version": "1.0",
+                "type": "drupal-module",
+                "source": {
+                    "url": "https://github.com/kanopi/launch_checklist.git",
+                    "type": "git",
+                    "reference": "1.0"
+                }
+            }
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/kanopi/tour_enhancements"
         }
     ],
     "require": {
         "php": ">=7.3",
-        "composer/installers": "^1.2",
+        "composer/installers": "^1.10",
         "cweagans/composer-patches": "^1.6",
         "dmore/chrome-mink-driver": "^2.7",
-        "drupal/config_direct_save": "^1.0",
-        "drupal/config_installer": "^1.0",
-        "drupal/config_provider": "2.0-alpha1",
-        "drupal/config_readonly": "^1.0@beta",
-        "drupal/config_sync": "2.0-alpha4",
-        "drupal/console": "^1",
-        "drupal/core-composer-scaffold": "^8.8",
-        "drupal/core-project-message": "^8.8",
-        "drupal/core-recommended": "^8.8",
-        "drupal/core-vendor-hardening": "^8.8",
-        "drush/drush": "^9",
+        "drupal/a11yproject_checklist": "*",
+        "drupal/admin_toolbar": "^3.0",
+        "drupal/coffee": "^1.2",
+        "drupal/config_filter": "^2.2",
+        "drupal/config_split": "^2",
+        "drupal/core-composer-scaffold": "^9.2.0",
+        "drupal/core-recommended": "^9.2.0",
+        "drupal/core-vendor-hardening": "^9.2.0",
+        "drupal/ctools": "^3.7",
+        "drupal/editor_advanced_link": "^2.0",
+        "drupal/entity_usage": "^2.0@beta",
+        "drupal/field_group": "^3.1",
+        "drupal/linkit": "^5.0-beta10",
+        "drupal/menu_link_attributes": "^1.2",
+        "drupal/metatag": "^1.15",
+        "drupal/pathauto": "^1.8",
+        "drupal/resource_hints": "1.x-dev",
+        "drupal/schema_metatag": "^2.2",
+        "drupal/seo_checklist": "4.x-dev@dev",
+        "drupal/seo_starter": "1.x-dev",
+        "drupal/simple_sitemap": "^4",
+        "drupal/sitemap": "^2.0",
+        "drupal/tour_ui": "^1.0@beta",
+        "drupal/twig_vardumper": "^3.0",
+        "drupal/views_bulk_operations": "^4.0",
+        "drupal/webp": "^1.0@beta",
+        "drupal/yoast_seo": "^1.7",
+        "drupal/youtube": "^1.2",
+        "drush/drush": "^10",
         "joachim-n/composer-manifest": "^1.0",
-        "oomphinc/composer-installers-extender": "^1.1",
-        "pantheon-systems/drupal-integrations": "^8",
+        "kanopi/launch_checklist": "^1.0",
+        "kanopi/tour_enhancements": "^1.1",
+        "oomphinc/composer-installers-extender": "2.0.0",
+        "pantheon-systems/drupal-integrations": "^9",
         "pantheon-systems/quicksilver-pushback": "^2",
         "rvtraveller/qs-composer-installer": "^1.1",
         "webflo/drupal-finder": "^1.0.0",
-        "webmozart/path-util": "^2.3",
-        "zaporylie/composer-drupal-optimizations": "^1.0"
+        "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "behat/behat": "^3.1",
-        "behat/mink": "^1.7",
-        "behat/mink-extension": "^2.2",
-        "behat/mink-goutte-driver": "^1.2",
-        "behat/mink-selenium2-driver": "^1.4",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
-        "dmore/behat-chrome-extension": "^1.3",
-        "drupal/coder": "^8.3.1",
-        "drupal/drupal-driver": "^2.1",
-        "drupal/drupal-extension": "^4.1",
-        "drush-ops/behat-drush-endpoint": "^9.3",
-        "genesis/behat-fail-aid": "^3.7",
-        "jcalderonzumba/mink-phantomjs-driver": "^0.3.1",
-        "justinrainbow/json-schema": "^5.2",
-        "mikey179/vfsstream": "^1.2",
-        "phpspec/prophecy": "^1.7",
-        "phpunit/phpunit": "^6.5 || ^7",
-        "squizlabs/php_codesniffer": "^3.4.0",
-        "symfony/browser-kit": "^3.4.0",
-        "symfony/css-selector": "^3.4.0",
-        "symfony/debug": "^3.4.0",
-        "symfony/dom-crawler": "^3.4.0 !=3.4.38",
-        "symfony/filesystem": "~3.4.0",
-        "symfony/finder": "~3.4.0",
-        "symfony/lock": "~3.4.0",
-        "symfony/phpunit-bridge": "^3.4.3"
+        "drupal/core-dev": "^9.2.0",
+        "drupal/devel": "^4.1",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5",
+        "symfony/phpunit-bridge": "^5.3",
+        "weitzman/drupal-test-traits": "^1.5"
     },
     "conflict": {
         "drupal/drupal": "*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "platform": {
-            "php": "7.3"
-        }
-    },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ]
-    },
     "scripts": {
         "build-assets": [
-            "@prepare-for-pantheon",
-            "composer install --optimize-autoloader"
-        ],
-        "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
-        "lint": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
-        "code-sniff": [
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/custom",
-            "./vendor/bin/phpcs --standard=Drupal --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/custom",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/modules/custom",
-            "./vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md --ignore=node_modules,bower_components,vendor ./web/themes/custom"
-        ],
-        "unit-test": "echo 'No unit test step defined.'",
-        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-create-project-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "composer install --optimize-autoloader --no-dev"
         ]
     },
     "extra": {
         "enable-patching": true,
-        "installer-types": ["library", "drupal-library", "npm-asset", "bower-asset", "quicksilver-script"],
-        "patches": {
-
-        },
-        "build-env": {
-            "install-cms": [
-                "drush site-install standard --account-mail={account-mail} --account-name={account-name} --account-pass={account-pass} --site-mail={site-mail} --site-name={site-name} --yes",
-                "drush pm-enable config_direct_save simple_block --yes",
-                "drush pm-uninstall block_content --yes"
-            ],
-            "export-configuration": "drush config-export --yes"
-        },
+        "installer-types": [
+            "drupal-library",
+            "npm-asset",
+            "bower-asset",
+            "quicksilver-script"
+        ],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
             "web/libraries/{$name}": [
@@ -149,15 +120,27 @@
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
         },
         "drupal-scaffold": {
-            "allowed-packages": [
-                "pantheon-systems/drupal-integrations"
-            ],
             "locations": {
                 "web-root": "./web"
             },
+            "allowed-packages": [
+                "pantheon-systems/drupal-integrations"
+            ],
             "file-mapping": {
-                "[project-root]/.editorconfig": false
+                "[web-root]/.htaccess": false,
+                "[web-root]/robots.txt": false,
+                "[web-root]/sites/development.services.yml": false
+            }
+        },
+        "patches": {
+            "drupal/tour_ui": {
+                "Tour UI: Will changes from (core 9.2+) Tour hurt? - https://www.drupal.org/project/tour_ui/issues/3214357": "https://www.drupal.org/files/issues/2021-05-28/tour_ui-3214357-7.patch"
             }
         }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
     }
 }
