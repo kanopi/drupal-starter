@@ -74,7 +74,7 @@
         "kanopi/launch_checklist": "^1.0",
         "kanopi/tour_enhancements": "^1.1",
         "oomphinc/composer-installers-extender": "2.0.0",
-        "pantheon-systems/drupal-integrations": "^8",
+        "pantheon-systems/drupal-integrations": "^9",
         "pantheon-systems/quicksilver-pushback": "^2",
         "rvtraveller/qs-composer-installer": "^1.1",
         "webflo/drupal-finder": "^1.0.0",
