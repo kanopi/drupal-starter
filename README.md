@@ -1,9 +1,9 @@
-# [Project Website Name](https://example.com/)
+# [Drupal Starter](https://example.com/)
 This is the Drupal Composer Project with docksal configuration to easily get a site started.
 
 Features:
 
-- Drupal 8 - Composer Install
+- Drupal 9 - Composer Install
 - Docksal Configuration
 - Basic CircleCI configuration
 - Project Readme
@@ -21,8 +21,8 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
 1. Clone this repo into your Projects directory
 
     ```
-    git clone https://github.com/kanopi/starter-8.git drupal8
-    cd drupal8
+    git clone https://github.com/kanopi/drupal-starter.git drupal-starter
+    cd drupal-starter
     ```
 
 2. Initialize the site
@@ -38,7 +38,7 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
 4. Point your browser to
 
     ```
-    http://drupal8.docksal
+    http://drupal-starter.docksal
     ```
 
 When the automated install is complete the command line output will display the admin username and password.
@@ -103,4 +103,5 @@ Command | Description
 `refresh` | Will execute a drush sql-dump from the remote server. **NOT SET UP CURRENTLY**
 `site-build` | Will run all of the necessary steps for `npm install` and `gulp sass`
 `test` | Test to confirm the site is running
+`share` | Opens a proxy server to your local computer using ngrok.io. Share in real time, or test locally.
 
