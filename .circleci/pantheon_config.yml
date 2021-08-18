@@ -1,4 +1,6 @@
 # https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
+TERMINUS_SITE: &TERMINUS_SITE "YOUR_SITE_ID"
+
 defaults: &defaults
   docker:
     - image: quay.io/pantheon-public/build-tools-ci:6.x
@@ -35,138 +37,139 @@ defaults: &defaults
     ADMIN_USERNAME: admin
     # BUILD_TOOLS_VERSION: ^2.0.0-alpha4
     TERM: dumb
-    # Replace with the Terminus Site.
-    TERMINUS_SITE: ""
+    TERMINUS_SITE: *TERMINUS_SITE
 
 version: 2.1
 
 orbs:
-  ci-tools: kanopi/ci-tools@1.2.0
+  ci-tools: kanopi/ci-tools@1.7.1
+  slack: circleci/slack@3.4.2
 
 jobs:
-    # @todo: common initialization: 'composer install' for the site-under-test
-    build:
-        <<: *defaults
-        steps:
-            - checkout
 
-            - restore_cache:
-                keys:
-                    - composer-cache
-                    - terminus-install
+  deploy_to_pantheon:
+    <<: *defaults
+    steps:
+      - checkout
+      - ci-tools/copy-ssh-key
+      - run:
+          # Set TERMINUS_ENV and related environment variables.
+          # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
+          name: setup-environment-vars
+          command: /build-tools-ci/scripts/set-environment
 
-            - run:
-                # Set TERMINUS_ENV and related environment variables.
-                # https://github.com/pantheon-systems/docker-build-tools-ci/blob/1.x/scripts/set-environment
-                name: environment
-                command: /build-tools-ci/scripts/set-environment
+      - run:
+          name: run PHP build step
+          command: composer -n build-assets
 
-            - run:
-                name: run composer install to get the vendor directory
-                command: composer install
+      # Deploy to Pantheon
+      - run:
+          name: deploy to Pantheon
+          command: ./.ci/deploy/pantheon/dev-multidev
+          no_output_timeout: 1h
 
-            - save_cache:
-                key: composer-cache
-                paths:
-                    - $HOME/.composer/cache
+      - slack/notify:
+          message: "Finished multidev build ${MULTIDEV_SITE_URL}\n
+          Branch: *${CIRCLE_BRANCH}*\n
+          PR: ${CIRCLE_PULL_REQUEST}"
+          include_job_number_field: false
+          include_project_field: false
+          webhook: https://hooks.slack.com/services/T02BTKQ5F/B0225B1RPV1/9999111100000
 
-            - save_cache:
-                key: terminus-install
-                paths:
-                    - $(TERMINUS_PLUGINS_DIR:-~/.terminus/plugins)
 
-            - run:
-                name: lint php code for syntax errors
-                command: composer -n lint
+  composer_lock_updater:
+    <<: *defaults
+    steps:
+      - checkout
+      - ci-tools/copy-ssh-key
+      - run:
+          # Set TERMINUS_ENV and related environment variables.
+          # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
+          name: setup-environment-vars
+          command: /build-tools-ci/scripts/set-environment
 
-            - run:
-                name: check coding standards
-                command: composer -n code-sniff
+      - run:
+          name: Authenticate with Terminus
+          command: terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
 
-            - run:
-                name: run unit tests
-                command: composer -n unit-test
-
-    build_sass:
-        docker:
-          - image: circleci/node:8-stretch
-        steps:
-          - checkout
-          - run:
-              name: Install Gulp
-              command: sudo npm install -g gulp-cli
-          - run:
-              name: Install NPM Packages
-              command: npm install
-              path: web/themes/custom/site_theme/
-          - run:
-              name: Compile CSS and JS files
-              command: ./node_modules/.bin/gulp
-              path: web/themes/custom/site_theme/
-          - persist_to_workspace:
-              root: web/themes/custom/site_theme
-              paths:
-                  - css
-                  - js
-
-    build_deploy_and_test:
-        <<: *defaults
-        steps:
-            - ci-tools/copy-ssh-key
-            - checkout
-
-            - attach_workspace:
-                at: web/themes/custom/site_theme/
-
-            - restore_cache:
-                keys:
-                    - composer-cache
-                    - terminus-install
-
-            - run:
-                # Set TERMINUS_ENV and related environment variables.
-                # https://github.com/pantheon-systems/docker-build-tools-ci/blob/1.x/scripts/set-environment
-                name: dependencies
-                command: /build-tools-ci/scripts/set-environment
-
-            - run:
-                name: install dev dependencies, build assets, etc.
-                command: ./.circleci/scripts/pantheon/01-prepare
-
-            - run:
-                name: build assets
-                command: composer -n build-assets
-
-            - run:
-                name: prepare database for site-under test
-                command: ./.circleci/scripts/pantheon/02-init-site-under-test-clone-existing
-
-            - run:
-                name: run composer install again to get dev dependencies
-                command: composer install
-
-            - run:
-                name: post-test actions
-                command: ./.circleci/scripts/pantheon/03-post-test
-
-            - run:
-                name: handle merge to master (if needed)
-                command: ./.circleci/scripts/pantheon/04-merge-master
-
-            - run:
-                name: remove transient test fixtures
-                command: ./.circleci/scripts/pantheon/09-cleanup-fixtures
+      - run:
+          name: run composer lock updater
+          command: set -e && terminus project:clu $TERMINUS_SITE
 
 workflows:
   version: 2
-  build_and_test:
+  build_deploy_and_test:
     jobs:
-      # Install dev dependencies and do simple tests (sniff, unit tests, etc.)
-      - build:
+      - deploy_to_pantheon:
           context: kanopi-code
-      - build_sass
-      # Build deploy and test on target platform
-      - build_deploy_and_test:
+      - ci-tools/lighthouse:
           context: kanopi-code
+          pre-steps:
+            - ci-tools/set-pantheon-url:
+                site_id: *TERMINUS_SITE
+                store_as: LIGHTHOUSE_URL
+          url: "${LIGHTHOUSE_URL}"
           requires:
-            - build_sass
+            - deploy_to_pantheon
+          post-steps:
+            - ci-tools/post-to-github-commit:
+                body: '@$(ls /opt/reports/*/comment.txt)'
+
+      - ci-tools/pa11y-audit:
+          context: kanopi-code
+          # The primary URL of the site.
+          urls: "https://google.com/"
+          # The URL we are going to replace with the multidev URL.
+          search-find: "https://google.com/"
+          # Makes the PR fail if this test fails.
+          pass-on-fail: "yes"
+          # Replace the primary URL with a Pantheon multidev URL.
+          pre-steps:
+            - ci-tools/set-pantheon-url:
+                site_id: *TERMINUS_SITE
+                store_as: SEARCH_REPLACE
+          # Post the pa11y results file as a comment on the PR.
+          post-steps:
+            - ci-tools/post-to-github-commit:
+                body: '@/tmp/pa11y-ci-results.txt'
+          requires:
+            - deploy_to_pantheon
+      - ci-tools/backstopjs:
+          pass-on-fail: "yes"
+          context: kanopi-code
+          # Defines the pages, and gives them a label.  It is a comma separated list.
+          # Add as many as you need.
+          urls: '/|Homepage'
+          # Sets the URL to test to be the Pantheon multidev.
+          pre-steps:
+            - ci-tools/set-pantheon-url:
+                site_id: *TERMINUS_SITE
+                store_as: TEST_URL
+            - ci-tools/set-pantheon-url:
+                site_id: *TERMINUS_SITE
+                site_env: "dev"
+                store_as: REFERENCE_URL
+          # Posts a link to the report to the PR.
+          post-steps:
+            - ci-tools/post-artifact-to-github:
+                body-prefix: "Click here to view the report:"
+                body-title: BackstopJS
+                search-for: html_report/index.html
+          requires:
+            - deploy_to_pantheon
+          # Don't run it on main because that is the url it tests against.
+          filters:
+            branches:
+              ignore: master
+
+  scheduled_update_check:
+    triggers:
+      - schedule:
+          cron: "5 8 * * 0"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - composer_lock_updater:
+          context: kanopi-code
