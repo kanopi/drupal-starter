@@ -10,6 +10,8 @@ Features:
 
 Please make this README as project specific as possible. Delete the things that are not relevant or add new sections as needed.
 
+> If using this on pantheon please delete the `config.yml`
+
 ## Important links
 
 Please put links to the important places here.  Imagine you know nothing about the project
