@@ -160,7 +160,7 @@ workflows:
           # Don't run it on main because that is the url it tests against.
           filters:
             branches:
-              ignore: master
+              ignore: main
 
   scheduled_update_check:
     triggers:
@@ -169,7 +169,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
     jobs:
       - composer_lock_updater:
           context: kanopi-code
