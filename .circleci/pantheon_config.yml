@@ -117,25 +117,34 @@ workflows:
 
       - ci-tools/pa11y-audit:
           context: kanopi-code
-          # The primary URL of the site.
-          urls: "https://google.com/"
-          # The URL we are going to replace with the multidev URL.
-          search-find: "https://google.com/"
+          urls: "${PR_ENV_URL}"
           # Makes the PR fail if this test fails.
           pass-on-fail: "yes"
           # Replace the primary URL with a Pantheon multidev URL.
           pre-steps:
             - ci-tools/set-pantheon-url:
                 site_id: *TERMINUS_SITE
-                store_as: SEARCH_REPLACE
+                store_as: PR_ENV_URL
           # Post the pa11y results file as a comment on the PR.
           post-steps:
             - ci-tools/post-to-github-commit:
                 body: '@/tmp/pa11y-ci-results.txt'
           requires:
             - deploy_to_pantheon
+
+      - ci-tools/phpcs-drupal:
+          context: kanopi-code
+          extensions: 'php,module,inc,install,test,profile,theme,css,info,txt,md'
+          location: 'web/modules/custom/ web/themes/custom/'
+          standards: 'Drupal,DrupalPractice'
+          report: '/tmp/phpcs.txt'
+          # Post the results file as a comment on the PR.
+          post-steps:
+            - ci-tools/post-to-github-commit:
+                body: '@/tmp/phpcs.txt'
+                when: 'on_fail'
+
       - ci-tools/backstopjs:
-          pass-on-fail: "yes"
           context: kanopi-code
           # Defines the pages, and gives them a label.  It is a comma separated list.
           # Add as many as you need.
