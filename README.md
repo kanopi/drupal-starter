@@ -8,6 +8,18 @@ Features:
 - Basic CircleCI configuration
 - Project Readme
 
+Please make this README as project specific as possible. Delete the things that are not relevant or add new sections as needed.
+
+## Important links
+
+Please put links to the important places here.  Imagine you know nothing about the project
+
+* Hosting platform dashboard for the project.
+* Production URL
+* Maybe dev/stage/test environments
+* Links to documentation for any 3rd party services used.
+
+
 ## Setup instructions
 
 ### Step #1: Docksal environment setup
@@ -105,3 +117,6 @@ Command | Description
 `test` | Test to confirm the site is running
 `share` | Opens a proxy server to your local computer using ngrok.io. Share in real time, or test locally.
 
+## Project specific notes
+
+Are there any projects specific quirks or setup that should be noted.
