@@ -114,12 +114,11 @@ workflows:
           post-steps:
             - ci-tools/post-to-github-commit:
                 body: '@$(ls /opt/reports/*/comment.txt)'
+                when: 'on_fail'
 
       - ci-tools/pa11y-audit:
           context: kanopi-code
           urls: "${PR_ENV_URL}"
-          # Makes the PR fail if this test fails.
-          pass-on-fail: "yes"
           # Replace the primary URL with a Pantheon multidev URL.
           pre-steps:
             - ci-tools/set-pantheon-url:
@@ -129,6 +128,7 @@ workflows:
           post-steps:
             - ci-tools/post-to-github-commit:
                 body: '@/tmp/pa11y-ci-results.txt'
+                when: 'on_fail'
           requires:
             - deploy_to_pantheon
 
@@ -164,6 +164,7 @@ workflows:
                 body-prefix: "Click here to view the report:"
                 body-title: BackstopJS
                 search-for: html_report/index.html
+                when: 'on_fail'
           requires:
             - deploy_to_pantheon
           # Don't run it on main because that is the url it tests against.
