@@ -61,10 +61,10 @@ jobs:
       - run:
           name: Install node packages and compile theme.
           command: |
-          cd "web/themes/custom/site_theme/$THEME_NAME"
-          npm install -g gulp-cli
-          npm install
-          gulp build
+            cd "web/themes/custom/site_theme/$THEME_NAME"
+            npm install -g gulp-cli
+            npm install
+            gulp build
       - persist_to_workspace:
           root: "web/themes/custom/site_theme/$THEME_NAME"
           paths:
