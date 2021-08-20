@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Run NPM Commands
+##
+## Usage: fin npm [arguments]
+##
+
+# Abort if anything fails
+set -e
+
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+
+cd ${DOCROOT_PATH}/themes/custom/${THEME}
+
+npm "$@"

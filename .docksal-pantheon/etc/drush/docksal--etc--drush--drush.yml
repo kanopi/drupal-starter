@@ -1,0 +1,8 @@
+options:
+  uri: 'http://${env.VIRTUAL_HOST}'
+ssh:
+  options: '-o LogLevel=QUIET -t '
+drush:
+  paths:
+    alias-path:
+      - '/etc/drush/sites'

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+## Refresh DB
+##
+## Usage: fin refresh [environment id]
+## Defaults to the primary environment
+
+# Abort if anything fails
+set -e
+
+ENVIRONMENT=${1:-"$hostingenv"}
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+
+echo "Pulling Database..."
+fin pull db -y --hosting-env=${ENVIRONMENT}
+
+echo "Update code through composer"
+cd ${PROJECT_ROOT}
+composer install
+
+cd ${DOCROOT_PATH}
+
+echo "Clear cache"
+fin drush cr -y
+
+echo "Update Drupal DB"
+fin drush updatedb -y
+
+echo "Clear cache"
+fin drush cr -y
+
+echo "Login link"
+fin drush uli

@@ -1,0 +1,15 @@
+version: "2.1"
+
+services:
+  cli:
+    environment:
+      - COMPOSER_MEMORY_LIMIT=-1
+      - THEME
+    volumes:
+      - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
+
+  # Fake email
+  mail:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: mail

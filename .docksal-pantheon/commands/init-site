@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Initialize/reinstall site
+##
+## Usage: fin init-site
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Settings --------------------------------
+
+# PROJECT_ROOT and DOCROOT are set as env variables in cli
+SITE_DIRECTORY="default"
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+SITEDIR_PATH="${DOCROOT_PATH}/sites/${SITE_DIRECTORY}"
+
+#-------------------------- END: Settings --------------------------------
+
+#-------------------------- Helper functions --------------------------------
+
+# Copy a settings file.
+# Skips if the destination file already exists.
+# @param $1 source file
+# @param $2 destination file
+copy_settings_file()
+{
+	local source="$1"
+	local dest="$2"
+
+	echo "Copying ${dest}..."
+  cp -f $source $dest
+}
+
+#-------------------------- END: Helper functions --------------------------------
+
+#-------------------------- Functions --------------------------------
+
+# Initialize local settings files
+init_code () {
+ cd ${PROJECT_ROOT};
+ composer install
+}
+
+# Initialize local settings files
+init_settings ()
+{
+	echo 'Copy settings files for local dev'
+	cp -f "${PROJECT_ROOT}/.docksal/etc/conf/settings.php" "${SITEDIR_PATH}/settings.local.php"
+	cp -f "${PROJECT_ROOT}/.docksal/etc/conf/development.services.yml" "${DOCROOT_PATH}/sites/development.services.yml"
+}
+
+# Fix file/folder permissions
+fix_permissions ()
+{
+	echo "Making site directory writable..."
+  mkdir -p "${SITEDIR_PATH}/files/private"
+	chmod 755 "${SITEDIR_PATH}"
+	chmod 755 "${SITEDIR_PATH}/files/private"
+}
+
+
+#-------------------------- END: Functions --------------------------------
+
+#-------------------------- Execution --------------------------------
+
+mkdir ~/tmp
+chmod 755 ~/tmp
+sudo localedef -i en_US -f UTF-8 en_US.UTF-8
+
+# Project initialization steps
+init_code
+fix_permissions
+init_settings
+#-------------------------- END: Execution --------------------------------
