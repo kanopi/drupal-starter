@@ -12,11 +12,16 @@ Please make this README as project specific as possible. Delete the things that 
 
 ### Pantheon setup
 
-Spin up an empty project in the Pantheon UI, make a note of the machine name you give the project.
+#### Create the project in pantheon
 
-Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circleci-pantheon` and `.docksal-pantheon` to `.circleci` and `.docksal`
+Create a new drupal 8 project.
+Add redis to the project
+Create a minimal site install
+Set the basic details for the site
 
 #### Update the files to be project specific
+
+Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circleci-pantheon` and `.docksal-pantheon` to `.circleci` and `.docksal`
 
 * Custom theme
     * Update the name of the theme folder to be project specific. `web/themes/custom/site_theme`
@@ -29,7 +34,9 @@ Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circle
         * `.docksal/etc/conf/settings.php` is used for the local settings file for drupal.
         * update `trusted_host_patterns` to match the **repo** name as that is what most likely the virtual host will be.
 * CircleCI
-    * In `config.yml` update the `TERMINUS_SITE` variable in line 2 to your pantheon machine name for the project.
+    * `config.yml`
+        * update the `TERMINUS_SITE` variable in line 2 to your pantheon machine name for the project.
+        * update the `THEME_NAME` variable in line 3 to the folder name for your custom theme.
 
 
 ## Important links
@@ -79,7 +86,7 @@ When the automated install is complete the command line output will display the 
 
 ## Easier setup with `fin init`
 
-Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal-old/commands/init).
+Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal/commands/init).
 This script is meant to be modified per project. The one in this repo will give you a good example of advanced init script.
 
 Some common tasks that can be handled by the init script:
