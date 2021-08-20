@@ -16,21 +16,19 @@ This repo is Pantheon specific at the moment
 
 #### Create the project in Pantheon
 
-Create a new drupal **8** project. This is because the Drupal 9 integrated composer flow is a little janky.
-![Create a new drupal 8 project](/docs/pantheon-1.png?raw=true)
+* Create a new drupal **8** project. This is because the Drupal 9 integrated composer flow is a little janky.
+![Create a new drupal 8 project](https://user-images.githubusercontent.com/1062456/130299366-ad0699bd-3dc6-4148-9d8e-a8901e26bcce.png)
 
-Create a minimal site install
-![Create a minimal site install](/docs/pantheon-2.png?raw=true)
+* Create a minimal site install
+![Create a minimal site install](https://user-images.githubusercontent.com/1062456/130299368-effbdab3-87ec-435b-812a-cb5d50b1c430.png)
 
-Set the basic details for the site
-![Set the basic details for the site](/docs/pantheon-3.png?raw=true)
+* Set the basic details for the site
+![Set the basic details for the site](https://user-images.githubusercontent.com/1062456/130299369-e102b080-f94b-45ce-a706-08392e075c1a.png)
 
-Add Redis to the project
-![Add redis to the project](/docs/pantheon-4.png?raw=true)
+* Add Redis to the project
+![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
 
 #### Update the files to be project specific
-
-Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circleci-Pantheon` and `.docksal-Pantheon` to `.circleci` and `.docksal`
 
 * Custom theme
     * Update the name of the theme folder to be project specific. `web/themes/custom/site_theme`
@@ -51,7 +49,7 @@ Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circle
         * Update `root: ./web/themes/custom/site_theme` to have the proper theme folder name
         * If you would like Slack notifications when builds complete uncomment the slack portion.  You will need to create a new CircleCI slack integration for the channel you want to post updates too and update the webhook URL.
     * CircleCI project config
-        * Make sure "Only Build PRs" and "Auto Cancel Builds" options are checked. ![Update circleci settings](/docs/circleci-1.png?raw=true)
+        * Make sure "Only Build PRs" and "Auto Cancel Builds" options are checked. ![Update circleci settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
 
 
 ## Important links
