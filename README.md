@@ -17,16 +17,16 @@ This repo is Pantheon specific at the moment
 #### Create the project in Pantheon
 
 Create a new drupal **8** project. This is because the Drupal 9 integrated composer flow is a little janky.
-![Create a new drupal 8 project](/docs/pantheon-1.png)
+![Create a new drupal 8 project](/docs/pantheon-1.png?raw=true)
 
 Create a minimal site install
-![Create a minimal site install](/docs/pantheon-2.png)
+![Create a minimal site install](/docs/pantheon-2.png?raw=true)
 
 Set the basic details for the site
-![Set the basic details for the site](/docs/pantheon-3.png)
+![Set the basic details for the site](/docs/pantheon-3.png?raw=true)
 
 Add Redis to the project
-![Add redis to the project](/docs/pantheon-4.png)
+![Add redis to the project](/docs/pantheon-4.png?raw=true)
 
 #### Update the files to be project specific
 
@@ -51,7 +51,7 @@ Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circle
         * Update `root: ./web/themes/custom/site_theme` to have the proper theme folder name
         * If you would like Slack notifications when builds complete uncomment the slack portion.  You will need to create a new CircleCI slack integration for the channel you want to post updates too and update the webhook URL.
     * CircleCI project config
-        * Make sure "Only Build PRs" and "Auto Cancel Builds" options are checked. ![Update circleci settings](/docs/circleci-1.png)
+        * Make sure "Only Build PRs" and "Auto Cancel Builds" options are checked. ![Update circleci settings](/docs/circleci-1.png?raw=true)
 
 
 ## Important links
