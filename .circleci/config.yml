@@ -56,7 +56,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          cd web/themes/custom/site_theme/$THEME_NAME
+          cd "web/themes/custom/site_theme/$THEME_NAME"
           npm install -g gulp-cli
           npm install
           gulp build
@@ -172,7 +172,6 @@ workflows:
           # Post the results file as a comment on the PR.
           post-steps:
             - ci-tools/post-to-github-commit:
-                context: kanopi-code
                 body: '@/tmp/phpcs.txt'
                 when: 'on_fail'
 
