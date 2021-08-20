@@ -94,6 +94,11 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "autoload": {
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ]
+    },
     "scripts": {
         "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
         "build-assets": [
