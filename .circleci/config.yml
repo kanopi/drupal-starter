@@ -66,7 +66,7 @@ jobs:
             ./node_modules/.bin/gulp build
 
       - persist_to_workspace:
-          root: ./web/themes/custom/$THEME_NAME
+          root: ./web/themes/custom/site_theme
           paths:
             - css
             - js
