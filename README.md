@@ -10,7 +10,27 @@ Features:
 
 Please make this README as project specific as possible. Delete the things that are not relevant or add new sections as needed.
 
-> If using this on pantheon please delete the `config.yml`
+### Pantheon setup
+
+Spin up an empty project in the Pantheon UI, make a note of the machine name you give the project.
+
+Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circleci-pantheon` and `.docksal-pantheon` to `.circleci` and `.docksal`
+
+#### Update the files to be project specific
+
+* Custom theme
+    * Update the name of the theme folder to be project specific. `web/themes/custom/site_theme`
+* Docksal
+    * docksal.env
+        * Update `hostingsite` to the machine name of the project in pantheon
+        * Update `THEME` to the name of the theme folder
+        * `hostingenv` is set to `dev` to start but when you release the project to production it should be changed to `live`
+    * settings.php
+        * `.docksal/etc/conf/settings.php` is used for the local settings file for drupal.
+        * update `trusted_host_patterns` to match the **repo** name as that is what most likely the virtual host will be.
+* CircleCI
+    * In `config.yml` update the `TERMINUS_SITE` variable in line 2 to your pantheon machine name for the project.
+
 
 ## Important links
 
@@ -59,7 +79,7 @@ When the automated install is complete the command line output will display the 
 
 ## Easier setup with `fin init`
 
-Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal/commands/init).
+Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal-old/commands/init).
 This script is meant to be modified per project. The one in this repo will give you a good example of advanced init script.
 
 Some common tasks that can be handled by the init script:
