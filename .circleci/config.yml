@@ -1,5 +1,5 @@
 # https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
-TERMINUS_SITE: &TERMINUS_SITE "drupal-starter2"
+TERMINUS_SITE: &TERMINUS_SITE "PANTHEON_PROJECT_MACHINE_NAME"
 THEME_NAME: &THEME_NAME "site_theme"
 
 defaults: &defaults
@@ -118,15 +118,13 @@ jobs:
 #          include_project_field: false
 #          webhook: https://hooks.slack.com/services/T02BTKQ5F/B0225B1RPV1/9999111100000
 
-
+  # Updates modules/composer packages once a week.
   composer_lock_updater:
     <<: *defaults
     steps:
       - checkout
       - ci-tools/copy-ssh-key
       - run:
-          # Set TERMINUS_ENV and related environment variables.
-          # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
           name: setup-environment-vars
           command: /build-tools-ci/scripts/set-environment
 

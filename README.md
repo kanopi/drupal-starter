@@ -12,26 +12,31 @@ Please make this README as project specific as possible. Delete the things that 
 
 ### Pantheon setup
 
-#### Create the project in pantheon
+This repo is Pantheon specific at the moment
+
+#### Create the project in Pantheon
 
 Create a new drupal **8** project. This is because the Drupal 9 integrated composer flow is a little janky.
 ![Create a new drupal 8 project](/docs/pantheon-1.png)
+
 Create a minimal site install
 ![Create a minimal site install](/docs/pantheon-2.png)
+
 Set the basic details for the site
 ![Set the basic details for the site](/docs/pantheon-3.png)
+
 Add Redis to the project
 ![Add redis to the project](/docs/pantheon-4.png)
 
 #### Update the files to be project specific
 
-Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circleci-pantheon` and `.docksal-pantheon` to `.circleci` and `.docksal`
+Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circleci-Pantheon` and `.docksal-Pantheon` to `.circleci` and `.docksal`
 
 * Custom theme
     * Update the name of the theme folder to be project specific. `web/themes/custom/site_theme`
 * Docksal
     * docksal.env
-        * Update `hostingsite` to the machine name of the project in pantheon
+        * Update `hostingsite` to the machine name of the project in Pantheon
         * Update `THEME` to the name of the theme folder
         * `hostingenv` is set to `dev` to start but when you release the project to production it should be changed to `live`
     * settings.php
@@ -39,11 +44,14 @@ Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circle
         * update `trusted_host_patterns` to match the **repo** name as that is what most likely the virtual host will be.
 * Drupal
     * Once you have downloaded the DB and are working locally, enabled the redis module.  Then uncomment the redis config in `web/sites/default/settings.php`
-
 * CircleCI
     * `config.yml`
-        * update the `TERMINUS_SITE` variable in line 2 to your pantheon machine name for the project.
-        * update the `THEME_NAME` variable in line 3 to the folder name for your custom theme.
+        * Update the `TERMINUS_SITE` variable in line 2 to your Pantheon machine name for the project.
+        * Update the `THEME_NAME` variable in line 3 to the folder name for your custom theme.
+        * Update `root: ./web/themes/custom/site_theme` to have the proper theme folder name
+        * If you would like Slack notifications when builds complete uncomment the slack portion.  You will need to create a new CircleCI slack integration for the channel you want to post updates too and update the webhook URL.
+    * CircleCI project config
+        * Make sure "Only Build PRs" and "Auto Cancel Builds" options are checked. ![Update circleci settings](/docs/circleci-1.png)
 
 
 ## Important links
@@ -52,6 +60,7 @@ Please put links to the important places here.  Imagine you know nothing about t
 
 * Hosting platform dashboard for the project.
 * Production URL
+* Link to CircleCI project page
 * Maybe dev/stage/test environments
 * Links to documentation for any 3rd party services used.
 
