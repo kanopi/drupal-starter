@@ -16,6 +16,9 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
  */
 include __DIR__ . "/settings.pantheon.php";
 
+# Exclude modules from config export.
+$settings['config_exclude_modules'] = ['devel', 'twig_xdebug'];
+
 // Add redis caching
 //if (defined('PANTHEON_ENVIRONMENT')) {
 //  // Include the Redis services.yml file. Adjust the path if you installed to a contrib or other subdirectory.
