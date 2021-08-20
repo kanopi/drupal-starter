@@ -172,6 +172,7 @@ workflows:
           # Post the results file as a comment on the PR.
           post-steps:
             - ci-tools/post-to-github-commit:
+                context: kanopi-code
                 body: '@/tmp/phpcs.txt'
                 when: 'on_fail'
 
