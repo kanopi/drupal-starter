@@ -9,13 +9,6 @@ protected_web_paths:
   - /sites/default/files/private/
   - /sites/default/files/config/
 workflows:
-  deploy_product:
-    after:
-      -
-        type: webphp
-        description: 'Run composer prepare-for-pantheon'
-        script: private/scripts/deploy_product/prepare-for-pantheon.php
-
   sync_code:
     after:
       - type: webphp
