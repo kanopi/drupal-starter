@@ -50,7 +50,6 @@ orbs:
 jobs:
 
   compile-theme:
-    working_directory: ~/
     docker:
       # This version of node should match whats in the theme NVM setup
       - image: cimg/node:12.22.5
