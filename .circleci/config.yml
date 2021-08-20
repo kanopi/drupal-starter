@@ -97,16 +97,16 @@ jobs:
       # Deploy to Pantheon
       - run:
           name: deploy to Pantheon
-          command: ./.ci/deploy/pantheon/dev-multidev
+          command: ./.circleci/scripts/pantheon/dev-multidev
           no_output_timeout: 1h
 
-      - slack/notify:
-          message: "Finished multidev build ${MULTIDEV_SITE_URL}\n
-          Branch: *${CIRCLE_BRANCH}*\n
-          PR: ${CIRCLE_PULL_REQUEST}"
-          include_job_number_field: false
-          include_project_field: false
-          webhook: https://hooks.slack.com/services/T02BTKQ5F/B0225B1RPV1/9999111100000
+#      - slack/notify:
+#          message: "Finished multidev build ${MULTIDEV_SITE_URL}\n
+#          Branch: *${CIRCLE_BRANCH}*\n
+#          PR: ${CIRCLE_PULL_REQUEST}"
+#          include_job_number_field: false
+#          include_project_field: false
+#          webhook: https://hooks.slack.com/services/T02BTKQ5F/B0225B1RPV1/9999111100000
 
 
   composer_lock_updater:
