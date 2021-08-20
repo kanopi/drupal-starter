@@ -61,12 +61,10 @@ jobs:
       - run:
           name: Install node packages and compile theme.
           command: |
-            pwd
-            ls -la
             cd "./web/themes/custom/$THEME_NAME"
-            npm install -g gulp-cli
             npm install
-            gulp build
+            ./node_modules/gulp-cli/bin/gulp.js build
+
       - persist_to_workspace:
           root: "./web/themes/custom/$THEME_NAME"
           paths:
@@ -93,8 +91,8 @@ jobs:
       - run:
           name: Copy compiled theme assets.
           command: |
-            - cp -r /tmp/workspace/css "web/themes/custom/site_theme/$THEME_NAME"
-            - cp -r /tmp/workspace/js "web/themes/custom/site_theme/$THEME_NAME"
+            - cp -r /tmp/workspace/css "web/themes/custom/$THEME_NAME"
+            - cp -r /tmp/workspace/js "web/themes/custom/$THEME_NAME"
 
       # Deploy to Pantheon
       - run:
