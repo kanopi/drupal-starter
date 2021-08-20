@@ -53,6 +53,8 @@ jobs:
     docker:
       # This version of node should match whats in the theme NVM setup
       - image: cimg/node:12.22.5
+    environment:
+      - THEME_NAME: *THEME_NAME
     steps:
       - checkout
       - run: |
