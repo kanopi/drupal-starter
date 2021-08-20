@@ -27,7 +27,7 @@ fi
 terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- cr
 
 # Import config
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- config-import --yes
+#terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- config-import --yes
 
 
 # Update the Drupal database

@@ -14,10 +14,14 @@ Please make this README as project specific as possible. Delete the things that 
 
 #### Create the project in pantheon
 
-Create a new drupal 8 project.
-Add redis to the project
+Create a new drupal **8** project. This is because the Drupal 9 integrated composer flow is a little janky.
+![Create a new drupal 8 project](/docs/pantheon-1.png)
 Create a minimal site install
+![Create a minimal site install](/docs/pantheon-2.png)
 Set the basic details for the site
+![Set the basic details for the site](/docs/pantheon-3.png)
+Add Redis to the project
+![Add redis to the project](/docs/pantheon-4.png)
 
 #### Update the files to be project specific
 
@@ -33,6 +37,9 @@ Delete the existing `.circleci` and `.docksal` folders. Then rename the `.circle
     * settings.php
         * `.docksal/etc/conf/settings.php` is used for the local settings file for drupal.
         * update `trusted_host_patterns` to match the **repo** name as that is what most likely the virtual host will be.
+* Drupal
+    * Once you have downloaded the DB and are working locally, enabled the redis module.  Then uncomment the redis config in `web/sites/default/settings.php`
+
 * CircleCI
     * `config.yml`
         * update the `TERMINUS_SITE` variable in line 2 to your pantheon machine name for the project.
