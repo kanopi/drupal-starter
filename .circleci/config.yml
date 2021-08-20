@@ -55,9 +55,12 @@ jobs:
       - image: cimg/node:12.22.5
     environment:
       - THEME_NAME: *THEME_NAME
+    working_directory: ~/project
     steps:
       - checkout
-      - run: |
+      - run:
+          name: Install node packages and compile theme.
+          command: |
           cd "web/themes/custom/site_theme/$THEME_NAME"
           npm install -g gulp-cli
           npm install
