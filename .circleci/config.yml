@@ -63,7 +63,7 @@ jobs:
           command: |
             cd "./web/themes/custom/$THEME_NAME"
             npm install
-            ./node_modules/gulp-cli/bin/gulp.js build
+            ./node_modules/.bin/gulp build
 
       - persist_to_workspace:
           root: "./web/themes/custom/$THEME_NAME"
