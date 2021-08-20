@@ -91,8 +91,8 @@ jobs:
       - run:
           name: Copy compiled theme assets.
           command: |
-            - cp -r /tmp/workspace/css "web/themes/custom/$THEME_NAME"
-            - cp -r /tmp/workspace/js "web/themes/custom/$THEME_NAME"
+            cp -r /tmp/workspace/css "web/themes/custom/$THEME_NAME"
+            cp -r /tmp/workspace/js "web/themes/custom/$THEME_NAME"
 
       # Deploy to Pantheon
       - run:

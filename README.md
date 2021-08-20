@@ -86,7 +86,7 @@ When the automated install is complete the command line output will display the 
 
 ## Easier setup with `fin init`
 
-Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal/commands/init).
+Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal-old/commands/init).
 This script is meant to be modified per project. The one in this repo will give you a good example of advanced init script.
 
 Some common tasks that can be handled by the init script:
