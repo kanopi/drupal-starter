@@ -5,4 +5,4 @@ ssh:
 drush:
   paths:
     alias-path:
-      - /etc/drush/sites
+      - '/etc/drush/sites'
