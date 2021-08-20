@@ -58,6 +58,7 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
+
       - run:
           name: Install node packages and compile theme.
           command: |
@@ -84,9 +85,18 @@ jobs:
           name: setup-environment-vars
           command: /build-tools-ci/scripts/set-environment
 
+      - restore_cache:
+          keys:
+            - drupal-{{ checksum "composer.lock" }}
+
       - run:
           name: run PHP build step
           command: composer -n build-assets
+
+      - save_cache:
+          key: drupal-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
 
       - run:
           name: Copy compiled theme assets.
