@@ -95,6 +95,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
         "build-assets": [
             "composer install --optimize-autoloader --no-dev"
         ]
