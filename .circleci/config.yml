@@ -61,6 +61,8 @@ jobs:
       - run:
           name: Install node packages and compile theme.
           command: |
+            pwd
+            ls -la
             cd "project/web/themes/custom/site_theme/$THEME_NAME"
             npm install -g gulp-cli
             npm install
