@@ -7,6 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=12 <14"
+  },
   "devDependencies": {
     "browser-sync": "^2.24.7",
     "compass-mixins": "^0.12.7",
