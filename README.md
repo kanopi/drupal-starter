@@ -39,7 +39,9 @@ This repo is Pantheon specific at the moment
         * `hostingenv` is set to `dev` to start but when you release the project to production it should be changed to `live`
     * settings.php
         * `.docksal/etc/conf/settings.php` is used for the local settings file for drupal.
-        * update `trusted_host_patterns` to match the **repo** name as that is what most likely the virtual host will be.
+        * update `trusted_host_patterns` to match the **repo** name as that is what most likely the virtual host will be. this is so drupal doesn't reject request to the docksal site
+    * vhost-overrides.conf
+        * Update the proxy url to use the pantheon machine name for the site you just created.
 * Drupal
     * Once you have downloaded the DB and are working locally, enabled the redis module.  Then uncomment the redis config in `web/sites/default/settings.php`
 * CircleCI

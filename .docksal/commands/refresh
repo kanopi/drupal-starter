@@ -3,7 +3,7 @@
 ## Refresh DB
 ##
 ## Usage: fin refresh [environment id]
-## Defaults to the primary environment
+## Defaults to the primary environment but can take an environment name as a parameter: fin refresh pr-123
 
 # Abort if anything fails
 set -e
@@ -14,7 +14,7 @@ DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 echo "Pulling Database..."
 fin pull db -y --hosting-env=${ENVIRONMENT}
 
-echo "Update code through composer"
+echo "Make sure code is current through composer"
 cd ${PROJECT_ROOT}
 composer install
 
