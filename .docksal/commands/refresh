@@ -14,10 +14,6 @@ DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 echo "Pulling Database..."
 fin pull db -y --hosting-env=${ENVIRONMENT}
 
-echo "Make sure code is current through composer"
-cd ${PROJECT_ROOT}
-composer install
-
 cd ${DOCROOT_PATH}
 
 echo "Clear cache"
@@ -28,6 +24,3 @@ fin drush updatedb -y
 
 echo "Clear cache"
 fin drush cr -y
-
-echo "Login link"
-fin drush uli
