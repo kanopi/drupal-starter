@@ -184,7 +184,6 @@ workflows:
           report: '/tmp/phpcs.txt'
           # Post the results file as a comment on the PR.
           post-steps:
-            # Post the results file as a comment on the PR if it fails.
             - ci-tools/post-artifact-to-github:
                 body-prefix: "Click here to view the report:"
                 body-title: phpcs
