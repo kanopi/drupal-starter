@@ -10,6 +10,8 @@
 # Abort if anything fails
 set -e
 
-cd ${PROJECT_ROOT}/web/themes/custom/site_theme
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 
-node_modules/.bin/gulp "$@"
+cd ${DOCROOT_PATH}/themes/custom/${THEME}
+
+./node_modules/.bin/gulp "$@"

@@ -1,5 +1,0 @@
-#dev:
-#  host: 'www.example.com'
-#  root: '/var/www/example.com/htdocs'
-#  user: 'username'
-#  uri: 'uri'

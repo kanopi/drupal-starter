@@ -1,46 +1,15 @@
 version: "2.1"
 
 services:
-  # Web
-  web:
-    environment:
-      - APACHE_FILE_PROXY
-
-  # CLI
   cli:
-    extends:
-      file: ${HOME}/.docksal/stacks/services.yml
-      service: cli
     environment:
-      - LC_ALL=en_US.UTF-8
-      - LANG=en_US.UTF-8
-      - LANGUAGE=en_US.UTF-8
-      - PANTHEON_SITE
-      - PANTHEON_ENV
-      - DRUSH_OPTIONS_URI=${VIRTUAL_HOST}
       - COMPOSER_MEMORY_LIMIT=-1
+      - THEME
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
-    ports:
-      - "3050:3050"
-      - "3051:3051"
 
   # Fake email
   mail:
     extends:
       file: ${HOME}/.docksal/stacks/services.yml
       service: mail
-
-  # PHPMyAdmin
-  pma:
-    hostname: pma
-    image: phpmyadmin/phpmyadmin
-    environment:
-      - PMA_HOST=db
-      - PMA_USER=root
-      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
-    labels:
-      - io.docksal.virtual-host=pma.${VIRTUAL_HOST},pma.${VIRTUAL_HOST}.*
-    dns:
-      - ${DOCKSAL_DNS1}
-      - ${DOCKSAL_DNS2}

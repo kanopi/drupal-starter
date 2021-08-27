@@ -5,18 +5,15 @@
  * Functions to support theming in the site_theme theme.
  */
 
-use Drupal\Component\Utility\Html;
-
 /**
  * Implements hook_preprocess_HOOK() for html.html.twig.
  */
 function site_theme_preprocess_html(array &$variables) {
   /* Add class to html tag */
-  //$variables['html_attributes']->addClass('no-js');
-
+  // $variables['html_attributes']->addClass('no-js');
   // Don't display the site name twice on the front page (and potentially others)
   /*if (isset($variables['head_title_array']['title']) && isset($variables['head_title_array']['name']) && ($variables['head_title_array']['title'] == $variables['head_title_array']['name'])) {
-    $variables['head_title'] = $variables['head_title_array']['name'];
+  $variables['head_title'] = $variables['head_title_array']['name'];
   }*/
 }
 
@@ -26,12 +23,12 @@ function site_theme_preprocess_html(array &$variables) {
 function site_theme_page_attachments_alter(array &$page) {
   // Tell IE to use latest rendering engine (not to use compatibility mode).
   /*$ie_edge = [
-    '#type' => 'html_tag',
-    '#tag' => 'meta',
-    '#attributes' => [
-    'http-equiv' => 'X-UA-Compatible',
-    'content' => 'IE=edge',
-    ],
+  '#type' => 'html_tag',
+  '#tag' => 'meta',
+  '#attributes' => [
+  'http-equiv' => 'X-UA-Compatible',
+  'content' => 'IE=edge',
+  ],
   ];
   $page['#attached']['html_head'][] = [$ie_edge, 'ie_edge'];*/
 }
@@ -83,7 +80,7 @@ function site_theme_theme_suggestions_field_alter(array &$suggestions, array $va
 function site_theme_theme_suggestions_fieldset_alter(array &$suggestions, array $variables) {
   /*$element = $variables['element'];
   if (isset($element['#attributes']['class']) && in_array('form-composite', $element['#attributes']['class'])) {
-    $suggestions[] = 'fieldset__form_composite';
+  $suggestions[] = 'fieldset__form_composite';
   }*/
 }
 
@@ -92,7 +89,7 @@ function site_theme_theme_suggestions_fieldset_alter(array &$suggestions, array 
  */
 function site_theme_preprocess_node(array &$variables) {
   // Default to turning off byline/submitted.
-  //$variables['display_submitted'] = FALSE;
+  // $variables['display_submitted'] = FALSE;.
 }
 
 /**
@@ -106,15 +103,14 @@ function site_theme_theme_suggestions_views_view_alter(array &$suggestions, arra
  * Implements hook_preprocess_form().
  */
 function site_theme_preprocess_form(array &$variables) {
-  //$variables['attributes']['novalidate'] = 'novalidate';
-
+  // $variables['attributes']['novalidate'] = 'novalidate';
 }
 
 /**
  * Implements hook_preprocess_select().
  */
 function site_theme_preprocess_select(array &$variables) {
-  //$variables['attributes']['class'][] = 'select-chosen';
+  // $variables['attributes']['class'][] = 'select-chosen';
 }
 
 /**
@@ -144,13 +140,13 @@ function site_theme_theme_suggestions_details_alter(array &$suggestions, array $
  * Implements hook_preprocess_menu_local_task().
  */
 function site_theme_preprocess_menu_local_task(array &$variables) {
-  //$variables['element']['#link']['url']->setOption('attributes', ['class'=>'rounded']);
+  // $variables['element']['#link']['url']->setOption('attributes', ['class'=>'rounded']);
 }
 
 /**
  * Implements template_preprocess_page_title_alter().
  */
-function site_theme_preprocess_page_title_alter(&$vars){
+function site_theme_preprocess_page_title_alter(&$vars) {
 
 }
 
@@ -159,12 +155,12 @@ function site_theme_preprocess_page_title_alter(&$vars){
  */
 function site_theme_theme_suggestions_page_title_alter(&$suggestions, $vars) {
   $route_name = \Drupal::routeMatch()->getRouteName();
-  $suggestions[] = 'page_title__' . str_ireplace('.','__', $route_name);
+  $suggestions[] = 'page_title__' . str_ireplace('.', '__', $route_name);
 }
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
-function site_theme_theme_suggestions_user_alter(&$suggestions, $vars){
+function site_theme_theme_suggestions_user_alter(&$suggestions, $vars) {
   $suggestions[] = 'user__' . $vars['elements']['#view_mode'];
 }
