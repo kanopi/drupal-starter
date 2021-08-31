@@ -40,6 +40,7 @@ defaults: &defaults
     TERM: dumb
     TERMINUS_SITE: *TERMINUS_SITE
     THEME_NAME: *THEME_NAME
+    DEFAULT_BRANCH: main
 
 version: 2.1
 
