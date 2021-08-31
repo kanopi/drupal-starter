@@ -28,7 +28,40 @@ This repo is Pantheon specific at the moment
 * Add Redis to the project
 ![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
 
+* Go to the Pantheon dashboard for your project.
+
+* Click on the Team tab.
+
+* Click on Add organization
+
+* Search for Kanopi Studios (Important: enter the full term (Kanopi Studios) to find this - if you just enter Kanopi, you will end up with the wrong group and things will not work).
+
+* Select and add Kanopi Studios.
+
+* Also add any Kanopi developers who will be working on the project as team members.
+
+#### Create project's Github repo
+* Go to [https://github.com/kanopi/drupal-starter](https://github.com/kanopi/drupal-starter)
+
+* Click on "Use this template" button.
+
+* Make the owner Kanopi and the repo private, then click "Create repository from template"
+
+* In the new repo, click on Settings and then the Manage Access tab.
+
+* Click on "Invite teams or people" button.
+
+* Search for and add Kanopi Studios and grant them Read access.
+
+* Click on "Add kanopicode to this repository"
+
 #### Update the files to be project specific
+
+* Clone the new repo to your local.
+
+* Create a development branch.
+
+* Make the project specific changes listed below.
 
 * Custom theme
     * Update the name of the theme folder to be project specific. `web/themes/custom/site_theme`
@@ -41,18 +74,56 @@ This repo is Pantheon specific at the moment
         * `.docksal/etc/conf/settings.php` is used for the local settings file for drupal.
         * update `trusted_host_patterns` to match the **repo** name as that is what most likely the virtual host will be. this is so drupal doesn't reject request to the docksal site
     * vhost-overrides.conf
+        * `.docksal/etc/nginx/vhost-overrides.conf`
         * Update the proxy url to use the pantheon machine name for the site you just created.
 * Drupal
-    * Once you have downloaded the DB and are working locally, enabled the redis module.  Then uncomment the redis config in `web/sites/default/settings.php`
+    * Once you have downloaded the DB and are working locally, enable the redis module.
+    * Uncomment the redis config in `web/sites/default/settings.php`
+    * Export config (`fin drush cex`) and commit it to the repo as a new PR.
 * CircleCI
     * `config.yml`
         * Update the `TERMINUS_SITE` variable in line 2 to your Pantheon machine name for the project.
         * Update the `THEME_NAME` variable in line 3 to the folder name for your custom theme.
         * Update `root: ./web/themes/custom/site_theme` to have the proper theme folder name
         * If you would like Slack notifications when builds complete uncomment the slack portion.  You will need to create a new CircleCI slack integration for the channel you want to post updates too and update the webhook URL.
-    * CircleCI project config
-        * Make sure "Only Build PRs" and "Auto Cancel Builds" options are checked. ![Update circleci settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
 
+* Run `fin init` to validate your work and local site.
+
+* Commit and push your changes.
+
+* Submit a pull request in github and merge it.
+
+* Circleci won't run this time because we haven't set it up yet. We need to commit the circleci config.yml first so we can setup circleci later.
+
+#### Circleci project setup
+
+* Go to [circleci projects dashboard](https://app.circleci.com/projects/project-dashboard/github/kanopi/)
+
+* Find your new project repo and click the "Set Up Project" button.
+
+* Select the branch name option and select the main branch, and click on the "Lets go" button.
+
+* Click on the gear for the project and click on the Advanced Settings tab.
+
+* Enable "Only build pull request" and "Auto Cancel Builds" options. ![Update circleci settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
+
+#### Validation
+
+* Create development branch off of main
+
+* Make a local change (e.g, enable the admin toolbar module and export config)
+
+* Git add, commit and push the change
+
+* Submit a PR in the github repo requesting merge to main branch.
+
+* Validate circleci job and deployment to Pantheon multidev.
+
+* Validate that config change is imported as expected.
+
+* Merge the PR.
+
+* Validate circleci job deployment and Pantheon Dev site.
 
 ## Important links
 
@@ -63,7 +134,6 @@ Please put links to the important places here.  Imagine you know nothing about t
 * Link to CircleCI project page
 * Maybe dev/stage/test environments
 * Links to documentation for any 3rd party services used.
-
 
 ## Setup instructions
 
