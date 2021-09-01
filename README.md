@@ -26,7 +26,7 @@ This repo is Pantheon specific at the moment
 ![Set the basic details for the site](https://user-images.githubusercontent.com/1062456/130299369-e102b080-f94b-45ce-a706-08392e075c1a.png)
 
 * Add Redis to the project
-![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
+  ![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
 
 * Go to the Pantheon dashboard for your project.
 
@@ -65,6 +65,7 @@ This repo is Pantheon specific at the moment
 
 * Custom theme
     * Update the name of the theme folder to be project specific. `web/themes/custom/site_theme`
+
 * Docksal
     * docksal.env
         * Update `hostingsite` to the machine name of the project in Pantheon
@@ -76,10 +77,7 @@ This repo is Pantheon specific at the moment
     * vhost-overrides.conf
         * `.docksal/etc/nginx/vhost-overrides.conf`
         * Update the proxy url to use the pantheon machine name for the site you just created.
-* Drupal
-    * Once you have downloaded the DB and are working locally, enable the redis module.
-    * Uncomment the redis config in `web/sites/default/settings.php`
-    * Export config (`fin drush cex`) and commit it to the repo as a new PR.
+
 * CircleCI
     * `config.yml`
         * Update the `TERMINUS_SITE` variable in line 2 to your Pantheon machine name for the project.
@@ -87,13 +85,17 @@ This repo is Pantheon specific at the moment
         * Update `root: ./web/themes/custom/site_theme` to have the proper theme folder name
         * If you would like Slack notifications when builds complete uncomment the slack portion.  You will need to create a new CircleCI slack integration for the channel you want to post updates too and update the webhook URL.
 
-* Run `fin init` to validate your work and local site.
+* Run `fin init` to validate your local site.
 
-* Commit and push your changes.
+* Run `fin drush cex -y`
 
-* Submit a pull request in github and merge it.
+* On a development branch, git add, commit and push all local changes.
 
-* Circleci won't run this time because we haven't set it up yet. We need to commit the circleci config.yml first so we can setup circleci later.
+* Create a PR in github.
+
+* Circleci won't run this time because we haven't set it up yet. We need to commit the project-specific circleci config.yml first so we can setup circleci later.
+
+* Merge PR (now we have our project-specific circleci config on the main branch so we can reference it from circleci). Circleci job will still not happen.
 
 #### Circleci project setup
 
@@ -107,19 +109,33 @@ This repo is Pantheon specific at the moment
 
 * Enable "Only build pull request" and "Auto Cancel Builds" options. ![Update circleci settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
 
-#### Validation
+#### Redis setup
 
-* Create development branch off of main
+* Enable the redis module in your local site.
 
-* Make a local change (e.g, enable the admin toolbar module and export config)
+* Export config.
 
-* Git add, commit and push the change
+* On a development branch, git add, commit and push all local changes.
 
-* Submit a PR in the github repo requesting merge to main branch.
+* Submit a PR on github.
 
-* Validate circleci job and deployment to Pantheon multidev.
+* Validate circleci job and multidev.
 
-* Validate that config change is imported as expected.
+* Merge PR.
+
+* Validate circleci job and Dev site.
+
+* In your local, checkout and pull main branch.
+
+* Creat new development branch.
+
+* Uncomment the redis config in `web/sites/default/settings.php`.
+
+* Git add, commit and push the change.
+
+* Submit a PR in the github repo.
+
+* Validate circleci job and deployment to multidev.
 
 * Merge the PR.
 
@@ -127,12 +143,12 @@ This repo is Pantheon specific at the moment
 
 ## Important links
 
-Please put links to the important places here.  Imagine you know nothing about the project
+Please put links to the important places here.  Imagine you know nothing about the project.
 
 * Hosting platform dashboard for the project.
-* Production URL
-* Link to CircleCI project page
-* Maybe dev/stage/test environments
+* Production URL.
+* Link to CircleCI project page.
+* Maybe dev/stage/test environments.
 * Links to documentation for any 3rd party services used.
 
 ## Setup instructions
@@ -145,14 +161,14 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
 
 ### Step #2: Project setup
 
-1. Clone this repo into your Projects directory
+1. Clone this repo into your Projects directory.
 
     ```
     git clone https://github.com/kanopi/drupal-starter.git drupal-starter
     cd drupal-starter
     ```
 
-2. Initialize the site
+2. Initialize the site.
 
     This will initialize local settings and install the site via drush
 
@@ -160,7 +176,7 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
     fin init
     ```
 
-3. **On Windows** add `fin hosts add` to your hosts file
+3. **On Windows** add `fin hosts add` to your hosts file.
 
 4. Point your browser to
 
