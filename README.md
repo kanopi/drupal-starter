@@ -55,6 +55,16 @@ This repo is Pantheon specific at the moment
 
 * Click on "Add kanopicode to this repository"
 
+* Still in Settings, click on the Branches tab.
+
+* Click on Add Rule.
+
+* Make Branch name pattern match your default branch (e.g., main).
+
+* Select "Require pull request reviews before merging"
+
+* Click Create button
+
 #### Update the files to be project specific
 
 * Clone the new repo to your local.
