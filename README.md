@@ -26,7 +26,7 @@ This repo is Pantheon specific at the moment
 ![Set the basic details for the site](https://user-images.githubusercontent.com/1062456/130299369-e102b080-f94b-45ce-a706-08392e075c1a.png)
 
 * Add Redis to the project
-  ![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
+![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
 
 * Go to the Pantheon dashboard for your project.
 
