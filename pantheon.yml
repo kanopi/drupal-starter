@@ -12,20 +12,20 @@ workflows:
   sync_code:
     after:
       - type: webphp
-        description: Database updates, config import.
+        description: 'Database updates, config import.'
         script: private/scripts/drush_config_import/drush_config_import.php
       - type: webphp
-        description: Push changes back to GitHub if needed
+        description: 'Push changes back to GitHub if needed'
         script: private/scripts/quicksilver/quicksilver-pushback/push-back.php
       - type: webphp
-        description: Log to New Relic
+        description: 'Log to New Relic'
         script: private/scripts/sync_code/new_relic_deploy.php
   # Log to New Relic when deploying to test or live.
   deploy:
     after:
       - type: webphp
-        description: Log to New Relic
+        description: 'Log to New Relic'
         script: private/scripts/deploy/new_relic_deploy.php
       - type: webphp
-        description: Database updates, config import.
+        description: 'Database updates, config import.'
         script: private/scripts/drush_config_import/drush_config_import.php
