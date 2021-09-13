@@ -188,7 +188,7 @@ workflows:
             - ci-tools/post-artifact-to-github:
                 body-prefix: "Click here to view the report:"
                 body-title: phpcs
-                search-for: tmp/phpcs-report.txt
+                search-for: tmp/phpcs.txt
                 when: on_fail
 
       - ci-tools/backstopjs:
