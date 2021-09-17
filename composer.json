@@ -114,7 +114,7 @@
         "build-assets": [
             "composer install --optimize-autoloader --no-dev"
         ],
-        "post-install-cmd": [
+        "post-autoload-dump": [
             "cp vendor/palantirnet/drupal-rector/rector.php . || true"
         ]
     },
