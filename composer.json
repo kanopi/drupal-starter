@@ -84,9 +84,12 @@
     "require-dev": {
         "drupal/core-dev": "^9.2.0",
         "drupal/devel": "^4.1",
+        "drupal/upgrade_status": "^3.10",
         "mglaman/phpstan-drupal": "^0.12.13",
         "palantirnet/drupal-rector": "^0.11.3",
         "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^0.12.6",
         "phpunit/phpunit": "^9.5",
         "symfony/phpunit-bridge": "^5.3",
         "weitzman/drupal-test-traits": "^1.5"
@@ -102,12 +105,17 @@
         ]
     },
     "scripts": {
-	"code-check": [
-	   "vendor/bin/phpstan analyse web/modules/custom web/themes/custom"
-	],
+        "code-check": [
+            "vendor/bin/phpstan analyse web/modules/custom web/themes/custom || true",
+            "vendor/bin/rector process web/modules/custom/ --dry-run || true",
+            "vendor/bin/rector process web/themes/custom/ --dry-run || true"
+        ],
         "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
         "build-assets": [
             "composer install --optimize-autoloader --no-dev"
+        ],
+        "post-install-cmd": [
+            "cp vendor/palantirnet/drupal-rector/rector.php . || true"
         ]
     },
     "extra": {
@@ -147,6 +155,9 @@
         "patches": {
             "drupal/tour_ui": {
                 "Tour UI: Will changes from (core 9.2+) Tour hurt? - https://www.drupal.org/project/tour_ui/issues/3214357": "https://www.drupal.org/files/issues/2021-05-28/tour_ui-3214357-7.patch"
+            },
+            "palantirnet/drupal-rector": {
+                "Access Level": "https://patch-diff.githubusercontent.com/raw/palantirnet/drupal-rector/pull/183.diff"
             }
         }
     },
