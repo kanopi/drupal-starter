@@ -106,14 +106,22 @@
     },
     "scripts": {
         "lint-php": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
-        "code-sniff": "vendor/bin/phpcs --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
+        "code-sniff": "vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
+        "code-fix-standards": "vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
         "code-fix": [
-            "vendor/bin/phpcbf --standard=DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
+            "@code-fix-standards",
+            "@rector-fix",
             "@lint-php"
         ],
         "phpstan": "vendor/bin/phpstan analyse web/modules/custom web/themes/custom || true",
         "rector-modules": "vendor/bin/rector process web/modules/custom/ --dry-run || true",
         "rector-themes": "vendor/bin/rector process web/themes/custom/ --dry-run || true",
+        "rector-fix-modules": "vendor/bin/rector process web/modules/custom/ || true",
+        "rector-fix-themes": "vendor/bin/rector process web/themes/custom/ || true",
+        "rector-fix": [
+            "@rector-fix-modules",
+            "@rector-fix-themes"
+        ],
         "code-check": [
             "@phpstan",
             "@rector-modules",
