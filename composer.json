@@ -90,8 +90,6 @@
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^0.12.6",
-        "phpunit/phpunit": "^9.5",
-        "symfony/phpunit-bridge": "^5.3",
         "weitzman/drupal-test-traits": "^1.5"
     },
     "conflict": {
