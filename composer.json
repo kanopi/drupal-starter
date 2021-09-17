@@ -84,6 +84,8 @@
     "require-dev": {
         "drupal/core-dev": "^9.2.0",
         "drupal/devel": "^4.1",
+        "mglaman/phpstan-drupal": "^0.12.13",
+        "palantirnet/drupal-rector": "^0.11.3",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "symfony/phpunit-bridge": "^5.3",
@@ -100,6 +102,9 @@
         ]
     },
     "scripts": {
+	"code-check": [
+	   "vendor/bin/phpstan analyse web/modules/custom web/themes/custom"
+	],
         "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
         "build-assets": [
             "composer install --optimize-autoloader --no-dev"
