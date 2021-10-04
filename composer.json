@@ -73,7 +73,7 @@
         "drush/drush": "^10",
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/launch_checklist": "^1.0",
-        "kanopi/tour_enhancements": "^1.1",
+        "kanopi/tour_enhancements": "^1.0",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^9",
         "pantheon-systems/quicksilver-pushback": "^2",
