@@ -30,10 +30,6 @@
                     "reference": "1.0"
                 }
             }
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/kanopi/tour_enhancements"
         }
     ],
     "require": {
@@ -64,6 +60,7 @@
         "drupal/seo_starter": "1.x-dev",
         "drupal/simple_sitemap": "^4",
         "drupal/sitemap": "^2.0",
+        "drupal/tour_enhancements": "^1",
         "drupal/tour_ui": "^1.0@beta",
         "drupal/twig_vardumper": "^3.0",
         "drupal/views_bulk_operations": "^4.0",
@@ -73,7 +70,6 @@
         "drush/drush": "^10",
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/launch_checklist": "^1.0",
-        "kanopi/tour_enhancements": "^1.0",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^9",
         "pantheon-systems/quicksilver-pushback": "^2",
