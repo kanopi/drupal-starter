@@ -1,6 +1,7 @@
 # https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
 TERMINUS_SITE: &TERMINUS_SITE "PANTHEON_PROJECT_MACHINE_NAME"
 THEME_NAME: &THEME_NAME "site_theme"
+THEME_PATH: &THEME_PATH "web/themes/custom/site_theme"
 
 defaults: &defaults
   docker:
@@ -35,25 +36,47 @@ orbs:
 
 jobs:
 
+  # Used to run PHP Checks
+  test:
+    docker: cimg/php:7.4
+    working_director: ~/project
+    steps:
+      - checkout
+      - ci-tools/copy-ssh-key
+      - run:
+          name: Composer Install
+          command: composer install --ansi --optimize-autoloader
+      - run:
+          name: Run Linting
+          command: composer -n lint-php
+      - run:
+          name: Run Code Sniff
+          command: composer -n code-sniff
+      - run:
+          name: Run PHPStan
+          command: composer -n phpstan
+
   compile-theme:
     docker:
       # This version of node should match whats in the theme NVM setup
       - image: cimg/node:12.22.5
-    environment:
-      - THEME_NAME: *THEME_NAME
     working_directory: ~/project
     steps:
       - checkout
-
       - run:
-          name: Install node packages and compile theme.
-          command: |
-            cd "./web/themes/custom/$THEME_NAME"
-            npm install
-            ./node_modules/.bin/gulp build
-
+          name: Install Node Packages.
+          command: npm install
+          path: *THEME_PATH
+      - run:
+          name: Run Gulp Build
+          command: node_modules/.bin/gulp build
+          path: *THEME_PATH
+      - run:
+          name: Cleanup Remove Node Modules
+          command: rm -rf node_modules
+          path: *THEME_PATH
       - persist_to_workspace:
-          root: ./web/themes/custom/site_theme
+          root: *THEME_PATH
           paths:
             - css
             - js
@@ -126,6 +149,8 @@ workflows:
   version: 2
   build_deploy_and_test:
     jobs:
+      - test:
+          context: kanopi-code
       - compile-theme:
           context: kanopi-code
       - deploy_to_pantheon:
