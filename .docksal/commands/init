@@ -25,11 +25,8 @@ echo-yellow () { echo -e "${yellow}$1${NC}"; }
 
 # Stack initialization
 echo -e "${green_bg} Step 1 ${NC}${green} Initializing stack...${NC}"
-if [[ $DOCKER_RUNNING == "true" ]]; then
-	fin reset -f
-else
-	fin up
-fi
+fin reset -f
+
 echo "Waiting 10s for MySQL to initialize...";
 sleep 10
 
@@ -39,8 +36,10 @@ echo -e "${green_bg} Step 2 ${NC}${green} Initializing site...${NC}"
 fin init-site
 fin install-theme-tools
 
-echo -e "${green_bg} Step 3 ${NC}${green} Pulling data from hosting...${NC}"
-fin refresh
+if [[ -f config/core.extension.yml ]]; then
+  echo -e "${green_bg} Step 3 ${NC}${green} Pulling data from hosting...${NC}"
+  fin refresh
+fi
 
 echo -en "${green_bg} DONE! ${NC} "
 echo -e "Open ${yellow}http://${VIRTUAL_HOST}${NC} in your browser to verify the setup."
