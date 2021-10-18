@@ -178,15 +178,28 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
     cd drupal-starter
     ```
 
-2. Initialize the site.
+2. Initialize Lefthook Git Hooks
+
+[Lefthook](https://github.com/evilmartians/lefthook) is used for configuring commands to run using githooks
+
+   ```
+   lefthook install
+   ```
+
+To install Lefthook the following commands can be done.
+
+  ```
+  sudo curl -fsSL -o /usr/local/bin/lefthook https://github.com/evilmartians/lefthook/releases/download/v0.7.7/lefthook_0.7.7_MacOS_x86_64
+  sudo chmod +x /usr/local/bin/lefthook
+  ```
+
+3. Initialize the site.
 
     This will initialize local settings and install the site via drush
 
     ```
     fin init
     ```
-
-3. **On Windows** add `fin hosts add` to your hosts file.
 
 4. Point your browser to
 

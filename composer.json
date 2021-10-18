@@ -168,9 +168,6 @@
         "patches": {
             "drupal/tour_ui": {
                 "Tour UI: Will changes from (core 9.2+) Tour hurt? - https://www.drupal.org/project/tour_ui/issues/3214357": "https://www.drupal.org/files/issues/2021-05-28/tour_ui-3214357-7.patch"
-            },
-            "palantirnet/drupal-rector": {
-                "Access Level": "https://patch-diff.githubusercontent.com/raw/palantirnet/drupal-rector/pull/183.diff"
             }
         }
     },

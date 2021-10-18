@@ -1,0 +1,9 @@
+pre-push:
+  parallel: true
+  commands:
+    code-sniff:
+      run: fin composer -n code-sniff
+    phpstan:
+      run: fin composer -n phpstan
+    lint:
+      run: fin composer -n lint-php

@@ -30,7 +30,7 @@ copy_settings_file()
 	local dest="$2"
 
 	echo "Copying ${dest}..."
-  cp -f $source $dest
+	cp -f $source $dest
 }
 
 #-------------------------- END: Helper functions --------------------------------
@@ -39,23 +39,31 @@ copy_settings_file()
 
 # Initialize local settings files
 init_code () {
- cd ${PROJECT_ROOT};
- composer install
+	cd ${PROJECT_ROOT};
+	composer install
 }
 
 # Initialize local settings files
 init_settings ()
 {
 	echo 'Copy settings files for local dev'
-	cp -f "${PROJECT_ROOT}/.docksal/etc/conf/settings.php" "${SITEDIR_PATH}/settings.local.php"
-	cp -f "${PROJECT_ROOT}/.docksal/etc/conf/development.services.yml" "${DOCROOT_PATH}/sites/development.services.yml"
+	ln -sf "${PROJECT_ROOT}/.docksal/etc/conf/settings.php" "${SITEDIR_PATH}/settings.local.php"
+	ln -sf "${PROJECT_ROOT}/.docksal/etc/conf/development.services.yml" "${DOCROOT_PATH}/sites/development.services.yml"
+}
+
+# Install the site with basic configuration
+site_install ()
+{
+	cd ${PROJECT_ROOT}/${DOCROOT}
+	drush site-install standard -y \
+		--site-name='My Drupal 8 Site'
 }
 
 # Fix file/folder permissions
 fix_permissions ()
 {
 	echo "Making site directory writable..."
-  mkdir -p "${SITEDIR_PATH}/files/private"
+	mkdir -p "${SITEDIR_PATH}/files/private"
 	chmod 755 "${SITEDIR_PATH}"
 	chmod 755 "${SITEDIR_PATH}/files/private"
 }
@@ -73,4 +81,8 @@ sudo localedef -i en_US -f UTF-8 en_US.UTF-8
 init_code
 fix_permissions
 init_settings
+
+if [[ ! -f ${PROJECT_ROOT}/config/core.extension.yml ]]; then
+	site_install
+fi
 #-------------------------- END: Execution --------------------------------
