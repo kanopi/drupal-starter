@@ -39,7 +39,7 @@ jobs:
   # Used to run PHP Checks
   test:
     docker:
-       image: cimg/php:7.4
+       - image: cimg/php:7.4
     working_directory: ~/project
     steps:
       - checkout
