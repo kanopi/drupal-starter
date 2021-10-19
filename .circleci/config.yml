@@ -38,8 +38,9 @@ jobs:
 
   # Used to run PHP Checks
   test:
-    docker: cimg/php:7.4
-    working_director: ~/project
+    docker:
+       image: cimg/php:7.4
+    working_directory: ~/project
     steps:
       - checkout
       - ci-tools/copy-ssh-key
