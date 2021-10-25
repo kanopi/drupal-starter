@@ -1,4 +1,5 @@
 parameters:
+  level: max
   customRulesetUsed: true
   reportUnmatchedIgnoredErrors: false
   # Ignore phpstan-drupal extension's rules.
