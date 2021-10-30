@@ -271,6 +271,31 @@ Command | Description
 `test` | Test to confirm the site is running
 `share` | Opens a proxy server to your local computer using ngrok.io. Share in real time, or test locally.
 
+## Composer Commands
+
+The following commands are available with Composer and should be prefixed with the command `fin composer`
+
+Command | Description
+--------|------------
+`lint-php` | Analyzes the custom modules folder for programmatic and stylistic errors
+`code-sniff-modules` | Runs PHPcs on the custom modules folder
+`code-sniff-themes` | Runs PHPcs on the custom themes folder
+`code-sniff` | Runs `code-sniff-modules` and `code-sniff-themes`
+`code-fix-modules` | Runs PHPcbf on the custom modules folder
+`code-fix-themes` | Runs PHPcbf on the custom themes folder
+`code-fix` | Runs `code-fix-modules` `code-fix-themes` `rector-fix` `lint-php`
+`phpstan` | PHPStan focuses on finding errors in the custom modules and themes folders without actually running it.
+`rector-modules` | Dry run on the custom modules folder of automates that checks for deprecations
+`rector-themes` | Dry run on the custom themes folder of automates that checks for deprecations
+`rector-fix-modules` | Automates the refactoring of deprecations on the custom modules folder
+`rector-fix-themes` | Automates the refactoring of deprecations on the custom themes folder
+`rector-fix` | Runs `rector-fix-modules` and `rector-fix-themes`
+`code-check` | Runs `phpstan` `rector-modules` `rector-themes` `code-sniff`
+`prepare-for-pantheon` | Used by CircleCI for Pantheon
+`build-assets` | Used by CircleCI for Pantheon
+`post-autoload-dump` | Used by CircleCI for Pantheon
+
+
 ## Project specific notes
 
 Are there any projects specific quirks or setup that should be noted.
