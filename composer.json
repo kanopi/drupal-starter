@@ -49,6 +49,7 @@
         "drupal/editor_advanced_link": "^2.0",
         "drupal/entity_usage": "^2.0@beta",
         "drupal/field_group": "^3.1",
+        "drupal/key": "*",
         "drupal/linkit": "^5.0-beta10",
         "drupal/menu_link_attributes": "^1.2",
         "drupal/metatag": "^1.15",
@@ -100,14 +101,21 @@
     },
     "scripts": {
         "lint-php": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
-        "code-sniff": "vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
-        "code-fix-standards": "vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
+        "code-sniff-modules": "vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
+        "code-sniff-themes": "vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/themes/custom || true",
+        "code-sniff": [
+            "@code-sniff-modules",
+            "@code-sniff-themes"
+        ],
+        "code-fix-modules": "vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
+        "code-fix-themes": "vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/themes/custom || true",
         "code-fix": [
-            "@code-fix-standards",
+            "@code-fix-modules",
+            "@code-fix-themes",
             "@rector-fix",
             "@lint-php"
         ],
-        "phpstan": "vendor/bin/phpstan analyse web/modules/custom web/themes/custom || true",
+        "phpstan": "vendor/bin/phpstan analyse web/modules/custom web/themes/custom --level max || true",
         "rector-modules": "vendor/bin/rector process web/modules/custom/ --dry-run || true",
         "rector-themes": "vendor/bin/rector process web/themes/custom/ --dry-run || true",
         "rector-fix-modules": "vendor/bin/rector process web/modules/custom/ || true",
@@ -128,7 +136,7 @@
         ],
         "post-autoload-dump": [
             "cp vendor/palantirnet/drupal-rector/rector.php . || true",
-            "vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer"
+            "vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer || true"
         ]
     },
     "extra": {

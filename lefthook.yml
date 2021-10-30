@@ -5,5 +5,9 @@ pre-push:
       run: fin composer -n code-sniff
     phpstan:
       run: fin composer -n phpstan
-    lint:
+    rector-modules:
+      run: fin composer -n rector-modules
+    rector-themes:
+      run: fin composer -n rector-themes
+    lint-php:
       run: fin composer -n lint-php
