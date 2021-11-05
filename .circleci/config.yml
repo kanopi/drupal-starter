@@ -5,7 +5,7 @@ THEME_PATH: &THEME_PATH "web/themes/custom/site_theme"
 
 defaults: &defaults
   docker:
-    - image: quay.io/pantheon-public/build-tools-ci:6.x
+    - image: quay.io/pantheon-public/build-tools-ci:7.x-php7.4
   working_directory: ~/example_drops_8_composer
   environment:
     TZ: "/usr/share/zoneinfo/America/Los_Angeles"
