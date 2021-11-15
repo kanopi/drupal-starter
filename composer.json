@@ -100,15 +100,15 @@
         ]
     },
     "scripts": {
-        "lint-php": "find web/modules/custom web/themes/custom -name '*.php' -exec php -l {} \\;",
-        "code-sniff-modules": "vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
-        "code-sniff-themes": "vendor/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/themes/custom || true",
+        "lint-php": "find web/modules/custom web/themes/custom -not -path '*/node_modules/*' -name '*.php' -exec php -l {} \\;",
+        "code-sniff-modules": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
+        "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/themes/custom || true",
         "code-sniff": [
             "@code-sniff-modules",
             "@code-sniff-themes"
         ],
-        "code-fix-modules": "vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
-        "code-fix-themes": "vendor/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/themes/custom || true",
+        "code-fix-modules": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
+        "code-fix-themes": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/themes/custom || true",
         "code-fix": [
             "@code-fix-modules",
             "@code-fix-themes",
