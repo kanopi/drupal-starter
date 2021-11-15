@@ -2,6 +2,8 @@ parameters:
   level: max
   customRulesetUsed: true
   reportUnmatchedIgnoredErrors: false
+  excludePaths:
+    - '*/node_modules/*'
   # Ignore phpstan-drupal extension's rules.
   ignoreErrors:
     - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
