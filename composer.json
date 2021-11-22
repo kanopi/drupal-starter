@@ -135,7 +135,7 @@
             "composer install --optimize-autoloader --no-dev"
         ],
         "post-autoload-dump": [
-            "cp vendor/palantirnet/drupal-rector/rector.php . || true",
+            "[ ! -f rector.php ] && cp vendor/palantirnet/drupal-rector/rector.php . || true",
             "vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer || true"
         ]
     },
