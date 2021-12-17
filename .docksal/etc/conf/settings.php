@@ -26,3 +26,6 @@ $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml'
 
 // Set Trusted Host Patterns to any.
 $settings['trusted_host_patterns'][] = '.*';
+
+$config['minifyhtml.config']['strip_comments'] = FALSE;
+$config['minifyhtml.config']['minify'] = FALSE;
