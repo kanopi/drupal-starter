@@ -29,3 +29,6 @@ $settings['trusted_host_patterns'][] = '.*';
 
 $config['minifyhtml.config']['strip_comments'] = FALSE;
 $config['minifyhtml.config']['minify'] = FALSE;
+
+// "Allow Insecure Derivatives" for webp images working locally.
+$config['image.settings']['allow_insecure_derivatives'] = TRUE;
