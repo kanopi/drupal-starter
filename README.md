@@ -38,7 +38,6 @@ This repo is Pantheon specific at the moment
 
 * Select and add Kanopi Studios.
 
-* Also add any Kanopi developers who will be working on the project as team members.
 
 #### Create project's Github repo
 * Go to [https://github.com/kanopi/drupal-starter](https://github.com/kanopi/drupal-starter)
@@ -87,7 +86,10 @@ This repo is Pantheon specific at the moment
     * vhost-overrides.conf
         * `.docksal/etc/nginx/vhost-overrides.conf`
         * Update the proxy url to use the pantheon machine name for the site you just created.
-
+    * .pa11yci.js
+        * Update the urls you would like to test in the array
+        * Make sure you update "YOUR-DOMAIN" to the docksal virtual host for the project.
+        * Update this README's pally section with the links to the correct urls.
 * CircleCI
     * `config.yml`
         * Update the `TERMINUS_SITE` variable in line 2 to your Pantheon machine name for the project.
@@ -270,6 +272,7 @@ Command | Description
 `site-build` | Will run all of the necessary steps for `npm install` and `gulp sass`
 `test` | Test to confirm the site is running
 `share` | Opens a proxy server to your local computer using ngrok.io. Share in real time, or test locally.
+`pa11y` | Run the `pa11y` tests defined in `tests/pa11y/.pa11yci.js`
 
 ## Composer Commands
 
@@ -294,6 +297,15 @@ Command | Description
 `prepare-for-pantheon` | Used by CircleCI for Pantheon
 `build-assets` | Used by CircleCI for Pantheon
 `post-autoload-dump` | Used by CircleCI for Pantheon
+
+
+### Pa11y Audits
+
+We have a Docksal command that will run [pa11y-ci](https://github.com/pa11y/pa11y-ci) audits `fin pa11y`. When the command finishes the reports are available at the following url [pa11y.explo.docksal](http://pa11y.explo.docksal/)
+
+If you want to change the configuration of the Pa11y tests you can edit the [.pa11yci.js](/tests/pa11y/.pa11yci.js) file.
+
+Note: This was cribbed from [Phase2](https://github.com/phase2/pa11y-dashboard)
 
 
 ## Project specific notes
