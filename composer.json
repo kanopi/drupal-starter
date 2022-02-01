@@ -17,19 +17,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "kanopi/launch_checklist",
-                "version": "1.0",
-                "type": "drupal-module",
-                "source": {
-                    "url": "https://github.com/kanopi/launch_checklist.git",
-                    "type": "git",
-                    "reference": "1.0"
-                }
-            }
         }
     ],
     "require": {
@@ -50,6 +37,7 @@
         "drupal/entity_usage": "^2.0@beta",
         "drupal/field_group": "^3.1",
         "drupal/key": "*",
+        "drupal/launch_checklist": "^1.1",
         "drupal/linkit": "^5.0-beta10",
         "drupal/menu_link_attributes": "^1.2",
         "drupal/metatag": "^1.15",
@@ -70,7 +58,6 @@
         "drupal/youtube": "^1.2",
         "drush/drush": "^10",
         "joachim-n/composer-manifest": "^1.0",
-        "kanopi/launch_checklist": "^1.0",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^9",
         "pantheon-systems/quicksilver-pushback": "^2",
