@@ -25,3 +25,18 @@ services:
       NGINX_VHOST_PRESET: http-proxy
     labels:
       - io.docksal.virtual-host=storybook.${VIRTUAL_HOST}
+
+  # dashboard displaying results from `fin pa11y`
+  pa11y:
+    # hostname needed in order to check local links
+    hostname: pa11y
+    image: outrigger/pa11y-dashboard
+    labels:
+      # Set host and port for pa11y container.
+      - io.docksal.virtual-host=pa11y.${VIRTUAL_HOST}
+      - io.docksal.virtual-port=8080
+    expose:
+      - "8080"
+    volumes:
+      # dashboard requires /app/tests/pa11y/report.json
+      - ../tests/:/app/tests
