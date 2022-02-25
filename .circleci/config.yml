@@ -156,6 +156,9 @@ workflows:
           context: kanopi-code
       - deploy_to_pantheon:
           context: kanopi-code
+          filters:
+            branches:
+              ignore: /^dependabot/
           requires:
             - compile-theme
       - ci-tools/lighthouse:
