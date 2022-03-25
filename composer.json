@@ -168,6 +168,17 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "phpstan/extension-installer": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-vendor-hardening": true,
+            "joachim-n/composer-manifest": true,
+            "oomphinc/composer-installers-extender": true,
+            "rvtraveller/qs-composer-installer": true
+        }
     }
 }
