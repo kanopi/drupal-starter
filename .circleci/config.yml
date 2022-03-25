@@ -31,8 +31,8 @@ defaults: &defaults
 version: 2.1
 
 orbs:
-  ci-tools: kanopi/ci-tools@1.7.1
-  cms-updates: kanopi/cms-updates@2.2.0
+  ci-tools: kanopi/ci-tools@1
+  cms-updates: kanopi/cms-updates@2
   slack: circleci/slack@3.4.2
 
 jobs:
