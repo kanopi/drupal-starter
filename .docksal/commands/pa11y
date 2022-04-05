@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+## Run accessibility testing
+##
+## Usage: fin pa11y
+
+# Report based on config found in ../../tests/pa11y/.pa11yci.js
+# Converts the .js config file to a .json file, usable by pa11yci
+node ${PROJECT_ROOT}/tests/pa11y/pa11y2json.js
+
+# Generates accessibility report used by dashboard service.
+docker run -t -v ${PROJECT_ROOT}/tests/pa11y/:/code/pa11y/ outrigger/pa11y:dev \
+        pa11y-ci --config /code/pa11y/config.json --json > ${PROJECT_ROOT}/tests/pa11y/report.json
+
+echo "Check http://pa11y.${VIRTUAL_HOST} for results"
