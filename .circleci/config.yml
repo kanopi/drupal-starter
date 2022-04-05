@@ -100,8 +100,10 @@ jobs:
             - drupal-{{ checksum "composer.lock" }}
 
       - run:
-          name: run PHP build step
-          command: composer -n build-assets
+          name: run Composer setup
+          command: |
+            composer -n build-assets
+            composer run prepare-for-pantheon
 
       - save_cache:
           key: drupal-{{ checksum "composer.lock" }}
