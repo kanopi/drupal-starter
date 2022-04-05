@@ -243,9 +243,9 @@ workflows:
       - cms-updates/run-update:
           cms: drupal
           docroot: web
-          site-env: test
+          site-env: dev
           site-hosting: pantheon
-          site-id: flysfo
+          site-id: *TERMINUS_SITE
           update-method: composer
           context: kanopi-code
     triggers:
