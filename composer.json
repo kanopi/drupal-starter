@@ -60,6 +60,7 @@
         "joachim-n/composer-manifest": "^1.0",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^9",
+        "pantheon-systems/search_api_pantheon": "^3.0",
         "rvtraveller/qs-composer-installer": "^1.1",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
@@ -171,6 +172,7 @@
             "cweagans/composer-patches": true,
             "drupal/*": true,
             "kanopi/*": true,
+            "pantheon-systems/*" : true,
             "composer/installers": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "joachim-n/composer-manifest": true,
