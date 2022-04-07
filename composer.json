@@ -26,6 +26,7 @@
         "dmore/chrome-mink-driver": "^2.7",
         "drupal/a11yproject_checklist": "*",
         "drupal/admin_toolbar": "^3.0",
+        "drupal/classy_paragraphs": "^1.0@RC",
         "drupal/coffee": "^1.2",
         "drupal/config_filter": "^2.2",
         "drupal/config_split": "^2",
