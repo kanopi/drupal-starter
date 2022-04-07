@@ -60,6 +60,7 @@
         "joachim-n/composer-manifest": "^1.0",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^9",
+        "pantheon-systems/search_api_pantheon": "^3.0",
         "rvtraveller/qs-composer-installer": "^1.1",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
@@ -160,9 +161,7 @@
             }
         },
         "patches": {
-            "drupal/tour_ui": {
-                "Tour UI: Will changes from (core 9.2+) Tour hurt? - https://www.drupal.org/project/tour_ui/issues/3214357": "https://www.drupal.org/files/issues/2021-05-28/tour_ui-3214357-7.patch"
-            }
+
         }
     },
     "config": {

@@ -9,20 +9,8 @@ defaults: &defaults
   working_directory: ~/example_drops_8_composer
   environment:
     TZ: "/usr/share/zoneinfo/America/Los_Angeles"
-
-    # The variables below usually do not need to be modified.
-
-    #======================================================================================================================================
-    # Circle CI 2.0 does not yet expand environment variables so they have to be manually EXPORTed
-    # Once environment variables can be expanded the variables below can be uncommented and the EXPORTs in set-up-globals.sh can be removed
-    # See: https://discuss.circleci.com/t/unclear-how-to-work-with-user-variables-circleci-provided-env-variables/12810/11
-    # See: https://discuss.circleci.com/t/environment-variable-expansion-in-working-directory/11322
-    # See: https://discuss.circleci.com/t/circle-2-0-global-environment-variables/8681
-    #======================================================================================================================================
-
     NOTIFY: 'scripts/github/add-commit-comment {project} {sha} "Created multidev environment [{site}#{env}]({dashboard-url})." {site-url}'
     ADMIN_USERNAME: admin
-    # BUILD_TOOLS_VERSION: ^2.0.0-alpha4
     TERM: dumb
     TERMINUS_SITE: *TERMINUS_SITE
     THEME_NAME: *THEME_NAME
@@ -101,8 +89,10 @@ jobs:
             - drupal-{{ checksum "composer.lock" }}
 
       - run:
-          name: run PHP build step
-          command: composer -n build-assets
+          name: run Composer setup
+          command: |
+            composer -n build-assets
+            composer run prepare-for-pantheon
 
       - save_cache:
           key: drupal-{{ checksum "composer.lock" }}
@@ -128,24 +118,6 @@ jobs:
 #          include_job_number_field: false
 #          include_project_field: false
 #          webhook: https://hooks.slack.com/services/T02BTKQ5F/B0225B1RPV1/9999111100000
-
-  # Updates modules/composer packages once a week.
-  composer_lock_updater:
-    <<: *defaults
-    steps:
-      - checkout
-      - ci-tools/copy-ssh-key
-      - run:
-          name: setup-environment-vars
-          command: /build-tools-ci/scripts/set-environment
-
-      - run:
-          name: Authenticate with Terminus
-          command: terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
-
-      - run:
-          name: run composer lock updater
-          command: set -e && terminus project:clu $TERMINUS_SITE
 
 workflows:
   version: 2
@@ -241,9 +213,9 @@ workflows:
       - cms-updates/run-update:
           cms: drupal
           docroot: web
-          site-env: test
+          site-env: dev
           site-hosting: pantheon
-          site-id: flysfo
+          site-id: *TERMINUS_SITE
           update-method: composer
           context: kanopi-code
     triggers:

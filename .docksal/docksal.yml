@@ -40,3 +40,6 @@ services:
     volumes:
       # dashboard requires /app/tests/pa11y/report.json
       - ../tests/:/app/tests
+
+  solr:
+    image: "docksal/solr:8"
