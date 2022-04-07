@@ -17,7 +17,7 @@ composer run prepare-for-pantheon
 if [[ $CI_BRANCH != "main" ]]
 then
   # Create a new multidev environment (or push to an existing one)
-  terminus -n build:env:create "$TERMINUS_SITE.dev" "$TERMINUS_ENV" --yes
+  terminus -n build:env:create "$TERMINUS_SITE.dev" "$TERMINUS_ENV" --yes --clone-content
 else
   # Push to the dev environment
   terminus -n build:env:push "$TERMINUS_SITE.dev" --yes
