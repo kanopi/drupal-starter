@@ -308,6 +308,25 @@ If you want to change the configuration of the Pa11y tests you can edit the [.pa
 Note: This was cribbed from [Phase2](https://github.com/phase2/pa11y-dashboard)
 
 
+### Robots.txt
+#### To append to drupal default scaffolding robots.txt
+- Navigate and open assets/custom-robots.txt
+- Add appended robots.txt to file
+- Run `fin composer install`
+#### To completely overwrite robots.txt
+- Open `composer.json`
+- Change the following:
+  ```
+    "[web-root]/robots.txt": {
+      "append": "assets/custom-robots.txt"
+    },
+  ```
+- To:
+  ```
+  "[web-root]/robots.txt": "assets/custom-robots.txt",
+  ```
+- Run `fin composer.json`
+
 ## Project specific notes
 
 Are there any projects specific quirks or setup that should be noted.
