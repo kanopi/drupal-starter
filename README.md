@@ -311,3 +311,15 @@ Note: This was cribbed from [Phase2](https://github.com/phase2/pa11y-dashboard)
 ## Project specific notes
 
 Are there any projects specific quirks or setup that should be noted.
+
+## Deployments
+
+During development our databases are Test and Dev. Once we have a launched product these will change to Live, Test and Dev. 
+
+1. Go to the project dashboard on Pantheon. 
+2. Backup databases for Test and Dev. 
+    1. To accomplish this you can go to the backups tab and backup everything or go to Database/Files and under Export 'export the database'. 
+3. Go to the environment you want to deploy to and make note of the tickets that are ready to deploy, document these in the deploy log message. 
+4. Once content has been deployed clone the Test database down to Dev.
+5. Pull the database locally, make sure there are no config changes that need to be committed to code. If there are changes, commit those and deploy.
+6. Tell the appropriate Slack channel that a deployment has taken place and include which tickets were deployed.
