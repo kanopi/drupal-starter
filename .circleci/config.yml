@@ -19,7 +19,7 @@ defaults: &defaults
 version: 2.1
 
 orbs:
-  ci-tools: kanopi/ci-tools@1
+  ci-tools: kanopi/ci-tools@2
   cms-updates: kanopi/cms-updates@2
   slack: circleci/slack@3.4.2
 
@@ -71,7 +71,7 @@ jobs:
             - css
             - js
 
-  deploy_to_pantheon:
+  deploy-to-pantheon:
     <<: *defaults
     steps:
       - checkout
@@ -127,7 +127,7 @@ workflows:
           context: kanopi-code
       - compile-theme:
           context: kanopi-code
-      - deploy_to_pantheon:
+      - deploy-to-pantheon:
           context: kanopi-code
           filters:
             branches:
@@ -138,31 +138,31 @@ workflows:
           context: kanopi-code
           pre-steps:
             - ci-tools/set-pantheon-url:
-                site_id: *TERMINUS_SITE
-                store_as: LIGHTHOUSE_URL
+                site-id: *TERMINUS_SITE
+                store-as: LIGHTHOUSE_URL
           url: "${LIGHTHOUSE_URL}"
           requires:
-            - deploy_to_pantheon
+            - deploy-to-pantheon
           post-steps:
             - ci-tools/post-to-github-commit:
                 body: '@$(ls /opt/reports/*/comment.txt)'
                 when: 'on_fail'
 
-      - ci-tools/pa11y-audit:
+      - ci-tools/pa11y:
           context: kanopi-code
           urls: "${PR_ENV_URL}"
           # Replace the primary URL with a Pantheon multidev URL.
           pre-steps:
             - ci-tools/set-pantheon-url:
-                site_id: *TERMINUS_SITE
-                store_as: PR_ENV_URL
+                site-id: *TERMINUS_SITE
+                store-as: PR_ENV_URL
           # Post the pa11y results file as a comment on the PR.
           post-steps:
             - ci-tools/post-to-github-commit:
                 body: '@/tmp/pa11y-ci-results.txt'
                 when: 'on_fail'
           requires:
-            - deploy_to_pantheon
+            - deploy-to-pantheon
 
       - ci-tools/phpcs-drupal:
           context: kanopi-code
@@ -178,6 +178,24 @@ workflows:
                 search-for: tmp/phpcs.txt
                 when: on_fail
 
+      - ci-tools/sdtt:
+          context: kanopi-code
+          url: "${PR_ENV_URL}"
+          requires:
+            - deploy-to-pantheon
+          # Replace the primary URL with a Pantheon multidev URL.
+          pre-steps:
+            - ci-tools/set-pantheon-url:
+                site-id: *TERMINUS_SITE
+                store-as: PR_ENV_URL
+          # Posts a link to the report to the PR.
+          post-steps:
+            - ci-tools/post-artifact-to-github:
+                body-prefix: "Click here to view the report:"
+                body-title: "❌ SDTT Failure - Homepage"
+                search-for: tmp/sdtt-results.txt
+                when: 'on_fail'
+
       - ci-tools/backstopjs:
           context: kanopi-code
           # Defines the pages, and gives them a label.  It is a comma separated list.
@@ -186,12 +204,12 @@ workflows:
           # Sets the URL to test to be the Pantheon multidev.
           pre-steps:
             - ci-tools/set-pantheon-url:
-                site_id: *TERMINUS_SITE
-                store_as: TEST_URL
+                site-id: *TERMINUS_SITE
+                store-as: TEST_URL
             - ci-tools/set-pantheon-url:
-                site_id: *TERMINUS_SITE
-                site_env: "dev"
-                store_as: REFERENCE_URL
+                site-id: *TERMINUS_SITE
+                site-env: "dev"
+                store-as: REFERENCE_URL
           # Posts a link to the report to the PR.
           post-steps:
             - ci-tools/post-artifact-to-github:
@@ -200,15 +218,21 @@ workflows:
                 search-for: html_report/index.html
                 when: 'on_fail'
           requires:
-            - deploy_to_pantheon
+            - deploy-to-pantheon
           # Don't run it on main because that is the url it tests against.
           filters:
             branches:
               ignore: main
+
   # Runs composer updates at midnight everyday.
   # Exports configuration and commits.
   # Pushes to a single branch and makes pull request on Github.
-  nightly_updates:
+  automated-updates:
+    when:
+      and:
+        # Looks for a trigger to run in the CircleCI project with the "automatic updates" name.
+        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - equal: [ "automatic updates", << pipeline.schedule.name >> ]
     jobs:
       - cms-updates/run-update:
           cms: drupal
@@ -218,10 +242,4 @@ workflows:
           site-id: *TERMINUS_SITE
           update-method: composer
           context: kanopi-code
-    triggers:
-      - schedule:
-          cron: 0 0 * * *
-          filters:
-            branches:
-              only:
-                - main
+
