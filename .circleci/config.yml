@@ -76,6 +76,8 @@ jobs:
     steps:
       - checkout
       - ci-tools/copy-ssh-key
+      - ci-tools/remove-files:
+          docroot: "web"
       - attach_workspace:
           at: /tmp/workspace
       - run:
