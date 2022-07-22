@@ -7,6 +7,10 @@
         {
             "name": "Sean Dietrich <sean@kanopistudios.com>",
             "role": "Developer / Architect"
+        },
+        {
+            "name": "Paul Sheldrake <paul@kanopi.com>",
+            "role": "Trouble Maker"
         }
     ],
     "repositories": [
@@ -23,16 +27,15 @@
         "php": ">=7.3",
         "composer/installers": "^1.10",
         "cweagans/composer-patches": "^1.6",
-        "dmore/chrome-mink-driver": "^2.7",
         "drupal/a11yproject_checklist": "*",
         "drupal/admin_toolbar": "^3.0",
         "drupal/classy_paragraphs": "^1.0@RC",
         "drupal/coffee": "^1.2",
         "drupal/config_filter": "^2.2",
         "drupal/config_split": "^2",
-        "drupal/core-composer-scaffold": "^9.3.0",
-        "drupal/core-recommended": "^9.3.0",
-        "drupal/core-vendor-hardening": "^9.3.0",
+        "drupal/core-composer-scaffold": "^9.4.0",
+        "drupal/core-recommended": "^9.4.0",
+        "drupal/core-vendor-hardening": "^9.4.0",
         "drupal/ctools": "^3.7",
         "drupal/editor_advanced_link": "^2.0",
         "drupal/entity_usage": "^2.0@beta",
@@ -67,15 +70,14 @@
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "drupal/core-dev": "^9.3.0",
+        "drupal/core-dev": "^9.4.0",
         "drupal/devel": "^4.1",
         "drupal/upgrade_status": "^3.10",
         "mglaman/phpstan-drupal": "^0.12.13",
         "palantirnet/drupal-rector": "^0.11.3",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^0.12.6",
-        "weitzman/drupal-test-traits": "^1.5"
+        "phpstan/phpstan-deprecation-rules": "^0.12.6"
     },
     "conflict": {
         "drupal/drupal": "*"
