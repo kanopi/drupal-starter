@@ -55,7 +55,7 @@
         "drupal/tour_enhancements": "^1",
         "drupal/tour_ui": "^1.0@beta",
         "drupal/twig_vardumper": "^3.0",
-        "drupal/views_bulk_operations": "^4.0",
+        "drupal/views_bulk_operations": "^4.1",
         "drupal/webp": "^1.0@beta",
         "drupal/yoast_seo": "^1.7",
         "drupal/youtube": "^1.2",
