@@ -46,6 +46,7 @@
         "drupal/redis": "^1.5",
         "drupal/resource_hints": "1.x-dev",
         "drupal/schema_metatag": "^2.2",
+        "drupal/seckit": "^2.0",
         "drupal/seo_checklist": "4.x-dev@dev",
         "drupal/seo_starter": "1.x-dev",
         "drupal/simple_sitemap": "^4",
