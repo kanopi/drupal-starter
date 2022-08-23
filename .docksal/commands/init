@@ -28,7 +28,6 @@ fin mkcert create
 echo "Install Docksal Pull Command";
 fin addon install --global pull
 
-
 # Stack initialization
 echo -e "${green_bg} Step 1 ${NC}${green} Initializing stack...${NC}"
 fin reset -f
