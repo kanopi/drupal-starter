@@ -54,9 +54,16 @@ init_settings ()
 # Install the site with basic configuration
 site_install ()
 {
-	cd ${PROJECT_ROOT}/${DOCROOT}
-	drush site-install standard -y \
-		--site-name='My Drupal 8 Site'
+	composer install
+}
+
+circleci_install () {
+  curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | sudo bash
+}
+
+ensure_jq () {
+  sudo apt update
+  sudo apt-get install jq -y
 }
 
 # Fix file/folder permissions
@@ -73,7 +80,7 @@ fix_permissions ()
 
 #-------------------------- Execution --------------------------------
 
-mkdir ~/tmp
+mkdir -p ~/tmp
 chmod 755 ~/tmp
 sudo localedef -i en_US -f UTF-8 en_US.UTF-8
 
@@ -81,8 +88,9 @@ sudo localedef -i en_US -f UTF-8 en_US.UTF-8
 init_code
 fix_permissions
 init_settings
+site_install
+circleci_install
+ensure_jq
 
-if [[ ! -f ${PROJECT_ROOT}/config/core.extension.yml ]]; then
-	site_install
-fi
+
 #-------------------------- END: Execution --------------------------------
