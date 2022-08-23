@@ -7,26 +7,20 @@ services:
       - THEME
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
+    # Expose port and let Storybook attach to it.
+    expose:
+      - 6006
+    labels:
+      - io.docksal.virtual-host=storybook.${VIRTUAL_HOST},storybook.${VIRTUAL_HOST}.*
+      - io.docksal.virtual-port=6006
+
   # Fake email
   mail:
     extends:
       file: ${HOME}/.docksal/stacks/services.yml
       service: mail
-  # Storybook URL
-  # Acts as a reverse proxy and just proxies requests from storybook.explo.docksal to cli:6006
-  storybook:
-    image: wodby/nginx
-    depends_on:
-      - cli
-    environment:
-      NGINX_BACKEND_HOST: cli
-      # Port 6006 Used for storybook in CLI container.
-      NGINX_BACKEND_PORT: 6006
-      NGINX_VHOST_PRESET: http-proxy
-    labels:
-      - io.docksal.virtual-host=storybook.${VIRTUAL_HOST}
 
-  # dashboard displaying results from `fin pa11y`
+  # Dashboard displaying results from `fin pa11y`.
   pa11y:
     # hostname needed in order to check local links
     hostname: pa11y
@@ -38,7 +32,7 @@ services:
     expose:
       - "8080"
     volumes:
-      # dashboard requires /app/tests/pa11y/report.json
+      # Dashboard requires /app/tests/pa11y/report.json.
       - ../tests/:/app/tests
 
   solr:

@@ -39,6 +39,7 @@
         "drupal/ctools": "^3.7",
         "drupal/editor_advanced_link": "^2.0",
         "drupal/entity_usage": "^2.0@beta",
+        "drupal/fancy_file_delete": "^2.0",
         "drupal/field_group": "^3.1",
         "drupal/key": "*",
         "drupal/launch_checklist": "^1.1",
@@ -49,6 +50,7 @@
         "drupal/redis": "^1.5",
         "drupal/resource_hints": "1.x-dev",
         "drupal/schema_metatag": "^2.2",
+        "drupal/seckit": "^2.0",
         "drupal/seo_checklist": "4.x-dev@dev",
         "drupal/seo_starter": "1.x-dev",
         "drupal/simple_sitemap": "^4",
@@ -56,7 +58,7 @@
         "drupal/tour_enhancements": "^1",
         "drupal/tour_ui": "^1.0@beta",
         "drupal/twig_vardumper": "^3.0",
-        "drupal/views_bulk_operations": "^4.0",
+        "drupal/views_bulk_operations": "^4.1",
         "drupal/webp": "^1.0@beta",
         "drupal/yoast_seo": "^1.7",
         "drupal/youtube": "^1.2",
@@ -159,7 +161,9 @@
             ],
             "file-mapping": {
                 "[web-root]/.htaccess": false,
-                "[web-root]/robots.txt": false,
+                "[web-root]/robots.txt": {
+                    "append": "assets/custom-robots.txt"
+                },
                 "[web-root]/sites/development.services.yml": false
             }
         },
