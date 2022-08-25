@@ -51,19 +51,14 @@ init_settings ()
 	ln -sf "${PROJECT_ROOT}/.docksal/etc/conf/development.services.yml" "${DOCROOT_PATH}/sites/development.services.yml"
 }
 
-# Install the site with basic configuration
-site_install ()
-{
-	composer install
-}
 
 circleci_install () {
   curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | sudo bash
 }
 
-ensure_jq () {
+ensure_utils () {
   sudo apt update
-  sudo apt-get install jq -y
+  sudo apt-get install jq rename -y
 }
 
 # Fix file/folder permissions
@@ -88,9 +83,8 @@ sudo localedef -i en_US -f UTF-8 en_US.UTF-8
 init_code
 fix_permissions
 init_settings
-site_install
 circleci_install
-ensure_jq
+ensure_utils
 
 
 #-------------------------- END: Execution --------------------------------
