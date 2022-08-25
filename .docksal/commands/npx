@@ -2,9 +2,9 @@
 
 #: exec_target = cli
 
-## Run Gulp Commands on the theme
+## Run NPM Commands
 ##
-## Usage: fin gulp [arguments]
+## Usage: fin npm [arguments]
 ##
 
 # Abort if anything fails
@@ -14,4 +14,4 @@ DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 
 cd ${DOCROOT_PATH}/themes/custom/${THEME}
 
-./node_modules/.bin/gulp "$@"
+npx "$@"

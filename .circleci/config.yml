@@ -2,6 +2,10 @@
 TERMINUS_SITE: &TERMINUS_SITE "PANTHEON_PROJECT_MACHINE_NAME"
 THEME_NAME: &THEME_NAME "site_theme"
 THEME_PATH: &THEME_PATH "web/themes/custom/site_theme"
+CIMG_NODE: &CIMG_NODE "cimg/node:lts-browsers"
+CIMG_PHP: &CIMG_PHP "cimg/php:8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
+CIMG_PHP_TAG: &CIMG_PHP_TAG "8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
+
 
 defaults: &defaults
   docker:
@@ -25,51 +29,76 @@ orbs:
 
 jobs:
 
-  # Used to run PHP Checks
-  test:
-    docker:
-       - image: cimg/php:7.4
-    working_directory: ~/project
-    steps:
-      - checkout
-      - ci-tools/copy-ssh-key
-      - run:
-          name: Composer Install
-          command: composer install --ansi --optimize-autoloader
-      - run:
-          name: Run Linting
-          command: composer -n lint-php
-      - run:
-          name: Run Code Sniff
-          command: composer -n code-sniff
-      - run:
-          name: Run PHPStan
-          command: composer -n phpstan
-
   compile-theme:
     docker:
       # This version of node should match whats in the theme NVM setup
-      - image: cimg/node:12.22.5
+      - image: *CIMG_NODE
     working_directory: ~/project
     steps:
       - checkout
+
+      - run:
+          name: Install packages to support Critical CSS
+          command: |
+            sudo apt update
+            sudo apt install -yq --no-install-recommends dh-autoreconf libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 libnss3
+
+      - restore_cache:
+          name: Restore Node cache
+          keys:
+            - node_cache-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
+            - node_cache-
       - run:
           name: Install Node Packages.
           command: npm install
           path: *THEME_PATH
+
+      - save_cache:
+          name: Save node cache
+          key: node_cache-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
+          paths:
+            - web/themes/custom/site_theme/node_modules
+
       - run:
-          name: Run Gulp Build
-          command: node_modules/.bin/gulp build
+          name: Run Storybook Build
+          command: npm run build
           path: *THEME_PATH
+
       - run:
-          name: Cleanup Remove Node Modules
-          command: rm -rf node_modules
+          name: Run Critical CSS
+          command: npm run criticalcss
           path: *THEME_PATH
+
       - persist_to_workspace:
           root: *THEME_PATH
           paths:
-            - css
-            - js
+            - dist
+
+  push_storybook:
+    docker:
+      - image: *CIMG_NODE
+    working_directory: ~/project
+    steps:
+      - checkout
+      - ci-tools/copy-ssh-key
+      - restore_cache:
+          keys:
+            - theme-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
+            - theme-
+      - run:
+          name: Install Storybook
+          path: web/themes/custom/site_theme
+          command: npm install
+
+      - save_cache:
+          key: theme-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
+          paths:
+            - web/themes/custom/site_theme/node_modules
+
+      - run:
+          name: Run Storybook Deploy
+          path: web/themes/custom/site_theme
+          command: npm run deploy-storybook
 
   deploy-to-pantheon:
     <<: *defaults
@@ -80,6 +109,7 @@ jobs:
           docroot: "web"
       - attach_workspace:
           at: /tmp/workspace
+
       - run:
           # Set TERMINUS_ENV and related environment variables.
           # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
@@ -103,9 +133,10 @@ jobs:
 
       - run:
           name: Copy compiled theme assets.
+          environment:
+            THEME_PATH: *THEME_PATH
           command: |
-            cp -r /tmp/workspace/css "web/themes/custom/$THEME_NAME"
-            cp -r /tmp/workspace/js "web/themes/custom/$THEME_NAME"
+            cp -vr /tmp/workspace/dist "$THEME_PATH"
 
       # Deploy to Pantheon
       - run:
@@ -123,10 +154,74 @@ jobs:
 
 workflows:
   version: 2
+
+  push_storybook:
+    jobs:
+      - push_storybook:
+          context: kanopi-code
+          filters:
+            branches:
+              only: main
+  test:
+    jobs:
+      - ci-tools/composer:
+          tag: *CIMG_PHP_TAG
+          name: "phpstan"
+          context: kanopi-code
+          command: 'phpstan'
+          save-output: true
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          report-title: ":x: phpstan"
+          filters:
+            branches:
+              ignore:
+                - main
+
+      - ci-tools/composer:
+          tag: *CIMG_PHP_TAG
+          name: "phpcs"
+          context: kanopi-code
+          command: 'code-sniff'
+          save-output: true
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          report-title: ":x: phpcs"
+          filters:
+            branches:
+              ignore:
+                - main
+
+      - ci-tools/composer:
+          tag: *CIMG_PHP_TAG
+          name: "rector-modules"
+          context: kanopi-code
+          command: 'rector-modules'
+          save-output: true
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          report-title: ":x: rector-modules"
+          filters:
+            branches:
+              ignore:
+                - main
+
+      - ci-tools/composer:
+          tag: *CIMG_PHP_TAG
+          name: "rector-theme"
+          context: kanopi-code
+          command: 'rector-themes'
+          save-output: true
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          report-title: ":x: rector-themes"
+          filters:
+            branches:
+              ignore:
+                - main
+
   build_deploy_and_test:
     jobs:
-      - test:
-          context: kanopi-code
       - compile-theme:
           context: kanopi-code
       - deploy-to-pantheon:
@@ -168,7 +263,7 @@ workflows:
 
       - ci-tools/phpcs-drupal:
           context: kanopi-code
-          extensions: 'php,module,inc,install,test,profile,theme,css,info,txt,md'
+          extensions: 'php,module,inc,install,test,profile,theme,info,txt,md'
           location: 'web/modules/custom/ web/themes/custom/'
           standards: 'Drupal,DrupalPractice'
           report: '/tmp/phpcs.txt'
