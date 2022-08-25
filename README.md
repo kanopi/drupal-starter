@@ -82,19 +82,17 @@ This repo is Pantheon specific at the moment
         * `hostingenv` is set to `dev` to start but when you release the project to production it should be changed to `live`
     * settings.php
         * `.docksal/etc/conf/settings.php` is used for the local settings file for drupal.
-        * update `trusted_host_patterns` to match the **repo** name as that is what most likely the virtual host will be. this is so drupal doesn't reject request to the docksal site
     * vhost-overrides.conf
         * `.docksal/etc/nginx/vhost-overrides.conf`
         * Update the proxy url to use the pantheon machine name for the site you just created.
     * .pa11yci.js
         * Update the urls you would like to test in the array
-        * Make sure you update "YOUR-DOMAIN" to the docksal virtual host for the project.
         * Update this README's pally section with the links to the correct urls.
 * CircleCI
     * `config.yml`
         * Update the `TERMINUS_SITE` variable in line 2 to your Pantheon machine name for the project.
         * Update the `THEME_NAME` variable in line 3 to the folder name for your custom theme.
-        * Update `root: ./web/themes/custom/site_theme` to have the proper theme folder name
+        * Update paths in JSON lock files in theme
         * If you would like Slack notifications when builds complete uncomment the slack portion.  You will need to create a new CircleCI slack integration for the channel you want to post updates too and update the webhook URL.
 
 * Run `fin init` to validate your local site.
@@ -236,25 +234,59 @@ The standard composer command is used but with the Docksal specific command `fin
 
 ## Theme
 
-The theme is based off of the Zurb Foundation framework. Gulp is installed and is helping with the compilation of the
-sass to css. Additionally it is also helping with the minification of the javascript and css to make the code as minimal
-as possible.
+The theme is based off the [Kanopi Design Component Library](https://github.com/kanopi/kdcl_basic) which uses Storybook and is originally forked from [Emulsify DS](https://github.com/emulsify-ds/emulsify-drupal).
 
-The theme included is located within `web/sites/themes/custom/site_theme`.
+The theme included is located within `docroot/sites/themes/custom/THEME`.
 
-You should clone that, rename, and update the names in the file names and in the files.
+The theme needs the following modules enabled: `fin drush en components emulsify_twig twig_tweak`
 
-### Gulp Commands
+The Storybook Design System published to the `gh-pages` branch and is available
+at https://kanopi.github.io/REPO_NAME/
 
-The following gulp tasks are available:
+Locally, running `fin npm run storybook` or `fin npm run build` will build the
+Storybook at http://storybook.${VIRTUAL_HOST}
+
+The theme uses Webpack and NPM to manage packages and run scripts.
+
+- @TODO [Hot Reloading in Drupal](https://docs.emulsify.info/usage/hot-reload-drupal)
+
+#### Storybook
+
+- Theme development run `fin npm run develop`. This will watch for all twig, js, and sass changes within the components directory.
+- The development storybook URL http://storybook.${VIRTUAL_HOST}
+
+#### Storybook Webpack
+For webpack storybook to work within a docksal container we needed to set `watchOptions` in `docroot/themes/custom/THEME/.storybook/webpack.config.js`
+```
+config.watchOptions = {
+  aggregateTimeout: 200,
+  poll: 1000,
+}
+```
+
+### Theme Commands
+
+The following commands are available with Node and should be prefixed with the
+command `fin npm run`.
 
 Command | Description
 --------|------------
-`sass` | One time compiles sass to css
-`watch` | Watches for changes with in the sass and lib folders and then runs the compilation and uglification
-`uglify` | Compresses all javascript files within the lib folder and minifies the code. The output is added to the js folder.
-`imagemin` | Compresses the images within the image folder
-`build` | Runs `sass` and `uglify`.  Used in the CircleCI automation
+`commit`| git-cz
+`lint`| Lint JS
+`a11y`| Run a11y on theme
+`storybook`| Start storybook
+`build-storybook`| Build static storybook
+`deploy-storybook`| Generate storybook for github pages
+`webpack`| Run webpack
+`build`| Build storybook
+`develop`| Run storybook and webpack at the same time
+`test`| Run tests
+`twatch`| Watch tests run
+`coverage`| Check test coverage
+`format`| Clean up code format
+`lint-staged`| lint-staged
+`postinstall`| Patches packages
+`criticalcss`| Compile critical CSS assets
 
 ## Docksal Commands
 
@@ -263,16 +295,13 @@ The following commands are available with Docksal and should be prefixed with th
 Command | Description
 --------|------------
 `composer` | Composer wrapper that executes within the CLI container
-`drupal-cli` | Drupali CLI wrapper
-`gulp` | Gulp Wrapper that runs within the theme web/themes/custom/site_theme
 `init` | Init Command that starts the project from scratch.
 `init-site` | Init Site Command that runs the site install and/or then runs the refresh command
 `npm` | NPM wrapper
+`npx` | NPX wrapper
 `refresh` | Will execute a drush sql-dump from the remote server. **NOT SET UP CURRENTLY**
-`site-build` | Will run all of the necessary steps for `npm install` and `gulp sass`
-`test` | Test to confirm the site is running
 `share` | Opens a proxy server to your local computer using ngrok.io. Share in real time, or test locally.
-`pa11y` | Run the `pa11y` tests defined in `tests/pa11y/.pa11yci.js`
+`rename-kdcl-basic` | Renames the folder in `web/themes/custom` to match the `THEME` environment variable.
 
 ## Composer Commands
 
@@ -333,12 +362,18 @@ Are there any projects specific quirks or setup that should be noted.
 
 ## Deployments
 
-During development our databases are Test and Dev. Once we have a launched product these will change to Live, Test and Dev. 
+### Github to Pantheon
+Deployments to the dev Pantheon environment is managed through Circle CI.
 
-1. Go to the project dashboard on Pantheon. 
-2. Backup databases for Test and Dev. 
-    1. To accomplish this you can go to the backups tab and backup everything or go to Database/Files and under Export 'export the database'. 
-3. Go to the environment you want to deploy to and make note of the tickets that are ready to deploy, document these in the deploy log message. 
-4. Once content has been deployed clone the Test database down to Dev.
-5. Pull the database locally, make sure there are no config changes that need to be committed to code. If there are changes, commit those and deploy.
-6. Tell the appropriate Slack channel that a deployment has taken place and include which tickets were deployed.
+Pull requests will build a MultiDev environment and update the PR with a comment. We also have Lighthouse testing and other audits enabled.
+
+Merges to `main` will merge Github to the Pantheon dev environment.During development our databases are Test and Dev. Once we have a launched product these will change to Live, Test and Dev.
+
+### Pantheon dev to production
+1. Go to the project dashboard on Pantheon.
+1. Backup databases for Test and Dev.
+    1. To accomplish this you can go to the backups tab and backup everything or go to Database/Files and under Export 'export the database'.
+1. Go to the environment you want to deploy to and make note of the tickets that are ready to deploy, document these in the deploy log message.
+1. Once content has been deployed clone the Test database down to Dev.
+1. Pull the database locally, make sure there are no config changes that need to be committed to code. If there are changes, commit those and deploy.
+1. Tell the appropriate Slack channel that a deployment has taken place and include which tickets were deployed.
