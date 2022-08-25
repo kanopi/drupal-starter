@@ -14,8 +14,7 @@
 /web/profiles/contrib/
 /web/private/scripts/quicksilver
 /web/.eslintrc.json
-/web/themes/custom/site_theme/css/
-/web/themes/custom/site_theme/js/
+
 
 # Ignore scaffold files
 web/.csslintrc
@@ -48,6 +47,10 @@ web/robots.txt
 web/sites/.gitignore
 web/sites/README.txt
 web/web.config
+
+# Ignore compiled theme files
+/web/themes/custom/*/dist
+node_modules
 
 # Add directories containing build assets below.
 # Keep all additions above the "cut" line.

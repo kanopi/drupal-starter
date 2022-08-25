@@ -3,11 +3,13 @@ pre-push:
   commands:
     code-sniff:
       run: fin composer -n code-sniff
-    phpstan:
-      run: fin composer -n phpstan
-    rector-modules:
-      run: fin composer -n rector-modules
-    rector-themes:
-      run: fin composer -n rector-themes
-    lint-php:
-      run: fin composer -n lint-php
+    circleci-config:
+      run: fin exec circleci config validate
+#    phpstan:
+#      run: fin composer -n phpstan
+#    rector-modules:
+#      run: fin composer -n rector-modules
+#    rector-themes:
+#      run: fin composer -n rector-themes
+#    lint-php:
+#      run: fin composer -n lint-php

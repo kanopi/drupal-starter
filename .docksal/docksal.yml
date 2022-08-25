@@ -37,3 +37,18 @@ services:
 
   solr:
     image: "docksal/solr:8"
+
+
+  # Storybook URL
+  # Acts as a reverse proxy and just proxies requests from storybook.explo.docksal to cli:6006
+  storybook:
+    image: wodby/nginx
+    depends_on:
+      - cli
+    environment:
+      NGINX_BACKEND_HOST: cli
+      # Port 6006 Used for storybook in CLI container.
+      NGINX_BACKEND_PORT: 6006
+      NGINX_VHOST_PRESET: http-proxy
+    labels:
+      - io.docksal.virtual-host=storybook.${VIRTUAL_HOST}

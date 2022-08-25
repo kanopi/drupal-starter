@@ -21,6 +21,13 @@ fi
 echo -e "${green_bg} Setup  ${NC}${green} Initializing githooks...${NC}"
 lefthook install
 
+echo "Install SSL certs...";
+fin addon install mkcert --global
+fin mkcert create
+
+echo "Install Docksal Pull Command";
+fin addon install --global pull
+
 # Stack initialization
 echo -e "${green_bg} Step 1 ${NC}${green} Initializing stack...${NC}"
 fin reset -f
@@ -34,10 +41,8 @@ echo -e "${green_bg} Step 2 ${NC}${green} Initializing site...${NC}"
 fin init-site
 fin install-theme-tools
 
-if [[ -f config/core.extension.yml ]]; then
-  echo -e "${green_bg} Step 3 ${NC}${green} Pulling data from hosting...${NC}"
-  fin refresh
-fi
+echo -e "${green_bg} Step 3 ${NC}${green} Pulling data from hosting...${NC}"
+fin refresh
 
 echo -en "${green_bg} DONE! ${NC} "
 echo -e "Open ${yellow}http://${VIRTUAL_HOST}${NC} in your browser to verify the setup."
