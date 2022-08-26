@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "composer/installers": "^1.10",
         "cweagans/composer-patches": "^1.6",
         "drupal/a11yproject_checklist": "*",
@@ -48,6 +48,7 @@
         "drupal/linkit": "^5.0-beta10",
         "drupal/menu_link_attributes": "^1.2",
         "drupal/metatag": "^1.15",
+        "drupal/pantheon_advanced_page_cache": "^2.0",
         "drupal/pathauto": "^1.8",
         "drupal/redis": "^1.5",
         "drupal/resource_hints": "1.x-dev",
@@ -75,7 +76,6 @@
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "drupal/core-dev": "^9.4.0",
         "drupal/devel": "^4.1",
         "drupal/upgrade_status": "^3.10",
         "mglaman/phpstan-drupal": "^0.12.13",
@@ -96,14 +96,14 @@
     },
     "scripts": {
         "lint-php": "find web/modules/custom web/themes/custom -not -path '*/node_modules/*' -name '*.php' -exec php -l {} \\;",
-        "code-sniff-modules": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
-        "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/themes/custom || true",
+        "code-sniff-modules": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom || true",
+        "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom || true",
         "code-sniff": [
             "@code-sniff-modules",
             "@code-sniff-themes"
         ],
-        "code-fix-modules": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/modules/custom || true",
-        "code-fix-themes": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md,yml web/themes/custom || true",
+        "code-fix-modules": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom || true",
+        "code-fix-themes": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom || true",
         "code-fix": [
             "@code-fix-modules",
             "@code-fix-themes",
