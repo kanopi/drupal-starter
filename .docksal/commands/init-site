@@ -58,7 +58,7 @@ circleci_install () {
 
 ensure_utils () {
   sudo apt update
-  sudo apt-get install jq rename -y
+  sudo apt-get install jq -y
 }
 
 # Fix file/folder permissions

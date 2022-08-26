@@ -10,6 +10,10 @@ set -e
 DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 THEME_ROOT="${PROJECT_ROOT}/${DOCROOT}/themes/custom"
 
+# Make sure rename exists
+sudo apt update
+sudo apt-get install rename -y
+
 # Rename git download
 cd $THEME_ROOT
 GIT_DIR_NAME=$(find ./* -maxdepth 0 -type d)
