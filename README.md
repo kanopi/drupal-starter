@@ -119,9 +119,9 @@ This repo is Pantheon specific at the moment
 
 * Enable "Only build pull request" and "Auto Cancel Builds" options. ![Update circleci settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
 
-#### Redis setup
+#### Drupal setup
 
-* Enable the redis module in your local site.
+* Enable the following modules: `fin drush en components emulsify_twig twig_tweak redis pantheon_advanced_page_cache claro -y`
 
 * Export config.
 
@@ -155,11 +155,9 @@ This repo is Pantheon specific at the moment
 
 Please put links to the important places here.  Imagine you know nothing about the project.
 
-* Hosting platform dashboard for the project.
-* Production URL.
-* Link to CircleCI project page.
-* Maybe dev/stage/test environments.
-* Links to documentation for any 3rd party services used.
+* [Pantheon Dashboard]()
+* [CircleCI]()
+* [Teamwork]()
 
 ## Setup instructions
 
@@ -172,55 +170,12 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
 ### Step #2: Project setup
 
 1. Clone this repo into your Projects directory.
+1. Change directory to the cloned folder.
+1. Make your own version of the `docksal-local.env` file from the example and add your `SECRET_TERMINUS_TOKEN` to the file.
+    * You don't need to do this if you set your token globally in Docksal
+1. Initialize the site with `fin init`
+1. Once the site has been initialized you'll get a url to go to in your browser to start dev'ing.
 
-    ```
-    git clone https://github.com/kanopi/drupal-starter.git drupal-starter
-    cd drupal-starter
-    ```
-
-2. Initialize Lefthook Git Hooks
-
-[Lefthook](https://github.com/evilmartians/lefthook) is used for configuring commands to run using githooks
-
-   ```
-   lefthook install
-   ```
-
-To install Lefthook the following commands can be done.
-
-  ```
-  sudo curl -fsSL -o /usr/local/bin/lefthook https://github.com/evilmartians/lefthook/releases/download/v0.7.7/lefthook_0.7.7_MacOS_x86_64
-  sudo chmod +x /usr/local/bin/lefthook
-  ```
-
-3. Initialize the site.
-
-    This will initialize local settings and install the site via drush
-
-    ```
-    fin init
-    ```
-
-4. Point your browser to
-
-    ```
-    http://drupal-starter.docksal
-    ```
-
-When the automated install is complete the command line output will display the admin username and password.
-
-## Easier setup with `fin init`
-
-Site provisioning can be automated using `fin init`, which calls the shell script in [.docksal/commands/init](.docksal-old/commands/init).
-This script is meant to be modified per project. The one in this repo will give you a good example of advanced init script.
-
-Some common tasks that can be handled by the init script:
-
-- initialize local settings files for Docker Compose, Drupal, Behat, etc.
-- import DB or perform a site install
-- compile Sass
-- run DB updates, revert features, clear caches, etc.
-- enable/disable modules, update variables values
 
 ## Installing Modules
 
@@ -237,8 +192,6 @@ The standard composer command is used but with the Docksal specific command `fin
 The theme is based off the [Kanopi Design Component Library](https://github.com/kanopi/kdcl_basic) which uses Storybook and is originally forked from [Emulsify DS](https://github.com/emulsify-ds/emulsify-drupal).
 
 The theme included is located within `docroot/sites/themes/custom/THEME`.
-
-The theme needs the following modules enabled: `fin drush en components emulsify_twig twig_tweak`
 
 The Storybook Design System published to the `gh-pages` branch and is available
 at https://kanopi.github.io/REPO_NAME/
@@ -330,7 +283,7 @@ Command | Description
 
 ### Pa11y Audits
 
-We have a Docksal command that will run [pa11y-ci](https://github.com/pa11y/pa11y-ci) audits `fin pa11y`. When the command finishes the reports are available at the following url [pa11y.explo.docksal](http://pa11y.explo.docksal/)
+We have a Docksal command that will run [pa11y-ci](https://github.com/pa11y/pa11y-ci) audits `fin pa11y`. When the command finishes the reports are available at the following url pa11y.$VIRTUAL_HOST
 
 If you want to change the configuration of the Pa11y tests you can edit the [.pa11yci.js](/tests/pa11y/.pa11yci.js) file.
 
