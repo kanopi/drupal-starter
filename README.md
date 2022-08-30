@@ -72,14 +72,12 @@ This repo is Pantheon specific at the moment
 
 * Make the project specific changes listed below.
 
-* Custom theme
-    * Update the name of the theme folder to be project specific. `web/themes/custom/site_theme`
-
 * Docksal
     * docksal.env
         * Update `hostingsite` to the machine name of the project in Pantheon
         * Update `THEME` to the name of the theme folder
         * `hostingenv` is set to `dev` to start but when you release the project to production it should be changed to `live`
+        * Run `fin install-kdcl-basic` after you have set the theme name that you want.
     * settings.php
         * `.docksal/etc/conf/settings.php` is used for the local settings file for drupal.
     * vhost-overrides.conf
@@ -158,6 +156,7 @@ Please put links to the important places here.  Imagine you know nothing about t
 * [Pantheon Dashboard]()
 * [CircleCI]()
 * [Teamwork]()
+* [Github Team]()
 
 ## Setup instructions
 
