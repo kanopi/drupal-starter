@@ -76,6 +76,7 @@
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
+        "drupal/core-dev": "^9",
         "drupal/devel": "^4.1",
         "drupal/upgrade_status": "^3.10",
         "mglaman/phpstan-drupal": "^0.12.13",
