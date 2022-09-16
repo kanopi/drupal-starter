@@ -151,7 +151,7 @@ workflows:
           filters:
             branches:
               only: main
-  test:
+  static-tests:
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG

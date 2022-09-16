@@ -97,25 +97,25 @@
     },
     "scripts": {
         "lint-php": "find web/modules/custom web/themes/custom -not -path '*/node_modules/*' -name '*.php' -exec php -l {} \\;",
-        "code-sniff-modules": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom || true",
-        "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom || true",
+        "code-sniff-modules": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
+        "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
         "code-sniff": [
             "@code-sniff-modules",
             "@code-sniff-themes"
         ],
-        "code-fix-modules": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom || true",
-        "code-fix-themes": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom || true",
+        "code-fix-modules": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
+        "code-fix-themes": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
         "code-fix": [
             "@code-fix-modules",
             "@code-fix-themes",
             "@rector-fix",
             "@lint-php"
         ],
-        "phpstan": "vendor/bin/phpstan analyse web/modules/custom web/themes/custom --level max || true",
-        "rector-modules": "vendor/bin/rector process web/modules/custom/ --dry-run || true",
-        "rector-themes": "vendor/bin/rector process web/themes/custom/ --dry-run || true",
-        "rector-fix-modules": "vendor/bin/rector process web/modules/custom/ || true",
-        "rector-fix-themes": "vendor/bin/rector process web/themes/custom/ || true",
+        "phpstan": "vendor/bin/phpstan analyse web/modules/custom web/themes/custom --level max ",
+        "rector-modules": "vendor/bin/rector process web/modules/custom/ --dry-run ",
+        "rector-themes": "vendor/bin/rector process web/themes/custom/ --dry-run ",
+        "rector-fix-modules": "vendor/bin/rector process web/modules/custom/ ",
+        "rector-fix-themes": "vendor/bin/rector process web/themes/custom/ ",
         "rector-fix": [
             "@rector-fix-modules",
             "@rector-fix-themes"
