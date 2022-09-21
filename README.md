@@ -76,22 +76,31 @@ This repo is Pantheon specific at the moment
     * docksal.env
         * Update `hostingsite` to the machine name of the project in Pantheon
         * Update `THEME` to the name of the theme folder
-        * `hostingenv` is set to `dev` to start but when you release the project to production it should be changed to `live`
-        * Run `fin install-kdcl-basic` after you have set the theme name that you want.
+        * `hostingenv` is set to `dev` to start but when you release the 
+        project to production it should be changed to `live`
+        * Run `fin install-kdcl-basic` after you have set the 
+        theme name that you want.
     * settings.php
-        * `.docksal/etc/conf/settings.php` is used for the local settings file for drupal.
+        * `.docksal/etc/conf/settings.php` is used for 
+        the local settings file for drupal.
     * vhost-overrides.conf
         * `.docksal/etc/nginx/vhost-overrides.conf`
-        * Update the proxy url to use the pantheon machine name for the site you just created.
+        * Update the proxy url to use the pantheon machine name
+         for the site you just created.
     * .pa11yci.js
         * Update the urls you would like to test in the array
-        * Update this README's pally section with the links to the correct urls.
+        * Update README's pally section with the links to the correct urls.
 * CircleCI
     * `config.yml`
-        * Update the `TERMINUS_SITE` variable in line 2 to your Pantheon machine name for the project.
-        * Update the `THEME_NAME` variable in line 3 to the folder name for your custom theme.
+        * Update the `TERMINUS_SITE` variable in line 2 
+        to your Pantheon machine name for the project.
+        * Update the `THEME_NAME` variable in line 3 
+        to the folder name for your custom theme.
         * Update paths in JSON lock files in theme
-        * If you would like Slack notifications when builds complete uncomment the slack portion.  You will need to create a new CircleCI slack integration for the channel you want to post updates too and update the webhook URL.
+        * If you would like Slack notifications when builds complete
+        uncomment the slack portion. 
+        You will need to create a new CircleCI slack integration 
+        for the channel you want to post updates too & update the webhook URL.
 
 * Run `fin init` to validate your local site.
 
@@ -101,25 +110,32 @@ This repo is Pantheon specific at the moment
 
 * Create a PR in github.
 
-* Circleci won't run this time because we haven't set it up yet. We need to commit the project-specific circleci config.yml first so we can setup circleci later.
+* Circleci won't run this time because we haven't set it up yet. 
+We need to commit the project-specific circleci config.yml first so we can setup circleci later.
 
-* Merge PR (now we have our project-specific circleci config on the main branch so we can reference it from circleci). Circleci job will still not happen.
+* Merge PR (now we have our project-specific circleci config 
+on the main branch so we can reference it from circleci). 
+Circleci job will still not happen.
 
 #### Circleci project setup
 
-* Go to [circleci projects dashboard](https://app.circleci.com/projects/project-dashboard/github/kanopi/)
+* Go to 
+[circleci](https://app.circleci.com/projects/project-dashboard/github/kanopi/)
 
 * Find your new project repo and click the "Set Up Project" button.
 
-* Select the branch name option and select the main branch, and click on the "Lets go" button.
+* Select the branch name option and select the main branch,
+ and click on the "Lets go" button.
 
 * Click on the gear for the project and click on the Advanced Settings tab.
 
-* Enable "Only build pull request" and "Auto Cancel Builds" options. ![Update circleci settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
+* Enable "Only build pull request" and "Auto Cancel Builds" options. 
+[Update settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
 
 #### Drupal setup
 
-* Enable the following modules: `fin drush en components emulsify_twig twig_tweak redis pantheon_advanced_page_cache claro -y`
+* Enable the following modules: 
+`fin drush en components emulsify_twig twig_tweak redis pantheon_advanced_page_cache claro -y`
 
 * Export config.
 
@@ -151,7 +167,8 @@ This repo is Pantheon specific at the moment
 
 ## Important links
 
-Please put links to the important places here.  Imagine you know nothing about the project.
+Please put links to the important places here.  
+Imagine you know nothing about the project.
 
 * [Pantheon Dashboard]()
 * [CircleCI]()
@@ -162,7 +179,7 @@ Please put links to the important places here.  Imagine you know nothing about t
 
 ### Step #1: Docksal environment setup
 
-**This is a one time setup - skip this if you already have a working Docksal environment.**
+**This is a one time setup.**
 
 Follow [Docksal install instructions](https://docs.docksal.io/getting-started/setup/)
 
@@ -170,25 +187,32 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
 
 1. Clone this repo into your Projects directory.
 1. Change directory to the cloned folder.
-1. Make your own version of the `docksal-local.env` file from the example and add your `SECRET_TERMINUS_TOKEN` to the file.
+1. Make your own version of the `docksal-local.env` file from the example 
+and add your `SECRET_TERMINUS_TOKEN` to the file.
     * You don't need to do this if you set your token globally in Docksal
 1. Initialize the site with `fin init`
-1. Once the site has been initialized you'll get a url to go to in your browser to start dev'ing.
+1. Once the site has been initialized you'll get a url 
+to go to in your browser to start dev'ing.
 
 
 ## Installing Modules
 
-Modules are installed using composer. The process for installing a module would be the following:
+Modules are installed using composer. 
+The process for installing a module would be the following:
 
 ```
 fin composer require [package]
 ```
 
-The standard composer command is used but with the Docksal specific command `fin` prepended to the beginning.
+The standard composer command is used but with the 
+Docksal specific command `fin` prepended to the beginning.
 
 ## Theme
 
-The theme is based off the [Kanopi Design Component Library](https://github.com/kanopi/kdcl_basic) which uses Storybook and is originally forked from [Emulsify DS](https://github.com/emulsify-ds/emulsify-drupal).
+The theme is based off the 
+[Kanopi Design Component Library](https://github.com/kanopi/kdcl_basic) 
+which uses Storybook and is originally forked from 
+[Emulsify DS](https://github.com/emulsify-ds/emulsify-drupal).
 
 The theme included is located within `docroot/sites/themes/custom/THEME`.
 
@@ -200,15 +224,18 @@ Storybook at http://storybook.${VIRTUAL_HOST}
 
 The theme uses Webpack and NPM to manage packages and run scripts.
 
-- @TODO [Hot Reloading in Drupal](https://docs.emulsify.info/usage/hot-reload-drupal)
+- @TODO 
+[Hot Reloading in Drupal](https://docs.emulsify.info/usage/hot-reload-drupal)
 
 #### Storybook
 
-- Theme development run `fin npm run develop`. This will watch for all twig, js, and sass changes within the components directory.
+- Theme development run `fin npm run develop`. This will watch for twig, js,
+ and sass changes within the components directory.
 - The development storybook URL http://storybook.${VIRTUAL_HOST}
 
 #### Storybook Webpack
-For webpack storybook to work within a docksal container we needed to set `watchOptions` in `docroot/themes/custom/THEME/.storybook/webpack.config.js`
+For webpack storybook to work within a docksal container we needed 
+to set `watchOptions` in `docroot/themes/custom/THEME/.storybook/webpack.config.js`
 ```
 config.watchOptions = {
   aggregateTimeout: 200,
@@ -242,37 +269,49 @@ Command | Description
 
 ## Docksal Commands
 
-The following commands are available with Docksal and should be prefixed with the command `fin`
+The following commands are available with Docksal 
+and should be prefixed with the command `fin`
 
 Command | Description
 --------|------------
 `composer` | Composer wrapper that executes within the CLI container
 `init` | Init Command that starts the project from scratch.
-`init-site` | Init Site Command that runs the site install and/or then runs the refresh command
+`init-site` | Init Site Command that runs the site install 
+and/or then runs the refresh command
 `npm` | NPM wrapper
 `npx` | NPX wrapper
-`refresh` | Will execute a drush sql-dump from the remote server. **NOT SET UP CURRENTLY**
-`share` | Opens a proxy server to your local computer using ngrok.io. Share in real time, or test locally.
-`rename-kdcl-basic` | Renames the folder in `web/themes/custom` to match the `THEME` environment variable.
+`refresh` | Will execute a drush sql-dump from the remote server.
+ **NOT SET UP CURRENTLY**
+`share` | Opens a proxy server to your local computer using ngrok.io. 
+Share in real time, or test locally.
+`rename-kdcl-basic` | Renames the folder in `web/themes/custom` 
+to match the `THEME` environment variable.
 
 ## Composer Commands
 
-The following commands are available with Composer and should be prefixed with the command `fin composer`
+The following commands are available with Composer and 
+should be prefixed with the command `fin composer`
 
 Command | Description
 --------|------------
-`lint-php` | Analyzes the custom modules folder for programmatic and stylistic errors
+`lint-php` | Analyzes the custom modules folder for programmatic 
+and stylistic errors
 `code-sniff-modules` | Runs PHPcs on the custom modules folder
 `code-sniff-themes` | Runs PHPcs on the custom themes folder
 `code-sniff` | Runs `code-sniff-modules` and `code-sniff-themes`
 `code-fix-modules` | Runs PHPcbf on the custom modules folder
 `code-fix-themes` | Runs PHPcbf on the custom themes folder
 `code-fix` | Runs `code-fix-modules` `code-fix-themes` `rector-fix` `lint-php`
-`phpstan` | PHPStan focuses on finding errors in the custom modules and themes folders without actually running it.
-`rector-modules` | Dry run on the custom modules folder of automates that checks for deprecations
-`rector-themes` | Dry run on the custom themes folder of automates that checks for deprecations
-`rector-fix-modules` | Automates the refactoring of deprecations on the custom modules folder
-`rector-fix-themes` | Automates the refactoring of deprecations on the custom themes folder
+`phpstan` | PHPStan focuses on finding errors in the custom modules and
+ themes folders without actually running it.
+`rector-modules` | Dry run on the custom modules folder of 
+automates that checks for deprecations
+`rector-themes` | Dry run on the custom themes folder of 
+automates that checks for deprecations
+`rector-fix-modules` | Automates the refactoring of deprecations 
+ on the custom modules folder
+`rector-fix-themes` | Automates the refactoring of deprecations
+ on the custom themes folder
 `rector-fix` | Runs `rector-fix-modules` and `rector-fix-themes`
 `code-check` | Runs `phpstan` `rector-modules` `rector-themes` `code-sniff`
 `prepare-for-pantheon` | Used by CircleCI for Pantheon
@@ -282,9 +321,13 @@ Command | Description
 
 ### Pa11y Audits
 
-We have a Docksal command that will run [pa11y-ci](https://github.com/pa11y/pa11y-ci) audits `fin pa11y`. When the command finishes the reports are available at the following url pa11y.$VIRTUAL_HOST
+We have a Docksal command that will run 
+[pa11y-ci](https://github.com/pa11y/pa11y-ci) 
+audits `fin pa11y`. When the command finishes the reports 
+are available at the following url pa11y.$VIRTUAL_HOST
 
-If you want to change the configuration of the Pa11y tests you can edit the [.pa11yci.js](/tests/pa11y/.pa11yci.js) file.
+If you want to change the configuration of the Pa11y tests you can edit the 
+[.pa11yci.js](/tests/pa11y/.pa11yci.js) file.
 
 Note: This was cribbed from [Phase2](https://github.com/phase2/pa11y-dashboard)
 
@@ -317,15 +360,24 @@ Are there any projects specific quirks or setup that should be noted.
 ### Github to Pantheon
 Deployments to the dev Pantheon environment is managed through Circle CI.
 
-Pull requests will build a MultiDev environment and update the PR with a comment. We also have Lighthouse testing and other audits enabled.
+Pull requests will build a MultiDev environment 
+and update the PR with a comment. 
+We also have Lighthouse testing and other audits enabled.
 
-Merges to `main` will merge Github to the Pantheon dev environment.During development our databases are Test and Dev. Once we have a launched product these will change to Live, Test and Dev.
+Merges to `main` will merge Github to the Pantheon dev environment.
+During development our databases are Test and Dev.
+Once we have a launched product these will change to Live, Test and Dev.
 
 ### Pantheon dev to production
 1. Go to the project dashboard on Pantheon.
 1. Backup databases for Test and Dev.
-    1. To accomplish this you can go to the backups tab and backup everything or go to Database/Files and under Export 'export the database'.
-1. Go to the environment you want to deploy to and make note of the tickets that are ready to deploy, document these in the deploy log message.
+    1. To accomplish this you can go to the backups tab and backup everything 
+    or go to Database/Files and under Export 'export the database'.
+1. Go to the environment you want to deploy to and make note of the tickets 
+that are ready to deploy, document these in the deploy log message.
 1. Once content has been deployed clone the Test database down to Dev.
-1. Pull the database locally, make sure there are no config changes that need to be committed to code. If there are changes, commit those and deploy.
-1. Tell the appropriate Slack channel that a deployment has taken place and include which tickets were deployed.
+1. Pull the database locally, make sure there are no config changes
+that need to be committed to code. 
+If there are changes, commit those and deploy.
+1. Tell the appropriate Slack channel that a deployment has taken place 
+and include which tickets were deployed.
