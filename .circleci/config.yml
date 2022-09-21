@@ -250,20 +250,6 @@ workflows:
           requires:
             - deploy-to-pantheon
 
-      - ci-tools/phpcs-drupal:
-          context: kanopi-code
-          extensions: 'php,module,inc,install,test,profile,theme,info,txt,md'
-          location: 'web/modules/custom/ web/themes/custom/'
-          standards: 'Drupal,DrupalPractice'
-          report: '/tmp/phpcs.txt'
-          # Post the results file as a comment on the PR.
-          post-steps:
-            - ci-tools/post-artifact-to-github:
-                body-prefix: "Click here to view the report:"
-                body-title: phpcs
-                search-for: tmp/phpcs.txt
-                when: on_fail
-
       - ci-tools/sdtt:
           context: kanopi-code
           url: "${PR_ENV_URL}"
