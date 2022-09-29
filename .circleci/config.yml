@@ -314,4 +314,4 @@ workflows:
           site-id: *TERMINUS_SITE
           update-method: composer
           context: kanopi-code
-
+          php-version: *CIMG_PHP_TAG
