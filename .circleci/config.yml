@@ -65,11 +65,11 @@ jobs:
 
       - run:
           name: Compile Storybook
-          path: web/themes/custom/oppenheimer
+          path: web/themes/custom/site_theme
           command: npm run build-storybook
 
       - store_artifacts:
-          path: web/themes/custom/oppenheimer/.out
+          path: web/themes/custom/site_theme/.out
           destination: storybook
 
       - ci-tools/post-artifact-to-github:
