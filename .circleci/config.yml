@@ -63,6 +63,19 @@ jobs:
           paths:
             - dist
 
+      - run:
+          name: Compile Storybook
+          path: web/themes/custom/oppenheimer
+          command: npm run build-storybook
+
+      - store_artifacts:
+          path: web/themes/custom/oppenheimer/.out
+          destination: storybook
+
+      - ci-tools/post-artifact-to-github:
+          body-title: Storybook
+          search-for: storybook/index.html
+
   push_storybook:
     docker:
       - image: *CIMG_NODE
