@@ -223,6 +223,9 @@ workflows:
                 - main
 
   build_deploy_and_test:
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - compile-theme:
           context: kanopi-code
