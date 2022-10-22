@@ -135,7 +135,7 @@ Circleci job will still not happen.
 #### Drupal setup
 
 * Enable the following modules: 
-`fin drush en components emulsify_twig twig_tweak redis pantheon_advanced_page_cache claro -y`
+`fin drush en components emulsify_twig admin_toolbar twig_tweak redis pantheon_advanced_page_cache -y`
 
 * Export config.
 
