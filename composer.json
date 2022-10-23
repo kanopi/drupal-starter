@@ -43,6 +43,7 @@
         "drupal/entity_usage": "^2.0@beta",
         "drupal/fancy_file_delete": "^2.0",
         "drupal/field_group": "^3.1",
+        "drupal/gin": "^3.0@beta",
         "drupal/key": "*",
         "drupal/launch_checklist": "^1.1",
         "drupal/linkit": "^5.0-beta10",
