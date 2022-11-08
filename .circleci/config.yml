@@ -2,7 +2,7 @@
 TERMINUS_SITE: &TERMINUS_SITE "PANTHEON_PROJECT_MACHINE_NAME"
 THEME_NAME: &THEME_NAME "site_theme"
 THEME_PATH: &THEME_PATH "web/themes/custom/site_theme"
-CIMG_NODE: &CIMG_NODE "cimg/node:lts-browsers"
+CIMG_NODE: &CIMG_NODE "cimg/node:16.14"
 CIMG_PHP: &CIMG_PHP "cimg/php:8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
 CIMG_PHP_TAG: &CIMG_PHP_TAG "8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
 
