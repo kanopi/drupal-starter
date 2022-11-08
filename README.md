@@ -348,7 +348,7 @@ Note: This was cribbed from [Phase2](https://github.com/phase2/pa11y-dashboard)
   ```
   "[web-root]/robots.txt": "assets/custom-robots.txt",
   ```
-- Run `fin composer.json`
+- Run `fin composer install`
 
 ## Project specific notes
 
