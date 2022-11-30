@@ -136,33 +136,20 @@ Circleci job will still not happen.
 
 * Enable the following modules:
 `fin drush en components emulsify_twig admin_toolbar twig_tweak redis pantheon_advanced_page_cache -y; fin drush then gin -y; fin drush config:set system.theme admin gin -y; fin drush rcrt 'adminstrator' 'Adminstrator' -y;`
-
+* Set config export path in `settings.php` to `$settings['config_sync_directory'] = '../config/';`
 * Export config.
-
 * On a development branch, git add, commit and push all local changes.
-
 * Submit a PR on github.
-
 * Validate circleci job and multidev.
-
 * Merge PR.
-
 * Validate circleci job and Dev site.
-
 * In your local, checkout and pull main branch.
-
 * Creat new development branch.
-
 * Uncomment the redis config in `web/sites/default/settings.php`.
-
 * Git add, commit and push the change.
-
 * Submit a PR in the github repo.
-
 * Validate circleci job and deployment to multidev.
-
 * Merge the PR.
-
 * Validate circleci job deployment and Pantheon Dev site.
 
 ## Important links
