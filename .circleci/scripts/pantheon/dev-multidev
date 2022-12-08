@@ -14,6 +14,11 @@ terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
 # Wake up the dev environment
 terminus -n env:wake "$TERMINUS_SITE.dev"
 
+# Delete old multidev environments associated
+# with PRs that has been merged or closed.
+terminus -n build:env:delete:pr $TERMINUS_SITE --yes
+terminus -n build:env:delete:ci $TERMINUS_SITE --yes
+
 if [[ $CI_BRANCH != "main" ]]
 then
   # Create a new multidev environment (or push to an existing one)
