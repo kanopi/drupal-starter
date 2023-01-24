@@ -32,3 +32,25 @@ $config['minifyhtml.config']['minify'] = FALSE;
 
 // "Allow Insecure Derivatives" for webp images working locally.
 $config['image.settings']['allow_insecure_derivatives'] = TRUE;
+
+
+// Override pantheon solr config
+$config['search_api.server.pantheon_solr8']['backend_config']['connector'] = 'standard';
+$config['search_api.server.pantheon_solr8']['backend_config']['connector_config'] = [
+  "scheme" => "http",
+  "host" => "solr",
+  "port" => "8983",
+  "path" => "/",
+  "core" => "search_api_solr_8.x-3.0",
+  "timeout" => "5",
+  "index_timeout" => "5",
+  "optimize_timeout" => "10",
+  "finalize_timeout" => "30",
+  "commit_within" => "1000",
+  "solr_version" => "",
+  "http_method" => "AUTO",
+  "skip_schema_check" => "false",
+  "jmx" => "false",
+  "jts" => "false",
+  "solr_install_dir" => "",
+];
