@@ -13,7 +13,8 @@ fin=$(which fin)
 LEFTHOOK=$(which lefthook || true)
 if [[ "${LEFTHOOK}" == "" ]]; then
   echo -e "${green_bg} Setup  ${NC}${green} Installing Lefthook...${NC}"
-  sudo curl -fsSL -o /usr/local/bin/lefthook "https://github.com/evilmartians/lefthook/releases/download/v0.7.7/lefthook_0.7.7_MacOS_x86_64"
+  ARCH=$(uname -m)
+  sudo curl -fsSL -o /usr/local/bin/lefthook "https://github.com/evilmartians/lefthook/releases/download/v0.7.7/lefthook_0.7.7_MacOS_${ARCH}"
   sudo chmod +x /usr/local/bin/lefthook
 fi
 
