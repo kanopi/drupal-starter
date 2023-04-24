@@ -12,6 +12,6 @@ set -e
 
 DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 
-cd ${DOCROOT_PATH}/themes/custom/${THEME}
+cd ${DOCROOT_PATH}/${THEME}
 
 npm "$@"
