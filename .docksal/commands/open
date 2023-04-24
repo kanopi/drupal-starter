@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+## Opens browser to virtualhost
+##
+## Usage: fin open
+
+open https://${VIRTUAL_HOST}${NC}
