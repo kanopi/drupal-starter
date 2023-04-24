@@ -6,6 +6,8 @@ services:
       - COMPOSER_MEMORY_LIMIT=-1
       - THEME
       - THEMENAME
+      - MIGRATE_DB_SOURCE
+      - MIGRATE_DB_ENV
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
     # Expose port and let Storybook attach to it.
