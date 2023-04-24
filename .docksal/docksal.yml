@@ -20,6 +20,20 @@ services:
     extends:
       file: ${HOME}/.docksal/stacks/services.yml
       service: mail
+      
+  # PHPMyAdmin
+  pma:
+    hostname: pma
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+    labels:
+      - io.docksal.virtual-host=pma.${VIRTUAL_HOST},pma.${VIRTUAL_HOST}.*
+    dns:
+      - ${DOCKSAL_DNS1}
+      - ${DOCKSAL_DNS2}
 
   # Dashboard displaying results from `fin pa11y`.
   pa11y:
