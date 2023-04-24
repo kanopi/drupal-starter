@@ -5,6 +5,7 @@ services:
     environment:
       - COMPOSER_MEMORY_LIMIT=-1
       - THEME
+      - THEMENAME
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
     # Expose port and let Storybook attach to it.
