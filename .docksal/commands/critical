@@ -1,0 +1,24 @@
+
+editdeletecontent_copyfile_download
+codehistoryplay_circle_outline
+#!/usr/bin/env bash
+ 
+#: exec_target = cli
+ 
+## Run Critical CSS Commands
+##
+## Usage: fin critical
+##
+ 
+# Abort if anything fails
+set -e
+ 
+#-------------------------- Settings --------------------------------------
+ 
+DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
+ 
+#-------------------------- Execution -------------------------------------
+ 
+cd ${DOCROOT_PATH}/${THEME}
+ 
+npm run criticalcss
