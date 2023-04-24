@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Wake up Pantheon Environment
+##
+## Usage: fin tickle
+
+# Abort if anything fails
+set -e
+
+while true
+do
+    printf "%s\n" "$(date)"
+    terminus env:wake ${MIGRATE_DB_SOURCE}.${MIGRATE_DB_ENV}
+    sleep 300
+done
