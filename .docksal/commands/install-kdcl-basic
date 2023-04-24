@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## Renames the download of the repo https://github.com/kanopi/kdcl_basic to the name of the theme set in THEME variable.
+## Renames the download of the repo https://github.com/kanopi/kdcl_basic to the name of the theme set in THEMENAME variable.
 
 # Abort if anything fails
 set -e
@@ -27,21 +27,20 @@ echo "Remove git stuff from theme repo/directory"
 rm -rf .git
 
 echo "Rename root theme files."
-rename "s/^kdcl_basic/$THEME/" kdcl_basic*
+rename "s/^kdcl_basic/$THEMENAME/" kdcl_basic*
 
 echo "Update text in files"
-find ./ -type f -exec sed -i '' -e "s/kdcl_basic/$THEME/g" {} \;
+find ./ -type f -exec sed -i '' -e "s/kdcl_basic/$THEMENAME/g" {} \;
 
 echo "Remove 'dist' ignore in theme gitignore.  This is for circleci deployments to work correctly."
 sed -i '' -e 's/dist//g' .gitignore
 
 echo "Rename folder in components"
 cd components
-mv kdcl_basic "$THEME"
+mv kdcl_basic "$THEMENAME"
 
 echo "Raname github folder"
 cd $THEME_ROOT
-mv "$GIT_DIR_NAME" "$THEME"
+mv "$GIT_DIR_NAME" "$THEMENAME"
 
 echo "Done  :)"
-
