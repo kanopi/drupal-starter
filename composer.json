@@ -34,6 +34,7 @@
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-recommended": "^10.0",
         "drupal/core-vendor-hardening": "^10.0",
+        "drupal/critical_css": "^1.19",
         "drupal/ctools": "^3.7",
         "drupal/editor_advanced_link": "^2.0",
         "drupal/emulsify_twig": "^4.0",
