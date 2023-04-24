@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Create and configure the migration database.
+##
+## Usage: fin migrate_prep_db
+
+# Abort if anything fails
+set -e
+
+## Create local Drupal 7 database to facilitate migrations.
+fin db create d7
+
+## Populate Drupal 7 database from a multidev.
+fin pull db --db-name=d7 -y --hosting-platform=${hostingplatform} --hosting-site=${MIGRATE_DB_SOURCE} --hosting-env=${MIGRATE_DB_ENV}
