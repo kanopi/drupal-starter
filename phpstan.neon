@@ -1,5 +1,6 @@
 parameters:
-  level: max
+  # Allows for drupal/coder and phpstan to co-exist peacefully.
+  level: 5
   customRulesetUsed: true
   reportUnmatchedIgnoredErrors: false
   excludePaths:
