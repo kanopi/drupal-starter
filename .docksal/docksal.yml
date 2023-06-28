@@ -53,7 +53,7 @@ services:
       - ../tests/:/app/tests
 
   solr:
-    image: "docksal/solr:8"
+    image: "devkteam/solr:8.1.1"
 
 
   # Storybook URL
