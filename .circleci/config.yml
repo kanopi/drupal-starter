@@ -250,6 +250,10 @@ workflows:
             - ci-tools/post-to-github-commit:
                 body: '@$(ls /opt/reports/*/comment.txt)'
                 when: 'always'
+          filters:
+            branches:
+              ignore:
+                - main
       - ci-tools/pa11y:
           context: kanopi-code
           urls: "${PR_ENV_URL}"
@@ -265,6 +269,10 @@ workflows:
                 when: 'on_fail'
           requires:
             - deploy-to-pantheon
+          filters:
+            branches:
+              ignore:
+                - main
       - ci-tools/sdtt:
           context: kanopi-code
           url: "${PR_ENV_URL}"
@@ -282,6 +290,10 @@ workflows:
                 body-title: "❌ Structured Data Testing Tool failure - Homepage"
                 search-for: tmp/sdtt-results.txt
                 when: 'on_fail'
+          filters:
+            branches:
+              ignore:
+                - main
       - ci-tools/backstopjs:
           context: kanopi-code
           # Defines the pages, and gives them a label.  It is a comma-separated list.
