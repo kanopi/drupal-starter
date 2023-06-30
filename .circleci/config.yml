@@ -156,19 +156,18 @@ jobs:
 
 workflows:
   version: 2
-
-  push_storybook:
+  Storybook:
     jobs:
       - push_storybook:
           context: kanopi-code
           filters:
             branches:
               only: main
-  static-tests:
+  PHPstan:
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
-          name: "phpstan"
+          name: "PHPstan"
           context: kanopi-code
           command: 'phpstan'
           save-output: true
@@ -179,10 +178,11 @@ workflows:
             branches:
               ignore:
                 - main
-
+  PHPcs:
+    jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
-          name: "phpcs"
+          name: "PHPcs"
           context: kanopi-code
           command: 'code-sniff'
           save-output: true
@@ -193,10 +193,11 @@ workflows:
             branches:
               ignore:
                 - main
-
+  Rector - modules:
+    jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
-          name: "rector-modules"
+          name: "Rector modules"
           context: kanopi-code
           command: 'rector-modules'
           save-output: true
@@ -207,10 +208,11 @@ workflows:
             branches:
               ignore:
                 - main
-
+  Rector - themes:
+    jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
-          name: "rector-theme"
+          name: "Rector themes"
           context: kanopi-code
           command: 'rector-themes'
           save-output: true
@@ -221,7 +223,6 @@ workflows:
             branches:
               ignore:
                 - main
-
   build_deploy_and_test:
     when:
       not:
@@ -248,8 +249,7 @@ workflows:
           post-steps:
             - ci-tools/post-to-github-commit:
                 body: '@$(ls /opt/reports/*/comment.txt)'
-                when: 'on_fail'
-
+                when: 'always'
       - ci-tools/pa11y:
           context: kanopi-code
           urls: "${PR_ENV_URL}"
@@ -265,7 +265,6 @@ workflows:
                 when: 'on_fail'
           requires:
             - deploy-to-pantheon
-
       - ci-tools/sdtt:
           context: kanopi-code
           url: "${PR_ENV_URL}"
@@ -280,13 +279,12 @@ workflows:
           post-steps:
             - ci-tools/post-artifact-to-github:
                 body-prefix: "Click here to view the report:"
-                body-title: "❌ SDTT Failure - Homepage"
+                body-title: "❌ Structured Data Testing Tool failure - Homepage"
                 search-for: tmp/sdtt-results.txt
                 when: 'on_fail'
-
       - ci-tools/backstopjs:
           context: kanopi-code
-          # Defines the pages, and gives them a label.  It is a comma separated list.
+          # Defines the pages, and gives them a label.  It is a comma-separated list.
           # Add as many as you need.
           urls: '/|Homepage'
           # Sets the URL to test to be the Pantheon multidev.
@@ -301,7 +299,7 @@ workflows:
           # Posts a link to the report to the PR.
           post-steps:
             - ci-tools/post-artifact-to-github:
-                body-prefix: "Click here to view the report:"
+                body-prefix: "❌ There was a failure. Click here to view the report:"
                 body-title: BackstopJS
                 search-for: html_report/index.html
                 when: 'on_fail'
@@ -311,7 +309,6 @@ workflows:
           filters:
             branches:
               ignore: main
-
   # Runs composer updates at midnight everyday.
   # Exports configuration and commits.
   # Pushes to a single branch and makes pull request on Github.
