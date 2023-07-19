@@ -35,7 +35,7 @@ watch_command='fin npm run develop'
 # PROJECT_ROOT and DOCROOT are set as env variables in cli
 SITE_DIRECTORY="${SITE_DIRECTORY}"
 DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
-FULL_THEME_PATH="${DOCROOT_PATH}/themes/custom/${THEME}"
+FULL_THEME_PATH="${DOCROOT_PATH}/${THEME}"
 #-------------------------- Execution -------------------------------------
 
 # Theme initialization.
@@ -72,7 +72,7 @@ echo "Theme node version: ${NODE_VERSION}"
 nvm install ${NODE_VERSION}
 nvm alias default ${NODE_VERSION}
 nvm use
-npm install
+npm install --save patch-package
 
 # Run Storybook Develop.
 echo -e "\n${yellow} ${construction} Running Storybook Develop ${construction}${NC}"
