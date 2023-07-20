@@ -104,11 +104,26 @@
             "@rector-fix",
             "@lint-php"
         ],
-        "phpstan": "vendor/bin/phpstan analyse web/modules/custom web/themes/custom --level max ",
-        "rector-modules": "vendor/bin/rector process web/modules/custom/ --dry-run ",
-        "rector-themes": "vendor/bin/rector process web/themes/custom/ --dry-run ",
-        "rector-fix-modules": "vendor/bin/rector process web/modules/custom/ ",
-        "rector-fix-themes": "vendor/bin/rector process web/themes/custom/ ",
+        "phpstan": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/phpstan analyse --memory-limit=-1 web/modules/custom web/themes/custom"
+        ],
+        "rector-modules": [
+             "Composer\\Config::disableProcessTimeout",
+             "vendor/bin/rector process web/modules/custom/ --dry-run"
+         ],
+        "rector-themes": [
+             "Composer\\Config::disableProcessTimeout",
+             "vendor/bin/rector process web/themes/custom/ --dry-run"
+         ],
+        "rector-fix-modules": [
+             "Composer\\Config::disableProcessTimeout",
+             "vendor/bin/rector process web/modules/custom/"
+         ],
+        "rector-fix-themes": [
+             "Composer\\Config::disableProcessTimeout",
+             "vendor/bin/rector process web/themes/custom/"
+         ],
         "rector-fix": [
             "@rector-fix-modules",
             "@rector-fix-themes"
