@@ -296,10 +296,17 @@ workflows:
                 - main
       - ci-tools/backstopjs:
           context: kanopi-code
-          # Defines the pages, and gives them a label.  It is a comma-separated list.
+          # Defines the pages, and gives them a label.
+          # It is a comma separated list.
           # Add as many as you need.
-          urls: '/|Homepage'
+          # urls: '/|Homepage,/style-guide|Style Guide'
+          # URLs now loaded in backstop.json from the project's root.
+          # Load additional configuration from the backstop.json file.
+          # See https://github.com/garris/BackstopJS#advanced-scenarios.
+          advanced-config: true
           # Sets the URL to test to be the Pantheon multidev.
+          search-find: 'TEST_URL'
+          search-replace: '${TEST_URL}'
           pre-steps:
             - ci-tools/set-pantheon-url:
                 site-id: *TERMINUS_SITE
@@ -317,13 +324,13 @@ workflows:
                 when: 'on_fail'
           requires:
             - deploy-to-pantheon
-          # Don't run it on main because that is the url it tests against.
+          # Don't run it on main because that is the URL it tests against.
           filters:
             branches:
               ignore: main
-  # Runs composer updates at midnight everyday.
+  # Runs composer updates at midnight every day.
   # Exports configuration and commits.
-  # Pushes to a single branch and makes pull request on Github.
+  # Pushes to a single branch and makes pull requests on GitHub.
   automated-updates:
     when:
       and:
