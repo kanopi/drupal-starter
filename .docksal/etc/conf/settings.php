@@ -18,6 +18,9 @@ $databases['default']['default'] = [
 $settings['file_chmod_directory'] = 0777;
 $settings['file_chmod_file'] = 0666;
 
+// Skip file system permissions hardening.
+$settings['skip_permissions_hardening'] = TRUE;
+
 // Local dev caching
 $settings['cache']['bins']['render'] = 'cache.backend.null';
 $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
