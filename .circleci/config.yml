@@ -9,7 +9,7 @@ CIMG_PHP_TAG: &CIMG_PHP_TAG "8.1" # This is the version of PHP set in pantheon.y
 
 defaults: &defaults
   docker:
-    - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.0
+    - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.1
   working_directory: ~/example_drops_8_composer
   environment:
     TZ: "/usr/share/zoneinfo/America/Los_Angeles"

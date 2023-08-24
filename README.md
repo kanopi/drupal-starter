@@ -3,7 +3,7 @@ This is the Drupal Composer Project with docksal configuration to easily get a s
 
 Features:
 
-- Drupal 9 - Composer Install
+- Drupal 10 - Composer Install
 - Docksal Configuration
 - Basic CircleCI configuration
 - Project Readme
@@ -16,14 +16,14 @@ This repo is Pantheon specific at the moment
 
 #### Create the project in Pantheon
 
-* Create a new drupal **8** project. This is because the Drupal 9 integrated composer flow is a little janky.
-![Create a new drupal 8 project](https://user-images.githubusercontent.com/1062456/130299366-ad0699bd-3dc6-4148-9d8e-a8901e26bcce.png)
+* Create a new drupal **10** project.
+![Create a new drupal 10 project](https://github.com/kanopi/drupal-starter/assets/7685811/a1926875-951d-473a-bf0f-146abf3ad1eb)
 
 * Create a minimal site install
-![Create a minimal site install](https://user-images.githubusercontent.com/1062456/130299368-effbdab3-87ec-435b-812a-cb5d50b1c430.png)
+  ![Create a minimal site install](https://user-images.githubusercontent.com/1062456/130299368-effbdab3-87ec-435b-812a-cb5d50b1c430.png)
 
 * Set the basic details for the site
-![Set the basic details for the site](https://user-images.githubusercontent.com/1062456/130299369-e102b080-f94b-45ce-a706-08392e075c1a.png)
+  ![Set the basic details for the site](https://user-images.githubusercontent.com/1062456/130299369-e102b080-f94b-45ce-a706-08392e075c1a.png)
 
 * Add Redis to the project
 ![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
