@@ -57,3 +57,10 @@ $config['search_api.server.pantheon_solr8']['backend_config']['connector_config'
   "jts" => "false",
   "solr_install_dir" => "",
 ];
+
+/**
+ * Disable CSS and JS aggregation.
+ */
+$config['system.performance']['css']['preprocess'] = FALSE;
+$config['system.performance']['js']['preprocess'] = FALSE;
+
