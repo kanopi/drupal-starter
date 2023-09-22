@@ -216,7 +216,7 @@
                     "append": "assets/custom-robots.txt"
                 },
                 "[web-root]/sites/default/settings.php": {
-                    "append": "assets/environment_indicator_defaults.inc"
+                    "append": "assets/pantheon_setting_defaults.inc"
                 },
                 "[web-root]/sites/development.services.yml": false
             }
@@ -237,6 +237,11 @@
             "drupal/search_api_autocomplete": {
                 "Undefined constant Drupal\\\\search_api_solr\\\\SolrBackendInterface::SEARCH_API_SOLR_SCHEMA_VERSION": "https://www.drupal.org/files/issues/2023-08-22/3382226-3.patch"
             }
+        },
+        "merge-plugin": {
+            "include": [
+                "web/modules/contrib/webform/composer.libraries.json"
+            ]
         }
     },
     "config": {
@@ -252,7 +257,8 @@
             "drupal/core-vendor-hardening": true,
             "joachim-n/composer-manifest": true,
             "oomphinc/composer-installers-extender": true,
-            "rvtraveller/qs-composer-installer": true
+            "rvtraveller/qs-composer-installer": true,
+            "wikimedia/composer-merge-plugin": true
         }
     }
 }
