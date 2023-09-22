@@ -178,6 +178,9 @@
                 "[web-root]/robots.txt": {
                     "append": "assets/custom-robots.txt"
                 },
+                "[web-root]/sites/default/settings.php": {
+                    "append": "assets/environment_indicator_defaults.inc"
+                },
                 "[web-root]/sites/development.services.yml": false
             }
         },
