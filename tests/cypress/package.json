@@ -1,0 +1,26 @@
+{
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "delete:reports": "rm cypress/results/* || true",
+    "combine:reports": "jrm cypress/results/combined-report.xml \"cypress/results/*.xml\"",
+    "prereport": "npm run delete:reports",
+    "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
+    "postreport": "npm run combine:reports",
+    "merge:reports": "npx mochawesome-merge 'cypress/results/*.json' > cypress/mochawesome.json; npx marge -o cypress/results/mocha-report cypress/mochawesome.json"
+  },
+  "dependencies": {
+    "@ngneat/falso": "^6.3.0",
+    "cypress-downloadfile": "^1.2.3",
+    "cypress-multi-reporters": "^1.6.1",
+    "dotenv": "^16.0.1",
+    "dotenv-parse-variables": "^2.0.0",
+    "mocha-junit-reporter": "^2.0.2",
+    "mochawesome": "^7.1.3",
+    "mochawesome-report-generator": "^6.2.0"
+  },
+  "devDependencies": {
+    "cypress": "^12.10.0"
+  }
+}

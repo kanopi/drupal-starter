@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+## Install the node packages for cypress on the developers local machine not Docksal.
+##
+## Usage: fin install-cypress
+
+# Make sure NVM works
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+CYPRESS_TESTS="${PROJECT_ROOT}/tests/cypress"
+cd "${CYPRESS_TESTS}"
+NODE_VERSION=$(cat ${CYPRESS_TESTS}/.nvmrc)
+nvm install $NODE_VERSION
+nvm use
+npm ci
+
+echo '{
+  "DRUSH_IS_DOCKSAL": "true"
+}
+' > "$CYPRESS_TESTS/cypress.env.json"

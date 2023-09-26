@@ -1,0 +1,12 @@
+/node_modules
+/cypress/screenshots/*
+/cypress/videos/*
+/cypress/results/*
+/cypress/junit/*
+/cypress/mochawesome.json
+/cypress/reports/*
+.env
+.env-*
+cypress.env.json
+/cypress/downloads/*
+/cypress/support/shrubs

@@ -54,6 +54,22 @@ echo -e "${NC}This should require no input.${NC}"
 echo -e "${green}${divider}${NC}"
 lefthook install
 
+echo -e "\n${yellow} ${construction} Initializing NVM... ${construction}${NC}\n"
+echo -e "${NC}This should require no input.${NC}"
+echo -e "${green}${divider}${NC}"
+NVM_DIR="${HOME}/.nvm"
+if [[ ! -d "$NVM_DIR" ]]; then
+    echo -e "${NC}Installing NVM.${NC}"
+    echo -e "${green}${divider}${NC}"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
+echo -e "\n${yellow} ${construction} Initializing Cypress... ${construction}${NC}\n"
+echo -e "${NC}This should require no input.${NC}"
+echo -e "${green}${divider}${NC}"
+fin install-cypress
+
 echo -e "\n${yellow} ${lock} Installing SSL certificate. ${lock}${NC}"
 echo -e "${NC}This should take ~1 minute and require no input.${NC}"
 echo -e "${green}${divider}${NC}"
