@@ -54,19 +54,14 @@ jobs:
             - web/themes/custom/site_theme/node_modules
 
       - run:
-          name: Run Storybook Build
-          command: npm run build
+          name: Compile Storybook
           path: *THEME_PATH
+          command: npm run build-storybook
 
       - persist_to_workspace:
           root: *THEME_PATH
           paths:
             - dist
-
-      - run:
-          name: Compile Storybook
-          path: web/themes/custom/site_theme
-          command: npm run build-storybook
 
       - store_artifacts:
           path: web/themes/custom/site_theme/.out
