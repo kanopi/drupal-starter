@@ -105,19 +105,15 @@
         "drush/drush": "^11",
         "joachim-n/composer-manifest": "^1.0",
         "oomphinc/composer-installers-extender": "2.0.0",
-        "pantheon-systems/drupal-integrations": "^9",
+        "pantheon-systems/drupal-integrations": "^10",
         "rvtraveller/qs-composer-installer": "^1.1",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "drupal/core-dev": "^10.0",
-        "drupal/devel": "^5.1",
-        "mglaman/phpstan-drupal": "^1.1",
-        "palantirnet/drupal-rector": "^0.15.0",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/extension-installer": "^1.2",
-        "phpstan/phpstan-deprecation-rules": "^1.1"
+        "drupal/core-dev": "^10.1",
+        "drupal/upgrade_status": "^4.0",
+        "palantirnet/drupal-rector": "^0.15.1"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -186,6 +182,9 @@
     },
     "extra": {
         "enable-patching": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
         "installer-types": [
             "drupal-library",
             "npm-asset",
