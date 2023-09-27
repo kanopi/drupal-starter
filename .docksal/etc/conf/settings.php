@@ -64,3 +64,5 @@ $config['search_api.server.pantheon_solr8']['backend_config']['connector_config'
 $config['system.performance']['css']['preprocess'] = FALSE;
 $config['system.performance']['js']['preprocess'] = FALSE;
 
+// Override Security Kit (seckit) Settings.
+$config['seckit.settings']['seckit_csrf']['origin'] = FALSE;
