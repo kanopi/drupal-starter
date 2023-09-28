@@ -135,7 +135,7 @@ Circleci job will still not happen.
 #### Drupal setup
 
 * Enable the following modules:
-`fin drush en components emulsify_twig admin_toolbar twig_tweak redis pantheon_advanced_page_cache -y; fin drush then gin -y; fin drush config:set system.theme admin gin -y; fin drush rcrt 'adminstrator' 'Adminstrator' -y;`
+`fin drush en components emulsify_twig admin_toolbar twig_tweak redis pantheon_advanced_page_cache -y; fin drush then gin -y; fin drush config:set system.theme admin gin -y; fin drush rcrt 'administrator' 'administrator' -y;`
 * Set config export path in `settings.php` to `$settings['config_sync_directory'] = '../config/';`
 * Export config.
 * On a development branch, git add, commit and push all local changes.
