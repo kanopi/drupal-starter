@@ -67,5 +67,6 @@ services:
       # Port 6006 Used for storybook in CLI container.
       NGINX_BACKEND_PORT: 6006
       NGINX_VHOST_PRESET: http-proxy
+      NGINX_HEADERS_CONTENT_SECURITY_POLICY: "frame-ancestors 'self'"
     labels:
       - io.docksal.virtual-host=storybook.${VIRTUAL_HOST}
