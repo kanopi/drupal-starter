@@ -24,3 +24,6 @@ fin drush updatedb -y
 
 echo "Clear cache"
 fin drush cr -y
+
+echo "Add Cypress users"
+fin cypress-users

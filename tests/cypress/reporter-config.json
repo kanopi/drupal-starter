@@ -1,0 +1,12 @@
+{
+  "reporterEnabled": "mochawesome, mocha-junit-reporter, spec, json",
+  "mochawesomeReporterOptions": {
+    "reportDir": "cypress/results",
+    "overwrite": false,
+    "html": true,
+    "json": true
+  },
+  "mochaJunitReporterReporterOptions": {
+    "mochaFile": "cypress/junit/[hash].xml"
+  }
+}

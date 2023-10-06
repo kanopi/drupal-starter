@@ -135,7 +135,7 @@ Circleci job will still not happen.
 #### Drupal setup
 
 * Enable the following modules:
-`fin drush en components emulsify_twig admin_toolbar twig_tweak redis pantheon_advanced_page_cache -y; fin drush then gin -y; fin drush config:set system.theme admin gin -y; fin drush rcrt 'adminstrator' 'Adminstrator' -y;`
+`fin drush en components emulsify_twig admin_toolbar twig_tweak redis pantheon_advanced_page_cache -y; fin drush then gin -y; fin drush config:set system.theme admin gin -y; fin drush rcrt 'administrator' 'administrator' -y;`
 * Set config export path in `settings.php` to `$settings['config_sync_directory'] = '../config/';`
 * Export config.
 * On a development branch, git add, commit and push all local changes.
@@ -261,17 +261,23 @@ and should be prefixed with the command `fin`
 
 Command | Description
 --------|------------
-`composer` | Composer wrapper that executes within the CLI container
+`critical` | Run Critical CSS.
+`cypress` | Run Cypress inside Docksal. ie. `fin cypress open`.
+`cypress-users` | Adds users Cypress can be used to test. Called from `fin refresh`.
+`composer` | Composer wrapper that executes within the CLI container.
 `init` | Init Command that starts the project from scratch.
-`init-site` | Init Site Command that runs the site install
-and/or then runs the refresh command
-`npm` | NPM wrapper
-`npx` | NPX wrapper
+`init-site` | Installs and configures Drupal.
+`install-cypress` | Called from `init` to install Cypress tools.
+`install-kdcl-basic` | Project setup theme generator.
+`install-theme-tools` | Installs tools needed for Critical, Storybook, etc.
+`migrate-prep-db` | Creates a second database to house a migration source.
+`npm` | Run NPM from the theme folder.
+`npx` | Run NPX from the theme folder.
+`open` | Opens browser to local site URL.
+`pa11y` | Runs the Pa11y accessibility tools suite locally.
 `refresh` | Will execute a drush sql-dump from the remote server.
 `share` | Opens a proxy server to your local computer using ngrok.io.
-Share in real time, or test locally.
-`rename-kdcl-basic` | Renames the folder in `web/themes/custom`
-to match the `THEME` environment variable. **DELETE AFTER SETUP**
+`tickle` | Wakes up the remote migration source environment every 5 minutes.
 
 ## Composer Commands
 

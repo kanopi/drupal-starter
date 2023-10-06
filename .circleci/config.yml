@@ -1,8 +1,11 @@
 # https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
 TERMINUS_SITE: &TERMINUS_SITE "PANTHEON_PROJECT_MACHINE_NAME"
+PANTHEON_UUID: &PANTHEON_UUID "xxx"
 THEME_NAME: &THEME_NAME "site_theme"
 THEME_PATH: &THEME_PATH "web/themes/custom/site_theme"
-CIMG_NODE: &CIMG_NODE "cimg/node:16.14"
+CYPRESS_NODE_VERSION: &CYPRESS_NODE_VERSION "18.16.1" # Matches NVMRC file.
+CYPRESS_CIMG_PHP: &CYPRESS_CIMG_PHP "cimg/php:8.1-browsers"
+CIMG_NODE: &CIMG_NODE "cimg/node:16.16"
 CIMG_PHP: &CIMG_PHP "cimg/php:8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
 CIMG_PHP_TAG: &CIMG_PHP_TAG "8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
 
@@ -26,6 +29,7 @@ orbs:
   ci-tools: kanopi/ci-tools@2
   cms-updates: kanopi/cms-updates@2
   slack: circleci/slack@3.4.2
+  node: circleci/node@5.0.3
 
 jobs:
 
@@ -96,6 +100,86 @@ jobs:
           name: Run Storybook Deploy
           path: web/themes/custom/site_theme
           command: npm run deploy-storybook
+
+  cypress:
+    docker:
+      - image: *CYPRESS_CIMG_PHP
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASS
+    environment:
+      TERMINUS_SITE: *TERMINUS_SITE
+      PANTHEON_UUID: *PANTHEON_UUID
+    resource_class: large
+    steps:
+      - ci-tools/set-variables
+      - checkout
+      - restore_cache:
+          keys:
+            - drupal-{{ checksum "composer.lock" }}
+
+      - run:
+          name: run Composer install for Shrubs
+          command: |
+            composer install
+
+      - save_cache:
+          key: drupal-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+
+      - ci-tools/copy-ssh-key
+      - node/install:
+          node-version: *CYPRESS_NODE_VERSION
+      - ci-tools/install-terminus
+      - run:
+          name: Authorize terminus
+          command: terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
+      - run:
+          name: Prime Cache
+          command: curl -I "${SITE_URL}"
+
+      - run:
+          name: Set Variables
+          command: |
+            (
+                echo "export CYPRESS_BASE_URL='${SITE_URL}'"
+                echo "export PR_ENVIRONMENT='${TERMINUS_SITE}.pr-${CIRCLE_PULL_REQUEST##*/}'"
+                echo "export CYPRESS_DRUSH_IS_PANTHEON='pr-${CIRCLE_PULL_REQUEST##*/}.${PANTHEON_UUID}'"
+            ) >> $BASH_ENV
+            source $BASH_ENV
+
+      - run:
+          name: Create the test user
+          command: |
+            ## Make it so it doesn't fail if the user already exists
+            terminus -n drush "$PR_ENVIRONMENT" -- user-create cypress --mail="cypress@mailinator.com" --password="cypress" || true
+            terminus -n drush "$PR_ENVIRONMENT" -- user-add-role administrator cypress || true
+
+      - run:
+          name: Install Cypress
+          command: npm ci
+          path: tests/cypress
+
+      - run:
+          name: Run Tests
+          command: |
+            shopt -s globstar
+            circleci tests glob cypress/e2e/**/*.cy.js | circleci tests split --split-by=timings > /tmp/tests-to-run
+            ./node_modules/.bin/cypress run -s $(cat /tmp/tests-to-run)
+          path: tests/cypress
+
+      - run:
+          when: always
+          name: Generate Report
+          command: npm run merge:reports
+          path: tests/cypress
+
+      - store_test_results:
+          path: tests/cypress/cypress/junit
+
+      - store_artifacts:
+          path: tests/cypress/cypress/
 
   deploy-to-pantheon:
     <<: *defaults
@@ -289,6 +373,29 @@ workflows:
             branches:
               ignore:
                 - main
+      - cypress:
+          context: kanopi-code
+          pre-steps:
+            - ci-tools/set-pantheon-url
+          requires:
+            - deploy-to-pantheon
+          filters:
+            branches:
+              ignore:
+                - main
+          post-steps:
+            ## Do two different GitHub posts to capture passes/fails separately.
+            - ci-tools/post-artifact-to-github:
+                when: 'on_fail'
+                body-prefix: ":x: Cypress test runner: **$((CIRCLE_NODE_INDEX++)) / $CIRCLE_NODE_TOTAL** "
+                body-title: "Failing Cypress Run"
+                search-for: "results/mocha-report/mochawesome.html"
+            - ci-tools/post-artifact-to-github:
+                when: 'on_success'
+                body-prefix: ":white_check_mark: Test runner: **$((CIRCLE_NODE_INDEX++)) / $CIRCLE_NODE_TOTAL** "
+                body-title: "Passing Cypress Run"
+                search-for: "results/mocha-report/mochawesome.html"
+
       - ci-tools/backstopjs:
           context: kanopi-code
           # Defines the pages, and gives them a label.
