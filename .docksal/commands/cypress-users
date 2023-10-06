@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+## Create Cypress users
+##
+## Usage: fin cypress-users
+## Creates an admin user for default cypress tests. Repeat for adding users with other roles.
+
+# Abort if anything fails
+set -e
+
+echo "Create default admin user for Cypress tests."
+fin drush user-create cypress --mail="support+cypress@kanopi.com" --password="cypress" || true
+fin drush user-add-role administrator cypress
