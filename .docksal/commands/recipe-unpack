@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Unpack a Drupal Recipe to the site's composer.json
+##
+## Usage: fin recipe-unpack [organization/package-name]
+##
+
+# Abort if anything fails
+set -e
+
+composer unpack "$@"
