@@ -24,7 +24,7 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/kanopi/shrubs"
+            "url": "https://gitlab.ewdev.ca/yonas.legesse/drupal-recipe-unpack.git"
         }
     ],
     "require": {
@@ -107,7 +107,10 @@
         "drupal/viewsreference": "^2.0@beta",
         "drupal/webform": "^6.2@beta",
         "drush/drush": "^11",
+        "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
+        "kanopi/drupal-build-starter": "*",
+        "kanopi/gin-admin-experience": "*",
         "kanopi/shrubs": "^0.2.1",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^10",
@@ -195,7 +198,8 @@
             "npm-asset",
             "bower-asset",
             "quicksilver-script",
-            "cypress-support"
+            "cypress-support",
+            "drupal-recipe"
         ],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
@@ -209,7 +213,8 @@
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"],
-            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
+            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
+            "web/recipes/contrib/{$name}": ["type:drupal-recipe"],
         },
         "drupal-scaffold": {
             "locations": {
@@ -232,7 +237,8 @@
         "patches": {
             "drupal/core": {
                 "Adds playsinline attribute option to Video Media": "https://www.drupal.org/files/issues/2022-04-11/3046152-28.patch",
-                "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe.patch"
+                "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe.patch",
+
             },
             "drupal/obfuscate": {
                 "Link Label in Field Formatter is not working": "https://www.drupal.org/files/issues/2023-06-26/3370295-1.patch"
@@ -264,7 +270,8 @@
             "joachim-n/composer-manifest": true,
             "oomphinc/composer-installers-extender": true,
             "rvtraveller/qs-composer-installer": true,
-            "wikimedia/composer-merge-plugin": true
+            "wikimedia/composer-merge-plugin": true,
+            "ewcomposer/unpack": true
         }
     }
 }
