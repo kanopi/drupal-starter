@@ -214,7 +214,7 @@
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
-            "web/recipes/contrib/{$name}": ["type:drupal-recipe"],
+            "web/recipes/contrib/{$name}": ["type:drupal-recipe"]
         },
         "drupal-scaffold": {
             "locations": {
@@ -237,7 +237,7 @@
         "patches": {
             "drupal/core": {
                 "Adds playsinline attribute option to Video Media": "https://www.drupal.org/files/issues/2022-04-11/3046152-28.patch",
-                "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe.patch",
+                "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe.patch"
 
             },
             "drupal/obfuscate": {
