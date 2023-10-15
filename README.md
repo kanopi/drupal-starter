@@ -1,5 +1,6 @@
 # [Drupal Starter](https://example.com/)
-This is the Drupal Composer Project with docksal configuration to easily get a site started.
+This is the Drupal Composer Project with docksal configuration to easily get a
+site started.
 
 Features:
 
@@ -8,7 +9,8 @@ Features:
 - Basic CircleCI configuration
 - Project Readme
 
-Please make this README as project specific as possible. Delete the things that are not relevant or add new sections as needed.
+Please make this README as project specific as possible. Delete the things that
+are not relevant or add new sections as needed.
 
 ### Pantheon setup
 
@@ -34,7 +36,9 @@ This repo is Pantheon specific at the moment
 
 * Click on Add organization
 
-* Search for Kanopi Studios (Important: enter the full term (Kanopi Studios) to find this - if you just enter Kanopi, you will end up with the wrong group and things will not work).
+* Search for Kanopi Studios (Important: enter the full term (Kanopi Studios) to
+find this - if you just enter Kanopi, you will end up with the wrong group and
+things will not work).
 
 * Select and add Kanopi Studios.
 
@@ -44,7 +48,8 @@ This repo is Pantheon specific at the moment
 
 * Click on "Use this template" button.
 
-* Make the owner Kanopi and the repo private, then click "Create repository from template"
+* Make the owner Kanopi and the repo private, then click "Create repository from
+ template"
 
 * In the new repo, click on Settings and then the Manage Access tab.
 
@@ -110,17 +115,18 @@ This repo is Pantheon specific at the moment
 
 * Create a PR in github.
 
-* Circleci won't run this time because we haven't set it up yet.
-We need to commit the project-specific circleci config.yml first so we can setup circleci later.
+* CircleCI won't run this time because we haven't set it up yet.
+We need to commit the project-specific CircleCI config.yml first so we can setup
+ CircleCI later.
 
-* Merge PR (now we have our project-specific circleci config
-on the main branch so we can reference it from circleci).
+* Merge PR (now we have our project-specific CircleCI config
+on the main branch so we can reference it from CircleCI).
 Circleci job will still not happen.
 
 #### Circleci project setup
 
 * Go to
-[circleci](https://app.circleci.com/projects/project-dashboard/github/kanopi/)
+[CircleCI](https://app.CircleCI.com/projects/project-dashboard/github/kanopi/)
 
 * Find your new project repo and click the "Set Up Project" button.
 
@@ -134,23 +140,29 @@ Circleci job will still not happen.
 
 #### Drupal setup
 
-* Enable the following modules:
-`fin drush en components emulsify_twig admin_toolbar twig_tweak redis pantheon_advanced_page_cache -y; fin drush then gin -y; fin drush config:set system.theme admin gin -y; fin drush rcrt 'administrator' 'administrator' -y;`
-* Set config export path in `settings.php` to `$settings['config_sync_directory'] = '../config/';`
-* Export config.
+* Apply and unpack the theme and build recipes:
+* * `fin recipe-apply gin-admin-experience`
+* * `fin drush cex -y`
+* * `fin recipe-unpack kanopi/gin-admin-experience`
+* * Commit your changes. NOTE: The recipe will be removed from the site's
+composer.json, but the dependencies will be added/updated.
+* * `fin recipe-apply drupal-build-starter`
+* * `fin drush cex -y`
+* * `fin recipe-unpack kanopi/drupal-build-starter`
+* * Commit your changes.
 * On a development branch, git add, commit and push all local changes.
 * Submit a PR on github.
-* Validate circleci job and multidev.
+* Validate CircleCI job and multidev.
 * Merge PR.
-* Validate circleci job and Dev site.
+* Validate CircleCI job and Dev site.
 * In your local, checkout and pull main branch.
-* Creat new development branch.
-* Uncomment the redis config in `web/sites/default/settings.php`.
+* Create a new development branch.
+* Uncomment the Redis config in `/assets/pantheon_setting_defaults.inc`.
 * Git add, commit and push the change.
 * Submit a PR in the github repo.
-* Validate circleci job and deployment to multidev.
+* Validate CircleCI job and deployment to multidev.
 * Merge the PR.
-* Validate circleci job deployment and Pantheon Dev site.
+* Validate CircleCI job deployment and Pantheon Dev site.
 
 ## Important links
 
@@ -222,7 +234,8 @@ The theme uses Webpack and NPM to manage packages and run scripts.
 
 #### Storybook Webpack
 For webpack storybook to work within a docksal container we needed
-to set `watchOptions` in `docroot/themes/custom/THEME/.storybook/webpack.config.js`
+to set `watchOptions` in
+`docroot/themes/custom/THEME/.storybook/webpack.config.js`
 ```
 config.watchOptions = {
   aggregateTimeout: 200,
