@@ -244,9 +244,6 @@
             },
             "drupal/redirect": {
                 "Setting 'Enforce clean and canonical URLs.' breaks CSS aggregation on multilingual Drupal 10.1.x with browser caching enabled": "https://www.drupal.org/files/issues/2023-07-20/3373123_redirect-7.patch"
-            },
-            "drupal/search_api_autocomplete": {
-                "Undefined constant Drupal\\\\search_api_solr\\\\SolrBackendInterface::SEARCH_API_SOLR_SCHEMA_VERSION": "https://www.drupal.org/files/issues/2023-08-22/3382226-3.patch"
             }
         },
         "merge-plugin": {
