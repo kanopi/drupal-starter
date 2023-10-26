@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
-#: exec_target = cli
-
 ## Create and configure the migration database.
 ##
-## Usage: fin migrate_prep_db
+## Usage: fin migrate-prep-db
 
 # Abort if anything fails
 set -e
