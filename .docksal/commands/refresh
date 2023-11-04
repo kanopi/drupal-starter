@@ -16,9 +16,6 @@ fin pull db -y --hosting-env=${ENVIRONMENT}
 
 cd ${DOCROOT_PATH}
 
-echo "Clear cache"
-fin drush cr -y
-
 echo "Update Drupal DB"
 fin drush updatedb -y
 
