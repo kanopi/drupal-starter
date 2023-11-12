@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use DrupalFinder\DrupalFinder;
-
 use DrupalRector\Set\Drupal10SetList;
 use DrupalRector\Set\Drupal8SetList;
 use DrupalRector\Set\Drupal9SetList;
@@ -16,7 +15,7 @@ return static function(RectorConfig $rectorConfig): void {
   $rectorConfig->sets([
     Drupal8SetList::DRUPAL_8,
     Drupal9SetList::DRUPAL_9,
-    //Drupal10SetList::DRUPAL_10,
+    Drupal10SetList::DRUPAL_10,
   ]);
 
   $parameters = $rectorConfig->parameters();
