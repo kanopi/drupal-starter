@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#: exec_target = cli
+
+## Remove UUIDs from config files.
+##
+## Usage: fin uuid-rm [path/to/folder]
+##
+
+# Abort if anything fails
+set -e
+
+cd "$@"
+
+echo -e "$@"
+
+FILES=*
+for f in $FILES
+do
+  echo "Processing $f file..."
+  sed -i '/^uuid:/d' $f
+  sed -i '/^_core:/d' $f
+  sed -i '/^  default_config_hash:/d' $f
+done
+
+echo -e "UUID removal complete."
