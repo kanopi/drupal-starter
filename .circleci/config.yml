@@ -7,8 +7,8 @@ CYPRESS_NODE_VERSION: &CYPRESS_NODE_VERSION "18.16.1" # Matches NVMRC file.
 CYPRESS_CIMG_PHP: &CYPRESS_CIMG_PHP "cimg/php:8.1-browsers"
 CIMG_NODE: &CIMG_NODE "cimg/node:16.16"
 CIMG_PHP: &CIMG_PHP "cimg/php:8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
-CIMG_PHP_TAG: &CIMG_PHP_TAG "8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
-
+CIMG_PHP_TAG: &CIMG_PHP_TAG "8.1.16"
+CIMG_PHP_TAG_MAJOR: &CIMG_PHP_TAG_MAJOR "8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
 
 defaults: &defaults
   docker:
@@ -23,7 +23,24 @@ defaults: &defaults
     THEME_NAME: *THEME_NAME
     DEFAULT_BRANCH: main
 
+# Adds Variable to run workflows after the build happens.
+after_build: &after_build << pipeline.parameters.run_post_build_tests >>
+
+# Adds Variable to run workflows with the build, and saves data for after_build.
+build: &build
+  not:
+    or:
+      - << pipeline.parameters.run_post_build_tests >>
+      - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+      - equal: [ api, << pipeline.trigger_source >> ]
+
 version: 2.1
+
+# Adds CircleCI parameters to run the post build tests.
+parameters:
+  run_post_build_tests:
+    type: boolean
+    default: false
 
 orbs:
   ci-tools: kanopi/ci-tools@2
@@ -32,7 +49,6 @@ orbs:
   node: circleci/node@5.0.3
 
 jobs:
-
   compile-theme:
     docker:
       # This version of node should match whats in the theme NVM setup
@@ -40,7 +56,6 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
-
       - restore_cache:
           name: Restore Node cache
           keys:
@@ -50,31 +65,29 @@ jobs:
           name: Install Node Packages.
           command: npm install
           path: *THEME_PATH
-
       - save_cache:
           name: Save node cache
           key: node_cache-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
           paths:
             - web/themes/custom/site_theme/node_modules
-
       - run:
-          name: Compile Storybook
+          name: Run Storybook Build
+          command: npm run build
           path: *THEME_PATH
-          command: npm run build-storybook
-
       - persist_to_workspace:
           root: *THEME_PATH
           paths:
             - dist
-
+      - run:
+          name: Compile Storybook
+          path: web/themes/custom/site_theme
+          command: npm run build-storybook
       - store_artifacts:
           path: web/themes/custom/site_theme/.out
           destination: storybook
-
       - ci-tools/post-artifact-to-github:
           body-title: Storybook
           search-for: storybook/index.html
-
   push_storybook:
     docker:
       - image: *CIMG_NODE
@@ -90,17 +103,14 @@ jobs:
           name: Install Storybook
           path: *THEME_PATH
           command: npm install
-
       - save_cache:
           key: theme-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
           paths:
             - web/themes/custom/site_theme/node_modules
-
       - run:
           name: Run Storybook Deploy
           path: web/themes/custom/site_theme
           command: npm run deploy-storybook
-
   cypress:
     docker:
       - image: *CYPRESS_CIMG_PHP
@@ -117,17 +127,14 @@ jobs:
       - restore_cache:
           keys:
             - drupal-{{ checksum "composer.lock" }}
-
       - run:
           name: run Composer install for Shrubs
           command: |
             composer install
-
       - save_cache:
           key: drupal-{{ checksum "composer.lock" }}
           paths:
             - vendor
-
       - ci-tools/copy-ssh-key
       - node/install:
           node-version: *CYPRESS_NODE_VERSION
@@ -138,7 +145,6 @@ jobs:
       - run:
           name: Prime Cache
           command: curl -I "${SITE_URL}"
-
       - run:
           name: Set Variables
           command: |
@@ -148,19 +154,16 @@ jobs:
                 echo "export CYPRESS_DRUSH_IS_PANTHEON='pr-${CIRCLE_PULL_REQUEST##*/}.${PANTHEON_UUID}'"
             ) >> $BASH_ENV
             source $BASH_ENV
-
       - run:
           name: Create the test user
           command: |
             ## Make it so it doesn't fail if the user already exists
             terminus -n drush "$PR_ENVIRONMENT" -- user-create cypress --mail="cypress@mailinator.com" --password="cypress" || true
             terminus -n drush "$PR_ENVIRONMENT" -- user-add-role administrator cypress || true
-
       - run:
           name: Install Cypress
           command: npm ci
           path: tests/cypress
-
       - run:
           name: Run Tests
           command: |
@@ -168,19 +171,15 @@ jobs:
             circleci tests glob cypress/e2e/**/*.cy.js | circleci tests split --split-by=timings > /tmp/tests-to-run
             ./node_modules/.bin/cypress run -s $(cat /tmp/tests-to-run)
           path: tests/cypress
-
       - run:
           when: always
           name: Generate Report
           command: npm run merge:reports
           path: tests/cypress
-
       - store_test_results:
           path: tests/cypress/cypress/junit
-
       - store_artifacts:
           path: tests/cypress/cypress/
-
   deploy-to-pantheon:
     <<: *defaults
     steps:
@@ -190,41 +189,34 @@ jobs:
           docroot: "web"
       - attach_workspace:
           at: /tmp/workspace
-
       - run:
           # Set TERMINUS_ENV and related environment variables.
           # https://github.com/pantheon-systems/docker-build-tools-ci/blob/6.x/scripts/set-environment
           name: setup-environment-vars
           command: /build-tools-ci/scripts/set-environment
-
       - restore_cache:
           keys:
             - drupal-{{ checksum "composer.lock" }}
-
       - run:
           name: run Composer setup
           command: |
             composer -n build-assets
             composer run prepare-for-pantheon
-
       - save_cache:
           key: drupal-{{ checksum "composer.lock" }}
           paths:
             - vendor
-
       - run:
           name: Copy compiled theme assets.
           environment:
             THEME_PATH: *THEME_PATH
           command: |
             cp -vr /tmp/workspace/dist "$THEME_PATH"
-
       # Deploy to Pantheon
       - run:
           name: deploy to Pantheon
           command: ./.circleci/scripts/pantheon/dev-multidev
           no_output_timeout: 1h
-
 #      - slack/notify:
 #          message: "Finished multidev build ${MULTIDEV_SITE_URL}\n
 #          Branch: *${CIRCLE_BRANCH}*\n
@@ -232,10 +224,12 @@ jobs:
 #          include_job_number_field: false
 #          include_project_field: false
 #          webhook: https://hooks.slack.com/services/T02BTKQ5F/B0225B1RPV1/9999111100000
+      - ci-tools/trigger-pipeline:
+          parameters: '{"run_post_build_tests":true}'
 
 workflows:
-  version: 2
   Storybook:
+    when: *build
     jobs:
       - push_storybook:
           context: kanopi-code
@@ -243,6 +237,7 @@ workflows:
             branches:
               only: main
   PHPstan:
+    when: *build
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -258,6 +253,7 @@ workflows:
               ignore:
                 - main
   PHPcs:
+    when: *build
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -273,6 +269,7 @@ workflows:
               ignore:
                 - main
   Rector - modules:
+    when: *build
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -288,6 +285,7 @@ workflows:
               ignore:
                 - main
   Rector - themes:
+    when: *build
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -302,10 +300,8 @@ workflows:
             branches:
               ignore:
                 - main
-  build_deploy_and_test:
-    when:
-      not:
-        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+  Deployment:
+    when: *build
     jobs:
       - compile-theme:
           context: kanopi-code
@@ -316,6 +312,32 @@ workflows:
               ignore: /^dependabot/
           requires:
             - compile-theme
+  Cypress:
+    when: *after_build
+    jobs:
+      - cypress:
+          context: kanopi-code
+          pre-steps:
+            - ci-tools/set-pantheon-url
+          filters:
+            branches:
+              ignore:
+                - main
+          post-steps:
+            ## Do two different GitHub posts to capture passes/fails separately.
+            - ci-tools/post-artifact-to-github:
+                when: 'on_fail'
+                body-prefix: ":x: Test runner: **$CIRCLE_NODE_INDEX / $CIRCLE_NODE_TOTAL** "
+                body-title: "Failing Cypress Run"
+                search-for: "results/mocha-report/mochawesome.html"
+            - ci-tools/post-artifact-to-github:
+                when: 'on_success'
+                body-prefix: ":white_check_mark: Test runner: **$CIRCLE_NODE_INDEX / $CIRCLE_NODE_TOTAL** "
+                body-title: "Passing Cypress Run"
+                search-for: "results/mocha-report/mochawesome.html"
+  Lighthouse - home:
+    when: *after_build
+    jobs:
       - ci-tools/lighthouse:
           context: kanopi-code
           pre-steps:
@@ -323,8 +345,6 @@ workflows:
                 site-id: *TERMINUS_SITE
                 store-as: LIGHTHOUSE_URL
           url: "${LIGHTHOUSE_URL}"
-          requires:
-            - deploy-to-pantheon
           post-steps:
             - ci-tools/post-to-github-commit:
                 body: '@$(ls /opt/reports/*/comment.txt)'
@@ -333,6 +353,9 @@ workflows:
             branches:
               ignore:
                 - main
+  Pa11y:
+    when: *after_build
+    jobs:
       - ci-tools/pa11y:
           context: kanopi-code
           urls: "${PR_ENV_URL}"
@@ -346,90 +369,67 @@ workflows:
             - ci-tools/post-to-github-commit:
                 body: '@/tmp/pa11y-ci-results.txt'
                 when: 'on_fail'
-          requires:
-            - deploy-to-pantheon
           filters:
             branches:
               ignore:
                 - main
-      - ci-tools/sdtt:
-          context: kanopi-code
-          url: "${PR_ENV_URL}"
-          requires:
-            - deploy-to-pantheon
-          # Replace the primary URL with a Pantheon multidev URL.
-          pre-steps:
-            - ci-tools/set-pantheon-url:
-                site-id: *TERMINUS_SITE
-                store-as: PR_ENV_URL
-          # Posts a link to the report to the PR.
-          post-steps:
-            - ci-tools/post-artifact-to-github:
-                body-prefix: "Click here to view the report:"
-                body-title: "❌ Structured Data Testing Tool failure - Homepage"
-                search-for: tmp/sdtt-results.txt
-                when: 'on_fail'
-          filters:
-            branches:
-              ignore:
-                - main
-      - cypress:
-          context: kanopi-code
-          pre-steps:
-            - ci-tools/set-pantheon-url
-          requires:
-            - deploy-to-pantheon
-          filters:
-            branches:
-              ignore:
-                - main
-          post-steps:
-            ## Do two different GitHub posts to capture passes/fails separately.
-            - ci-tools/post-artifact-to-github:
-                when: 'on_fail'
-                body-prefix: ":x: Cypress test runner: **$((CIRCLE_NODE_INDEX++)) / $CIRCLE_NODE_TOTAL** "
-                body-title: "Failing Cypress Run"
-                search-for: "results/mocha-report/mochawesome.html"
-            - ci-tools/post-artifact-to-github:
-                when: 'on_success'
-                body-prefix: ":white_check_mark: Test runner: **$((CIRCLE_NODE_INDEX++)) / $CIRCLE_NODE_TOTAL** "
-                body-title: "Passing Cypress Run"
-                search-for: "results/mocha-report/mochawesome.html"
-
-      - ci-tools/backstopjs:
-          context: kanopi-code
-          # Defines the pages, and gives them a label.
-          # It is a comma separated list.
-          # Add as many as you need.
-          # urls: '/|Homepage,/style-guide|Style Guide'
-          # URLs now loaded in backstop.json from the project's root.
-          # Load additional configuration from the backstop.json file.
-          # See https://github.com/garris/BackstopJS#advanced-scenarios.
-          advanced-config: true
-          # Sets the URL to test to be the Pantheon multidev.
-          search-find: 'TEST_URL'
-          search-replace: '${TEST_URL}'
-          pre-steps:
-            - ci-tools/set-pantheon-url:
-                site-id: *TERMINUS_SITE
-                store-as: TEST_URL
-            - ci-tools/set-pantheon-url:
-                site-id: *TERMINUS_SITE
-                site-env: "dev"
-                store-as: REFERENCE_URL
-          # Posts a link to the report to the PR.
-          post-steps:
-            - ci-tools/post-artifact-to-github:
-                body-prefix: "❌ There was a failure. Click here to view the report:"
-                body-title: BackstopJS
-                search-for: html_report/index.html
-                when: 'on_fail'
-          requires:
-            - deploy-to-pantheon
-          # Don't run it on main because that is the URL it tests against.
-          filters:
-            branches:
-              ignore: main
+#  Structured data testing tool:
+#    when: *after_build
+#    jobs:
+#      - ci-tools/sdtt:
+#          context: kanopi-code
+#          url: "${PR_ENV_URL}"
+#          # Replace the primary URL with a Pantheon multidev URL.
+#          pre-steps:
+#            - ci-tools/set-pantheon-url:
+#                site-id: *TERMINUS_SITE
+#                store-as: PR_ENV_URL
+#          # Posts a link to the report to the PR.
+#          post-steps:
+#            - ci-tools/post-artifact-to-github:
+#                body-prefix: "Click here to view the report:"
+#                body-title: "❌ Structured Data Testing Tool failure - Homepage"
+#                search-for: tmp/sdtt-results.txt
+#                when: 'on_fail'
+#          filters:
+#            branches:
+#              ignore:
+#                - main
+#  Backstop visual regression:
+#    when: *after_build
+#    jobs:
+#      - ci-tools/backstopjs:
+#          context: kanopi-code
+#          # Defines the pages, and gives them a label.
+#          # It is a comma separated list.
+#          # Add as many as you need.
+#          # urls: '/|Homepage,/style-guide|Style Guide'
+#          # URLs now loaded in backstop.json
+#          # Load additional configuration from the backstop.json file.
+#          # See https://github.com/garris/BackstopJS#advanced-scenarios.
+#          advanced-config: true
+#          # Sets the URL to test to be the Pantheon multidev.
+#          search-find: 'TEST_URL'
+#          search-replace: '${TEST_URL}'
+#          pre-steps:
+#            - ci-tools/set-pantheon-url:
+#                site-id: *TERMINUS_SITE
+#                store-as: TEST_URL
+#            - ci-tools/set-pantheon-url:
+#                site-id: *TERMINUS_SITE
+#                site-env: "dev"
+#                store-as: REFERENCE_URL
+#          # Posts a link to the report to the PR.
+#          post-steps:
+#            - ci-tools/post-artifact-to-github:
+#                body-prefix: "❌ There was a failure. Click here to view the report:"
+#                body-title: BackstopJS
+#                search-for: html_report/index.html
+#                when: 'on_fail'
+#          # Don't run it on main because that is the url it tests against.
+#          filters:
+#            branches:
+#              ignore: main
   # Runs composer updates at midnight every day.
   # Exports configuration and commits.
   # Pushes to a single branch and makes pull requests on GitHub.
