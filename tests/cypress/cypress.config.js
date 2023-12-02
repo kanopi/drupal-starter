@@ -8,6 +8,11 @@ module.exports = defineConfig({
     configFile: "reporter-config.json",
   },
 
+  video: true,
+
+  viewportWidth: 1350,
+  viewportHeight: 940,
+
   e2e: {
     responseTimeout: 20000,
     setupNodeEvents(on, config) {
