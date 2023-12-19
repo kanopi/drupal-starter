@@ -85,6 +85,8 @@ things will not work).
         project to production it should be changed to `live`
         * Run `fin install-kdcl-basic` after you have set the
         theme name that you want.
+        * Add the following: `VIRTUAL_HOST=${hostingsite}.docksal.site`
+
     * settings.php
         * `.docksal/etc/conf/settings.php` is used for
         the local settings file for drupal.
