@@ -96,6 +96,7 @@ ensure_utils () {
 mkdir -p ~/tmp
 chmod 755 ~/tmp
 sudo localedef -i en_US -f UTF-8 en_US.UTF-8
+sudo rm /etc/apt/sources.list.d/blackfire.list || true
 
 # Project initialization steps
 init_code
