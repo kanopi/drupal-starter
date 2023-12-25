@@ -1,6 +1,6 @@
 {
     "name": "kanopi/drupal-starter",
-    "description": "Project template for Drupal 9 projects with composer and docksal",
+    "description": "Project template for modern Drupal projects with composer and docksal",
     "type": "project",
     "license": "GPL-2.0+",
     "authors": [
@@ -11,6 +11,10 @@
         {
             "name": "Paul Sheldrake <paul@kanopi.com>",
             "role": "Trouble Maker"
+        },
+        {
+            "name": "Jim Birch <jim@kanopi.com>",
+            "role": "Custodian"
         }
     ],
     "repositories": [
@@ -28,97 +32,21 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
-        "composer/installers": "^1.10",
-        "cweagans/composer-patches": "^1.6",
-        "drupal/access_unpublished": "^1.5",
-        "drupal/address": "^1.12",
-        "drupal/admin_toolbar": "^3.0",
-        "drupal/allowed_formats": "^3.0",
-        "drupal/better_exposed_filters": "^6.0",
-        "drupal/block_class": "^2.0",
-        "drupal/checklistapi": "^2",
-        "drupal/components": "^3.0@beta",
-        "drupal/config_filter": "^2.2",
-        "drupal/config_split": "^2",
-        "drupal/core-composer-scaffold": "^10.0",
-        "drupal/core-recommended": "^10.0",
-        "drupal/core-vendor-hardening": "^10.0",
-        "drupal/critical_css": "^1.19",
-        "drupal/ctools": "^3.7",
-        "drupal/diff": "^1.1",
-        "drupal/easy_breadcrumb": "^2.0",
-        "drupal/editor_advanced_link": "^2.0",
-        "drupal/emulsify_twig": "^4.0",
-        "drupal/entity_usage": "^2.0@beta",
-        "drupal/entityqueue": "^1.7",
-        "drupal/environment_indicator": "^4.0",
-        "drupal/environment_indicator_ribbon": "^1.0",
-        "drupal/facets": "^2.0",
-        "drupal/fancy_file_delete": "^2.0",
-        "drupal/field_group": "^3.1",
-        "drupal/focal_point": "^2.0",
-        "drupal/gin": "^3.0@RC",
-        "drupal/gin_login": "^2.0",
-        "drupal/gin_toolbar": "^1.0@RC",
-        "drupal/google_tag": "^2.0",
-        "drupal/key": "^1.17",
-        "drupal/launch_checklist": "^1.1",
-        "drupal/media_library_edit": "^3.0",
-        "drupal/menu_link_attributes": "^1.2",
-        "drupal/metatag": "^2.0",
-        "drupal/mimemail": "^1.0@alpha",
-        "drupal/nomarkup": "^1.0",
-        "drupal/obfuscate": "2.0.x-dev@dev",
-        "drupal/oembed_providers": "^2.1",
-        "drupal/pantheon_advanced_page_cache": "^2.0",
-        "drupal/paragraphs": "^1.16",
-        "drupal/paragraphs_edit": "^3.0",
-        "drupal/pathauto": "^1.8",
-        "drupal/quick_node_clone": "^1.16",
-        "drupal/rabbit_hole": "^1.0@beta",
-        "drupal/redirect": "^1.9",
-        "drupal/redis": "^1.5",
-        "drupal/resource_hints": "1.x-dev",
-        "drupal/responsive_tables_filter": "^1.18",
-        "drupal/scheduler": "^2.0",
-        "drupal/scheduler_content_moderation_integration": "^2.0@beta",
-        "drupal/schema_metatag": "^3.0",
-        "drupal/search_api": "^1.29",
-        "drupal/search_api_autocomplete": "^1.7",
-        "drupal/search_api_pantheon": "^8.1",
-        "drupal/search_api_solr": "^4.3",
-        "drupal/seckit": "^2.0",
-        "drupal/sendgrid_integration": "^2.2",
-        "drupal/seo_checklist": "^5.2",
-        "drupal/seo_starter": "1.x-dev",
-        "drupal/simple_sitemap": "^4",
-        "drupal/sitemap": "^2.0",
-        "drupal/smart_date": "^4.0",
-        "drupal/token_or": "^2.1",
-        "drupal/twig_tweak": "^3.2",
-        "drupal/twig_vardumper": "^3.1",
-        "drupal/view_unpublished": "^1.1",
-        "drupal/views_bulk_edit": "^2.9",
-        "drupal/views_bulk_operations": "^4.1",
-        "drupal/views_data_export": "^1.3",
-        "drupal/views_infinite_scroll": "^2.0",
-        "drupal/viewsreference": "^2.0@beta",
-        "drupal/webform": "^6.2@beta",
-        "drush/drush": "^11",
+        "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7.3",
+        "drupal/core-composer-scaffold": "^10.2",
+        "drupal/core-recommended": "^10.2",
+        "drupal/core-vendor-hardening": "^10.2",
+        "drush/drush": "^12.4.3",
         "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
-        "kanopi/drupal-build-starter": "*",
-        "kanopi/gin-admin-experience": "*",
-        "kanopi/shrubs": "^0.2.1",
+        "kanopi/shrubs": "^0.2.5",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^10",
         "rvtraveller/qs-composer-installer": "^1.1",
-        "webflo/drupal-finder": "^1.0.0",
-        "webmozart/path-util": "^2.3"
     },
     "require-dev": {
-        "drupal/core-dev": "^10.1",
+        "drupal/core-dev": "^10.2",
         "drupal/upgrade_status": "^4.0",
         "palantirnet/drupal-rector": "^0.18"
     },
@@ -198,6 +126,7 @@
             "bower-asset",
             "quicksilver-script",
             "cypress-support",
+            "cypress-e2e",
             "drupal-recipe"
         ],
         "installer-paths": {
@@ -207,13 +136,14 @@
                 "type:bower-asset",
                 "type:npm-asset"
             ],
-            "tests/cypress/cypress/support/{$name}": ["type:cypress-support"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"],
+            "tests/cypress/cypress/support/{$name}": ["type:cypress-support"],
+            "tests/cypress/cypress/e2e/{$name}": ["type:cypress-e2e"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
-            "web/recipes/contrib/{$name}": ["type:drupal-recipe"]
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/recipes/contrib/{$name}": ["type:drupal-recipe"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"]
         },
         "drupal-scaffold": {
             "locations": {
@@ -235,21 +165,8 @@
         },
         "patches": {
             "drupal/core": {
-                "Adds playsinline attribute option to Video Media": "https://www.drupal.org/files/issues/2022-04-11/3046152-28.patch",
-                "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe.patch"
-
-            },
-            "drupal/obfuscate": {
-                "Link Label in Field Formatter is not working": "https://www.drupal.org/files/issues/2023-06-26/3370295-1.patch"
-            },
-            "drupal/redirect": {
-                "Setting 'Enforce clean and canonical URLs.' breaks CSS aggregation on multilingual Drupal 10.1.x with browser caching enabled": "https://www.drupal.org/files/issues/2023-07-20/3373123_redirect-7.patch"
+                "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe-10.2.x.patch"
             }
-        },
-        "merge-plugin": {
-            "include": [
-                "web/modules/contrib/webform/composer.libraries.json"
-            ]
         }
     },
     "config": {
@@ -266,7 +183,6 @@
             "joachim-n/composer-manifest": true,
             "oomphinc/composer-installers-extender": true,
             "rvtraveller/qs-composer-installer": true,
-            "wikimedia/composer-merge-plugin": true,
             "ewcomposer/unpack": true
         }
     }
