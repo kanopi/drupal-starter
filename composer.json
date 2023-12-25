@@ -32,7 +32,7 @@
         }
     ],
     "require": {
-        "composer/installers": "^2.0",
+        "composer/installers": "*",
         "cweagans/composer-patches": "^1.7.3",
         "drupal/core-composer-scaffold": "^10.2",
         "drupal/core-recommended": "^10.2",
@@ -183,7 +183,8 @@
             "joachim-n/composer-manifest": true,
             "oomphinc/composer-installers-extender": true,
             "rvtraveller/qs-composer-installer": true,
-            "ewcomposer/unpack": true
+            "ewcomposer/unpack": true,
+            "php-http/discovery": true
         }
     }
 }
