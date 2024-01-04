@@ -21,7 +21,7 @@ $settings['file_chmod_file'] = 0666;
 // Skip file system permissions hardening.
 $settings['skip_permissions_hardening'] = TRUE;
 
-// Local dev caching
+// Disable local development caching.
 $settings['cache']['bins']['render'] = 'cache.backend.null';
 $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
 $settings['cache']['bins']['page'] = 'cache.backend.null';
@@ -30,14 +30,17 @@ $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml'
 // Set Trusted Host Patterns to any.
 $settings['trusted_host_patterns'][] = '.*';
 
-$config['minifyhtml.config']['strip_comments'] = FALSE;
-$config['minifyhtml.config']['minify'] = FALSE;
+// Override ClamAV settings.
+$config['clamav.settings']['enabled'] = FALSE;
 
 // "Allow Insecure Derivatives" for webp images working locally.
 $config['image.settings']['allow_insecure_derivatives'] = TRUE;
 
+// Disable minifyHTML settings.
+$config['minifyhtml.config']['strip_comments'] = FALSE;
+$config['minifyhtml.config']['minify'] = FALSE;
 
-// Override pantheon solr config
+// Override pantheon solr configuration.
 $config['search_api.server.pantheon_solr8']['backend_config']['connector'] = 'standard';
 $config['search_api.server.pantheon_solr8']['backend_config']['connector_config'] = [
   "scheme" => "http",
@@ -58,11 +61,9 @@ $config['search_api.server.pantheon_solr8']['backend_config']['connector_config'
   "solr_install_dir" => "",
 ];
 
-/**
- * Disable CSS and JS aggregation.
- */
-$config['system.performance']['css']['preprocess'] = FALSE;
-$config['system.performance']['js']['preprocess'] = FALSE;
-
 // Override Security Kit (seckit) Settings.
 $config['seckit.settings']['seckit_csrf']['origin'] = FALSE;
+
+// Disable CSS and JS aggregation.
+$config['system.performance']['css']['preprocess'] = FALSE;
+$config['system.performance']['js']['preprocess'] = FALSE;
