@@ -41,6 +41,12 @@ fin composer config allow-plugins.ewcomposer/unpack true
 fin composer config repo.recipe-unpack vcs https://gitlab.ewdev.ca/yonas.legesse/drupal-recipe-unpack.git
 fin composer require ewcomposer/unpack:1.x-dev@dev
 
+# Update .gitignore
+echo -e "\n${yellow} Update your .gitignore file manually and add the following: ${NC}"
+echo -e "/web/recipes/.gitignore"
+echo -e "/web/recipes/contrib/"
+echo -e "${green}${divider}${NC}"
+
 # Complete
 echo -e "\n${yellow} ${party} Your project is now ready to apply recipes! ${reverseparty}${NC}"
 echo -e "Run ${yellow}${require_command}${NC} to require a recipe."
