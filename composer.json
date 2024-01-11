@@ -49,7 +49,7 @@
         "drupal/core-dev": "^10.2",
         "drupal/devel": "^5.1",
         "drupal/upgrade_status": "^4.0",
-        "palantirnet/drupal-rector": "^0.18"
+        "palantirnet/drupal-rector": "^0.19"
     },
     "conflict": {
         "drupal/drupal": "*"
