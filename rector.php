@@ -18,8 +18,6 @@ return static function(RectorConfig $rectorConfig): void {
     Drupal10SetList::DRUPAL_10,
   ]);
 
-  $parameters = $rectorConfig->parameters();
-
   $drupalFinder = new DrupalFinder();
   $drupalFinder->locateRoot(__DIR__);
   $drupalRoot = $drupalFinder->getDrupalRoot();
@@ -43,5 +41,4 @@ return static function(RectorConfig $rectorConfig): void {
   ]);
   $rectorConfig->importNames(TRUE, FALSE);
   $rectorConfig->importShortClasses(FALSE);
-  $parameters->set('drupal_rector_notices_as_comments', TRUE);
 };
