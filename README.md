@@ -155,6 +155,15 @@ This repo is Pantheon specific at the moment
 - Validate CircleCI job and Dev site.
 - In your local, checkout and pull main branch.
 - Create a new development branch.
+- - `fin drush en -y redis`
+- - `fin drush cex -y`
+- Git add, commit and push the change.
+- Submit a PR in the github repo.
+- Validate CircleCI job and deployment to multidev.
+- Merge the PR.
+- Validate CircleCI job deployment and Pantheon Dev site.
+- In your local, checkout and pull main branch.
+- Create a new development branch.
 - Uncomment the Redis config in `/assets/pantheon_setting_defaults.inc`.
 - Git add, commit and push the change.
 - Submit a PR in the github repo.
