@@ -1,4 +1,5 @@
 # [Drupal Starter](https://example.com/)
+
 This is the Drupal Composer Project with docksal configuration to easily get a
 site started.
 
@@ -18,161 +19,158 @@ This repo is Pantheon specific at the moment
 
 #### Create the project in Pantheon
 
-* Create a new drupal **10** project.
-![Create a new drupal 10 project](https://github.com/kanopi/drupal-starter/assets/7685811/a1926875-951d-473a-bf0f-146abf3ad1eb)
+- Create a new drupal **10** project.
+  ![Create a new drupal 10 project](https://github.com/kanopi/drupal-starter/assets/7685811/a1926875-951d-473a-bf0f-146abf3ad1eb)
 
-* Create a minimal site install
+- Create a minimal site install
   ![Create a minimal site install](https://user-images.githubusercontent.com/1062456/130299368-effbdab3-87ec-435b-812a-cb5d50b1c430.png)
 
-* Set the basic details for the site
+- Set the basic details for the site
   ![Set the basic details for the site](https://user-images.githubusercontent.com/1062456/130299369-e102b080-f94b-45ce-a706-08392e075c1a.png)
 
-* Add Redis to the project
-![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
+- Add Redis to the project
+  ![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
 
-* Go to the Pantheon dashboard for your project.
+- Go to the Pantheon dashboard for your project.
 
-* Click on the Team tab.
+- Click on the Team tab.
 
-* Click on Add organization
+- Click on Add organization
 
-* Search for Kanopi Studios (Important: enter the full term (Kanopi Studios) to
-find this - if you just enter Kanopi, you will end up with the wrong group and
-things will not work).
+- Search for Kanopi Studios (Important: enter the full term (Kanopi Studios) to
+  find this - if you just enter Kanopi, you will end up with the wrong group and
+  things will not work).
 
-* Select and add Kanopi Studios.
-
+- Select and add Kanopi Studios.
 
 #### Create project's Github repo
-* Go to [https://github.com/kanopi/drupal-starter](https://github.com/kanopi/drupal-starter)
 
-* Click on "Use this template" button.
+- Go to [https://github.com/kanopi/drupal-starter](https://github.com/kanopi/drupal-starter)
 
-* Make the owner Kanopi and the repo private, then click "Create repository from
- template"
+- Click on "Use this template" button.
 
-* In the new repo, click on Settings and then the Manage Access tab.
+- Make the owner Kanopi and the repo private, then click "Create repository from
+  template"
 
-* Click on "Invite teams or people" button.
+- In the new repo, click on Settings and then the Manage Access tab.
 
-* Search for and add Kanopi Studios and grant them Read access.
+- Click on "Invite teams or people" button.
 
-* Click on "Add kanopicode to this repository"
+- Search for and add Kanopi Studios and grant them Read access.
 
-* Still in Settings, click on the Branches tab.
+- Click on "Add kanopicode to this repository"
 
-* Click on Add Rule.
+- Still in Settings, click on the Branches tab.
 
-* Make Branch name pattern match your default branch (e.g., main).
+- Click on Add Rule.
 
-* Select "Require pull request reviews before merging"
+- Make Branch name pattern match your default branch (e.g., main).
 
-* Click Create button
+- Select "Require pull request reviews before merging"
+
+- Click Create button
 
 #### Update the files to be project specific
 
-* Clone the new repo to your local.
+- Clone the new repo to your local.
 
-* Create a development branch.
+- Create a development branch.
 
-* Make the project specific changes listed below.
+- Make the project specific changes listed below.
 
-* Docksal
-    * docksal.env
-        * Update `hostingsite` to the machine name of the project in Pantheon
-        * Update `THEME` to the name of the theme folder
-        * `hostingenv` is set to `dev` to start but when you release the
-        project to production it should be changed to `live`
-        * Run `fin install-kdcl-basic` after you have set the
-        theme name that you want.
-    * settings.php
-        * `.docksal/etc/conf/settings.php` is used for
-        the local settings file for drupal.
-    * vhost-overrides.conf
-        * `.docksal/etc/nginx/vhost-overrides.conf`
-        * Update the proxy url to use the pantheon machine name
-         for the site you just created.
-    * .pa11yci.js
-        * Update the urls you would like to test in the array
-        * Update README's pally section with the links to the correct urls.
-* CircleCI
-    * `config.yml`
-        * Update the `TERMINUS_SITE` variable in line 2
-        to your Pantheon machine name for the project.
-        * Update the `THEME_NAME` variable in line 3
-        to the folder name for your custom theme.
-        * Update paths in JSON lock files in theme
-        * If you would like Slack notifications when builds complete
-        uncomment the slack portion.
-        You will need to create a new CircleCI slack integration
-        for the channel you want to post updates too & update the webhook URL.
+- Docksal
+  - docksal.env
+    - Update `hostingsite` to the machine name of the project in Pantheon
+    - Update `THEME` to the name of the theme folder
+    - `hostingenv` is set to `dev` to start but when you release the
+      project to production it should be changed to `live`
+    - Run `fin install-kdcl-basic` after you have set the
+      theme name that you want.
+  - settings.php
+    - `.docksal/etc/conf/settings.php` is used for
+      the local settings file for drupal.
+  - vhost-overrides.conf
+    - `.docksal/etc/nginx/vhost-overrides.conf`
+    - Update the proxy url to use the pantheon machine name
+      for the site you just created.
+  - .pa11yci.js
+    - Update the urls you would like to test in the array
+    - Update README's pally section with the links to the correct urls.
+- CircleCI
 
-* Run `fin init` to validate your local site.
+  - `config.yml`
+    - Update the `TERMINUS_SITE` variable in line 2
+      to your Pantheon machine name for the project.
+    - Update the `THEME_NAME` variable in line 3
+      to the folder name for your custom theme.
+    - Update paths in JSON lock files in theme
+    - If you would like Slack notifications when builds complete
+      uncomment the slack portion.
+      You will need to create a new CircleCI slack integration
+      for the channel you want to post updates too & update the webhook URL.
 
-* Run `fin drush cex -y`
+- Run `fin init` to validate your local site.
 
-* On a development branch, git add, commit and push all local changes.
+- Run `fin drush cex -y`
 
-* Create a PR in github.
+- On a development branch, git add, commit and push all local changes.
 
-* CircleCI won't run this time because we haven't set it up yet.
-We need to commit the project-specific CircleCI config.yml first so we can setup
- CircleCI later.
+- Create a PR in github.
 
-* Merge PR (now we have our project-specific CircleCI config
-on the main branch so we can reference it from CircleCI).
-Circleci job will still not happen.
+- CircleCI won't run this time because we haven't set it up yet.
+  We need to commit the project-specific CircleCI config.yml first so we can setup
+  CircleCI later.
+
+- Merge PR (now we have our project-specific CircleCI config
+  on the main branch so we can reference it from CircleCI).
+  Circleci job will still not happen.
 
 #### Circleci project setup
 
-* Go to
-[CircleCI](https://app.CircleCI.com/projects/project-dashboard/github/kanopi/)
+- Go to
+  [CircleCI](https://app.CircleCI.com/projects/project-dashboard/github/kanopi/)
 
-* Find your new project repo and click the "Set Up Project" button.
+- Find your new project repo and click the "Set Up Project" button.
 
-* Select the branch name option and select the main branch,
- and click on the "Lets go" button.
+- Select the branch name option and select the main branch,
+  and click on the "Lets go" button.
 
-* Click on the gear for the project and click on the Advanced Settings tab.
+- Click on the gear for the project and click on the Advanced Settings tab.
 
-* Enable "Only build pull request" and "Auto Cancel Builds" options.
-[Update settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
+- Enable "Only build pull request" and "Auto Cancel Builds" options.
+  [Update settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
 
 #### Drupal setup
 
-* Apply and unpack the theme and build recipes:
-* * `fin recipe-apply gin-admin-experience`
-* * `fin drush cex -y`
-* * `fin recipe-unpack kanopi/gin-admin-experience`
-* * Commit your changes. NOTE: The recipe will be removed from the site's
-composer.json, but the dependencies will be added/updated.
-* * `fin recipe-apply drupal-build-starter`
-* * `fin drush cex -y`
-* * `fin recipe-unpack kanopi/drupal-build-starter`
-* * Commit your changes.
-* On a development branch, git add, commit and push all local changes.
-* Submit a PR on github.
-* Validate CircleCI job and multidev.
-* Merge PR.
-* Validate CircleCI job and Dev site.
-* In your local, checkout and pull main branch.
-* Create a new development branch.
-* Uncomment the Redis config in `/assets/pantheon_setting_defaults.inc`.
-* Git add, commit and push the change.
-* Submit a PR in the github repo.
-* Validate CircleCI job and deployment to multidev.
-* Merge the PR.
-* Validate CircleCI job deployment and Pantheon Dev site.
+- Apply and unpack the theme and build recipes:
+- - `fin composer require kanopi/saplings:^0.1.28`
+- - `fin recipe-apply saplings`
+- - `fin drush cex -y`
+- - `fin recipe-unpack kanopi/saplings`
+- - Commit your changes.
+- On a development branch, git add, commit and push all local changes.
+- Submit a PR on github.
+- Validate CircleCI job and multidev.
+- Merge PR.
+- Validate CircleCI job and Dev site.
+- In your local, checkout and pull main branch.
+- Create a new development branch.
+- Uncomment the Redis config in `/assets/pantheon_setting_defaults.inc`.
+- Git add, commit and push the change.
+- Submit a PR in the github repo.
+- Validate CircleCI job and deployment to multidev.
+- Merge the PR.
+- Validate CircleCI job deployment and Pantheon Dev site.
 
 ## Important links
 
 Please put links to the important places here.
 Imagine you know nothing about the project.
 
-* [Pantheon Dashboard]()
-* [CircleCI]()
-* [Teamwork]()
-* [Github Team]()
+- [Pantheon Dashboard]()
+- [CircleCI]()
+- [Teamwork]()
+- [Github Team]()
 
 ## Setup instructions
 
@@ -187,12 +185,10 @@ Follow [Docksal install instructions](https://docs.docksal.io/getting-started/se
 1. Clone this repo into your Projects directory.
 1. Change directory to the cloned folder.
 1. Make your own version of the `docksal-local.env` file from the example
-and add your `SECRET_TERMINUS_TOKEN` to the file.
-    * You don't need to do this if you set your token globally in Docksal
+   and add your `SECRET_TERMINUS_TOKEN` to the file. \* You don't need to do this if you set your token globally in Docksal
 1. Initialize the site with `fin init`
 1. Once the site has been initialized you'll get a url
-to go to in your browser to start dev'ing.
-
+   to go to in your browser to start dev'ing.
 
 ## Installing Modules
 
@@ -224,18 +220,20 @@ Storybook at http://storybook.${VIRTUAL_HOST}
 The theme uses Webpack and NPM to manage packages and run scripts.
 
 - @TODO
-[Hot Reloading in Drupal](https://docs.emulsify.info/usage/hot-reload-drupal)
+  [Hot Reloading in Drupal](https://docs.emulsify.info/usage/hot-reload-drupal)
 
 #### Storybook
 
 - Theme development run `fin npm run develop`. This will watch for twig, js,
- and sass changes within the components directory.
+  and sass changes within the components directory.
 - The development storybook URL http://storybook.${VIRTUAL_HOST}
 
 #### Storybook Webpack
+
 For webpack storybook to work within a docksal container we needed
 to set `watchOptions` in
 `docroot/themes/custom/THEME/.storybook/webpack.config.js`
+
 ```
 config.watchOptions = {
   aggregateTimeout: 200,
@@ -248,58 +246,59 @@ config.watchOptions = {
 The following commands are available with Node and should be prefixed with the
 command `fin npm run`.
 
-Command | Description
---------|------------
-`commit`| git-cz
-`lint`| Lint JS
-`a11y`| Run a11y on theme
-`storybook`| Start storybook
-`build-storybook`| Build static storybook
-`deploy-storybook`| Generate storybook for github pages
-`webpack`| Run webpack
-`build`| Build storybook
-`develop`| Run storybook and webpack at the same time
-`test`| Run tests
-`twatch`| Watch tests run
-`coverage`| Check test coverage
-`format`| Clean up code format
-`lint-staged`| lint-staged
-`postinstall`| Patches packages
-`criticalcss`| Compile critical CSS assets
+| Command            | Description                                |
+| ------------------ | ------------------------------------------ |
+| `commit`           | git-cz                                     |
+| `lint`             | Lint JS                                    |
+| `a11y`             | Run a11y on theme                          |
+| `storybook`        | Start storybook                            |
+| `build-storybook`  | Build static storybook                     |
+| `deploy-storybook` | Generate storybook for github pages        |
+| `webpack`          | Run webpack                                |
+| `build`            | Build storybook                            |
+| `develop`          | Run storybook and webpack at the same time |
+| `test`             | Run tests                                  |
+| `twatch`           | Watch tests run                            |
+| `coverage`         | Check test coverage                        |
+| `format`           | Clean up code format                       |
+| `lint-staged`      | lint-staged                                |
+| `postinstall`      | Patches packages                           |
+| `criticalcss`      | Compile critical CSS assets                |
 
 ## Docksal Commands
 
 The following commands are available with Docksal
 and should be prefixed with the command `fin`
 
-Command | Description
---------|------------
-`critical` | Run Critical CSS.
-`cypress` | Run Cypress inside Docksal. ie. `fin cypress open`.
-`cypress-users` | Adds users Cypress can be used to test. Called from `fin refresh`.
-`composer` | Composer wrapper that executes within the CLI container.
-`init` | Init Command that starts the project from scratch.
-`init-site` | Installs and configures Drupal.
-`install-cypress` | Called from `init` to install Cypress tools.
-`install-kdcl-basic` | Project setup theme generator.
-`install-theme-tools` | Installs tools needed for Critical, Storybook, etc.
-`migrate-prep-db` | Creates a second database to house a migration source.
-`npm` | Run NPM from the theme folder.
-`npx` | Run NPX from the theme folder.
-`open` | Opens browser to local site URL.
-`pa11y` | Runs the Pa11y accessibility tools suite locally.
-`refresh` | Will execute a drush sql-dump from the remote server.
-`share` | Opens a proxy server to your local computer using ngrok.io.
-`tickle` | Wakes up the remote migration source environment every 5 minutes.
+| Command               | Description                                                        |
+| --------------------- | ------------------------------------------------------------------ |
+| `critical`            | Run Critical CSS.                                                  |
+| `cypress`             | Run Cypress inside Docksal. ie. `fin cypress open`.                |
+| `cypress-users`       | Adds users Cypress can be used to test. Called from `fin refresh`. |
+| `composer`            | Composer wrapper that executes within the CLI container.           |
+| `init`                | Init Command that starts the project from scratch.                 |
+| `init-site`           | Installs and configures Drupal.                                    |
+| `install-cypress`     | Called from `init` to install Cypress tools.                       |
+| `install-kdcl-basic`  | Project setup theme generator.                                     |
+| `install-theme-tools` | Installs tools needed for Critical, Storybook, etc.                |
+| `migrate-prep-db`     | Creates a second database to house a migration source.             |
+| `npm`                 | Run NPM from the theme folder.                                     |
+| `npx`                 | Run NPX from the theme folder.                                     |
+| `open`                | Opens browser to local site URL.                                   |
+| `pa11y`               | Runs the Pa11y accessibility tools suite locally.                  |
+| `refresh`             | Will execute a drush sql-dump from the remote server.              |
+| `share`               | Opens a proxy server to your local computer using ngrok.io.        |
+| `tickle`              | Wakes up the remote migration source environment every 5 minutes.  |
 
 ## Composer Commands
 
 The following commands are available with Composer and
 should be prefixed with the command `fin composer`
 
-Command | Description
---------|------------
-`lint-php` | Analyzes the custom modules folder for programmatic
+| Command    | Description                                         |
+| ---------- | --------------------------------------------------- |
+| `lint-php` | Analyzes the custom modules folder for programmatic |
+
 and stylistic errors
 `code-sniff-modules` | Runs PHPcs on the custom modules folder
 `code-sniff-themes` | Runs PHPcs on the custom themes folder
@@ -308,21 +307,20 @@ and stylistic errors
 `code-fix-themes` | Runs PHPcbf on the custom themes folder
 `code-fix` | Runs `code-fix-modules` `code-fix-themes` `rector-fix` `lint-php`
 `phpstan` | PHPStan focuses on finding errors in the custom modules and
- themes folders without actually running it.
+themes folders without actually running it.
 `rector-modules` | Dry run on the custom modules folder of
 automates that checks for deprecations
 `rector-themes` | Dry run on the custom themes folder of
 automates that checks for deprecations
 `rector-fix-modules` | Automates the refactoring of deprecations
- on the custom modules folder
+on the custom modules folder
 `rector-fix-themes` | Automates the refactoring of deprecations
- on the custom themes folder
+on the custom themes folder
 `rector-fix` | Runs `rector-fix-modules` and `rector-fix-themes`
 `code-check` | Runs `phpstan` `rector-modules` `rector-themes` `code-sniff`
 `prepare-for-pantheon` | Used by CircleCI for Pantheon
 `build-assets` | Used by CircleCI for Pantheon
 `post-autoload-dump` | Used by CircleCI for Pantheon
-
 
 ### Pa11y Audits
 
@@ -336,13 +334,16 @@ If you want to change the configuration of the Pa11y tests you can edit the
 
 Note: This was cribbed from [Phase2](https://github.com/phase2/pa11y-dashboard)
 
-
 ### Robots.txt
+
 #### To append to drupal default scaffolding robots.txt
+
 - Navigate and open assets/custom-robots.txt
 - Add appended robots.txt to file
 - Run `fin composer install`
+
 #### To completely overwrite robots.txt
+
 - Open `composer.json`
 - Change the following:
   ```
@@ -363,6 +364,7 @@ Are there any projects specific quirks or setup that should be noted.
 ## Deployments
 
 ### Github to Pantheon
+
 Deployments to the dev Pantheon environment is managed through Circle CI.
 
 Pull requests will build a MultiDev environment
@@ -374,15 +376,16 @@ During development our databases are Test and Dev.
 Once we have a launched product these will change to Live, Test and Dev.
 
 ### Pantheon dev to production
+
 1. Go to the project dashboard on Pantheon.
 1. Backup databases for Test and Dev.
-    1. To accomplish this you can go to the backups tab and backup everything
-    or go to Database/Files and under Export 'export the database'.
+   1. To accomplish this you can go to the backups tab and backup everything
+      or go to Database/Files and under Export 'export the database'.
 1. Go to the environment you want to deploy to and make note of the tickets
-that are ready to deploy, document these in the deploy log message.
+   that are ready to deploy, document these in the deploy log message.
 1. Once content has been deployed clone the Test database down to Dev.
 1. Pull the database locally, make sure there are no config changes
-that need to be committed to code.
-If there are changes, commit those and deploy.
+   that need to be committed to code.
+   If there are changes, commit those and deploy.
 1. Tell the appropriate Slack channel that a deployment has taken place
-and include which tickets were deployed.
+   and include which tickets were deployed.
