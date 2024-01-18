@@ -2,7 +2,7 @@ api_version: 1
 web_docroot: true
 php_version: 8.1
 database:
-  version: 10.4
+  version: 10.6
 drush_version: 10
 build_step: false
 search:
