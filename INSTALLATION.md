@@ -69,8 +69,8 @@ things will not work).
         * Update `THEME` to the name of the theme folder
         * `hostingenv` is set to `dev` to start but when you release the
         project to production it should be changed to `live`
-        * Run `fin install-kdcl-basic` after you have set the
-        theme name that you want.
+        ~~* Run `fin install-kdcl-basic` after you have set the~~
+        ~~theme name that you want.~~
     * settings.php
         * `.docksal/etc/conf/settings.php` is used for
         the local settings file for drupal.
@@ -125,29 +125,20 @@ Circleci job will still not happen.
 [Update settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
 
 ## Drupal setup
+We have removed all opinions about which modules should be installed in Drupal.
 
-@TODO Review to make this better.
+Instead, we have created the [kanopi/saplings](https://www.github.com/kanopi/saplings)
+Drupal recipe to require, intsall, and configure the modules and content types we 
+use on most Drupal builds.  Please visit that repository to continue using that.
 
-* Apply and unpack the theme and build recipes:
-* * `fin recipe-apply gin-admin-experience`
-* * `fin drush cex -y`
-* * `fin recipe-unpack kanopi/gin-admin-experience`
-* * Commit your changes. NOTE: The recipe will be removed from the site's
-composer.json, but the dependencies will be added/updated.
-* * `fin recipe-apply drupal-build-starter`
-* * `fin drush cex -y`
-* * `fin recipe-unpack kanopi/drupal-build-starter`
-* * Commit your changes.
-* On a development branch, git add, commit and push all local changes.
-* Submit a PR on github.
-* Validate CircleCI job and multidev.
-* Merge PR.
-* Validate CircleCI job and Dev site.
-* In your local, checkout and pull main branch.
-* Create a new development branch.
-* Uncomment the Redis config in `/assets/pantheon_setting_defaults.inc`.
-* Git add, commit and push the change.
-* Submit a PR in the github repo.
-* Validate CircleCI job and deployment to multidev.
-* Merge the PR.
-* Validate CircleCI job deployment and Pantheon Dev site.
+### A note about Redis on Pantheon.
+* We enabled Redis on Pantheon in an earlier step.
+* Before it can be configure, the Drupal Redis module needs to be enabled and 
+pushed to Pantheon.  It is a two commit process.
+* Once the module has been enabled and verified on Pantheon:
+  * Uncomment the Redis config in `/assets/pantheon_setting_defaults.inc`.
+  * Git add, commit and push the change.
+  * Submit a PR in the github repo.
+  * Validate CircleCI job and deployment to multidev.
+  * Merge the PR.
+  * Validate CircleCI job deployment and Pantheon Dev site.
