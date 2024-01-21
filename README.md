@@ -55,72 +55,15 @@ Modules are installed using composer.
 The process for installing a module would be the following:
 
 ```
-fin composer require [package]
+fin composer require [organization]/[package]
 ```
 
 The standard composer command is used but with the
 Docksal specific command `fin` prepended to the beginning.
 
-## Theme
-
-The theme is based off the
-[Kanopi Design Component Library](https://github.com/kanopi/kdcl_basic)
-which uses Storybook and is originally forked from
-[Emulsify DS](https://github.com/emulsify-ds/emulsify-drupal).
-
-The theme included is located within `docroot/sites/themes/custom/THEME`.
-
-The Storybook Design System published to the `gh-pages` branch and is available
-at https://kanopi.github.io/REPO_NAME/
-
-Locally, running `fin npm run storybook` or `fin npm run build` will build the
-Storybook at http://storybook.${VIRTUAL_HOST}
-
-The theme uses Webpack and NPM to manage packages and run scripts.
-
-- @TODO
-[Hot Reloading in Drupal](https://docs.emulsify.info/usage/hot-reload-drupal)
-
-#### Storybook
-
-- Theme development run `fin npm run develop`. This will watch for twig, js,
- and sass changes within the components directory.
-- The development storybook URL http://storybook.${VIRTUAL_HOST}
-
-#### Storybook Webpack
-For webpack storybook to work within a docksal container we needed
-to set `watchOptions` in
-`docroot/themes/custom/THEME/.storybook/webpack.config.js`
-```
-config.watchOptions = {
-  aggregateTimeout: 200,
-  poll: 1000,
-}
-```
-
-### Theme Commands
-
-The following commands are available with Node and should be prefixed with the
-command `fin npm run`.
-
-Command | Description
---------|------------
-`commit`| git-cz
-`lint`| Lint JS
-`a11y`| Run a11y on theme
-`storybook`| Start storybook
-`build-storybook`| Build static storybook
-`deploy-storybook`| Generate storybook for github pages
-`webpack`| Run webpack
-`build`| Build storybook
-`develop`| Run storybook and webpack at the same time
-`test`| Run tests
-`twatch`| Watch tests run
-`coverage`| Check test coverage
-`format`| Clean up code format
-`lint-staged`| lint-staged
-`postinstall`| Patches packages
-`criticalcss`| Compile critical CSS assets
+## Theme Commands and Setup Documentation
+- [Saplings Child](SAPLINGS_THEME.md) - Current theme based on ui_suite_bootstrap
+- [Emulsify](EMULSIFY.md) - kanopi/kdcl_basic theme was built from Emulsify.
 
 ## Docksal Commands
 
@@ -135,17 +78,22 @@ Command | Description
 `composer` | Composer wrapper that executes within the CLI container.
 `init` | Init Command that starts the project from scratch.
 `init-site` | Installs and configures Drupal.
+`install-critical-tools` | Installs tools needed for Critical CSS.
 `install-cypress` | Called from `init` to install Cypress tools.
-`install-kdcl-basic` | Project setup theme generator.
+`install-kdcl-basic` | Project setup theme generator. [Deprecated]
 `install-theme-tools` | Installs tools needed for Critical, Storybook, etc.
 `migrate-prep-db` | Creates a second database to house a migration source.
 `npm` | Run NPM from the theme folder.
 `npx` | Run NPX from the theme folder.
 `open` | Opens browser to local site URL.
 `pa11y` | Runs the Pa11y accessibility tools suite locally.
+`recipe-apply` | Apply Drupal contrib Recipes that have been required.
+`recipe-configure` | Configures sites for Drupal Recipes. Already run in this repo.
+`recipe-unpack` | Unpacks Composer dependencies from a Recipe to the project's composer.json.
 `refresh` | Will execute a drush sql-dump from the remote server.
 `share` | Opens a proxy server to your local computer using ngrok.io.
 `tickle` | Wakes up the remote migration source environment every 5 minutes.
+`uuid-rm` | Helper command for Drupal Recipe builders that removes UUIDs from config files.
 
 ## Composer Commands
 
@@ -189,7 +137,7 @@ are available at the following url pa11y.$VIRTUAL_HOST
 If you want to change the configuration of the Pa11y tests you can edit the
 [.pa11yci.js](/tests/pa11y/.pa11yci.js) file.
 
-Note: This was cribbed from [Phase2](https://github.com/phase2/pa11y-dashboard)
+Note: This was forked from [Phase2](https://github.com/phase2/pa11y-dashboard)
 
 
 ### Robots.txt
