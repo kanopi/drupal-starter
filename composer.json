@@ -128,7 +128,8 @@
             "quicksilver-script",
             "cypress-support",
             "cypress-e2e",
-            "drupal-recipe"
+            "drupal-recipe",
+            "drupal-custom-theme"
         ],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
@@ -144,7 +145,8 @@
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/recipes/contrib/{$name}": ["type:drupal-recipe"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"]
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
         "drupal-scaffold": {
             "locations": {
