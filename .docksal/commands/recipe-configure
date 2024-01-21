@@ -34,6 +34,9 @@ fin composer update drupal/core
 fin composer config allow-plugins.oomphinc/composer-installers-extender
 fin composer config extra.installer-types --merge --json '["drupal-recipe"]'
 fin composer config extra.installer-paths --merge --json '{"web/recipes/contrib/{$name}": ["type:drupal-recipe"]}'
+# Saplings also requires a custom theme to be required.
+fin composer config extra.installer-types --merge --json '["drupal-custom-theme"]'
+fin composer config extra.installer-paths --merge --json '{"web/themes/custom/{$name}": ["type:drupal-custom-theme"]}'
 fin composer require oomphinc/composer-installers-extender
 
 # Requires Drupal Recipe Unpack.
