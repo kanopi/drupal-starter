@@ -4,20 +4,20 @@ site started.
 
 Features:
 
-- Drupal 10 - Composer Install
-- Docksal Configuration
-- Basic CircleCI configuration
-- Project Readme
-
-## Additional Documentation
-
-- [Installation](INSTALLATION.md) - for step by step instructions on setting
-this repository up for the first time.
-- [About](ABOUT.md) - for details on how this repository is set up and the
-reasoning behind it.
+- Configured for Pantheon hosting
+- Unopinionated Modern Drupal Installation
+- Composer Installation
+- Docksal Local Development Configuration
+- CircleCI Deployment and Testing configuration
 
 Please make this README as project specific as possible. Delete the things that
 are not relevant or add new sections as needed.
+
+
+## Project specific notes
+
+Are there any projects specific quirks or setup that should be noted?
+
 
 ## Important links
 
@@ -29,46 +29,30 @@ Imagine you know nothing about the project.
 * [Teamwork]()
 * [Github Team]()
 
-## Developer setup instructions
 
-### Step #1: Docksal environment setup
+## Additional Documentation
 
-**This is a one time setup.**
+- [Installation](docs/INSTALLATION.md) - for step by step instructions on
+setting this repository up for the first time.
+- [Developer Setup Instructions](docs/DEVELOP.md) - Developers start here to get
+ setup.
+- [About](docs/ABOUT.md) - for details on how this repository is set up and the
+reasoning behind it.
+- [Testing](docs/TESTING.md) - Details about all the testing available in this
+project.
 
-Follow [Docksal install instructions](https://docs.docksal.io/getting-started/setup/)
-
-### Step #2: Project setup
-
-1. Clone this repo into your Projects directory.
-1. Change directory to the cloned folder.
-1. Make your own version of the `docksal-local.env` file from the example
-and add your `SECRET_TERMINUS_TOKEN` to the file.
-    * You don't need to do this if you set your token globally in Docksal
-1. Initialize the site with `fin init`
-1. Once the site has been initialized you'll get a url
-to go to in your browser to start dev'ing.
-
-
-## Installing Modules
-
-Modules are installed using composer.
-The process for installing a module would be the following:
-
-```
-fin composer require [organization]/[package]
-```
-
-The standard composer command is used but with the
-Docksal specific command `fin` prepended to the beginning.
 
 ## Theme Commands and Setup Documentation
-- [Saplings Child](SAPLINGS_THEME.md) - Current theme based on ui_suite_bootstrap
-- [Emulsify](EMULSIFY.md) - kanopi/kdcl_basic theme was built from Emulsify.
+- [Saplings Child](docs/SAPLINGS_THEME.md) - Current theme based on
+ui_suite_bootstrap
+- [Emulsify](docs/EMULSIFY.md) - kanopi/kdcl_basic theme was built from
+Emulsify.
+
 
 ## Docksal Commands
 
-The following commands are available with Docksal
-and should be prefixed with the command `fin`
+The following commands are available with Docksal and should be prefixed with
+the command `fin`.
 
 Command | Description
 --------|------------
@@ -95,10 +79,11 @@ Command | Description
 `tickle` | Wakes up the remote migration source environment every 5 minutes.
 `uuid-rm` | Helper command for Drupal Recipe builders that removes UUIDs from config files.
 
+
 ## Composer Commands
 
-The following commands are available with Composer and
-should be prefixed with the command `fin composer`
+The following commands are available with Composer and should be prefixed with
+the command `fin composer`.
 
 Command | Description
 --------|------------
@@ -127,56 +112,18 @@ automates that checks for deprecations
 `post-autoload-dump` | Used by CircleCI for Pantheon
 
 
-### Pa11y Audits
-
-We have a Docksal command that will run
-[pa11y-ci](https://github.com/pa11y/pa11y-ci)
-audits `fin pa11y`. When the command finishes the reports
-are available at the following url pa11y.$VIRTUAL_HOST
-
-If you want to change the configuration of the Pa11y tests you can edit the
-[.pa11yci.js](/tests/pa11y/.pa11yci.js) file.
-
-Note: This was forked from [Phase2](https://github.com/phase2/pa11y-dashboard)
-
-
-### Robots.txt
-#### To append to drupal default scaffolding robots.txt
-- Navigate and open assets/custom-robots.txt
-- Add appended robots.txt to file
-- Run `fin composer install`
-#### To completely overwrite robots.txt
-- Open `composer.json`
-- Change the following:
-  ```
-    "[web-root]/robots.txt": {
-      "append": "assets/custom-robots.txt"
-    },
-  ```
-- To:
-  ```
-  "[web-root]/robots.txt": "assets/custom-robots.txt",
-  ```
-- Run `fin composer install`
-
-## Project specific notes
-
-Are there any projects specific quirks or setup that should be noted.
-
 ## Deployments
 
-### Github to Pantheon
-Deployments to the dev Pantheon environment is managed through Circle CI.
+### GitHub to Pantheon
+Deployments to the dev Pantheon environment are managed through CircleCI.
 
-Pull requests will build a MultiDev environment
-and update the PR with a comment.
-We also have Lighthouse testing and other audits enabled.
+Pull requests will build a MultiDev environment then update the PR with a
+comment. We also have Lighthouse testing and other audits enabled.
 
-Merges to `main` will merge Github to the Pantheon dev environment.
-During development our databases are Test and Dev.
-Once we have a launched product these will change to Live, Test and Dev.
+Merges to `main` will merge and deploy the GitHub code to the Pantheon dev
+environment.
 
-### Pantheon dev to production
+### Pantheon dev to prod deployments
 1. Go to the project dashboard on Pantheon.
 1. Backup databases for Test and Dev.
     1. To accomplish this you can go to the backups tab and backup everything
