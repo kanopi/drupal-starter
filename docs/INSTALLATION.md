@@ -3,52 +3,95 @@
 Instructions on how to install and configure this Drupal project template for
 Pantheon, CircleCI, and local Docksal development.
 
+
 -----
 
-## CLI Installation Method
+## CLI installation method
+
+
+### Create a GitHub repository for the project.
+
+Install [GitHub CLI](https://cli.github.com/) if you don't have it. `brew install gh`
+
+Install the [Repo Config GH CLI extension](https://github.com/twelvelabs/gh-repo-config) `gh extension install twelvelabs/gh-repo-config`
+
+
+#### Create a GitHub team (Optional)
+
+`gh api /orgs/<organization>/teams --method POST -f org=<organization> -f name=<team_name> -f privacy=closed`
+
+* `organization` -  The GitHub organization name.
+* `repo_name` - The name of your new repository.
+* `team_name` - The name of the team created.
+
+
+#### Create and clone your new repository
+
+`cd ~/Projects` (Or where ever you keep your sites.)
+
+`gh repo create <organization>/<repo_name> --template kanopi/drupal-starter --private --team <team_name> --clone`
+
+`cd <repo_name>`
+
+NOTE: Use `--public` instead of `--private` for a public repository.
+
+
+#### Configure GitHub Repository Configuration
+
+Edit the three files in `/.github/config/`
+
+* `/branch-protection/main.json` - Configures branch protection rules on the `main` branch. [Branch Rules Reference](https://docs.github.com/en/rest/branches/branch-protection?apiVersion=2022-11-28#update-branch-protection)
+* `repo.json` - Configures the repositories' settings. [Repository Update Reference](https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#update-a-repository)
+* `topics.json` - Configures the repositories' topics/tags.
+
+Run `gh repo-config apply` to apply the configuration to GitHub.
+
+
+-----
 
 ### Create the site in Pantheon
 
 `fin terminus site:create <site_name> <label> <upstream_id> --org <org_id> —region <region>`
 
-  * `site_name` - Machine name of the project
-  * `label` - Friendly project name
-  * `upstream_id` - Currently *Drupal 10 Start State* - `7f9fd7d4-77ec-4e6b-a73f-d32b93a1c6b1`
-    * Run `fin terminus upstream:list` to see all.
-  * `org_id` - The UUID of your Pantheon organization.
-    * Run `fin terminus org:list` to see all.
-  * `region` Codes for which region to create the site.
-    * `au` - Australia
-    * `ca` - Canada
-    * `eu` - European Union
-    * `us` - United States
+* `site_name` - Machine name of the project
+* `label` - Friendly project name
+* `upstream_id` - Currently *Drupal 10 Start State* - `7f9fd7d4-77ec-4e6b-a73f-d32b93a1c6b1`
+* Run `fin terminus upstream:list` to see all.
+* `org_id` - The UUID of your Pantheon organization.
+* Run `fin terminus org:list` to see all.
+* `region` Codes for which region to create the site.
+* `au` - Australia
+* `ca` - Canada
+* `eu` - European Union
+* `us` - United States
+
 
 ### Install Drupal using the minimal install profile
 
 `fin terminus drush <site_name>.dev -- site-install minimal -y --site-name=<drupal_site_name> --account-name=<account_name> --account-mail=<account_mail> --site-mail=<site_mail>`
 
-  * `drupal_site_name` - Friendly name of the site.
-  * `account_name` - User 1's machine name.
-  * `account_mail` - User 1's email.
-  * `site_mail` - For Drupal system mailings.
+* `drupal_site_name` - Friendly name of the site.
+* `account_name` - User 1's machine name.
+* `account_mail` - User 1's email.
+* `site_mail` - For Drupal system mailings.
 
-### Add Redis to the project
+
+### Add Redis to the Pantheon site
 
 `fin terminus redis:enable`
 
-See *A note about Redis on Pantheon* below.
+See [A note about Redis on Pantheon](#a-note-about-redis-on-pantheon) below.
 
-### Create a GitHub repository for the project.
-
-@TODO See UI method below until this is documented.
 
 ### Configure Docksal
 
 @TODO See UI method below until this is documented.
 
+
 ### Configure CircleCI
 
 @TODO See UI method below until this is documented.
+
 
 ### Site Build Drupal
 
@@ -58,21 +101,26 @@ See *A note about Redis on Pantheon* below.
 
 ## UI Installation Method
 
+
 ### Create a new Drupal project.
 
 ![Create a new Drupal project](https://github.com/kanopi/drupal-starter/assets/7685811/a1926875-951d-473a-bf0f-146abf3ad1eb)
+
 
 ### Create a minimal site install
 
   ![Create a minimal site install](https://user-images.githubusercontent.com/1062456/130299368-effbdab3-87ec-435b-812a-cb5d50b1c430.png)
 
+
 ### Set the basic details for the site
 
   ![Set the basic details for the site](https://user-images.githubusercontent.com/1062456/130299369-e102b080-f94b-45ce-a706-08392e075c1a.png)
 
+
 ### Add Redis to the project
 
 ![Add redis to the project](https://user-images.githubusercontent.com/1062456/130299370-1e5564db-73dc-4ade-b086-5b7af27d7608.png)
+
 
 ### Configure Pantheon
 
@@ -100,6 +148,7 @@ things will not work).
 * Make Branch name pattern match your default branch (e.g., main).
 * Select "Require pull request reviews before merging"
 * Click Create button
+
 
 ### Configure Docksal
 
@@ -146,6 +195,7 @@ We need to commit the project-specific CircleCI config.yml first so we can setup
 on the main branch so we can reference it from CircleCI).
 Circleci job will still not happen.
 
+
 ### CircleCI project setup
 
 * Go to
@@ -157,6 +207,9 @@ Circleci job will still not happen.
 * Enable "Only build pull request" and "Auto Cancel Builds" options.
 [Update settings](https://user-images.githubusercontent.com/1062456/130299362-9c04c3e2-e59a-4e73-8dfa-816d8d5316f4.png)
 
+
+-----
+
 ## Drupal setup
 
 We have removed all opinions about which modules should be installed in Drupal.
@@ -164,6 +217,7 @@ We have removed all opinions about which modules should be installed in Drupal.
 Instead, we have created the [kanopi/saplings](https://www.github.com/kanopi/saplings)
 Drupal recipe to require, intsall, and configure the modules and content types we 
 use on most Drupal builds.  Please visit that repository to continue using that.
+
 
 ### A note about Redis on Pantheon.
 
