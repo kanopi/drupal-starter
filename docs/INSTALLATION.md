@@ -60,7 +60,7 @@ Run `gh repo-config apply` to apply the configuration to GitHub.
 
 ### Create the site in Pantheon
 
-`fin terminus site:create <site_name> <label> <upstream_id> --org <org_id> —region <region>`
+`fin terminus site:create --org=<org_id> —region=<region> -- <site_name> <label> <upstream_id>`
 
 * `site_name` - Machine name of the project
 * `label` - Friendly project name
@@ -73,6 +73,8 @@ Run `gh repo-config apply` to apply the configuration to GitHub.
 * `ca` - Canada
 * `eu` - European Union
 * `us` - United States
+
+Kanopians: [Link more complete Cacher](https://snippets.cacher.io/snippet/667c30ad329368008618).
 
 
 ### Install Drupal using the minimal install profile
