@@ -49,6 +49,15 @@ Run `gh repo-config apply` to apply the configuration to GitHub.
 
 -----
 
+### Start Docksal
+
+* Edit `.docksal/docksal.env`
+  * Update `hostingsite` to the `<repo_name>` used above.  This should also be your Pantheon `<site_name>` used below.
+* Run `fin start`
+
+
+-----
+
 ### Create the site in Pantheon
 
 `fin terminus site:create <site_name> <label> <upstream_id> --org <org_id> —region <region>`
