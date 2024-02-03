@@ -60,7 +60,7 @@ Run `gh repo-config apply` to apply the configuration to GitHub.
 
 ### Create the site in Pantheon
 
-`fin terminus site:create --org=<org_id> —region=<region> -- <site_name> <label> <upstream_id>`
+`fin terminus site:create --org=<org_id> —-region=<region> -- <site_name> <label> <upstream_id>`
 
 * `site_name` - Machine name of the project
 * `label` - Friendly project name
