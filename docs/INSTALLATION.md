@@ -89,7 +89,7 @@ Kanopians: [Link more complete Cacher](https://snippets.cacher.io/snippet/667c30
 
 ### Add Redis to the Pantheon site
 
-`fin terminus redis:enable`
+`fin terminus redis:enable <site_id>`
 
 See [A note about Redis on Pantheon](#a-note-about-redis-on-pantheon) below.
 
