@@ -24,10 +24,14 @@ Are there any projects specific quirks or setup that should be noted?
 Please put links to the important places here.
 Imagine you know nothing about the project.
 
+* [Local URL]()
+* [Project URL]()
+* [GitHub Repo]()
+* [GitHub Team]()
+* [Pantheon Dev]()
 * [Pantheon Dashboard]()
 * [CircleCI]()
 * [Teamwork]()
-* [Github Team]()
 
 
 ## Additional Documentation
