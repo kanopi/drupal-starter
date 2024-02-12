@@ -104,11 +104,11 @@ fin init-site
 # Added a comment so themers can run manually.
 # fin install-theme-tools
 # fin install-critical-tools
+fin solr-create-core
 
 # Database
-if [[ -f config/core.extension.yml ]]; then
-  fin refresh
-fi
+fin refresh
+
 
 echo -e "\n${yellow} ${key} Logging you in. ${key}${NC}"
 echo -e "${NC}This should take ~1 minute and require no input.${NC}"

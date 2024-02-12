@@ -10,63 +10,11 @@ services:
       - MIGRATE_DB_ENV
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
-    # Expose port and let Storybook attach to it.
-    expose:
-      - 6006
-    labels:
-      - io.docksal.virtual-host=storybook.${VIRTUAL_HOST},storybook.${VIRTUAL_HOST}.*
-      - io.docksal.virtual-port=6006
-
-  # Fake email
-  mail:
-    extends:
-      file: ${HOME}/.docksal/stacks/services.yml
-      service: mail
-      
-  # PHPMyAdmin
-  pma:
-    hostname: pma
-    image: phpmyadmin/phpmyadmin
-    environment:
-      - PMA_HOST=db
-      - PMA_USER=root
-      - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
-    labels:
-      - io.docksal.virtual-host=pma.${VIRTUAL_HOST},pma.${VIRTUAL_HOST}.*
-    dns:
-      - ${DOCKSAL_DNS1}
-      - ${DOCKSAL_DNS2}
-
-  # Dashboard displaying results from `fin pa11y`.
-  pa11y:
-    # hostname needed in order to check local links
-    hostname: pa11y
-    image: outrigger/pa11y-dashboard
-    labels:
-      # Set host and port for pa11y container.
-      - io.docksal.virtual-host=pa11y.${VIRTUAL_HOST}
-      - io.docksal.virtual-port=8080
-    expose:
-      - "8080"
-    volumes:
-      # Dashboard requires /app/tests/pa11y/report.json.
-      - ../tests/:/app/tests
 
   solr:
-    image: "devkteam/solr:8.1.1"
-
-
-  # Storybook URL
-  # Acts as a reverse proxy and just proxies requests from storybook.explo.docksal to cli:6006
-  storybook:
-    image: wodby/nginx
-    depends_on:
-      - cli
-    environment:
-      NGINX_BACKEND_HOST: cli
-      # Port 6006 Used for storybook in CLI container.
-      NGINX_BACKEND_PORT: 6006
-      NGINX_VHOST_PRESET: http-proxy
-      NGINX_HEADERS_CONTENT_SECURITY_POLICY: "frame-ancestors 'self'"
-    labels:
-      - io.docksal.virtual-host=storybook.${VIRTUAL_HOST}
+    image: "devkteam/solr:8"
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: solr
+    volumes:
+      - ${PROJECT_ROOT}/.docksal/etc/solr/conf:/opt/solr/server/solr/configsets/solr8/conf

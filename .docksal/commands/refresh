@@ -11,6 +11,8 @@ set -e
 ENVIRONMENT=${1:-"$hostingenv"}
 DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 
+fin composer install
+
 echo "Pulling Database..."
 fin pull db -y --hosting-env=${ENVIRONMENT}
 
