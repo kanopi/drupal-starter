@@ -104,6 +104,7 @@ fin init-site
 # Added a comment so themers can run manually.
 # fin install-theme-tools
 # fin install-critical-tools
+fin solr-create-core
 
 # Database
 fin refresh

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#: exec_target = solr
+#
+# THE PARAMETERS ARE HARD CODED HERE BUT YOU WILL NEED TO ADJUST THEM PER PROJECT
+#
+# -c is the name of the core to create. THIS HAS TO MATCH YOUR CORE NAME that is already set in the drupal admin UI.
+#    We are assuming you setup solr search before converting it to docksal. If you are creating it anew then you can
+#    call the core whatever you want.
+#
+# -d is the directory to search for the config set templates to use.  This CAN (but does not have to be) checked into the
+#    git repository.  Sometimes it IS checked into the repository in order to help the developers get started.  DO NOT use
+#    a config set directory from a version of solr that is different than the version for which it was generated.  This
+#    important fact is why we put the solr version in the directory name
+#
+
+/opt/solr/bin/solr create_core -c search_api_solr_8.x-3.0 -d /opt/solr/server/solr/configsets/solr8 -p 8983
