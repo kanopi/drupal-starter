@@ -1,0 +1,26 @@
+{% set sa_reverse_order = 0 %}
+{% if content.sa_reverse_order['#items'].value == 1 %}
+  {% set sa_reverse_order = true %}
+{% endif %}
+
+{% set textleft = '' %}
+{% if sa_reverse_order %}
+  {% set textleft = 'flex-row-reverse' %}
+{% endif %}
+
+<div class="container-fluid {{ textleft }}">
+  <div class="container p-0 p-lg-3">
+    <div class="row align-items-center justify-content-end {{ textleft }}">
+      <div class="align-self-center col-md-6">
+        {% if content.sa_media is not empty %}
+          {{ content.sa_media }}
+        {% endif %}
+      </div>
+      <div class="align-self-center col-md-6">
+        {% if content.sa_description is not empty %}
+          {{ content.sa_description }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

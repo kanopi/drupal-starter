@@ -1,0 +1,22 @@
+uuid: ed3a7549-1989-441a-b47c-c82a2e2c44cd
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+_core:
+  default_config_hash: Y4TwWWujIfkO9bD4Iij-HA2-JkL-yBb7oz2odZ0yZG0
+id: paragraph.sa_carousel_item
+field_name: sa_carousel_item
+entity_type: paragraph
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

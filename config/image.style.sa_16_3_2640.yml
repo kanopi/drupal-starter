@@ -1,0 +1,25 @@
+uuid: 769d334d-d752-486f-8640-cad871d17763
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: 8E_ovnC1FJ5dtupB8s-xe2Ys9r8PwAG3s8iuHJcGC48
+name: sa_16_3_2640
+label: '16:3 - 2640x496'
+effects:
+  2eecdd98-49f2-40f0-9afc-cc46c8339f65:
+    uuid: 2eecdd98-49f2-40f0-9afc-cc46c8339f65
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2640
+      height: 496
+      crop_type: focal_point
+  0aa26d61-0b41-4a9f-a204-421e6cfdd975:
+    uuid: 0aa26d61-0b41-4a9f-a204-421e6cfdd975
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

@@ -1,0 +1,13 @@
+uuid: dce2ff2b-79e0-4399-b84c-f445f010f1c7
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: 1kNRcym5H-bvbf7xY40g1wDNF_ndyKwfQFeaApKPx7o
+id: paragraph.sa_tab_item
+label: 'Tab Item'
+description: 'This is a button for the tab.'
+targetEntityType: paragraph
+cache: true

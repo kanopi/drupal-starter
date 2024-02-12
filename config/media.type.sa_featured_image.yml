@@ -1,0 +1,21 @@
+uuid: 73c1a259-4e4a-4224-9b62-8c8241199c99
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: sa_media_image
+_core:
+  default_config_hash: l6NywP9Gj1hKw7O9cAIcxk5DXcyGmhU-ELVbUKcR_xQ
+id: sa_featured_image
+label: 'Featured image'
+description: 'The image type is used for the hero/representative image of an entity, and the SEO image override.'
+source: image
+queue_thumbnail_downloads: true
+new_revision: true
+source_configuration:
+  source_field: sa_media_image
+field_map:
+  name: name

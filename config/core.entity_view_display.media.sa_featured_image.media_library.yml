@@ -1,0 +1,39 @@
+uuid: c9fc1e55-57b9-47ee-8649-6c8ba7dbc975
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.sa_featured_image.sa_media_image
+    - image.style.media_library
+    - media.type.sa_featured_image
+  module:
+    - image
+    - nomarkup
+_core:
+  default_config_hash: TQ_mksmkE1HozjH-XZXz7VyoPvD3S7OAfbreVrqHdnQ
+id: media.sa_featured_image.media_library
+targetEntityType: media
+bundle: sa_featured_image
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: media_library
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: ''
+    weight: 0
+    region: content
+hidden:
+  created: true
+  name: true
+  sa_media_image: true
+  uid: true

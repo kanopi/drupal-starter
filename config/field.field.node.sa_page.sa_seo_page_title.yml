@@ -1,0 +1,21 @@
+uuid: 00a52e0a-12fd-4fc5-bc5f-e002f48cdf3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_seo_page_title
+    - node.type.sa_page
+_core:
+  default_config_hash: ETSgCtxOeRXSDlyOibPxym6EMH6xanb4J7aTzTH_gwg
+id: node.sa_page.sa_seo_page_title
+field_name: sa_seo_page_title
+entity_type: node
+bundle: sa_page
+label: 'SEO Page Title'
+description: 'Use this field to overwrite the default HTML page title for SEO.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

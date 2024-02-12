@@ -1,0 +1,21 @@
+uuid: 3a70f27e-ea2d-4b20-bc5b-719aabcd4f08
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_header
+    - paragraphs.paragraphs_type.sa_tab
+_core:
+  default_config_hash: FNbUEYoaTJfyZhzctR1kLeNF1l8HU_cYupsmGzVY8xo
+id: paragraph.sa_tab.sa_header
+field_name: sa_header
+entity_type: paragraph
+bundle: sa_tab
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

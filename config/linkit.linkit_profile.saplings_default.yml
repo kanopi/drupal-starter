@@ -1,0 +1,23 @@
+uuid: 22b31dfd-2f22-45a5-a19b-455034158bd8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: W8oS8vQreEsl0dTa5aqdYDTuRdNO9pwnM_pcvQ5_RAA
+label: 'Saplings Linkit default'
+id: saplings_default
+description: 'A default Linkit profile'
+matchers:
+  9e9c3670-8480-4b0f-aaf6-bdecf4a36ed7:
+    id: 'entity:node'
+    uuid: 9e9c3670-8480-4b0f-aaf6-bdecf4a36ed7
+    settings:
+      metadata: '[node:content-type:name] #[node:nid] | [node:created:medium] by [node:author]'
+      bundles: {  }
+      group_by_bundle: false
+      include_unpublished: false
+      substitution_type: canonical
+      limit: 100
+    weight: 0

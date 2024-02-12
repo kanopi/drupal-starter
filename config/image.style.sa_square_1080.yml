@@ -1,0 +1,25 @@
+uuid: f159107b-ec10-47bc-bd4d-60e33bc57220
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: CeYFwsw6Ev81VLwfZ172ySappH10z6ZNj5RxvxNK1lw
+name: sa_square_1080
+label: 'Square - 1080'
+effects:
+  11ecb379-036e-4fd9-964f-b23966b1943c:
+    uuid: 11ecb379-036e-4fd9-964f-b23966b1943c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1080
+      height: 1080
+      crop_type: focal_point
+  b09c93d8-f7e8-413f-ae2f-a74f816fe2ec:
+    uuid: b09c93d8-f7e8-413f-ae2f-a74f816fe2ec
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

@@ -1,0 +1,12 @@
+uuid: 01881fa4-3274-4c46-a547-0929886a1bc0
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: M0EcNUjlzF3Ut-UXkzEk8zcbojIb1Tbw3Wu5sqPe2rw
+id: sa_filtered_list
+label: 'Filtered List'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

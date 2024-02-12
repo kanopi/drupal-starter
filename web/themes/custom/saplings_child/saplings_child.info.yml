@@ -1,0 +1,33 @@
+name: "Saplings Child"
+type: theme
+description: "Saplings Child Theme"
+core_version_requirement: ^10
+base theme: ui_suite_bootstrap
+
+regions:
+  navigation: "Navigation"
+  navigation_collapsible: "Navigation (Collapsible)"
+  header: "Top Bar"
+  highlighted: "Highlighted"
+  help: "Help"
+  content: "Content"
+  sidebar_first: "Primary"
+  sidebar_second: "Secondary"
+  footer: "Footer"
+  page_top: "Page top"
+  page_bottom: "Page bottom"
+
+ckeditor5-stylesheets:
+  - dist/css/ckeditor5.css
+
+libraries-override:
+  ui_suite_bootstrap/bootstrap:
+    css:
+      theme:
+        /libraries/bootstrap/dist/css/bootstrap.min.css: false
+
+libraries-extend:
+  ui_suite_bootstrap/bootstrap:
+    - saplings_child/bootstrap
+  ui_suite_bootstrap/form:
+    - saplings_child/form

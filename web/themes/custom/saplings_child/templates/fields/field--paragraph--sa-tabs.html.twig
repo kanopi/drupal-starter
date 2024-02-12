@@ -1,0 +1,21 @@
+{% set pane_id_base = "pane-" ~ random() %}
+
+{% set tabs = [] %}
+{% for item in items %}
+  {% set tab = pattern('nav_item', {
+    link: item.content|merge({'#view_mode': 'sa_tab_item'}) ,
+    toggle: pane_id_base ~ '-' ~ loop.index,
+    active: loop.first
+  }) %}
+  {% set tabs = tabs|merge([tab])%}
+{% endfor %}
+{{ pattern('nav', {
+  items: tabs
+}, 'tabs') }}
+
+<div class="tab-content">
+  {% for item in items %}
+    {% set item = loop.first ? item.content|add_class(["show", "active"]) : item.content %}
+    {{ item|add_class("tab-pane")|set_attribute("id", pane_id_base ~ '-' ~ loop.index) }}
+  {% endfor %}
+</div>

@@ -1,0 +1,40 @@
+uuid: 401907e3-9386-4ce9-9d4b-7603b1e5d29a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.sa_media_image
+    - media.type.sa_featured_image
+  module:
+    - image
+_core:
+  default_config_hash: X40XXAV7cROLrXXXcgpJJa5T2EtjY0siDOjq4PER5t4
+id: media.sa_featured_image.sa_media_image
+field_name: sa_media_image
+entity_type: media
+bundle: sa_featured_image
+label: Image
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: 'featured-image/[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg webp'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

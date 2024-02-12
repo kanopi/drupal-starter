@@ -1,0 +1,22 @@
+// Adapt path to libraries depending on your installation.
+
+// Import Bootstrap minimum requirements to import Bootstrap variables.
+@import "../../../../../libraries/bootstrap/scss/functions";
+
+// Import Bootstrap variables overrides.
+@import "bootstrap-variables";
+
+// Import Bootstrap remaining configuration.
+@import "../../../../../libraries/bootstrap/scss/variables";
+@import "../../../../../libraries/bootstrap/scss/variables-dark";
+@import "../../../../../libraries/bootstrap/scss/maps";
+@import "../../../../../libraries/bootstrap/scss/mixins";
+@import "../../../../../libraries/bootstrap/scss/utilities";
+
+// Import Fontawesome.
+//@import "../../../../../../../libraries/fontawesome/scss/functions";
+//@import "../../../../../../../libraries/fontawesome/scss/variables";
+//@import "../../../../../../../libraries/fontawesome/scss/mixins";
+
+// Import custom variables.
+@import "custom-variables";

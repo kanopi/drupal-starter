@@ -1,0 +1,31 @@
+uuid: df4314f0-4a1c-4c96-955e-ec0b9fb8a2e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_tab.sa_description
+    - field.field.paragraph.sa_tab.sa_header
+    - paragraphs.paragraphs_type.sa_tab
+  module:
+    - nomarkup
+    - text
+_core:
+  default_config_hash: rrI9d4ukvtL18cDCMWgcrmR6QqnY8KIqVmyPsHwz1Q0
+id: paragraph.sa_tab.default
+targetEntityType: paragraph
+bundle: sa_tab
+mode: default
+content:
+  sa_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 0
+    region: content
+hidden:
+  sa_header: true

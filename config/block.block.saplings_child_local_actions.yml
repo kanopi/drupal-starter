@@ -1,0 +1,20 @@
+uuid: f88ad8e1-d27a-446d-ba97-c3f19cc01fd6
+langcode: en
+status: true
+dependencies:
+  theme:
+    - saplings_child
+_core:
+  default_config_hash: ABoKnlk20KHqZRw_2Qr4EvaFvH4lnQ2nuhunHeE1JIU
+id: saplings_child_local_actions
+theme: saplings_child
+region: header
+weight: 20
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

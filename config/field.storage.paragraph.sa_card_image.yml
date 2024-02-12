@@ -1,0 +1,22 @@
+uuid: ac25a29b-2e1d-42db-b7cd-27a3080a81a4
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+_core:
+  default_config_hash: 9KXx7qVAw2i7JvSCdtHsM0NwHN4MFMiJPzDpJIr6Ork
+id: paragraph.sa_card_image
+field_name: sa_card_image
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

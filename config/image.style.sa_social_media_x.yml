@@ -1,0 +1,19 @@
+uuid: 5ca59bf6-8caa-49a9-bbc3-4e3786055f3f
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: b6PIhGShxOW6B4iY82Qo6pMiI66mRJqODdlYUOV07NE
+name: sa_social_media_x
+label: 'Social Media - X (Twitter)'
+effects:
+  7de498f6-16e8-4f33-aa2b-afc30ad91155:
+    uuid: 7de498f6-16e8-4f33-aa2b-afc30ad91155
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1600
+      height: 900
+      crop_type: focal_point

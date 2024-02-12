@@ -1,0 +1,36 @@
+uuid: c96c2efe-a9f4-44f5-a168-2696564b947d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_tab.sa_description
+    - field.field.paragraph.sa_tab.sa_header
+    - paragraphs.paragraphs_type.sa_tab
+  module:
+    - text
+_core:
+  default_config_hash: yK9uQQ5qT7853jON-eame5Z1oXT5JJz6wI7kDKvPnrM
+id: paragraph.sa_tab.default
+targetEntityType: paragraph
+bundle: sa_tab
+mode: default
+content:
+  sa_description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  sa_header:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

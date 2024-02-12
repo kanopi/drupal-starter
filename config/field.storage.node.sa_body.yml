@@ -1,0 +1,21 @@
+uuid: 05f3b58a-9b17-401c-aa9a-f44f199e115a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+_core:
+  default_config_hash: PWD-SUKccIJoO9D8eM8yxSRUhhxpK-CNTBbEJm86ls0
+id: node.sa_body
+field_name: sa_body
+entity_type: node
+type: text_with_summary
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: true
+custom_storage: false

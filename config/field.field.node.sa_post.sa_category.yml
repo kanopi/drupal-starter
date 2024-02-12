@@ -1,0 +1,31 @@
+uuid: d6258d5c-71b5-44ff-9e6b-c0a27900fb0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_category
+    - node.type.sa_post
+    - taxonomy.vocabulary.sa_category
+_core:
+  default_config_hash: w-YVL1mAw8ISOyVvB9MH2gFVa403izAkco_0NK1bipI
+id: node.sa_post.sa_category
+field_name: sa_category
+entity_type: node
+bundle: sa_post
+label: Category
+description: 'Categorize posts by shared characteristics that can be used to group content together in filtered lists throughout the site.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sa_category: sa_category
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

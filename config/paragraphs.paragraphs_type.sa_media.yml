@@ -1,0 +1,12 @@
+uuid: c67af1a8-0a76-4937-b1e7-68d9deca091f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 2fLSMW5A-_54bE1LgLPXXPpHpwIGXDSE9Wx682Ube0c
+id: sa_media
+label: Media
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

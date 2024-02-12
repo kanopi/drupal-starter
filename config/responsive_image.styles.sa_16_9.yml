@@ -1,0 +1,46 @@
+uuid: e5d2fc28-2d64-42f2-a71c-5858a80e60d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.sa_16_9_1280
+    - image.style.sa_16_9_1920
+    - image.style.sa_16_9_2640
+    - image.style.sa_16_9_3840
+    - image.style.sa_16_9_768
+    - image.style.sa_16_9_960
+  module:
+    - saplings_custom
+_core:
+  default_config_hash: AvJ58m3yJ0oZ3hQxpajfFIiVF6lMo8YWdMw87chF5As
+id: sa_16_9
+label: '16:9'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: 100vw
+      sizes_image_styles:
+        - sa_16_9_3840
+        - sa_16_9_1280
+        - sa_16_9_1920
+        - sa_16_9_2640
+        - sa_16_9_768
+        - sa_16_9_960
+    breakpoint_id: saplings_custom.retina
+    multiplier: 1x
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: 100vw
+      sizes_image_styles:
+        - sa_16_9_3840
+        - sa_16_9_1280
+        - sa_16_9_1920
+        - sa_16_9_2640
+        - sa_16_9_768
+        - sa_16_9_960
+    breakpoint_id: saplings_custom.retina
+    multiplier: 2x
+breakpoint_group: saplings_custom
+fallback_image_style: sa_16_9_768

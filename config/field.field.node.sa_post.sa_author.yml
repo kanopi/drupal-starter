@@ -1,0 +1,21 @@
+uuid: fdaaf34c-e36c-4472-916b-eecff1f7b2b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_author
+    - node.type.sa_post
+_core:
+  default_config_hash: cL-XbL_rt_IQobyYkCvtAqoVJTNeYyjiSqMl_RIoO8c
+id: node.sa_post.sa_author
+field_name: sa_author
+entity_type: node
+bundle: sa_post
+label: Author
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,31 @@
+uuid: dde2dac4-6233-4ab0-8321-91ca8efd3561
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_featured_image
+    - media.type.sa_featured_image
+    - node.type.sa_post
+_core:
+  default_config_hash: kVp0ssHi6hL1PcvbFkEUk1-OCqOnZ2ZmlGKS_K9s1nE
+id: node.sa_post.sa_featured_image
+field_name: sa_featured_image
+entity_type: node
+bundle: sa_post
+label: 'Featured image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      sa_featured_image: sa_featured_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

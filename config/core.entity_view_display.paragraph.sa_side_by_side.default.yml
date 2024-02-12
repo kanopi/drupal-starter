@@ -1,0 +1,45 @@
+uuid: da4daaee-c80c-4993-8f13-28248f0a01b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_side_by_side.sa_description
+    - field.field.paragraph.sa_side_by_side.sa_media
+    - field.field.paragraph.sa_side_by_side.sa_reverse_order
+    - paragraphs.paragraphs_type.sa_side_by_side
+  module:
+    - text
+_core:
+  default_config_hash: xrBJ_5gfcfG8RLSXKBi7HdoE6YTOKbREoff8IcbH3Ew
+id: paragraph.sa_side_by_side.default
+targetEntityType: paragraph
+bundle: sa_side_by_side
+mode: default
+content:
+  sa_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  sa_media:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  sa_reverse_order:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden: {  }

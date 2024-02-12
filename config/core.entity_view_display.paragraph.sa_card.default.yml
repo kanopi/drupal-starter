@@ -1,0 +1,82 @@
+uuid: ecd0ae5e-f696-4a1f-a19d-8a1f62e590a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_card.sa_card_image
+    - field.field.paragraph.sa_card.sa_description
+    - field.field.paragraph.sa_card.sa_header
+    - paragraphs.paragraphs_type.sa_card
+  module:
+    - ds
+    - nomarkup
+    - text
+third_party_settings:
+  ds:
+    layout:
+      id: pattern_card
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        pattern:
+          sa_templates: default
+          variant: default
+          settings:
+            image_position: ''
+            image_position_token: ''
+            image_col_classes: col-md-4
+            image_col_classes_token: ''
+            content_col_classes: col-md-8
+            content_col_classes_token: ''
+    regions:
+      image:
+        - sa_card_image
+      header:
+        - sa_header
+      content:
+        - sa_description
+_core:
+  default_config_hash: y6T-3Is2NbAkKhbMZixsJv4HFz8rEUtXMMd4pUe28dI
+id: paragraph.sa_card.default
+targetEntityType: paragraph
+bundle: sa_card
+mode: default
+content:
+  sa_card_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: 0
+    weight: 0
+    region: image
+  sa_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 2
+    region: content
+  sa_header:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 1
+    region: header
+hidden: {  }

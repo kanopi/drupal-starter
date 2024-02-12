@@ -1,0 +1,21 @@
+uuid: a85ea60c-e8c7-4b39-a7c6-534a9700aa3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_styles
+    - paragraphs.paragraphs_type.sa_media
+_core:
+  default_config_hash: N4I06d7VKF9EYs4wpNzx-gORy8jUu8muXQxbirA33Dg
+id: paragraph.sa_media.sa_styles
+field_name: sa_styles
+entity_type: paragraph
+bundle: sa_media
+label: Styles
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

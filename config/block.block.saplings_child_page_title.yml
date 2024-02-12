@@ -1,0 +1,20 @@
+uuid: 2cee6473-d29a-4f5a-a81b-25af9e9b6d5a
+langcode: en
+status: true
+dependencies:
+  theme:
+    - saplings_child
+_core:
+  default_config_hash: Oh72CHUkp6cj6dbrXMK2hzCsM05w9cHVoD22rMLQUfk
+id: saplings_child_page_title
+theme: saplings_child
+region: header
+weight: 0
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

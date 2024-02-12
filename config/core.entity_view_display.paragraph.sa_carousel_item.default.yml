@@ -1,0 +1,62 @@
+uuid: d3b170bc-6f77-4813-98c9-014d5eb92b28
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_carousel_item.sa_carousel_caption
+    - field.field.paragraph.sa_carousel_item.sa_carousel_image
+    - paragraphs.paragraphs_type.sa_carousel_item
+  module:
+    - ds
+    - nomarkup
+third_party_settings:
+  ds:
+    layout:
+      id: pattern_carousel_item
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        pattern:
+          field_templates: only_content
+    regions:
+      image:
+        - sa_carousel_image
+      caption:
+        - sa_carousel_caption
+_core:
+  default_config_hash: eUZEppKIDzPIRpiT4DhJm9L4OivMujd9QglTAM7ch-A
+id: paragraph.sa_carousel_item.default
+targetEntityType: paragraph
+bundle: sa_carousel_item
+mode: default
+content:
+  sa_carousel_caption:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: caption
+  sa_carousel_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: sa_5_4
+      link: false
+    third_party_settings:
+      nomarkup:
+        enabled: false
+        separator: '|'
+        referenced_entity: 0
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 0
+    region: image
+hidden: {  }

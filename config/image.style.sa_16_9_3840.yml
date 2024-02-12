@@ -1,0 +1,25 @@
+uuid: 6f371275-76dc-4d1e-aa8d-1b8d34dd4244
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: CmWvXRl3PHbY6y6_5WAF-M3YamHSNyVETSuHNeTWITM
+name: sa_16_9_3840
+label: '16:9 - 3840x2160'
+effects:
+  cb1d24b1-3712-454a-aa07-440932e89d05:
+    uuid: cb1d24b1-3712-454a-aa07-440932e89d05
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 3840
+      height: 2160
+      crop_type: focal_point
+  f7c96efe-0c38-414f-b0a6-ee09c6fa762f:
+    uuid: f7c96efe-0c38-414f-b0a6-ee09c6fa762f
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

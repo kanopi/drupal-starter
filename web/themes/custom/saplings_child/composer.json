@@ -1,0 +1,15 @@
+{
+    "name": "kanopi/saplings_child",
+    "description": "Drupal Child theme for Saplings",
+    "type": "drupal-custom-theme",
+    "homepage": "https://github.com/kanopi/saplings_child",
+    "support": {
+      "issues": "https://github.com/kanopi/saplings_child/issues"
+    },
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+    }
+  }
+  

@@ -1,0 +1,12 @@
+uuid: a401a62e-491b-4244-bdfc-e3abec028428
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: CNu8rDKLI8zseqMvT7WcM0uJkcYiBWrSf-6fiHIqAqM
+id: sa_accordion
+label: Accordion
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

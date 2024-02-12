@@ -1,0 +1,25 @@
+uuid: b1fc4e8f-6119-470f-9648-b3ff1998e7ed
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: 2MiSr52g0nuGWGVdn7ZZGXolSeRhC2ZJxK0NQxEnWSI
+name: sa_square_540
+label: 'Square - 540'
+effects:
+  bed2d83b-1720-4c39-9062-946b889ed0ad:
+    uuid: bed2d83b-1720-4c39-9062-946b889ed0ad
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 540
+      height: 540
+      crop_type: focal_point
+  b5340f1e-3819-4a09-a2a3-7d942fb362fa:
+    uuid: b5340f1e-3819-4a09-a2a3-7d942fb362fa
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

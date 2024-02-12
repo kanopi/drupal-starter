@@ -1,0 +1,21 @@
+uuid: ac196c79-ea71-4801-9df7-d421f1acc099
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_header
+    - paragraphs.paragraphs_type.sa_card
+_core:
+  default_config_hash: Gq83odCVR_eoGqAJHJug6OJWU5p6XhnPZ7EXUdpfqHQ
+id: paragraph.sa_card.sa_header
+field_name: sa_header
+entity_type: paragraph
+bundle: sa_card
+label: Header
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

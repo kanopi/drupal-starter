@@ -1,0 +1,11 @@
+uuid: c39a258e-e827-485e-82ce-8a4e40f6754f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: kcCGp4I94RA-Q3xTVJHkTBZWSVMZVFhIEikZd3RqTBM
+id: content_editor
+label: 'Content Editor'
+weight: 5
+is_admin: null
+permissions: {  }

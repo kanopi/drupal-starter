@@ -1,0 +1,24 @@
+uuid: c0e98eb4-9bdf-40f5-8f82-cc364c197885
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_description
+    - paragraphs.paragraphs_type.sa_filtered_list
+  module:
+    - text
+_core:
+  default_config_hash: 9tLdTc_aLLeN2azLT8Sdj5iOQ82-e-QKBQddy6Mdt6c
+id: paragraph.sa_filtered_list.sa_description
+field_name: sa_description
+entity_type: paragraph
+bundle: sa_filtered_list
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

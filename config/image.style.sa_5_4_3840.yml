@@ -1,0 +1,25 @@
+uuid: 32d1eb77-22c6-403b-9a85-b50cfe3096bf
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: aYIdWvP1g5KLoKnA8gusv4AMpj1y0i8lFjC_9hshnwY
+name: sa_5_4_3840
+label: '5:4 - 3840x3072'
+effects:
+  806293d1-b690-4224-b83a-fc826aa438e6:
+    uuid: 806293d1-b690-4224-b83a-fc826aa438e6
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 3840
+      height: 3072
+      crop_type: focal_point
+  185fd0d2-2b4b-4129-bfd4-6d71eb52c55d:
+    uuid: 185fd0d2-2b4b-4129-bfd4-6d71eb52c55d
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

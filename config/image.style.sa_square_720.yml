@@ -1,0 +1,25 @@
+uuid: f2e90e67-6b28-4580-9d29-c6a8a5756a20
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: s1j0FEbcuUXpayY86XITKqb3UPVtybviEupsWZSLLtQ
+name: sa_square_720
+label: 'Square - 720'
+effects:
+  81f334c7-fd4c-4642-8e71-b98810d565e1:
+    uuid: 81f334c7-fd4c-4642-8e71-b98810d565e1
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 720
+      height: 720
+      crop_type: focal_point
+  fc873231-d2c5-4994-aa63-25d87be75ae3:
+    uuid: fc873231-d2c5-4994-aa63-25d87be75ae3
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

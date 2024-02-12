@@ -1,0 +1,23 @@
+uuid: 1d8d4b69-e1f2-4c21-8550-a23d6cd29d82
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_reverse_order
+    - paragraphs.paragraphs_type.sa_side_by_side
+_core:
+  default_config_hash: qPehKhAFHti5AqTPggdEdcKR-OBoyFFomsAifUvTxOQ
+id: paragraph.sa_side_by_side.sa_reverse_order
+field_name: sa_reverse_order
+entity_type: paragraph
+bundle: sa_side_by_side
+label: 'Reverse order'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

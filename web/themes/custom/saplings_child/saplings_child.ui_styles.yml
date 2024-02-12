@@ -1,0 +1,100 @@
+colors_background_gradient:
+  category: "Background"
+  label: "Background gradient"
+  description: "Add a linear gradient as background image to the backgrounds. This gradient starts with a semi-transparent white which fades out to the bottom."
+  links:
+    - "https://getbootstrap.com/docs/5.3/utilities/background/#background-gradient"
+  options:
+    bg-gradient: "Gradient"
+  previewed_with:
+    - border
+    - p-2
+    - bg-primary
+
+spacing_margin_top:
+  category: "Spacing"
+  label: "Margin top"
+  options:
+    mt-0: "0"
+    mt-1: "1"
+    mt-2: "2"
+    mt-3: "3"
+    mt-4: "4"
+    mt-5: "5"
+    mt-auto: "Auto"
+    mt-n0: "Negative 0"
+    mt-n1: "Negative 1"
+    mt-n2: "Negative 2"
+    mt-n3: "Negative 3"
+    mt-n4: "Negative 4"
+    mt-n5: "Negative 5"
+  previewed_with:
+    - border
+    - p-2
+    - bg-light
+
+spacing_margin_bottom:
+  category: "Spacing"
+  label: "Margin bottom"
+  options:
+    mb-0: "0"
+    mb-1: "1"
+    mb-2: "2"
+    mb-3: "3"
+    mb-4: "4"
+    mb-5: "5"
+    mb-auto: "Auto"
+    mb-n0: "Negative 0"
+    mb-n1: "Negative 1"
+    mb-n2: "Negative 2"
+    mb-n3: "Negative 3"
+    mb-n4: "Negative 4"
+    mb-n5: "Negative 5"
+  previewed_with:
+    - border
+    - p-2
+    - bg-light
+
+spacing_margin_start:
+  category: "Spacing"
+  label: "Margin start"
+  options:
+    ms-0: "0"
+    ms-1: "1"
+    ms-2: "2"
+    ms-3: "3"
+    ms-4: "4"
+    ms-5: "5"
+    ms-auto: "Auto"
+    ms-n0: "Negative 0"
+    ms-n1: "Negative 1"
+    ms-n2: "Negative 2"
+    ms-n3: "Negative 3"
+    ms-n4: "Negative 4"
+    ms-n5: "Negative 5"
+  previewed_with:
+    - border
+    - p-2
+    - bg-light
+
+spacing_margin_end:
+  category: "Spacing"
+  label: "Margin end"
+  options:
+    me-0: "0"
+    me-1: "1"
+    me-2: "2"
+    me-3: "3"
+    me-4: "4"
+    me-5: "5"
+    me-auto: "Auto"
+    me-n0: "Negative 0"
+    me-n1: "Negative 1"
+    me-n2: "Negative 2"
+    me-n3: "Negative 3"
+    me-n4: "Negative 4"
+    me-n5: "Negative 5"
+  previewed_with:
+    - border
+    - p-2
+    - bg-light

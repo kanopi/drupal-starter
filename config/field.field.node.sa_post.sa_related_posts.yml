@@ -1,0 +1,30 @@
+uuid: 4feead97-7e97-4c60-b991-3b7f479af61f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_related_posts
+    - node.type.sa_post
+_core:
+  default_config_hash: VxtIogfuAoyevdSA1zoChlEUbj85JbXNKOuBxPwdsIo
+id: node.sa_post.sa_related_posts
+field_name: sa_related_posts
+entity_type: node
+bundle: sa_post
+label: 'Related posts'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      sa_post: sa_post
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

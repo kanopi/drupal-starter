@@ -1,0 +1,10 @@
+uuid: caaeb89f-2eb5-456b-9b45-6f7fd0326c7e
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dUhSIkqS3t960ZY50qwNv9f5Aa-q5Y3JiOIl_iAg_Sc
+name: 'Post Type'
+vid: sa_post_type
+description: 'Provides a way to categorize posts by their type. Common types are Blog, News and Press Releases.'
+weight: 0

@@ -1,0 +1,22 @@
+uuid: 19328c08-b6fa-4170-b187-61aa52632fae
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - node
+_core:
+  default_config_hash: WK31TF_nVZ7e932Dw2b4te9A9_yJPoTNDhJU_5JRy0M
+id: node.sa_seo_image
+field_name: sa_seo_image
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

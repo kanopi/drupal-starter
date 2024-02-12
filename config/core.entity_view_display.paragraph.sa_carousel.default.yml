@@ -1,0 +1,52 @@
+uuid: 7dfc2b25-58b3-4a19-bcb4-d1863a4266ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_carousel.sa_carousel_item
+    - paragraphs.paragraphs_type.sa_carousel
+  module:
+    - nomarkup
+    - ui_patterns_field_formatters
+_core:
+  default_config_hash: mLIN1jnGGoP2ZvdQ_if-m7JlPhvFhz1Oyfip83ofqLA
+id: paragraph.sa_carousel.default
+targetEntityType: paragraph
+bundle: sa_carousel
+mode: default
+content:
+  sa_carousel_item:
+    type: pattern_all_formatter
+    label: hidden
+    settings:
+      type: entity_reference_revisions_entity_view
+      settings:
+        view_mode: default
+      pattern: carousel
+      pattern_mapping:
+        'field_meta_properties:_formatted':
+          destination: slides
+          weight: 0
+          plugin: field_meta_properties
+          source: _formatted
+      pattern_settings:
+        carousel:
+          with_controls: '1'
+          with_controls_token: ''
+          with_indicators: '1'
+          with_indicators_token: ''
+          with_touch: '1'
+          with_touch_token: ''
+          interval: '5000'
+          interval_token: '5000'
+          carousel_id: ''
+      pattern_variant: default
+      variants_token: {  }
+    third_party_settings:
+      nomarkup:
+        enabled: false
+        separator: ''
+        referenced_entity: ''
+    weight: 0
+    region: content
+hidden: {  }

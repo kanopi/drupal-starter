@@ -1,0 +1,32 @@
+uuid: a31f71c0-eb63-43c4-bd27-26df06e06faa
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 3X2dWP4t5WaFyZ9C6_dwAZ0lIajklyT7vl7zrwSs8Xc
+id: node__sa_page
+label: 'Content: Page'
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:sa_description|node:sa_seo_description]'
+  image_src: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook]'
+  og_description: '[node:sa_description|node:sa_seo_description]'
+  og_image: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook]'
+  og_image_alt: '[node:sa_featured_image:entity:field_media_image:alt]'
+  og_image_height: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:height]'
+  og_image_type: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:mimetype]'
+  og_image_width: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:width]'
+  og_locale: en_US
+  og_site_name: '[site:name]'
+  og_title: '[node:sa_seo_page_title|node:title]'
+  og_type: website
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  referrer: unsafe-url
+  rights: 'Copyright ©[date:html_year] All rights reserved.'
+  title: '[node:sa_seo_page_title|node:title] | [site:name]'
+  twitter_cards_description: '[node:sa_description|node:sa_seo_description]'
+  twitter_cards_image: '[node:sa_featured_image:entity:field_media_image:sa_social_media_x:url]'
+  twitter_cards_image_alt: '[node:sa_featured_image:entity:field_media_image:alt]'
+  twitter_cards_title: '[node:sa_seo_page_title|node:title]'
+  twitter_cards_type: summary_large_image

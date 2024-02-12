@@ -1,0 +1,25 @@
+uuid: ea837239-dee7-486f-92ab-92c169ff35e8
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: '-6az8xBFj0WV-ucA3kGWUHUR-y6mWjHYN4Hu4R78MhQ'
+name: sa_square_360
+label: 'Square - 360'
+effects:
+  aec3794c-4e79-4c3b-aeaf-4002923c065e:
+    uuid: aec3794c-4e79-4c3b-aeaf-4002923c065e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 360
+      height: 360
+      crop_type: focal_point
+  ec350863-c40c-46c0-9c3e-7eb970b605f2:
+    uuid: ec350863-c40c-46c0-9c3e-7eb970b605f2
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

@@ -1,0 +1,23 @@
+uuid: d38db13a-1735-4265-b19a-a6bf375e318f
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - views
+    - viewsreference
+_core:
+  default_config_hash: 0y3SmyNJs9RC-Y6j2_OKwd0MSLZF79zHusi8zE9sp4k
+id: paragraph.sa_filtered_list
+field_name: sa_filtered_list
+entity_type: paragraph
+type: viewsreference
+settings:
+  target_type: view
+module: viewsreference
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

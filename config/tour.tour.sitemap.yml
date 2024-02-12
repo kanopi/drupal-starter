@@ -1,0 +1,69 @@
+uuid: 0fb1d053-5fdd-434e-a447-d6e288f209d0
+langcode: en
+status: true
+dependencies:
+  module:
+    - sitemap
+_core:
+  default_config_hash: Gi54VzjWQeYxc11Wn--dJyK-v1mFl_Sfj0mMX8t_FZc
+id: sitemap
+label: 'Sitemap tour'
+module: sitemap
+routes:
+  -
+    route_name: sitemap.settings
+tips:
+  page-title:
+    id: page-title
+    plugin: text
+    label: 'Page Title'
+    weight: -100
+    attributes:
+      data-id: edit-page-title
+    body: '<p>Define the page title that will be used on the Sitemap page. If you do not wish to display a title, leave this field blank.</p>'
+    location: right
+  message:
+    id: message
+    plugin: text
+    label: 'Sitemap message'
+    weight: -99
+    attributes:
+      data-id: edit-message-value
+    body: '<p>Define a message to be displayed above the sitemap. If you do not wish to display a message, leave this field blank.</p>'
+    location: bottom
+  plugins:
+    id: plugins
+    plugin: text
+    label: Plugins
+    weight: -98
+    attributes:
+      data-class: 'form-item label[for="edit-enabled"]'
+    body: '<p>Select which plugins to use to generate entries into the sitemap.  You will be able to configure below.</p>'
+    location: right
+  plugin-display-order:
+    id: plugin-display-order
+    plugin: text
+    label: 'Plugin display order'
+    weight: -97
+    attributes:
+      data-id: sitemap-order
+    body: '<p>Use this section to reorder the items as they appear in the Sitemap.  Click and drag the arrow icon to reorder, or select Show row heights and you can set the weight of the items manually.  The lower the number the higher in the list it will appear.</p>'
+    location: bottom
+  css:
+    id: css
+    plugin: text
+    label: 'CSS Settings'
+    weight: -96
+    attributes:
+      data-id: edit-css
+    body: '<p>Select this box if you wish to load the CSS file included with the module. To learn how to override or specify the CSS at the theme level, visit the <a href="https://www.drupal.org/node/2615568">documentation page</a>.</p>'
+    location: top
+  save-configuration:
+    id: save-configuration
+    plugin: text
+    label: 'Save configuration'
+    weight: -95
+    attributes:
+      data-id: edit-actions
+    body: '<p>Once you are finished configuring the sitemap settings, select Save configuration to save them.</p>'
+    location: top

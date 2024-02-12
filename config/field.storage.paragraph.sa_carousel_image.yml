@@ -1,0 +1,22 @@
+uuid: a45ae271-36e6-4005-b987-9f05370906ce
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+_core:
+  default_config_hash: bFEwfUhcaJ0d71pE5lcMTboodPNmw-tREdrSaHNPqh0
+id: paragraph.sa_carousel_image
+field_name: sa_carousel_image
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

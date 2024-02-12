@@ -1,0 +1,21 @@
+uuid: d3c22f4e-8be5-4dae-96e8-97155c291450
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_styles
+    - paragraphs.paragraphs_type.sa_text
+_core:
+  default_config_hash: 1MzNiKrPQUdKidIh0Eo6p0EwAGWmVkJyY9OALNxEgKc
+id: paragraph.sa_text.sa_styles
+field_name: sa_styles
+entity_type: paragraph
+bundle: sa_text
+label: Styles
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

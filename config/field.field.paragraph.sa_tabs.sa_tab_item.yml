@@ -1,0 +1,66 @@
+uuid: 2e4cb748-cd35-46bd-82f5-ca915be59d6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_tab_item
+    - paragraphs.paragraphs_type.sa_tab
+    - paragraphs.paragraphs_type.sa_tabs
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: 9AEAxunJCnBNeXv-R2JZazug38az5KABvXRUKKc2koQ
+id: paragraph.sa_tabs.sa_tab_item
+field_name: sa_tab_item
+entity_type: paragraph
+bundle: sa_tabs
+label: 'Tab Item'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      sa_tab: sa_tab
+    negate: 0
+    target_bundles_drag_drop:
+      sa_accordion:
+        weight: 13
+        enabled: false
+      sa_accordion_item:
+        weight: 14
+        enabled: false
+      sa_block:
+        weight: 15
+        enabled: false
+      sa_card:
+        weight: 16
+        enabled: false
+      sa_carousel:
+        weight: 17
+        enabled: false
+      sa_carousel_item:
+        weight: 18
+        enabled: false
+      sa_filtered_list:
+        weight: 19
+        enabled: false
+      sa_media:
+        weight: 20
+        enabled: false
+      sa_side_by_side:
+        weight: 21
+        enabled: false
+      sa_tab:
+        weight: 22
+        enabled: true
+      sa_tabs:
+        weight: 23
+        enabled: false
+      sa_text:
+        weight: 24
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,22 @@
+uuid: 6e356af6-e532-4385-aba3-2fc417462675
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ui_suite_bootstrap
+_core:
+  default_config_hash: T0wbI6qVdThbbIqXDZFg_1VZ3_ittXBdEoUH7d7ux_E
+id: ui_suite_bootstrap_local_tasks
+theme: ui_suite_bootstrap
+region: content
+weight: -20
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

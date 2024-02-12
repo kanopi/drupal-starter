@@ -1,0 +1,10 @@
+uuid: 7c067602-2ff0-4097-ae3e-0d43030b224f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: W3NHNpLfStonU2yUkDB-im1WBfXApEryS0_pN4bqrK4
+name: Category
+vid: sa_category
+description: 'Provides a way to categorize your content by shared characteristics to topic.'
+weight: 0

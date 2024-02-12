@@ -1,0 +1,115 @@
+uuid: a3ada5a9-fb7f-43ad-9e21-4b07fc74d776
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.sa_post.sa_author
+    - field.field.node.sa_post.sa_author_url
+    - field.field.node.sa_post.sa_body
+    - field.field.node.sa_post.sa_category
+    - field.field.node.sa_post.sa_description
+    - field.field.node.sa_post.sa_external_source
+    - field.field.node.sa_post.sa_featured_image
+    - field.field.node.sa_post.sa_related_posts
+    - field.field.node.sa_post.sa_robots
+    - field.field.node.sa_post.sa_seo_description
+    - field.field.node.sa_post.sa_seo_image
+    - field.field.node.sa_post.sa_seo_page_title
+    - field.field.node.sa_post.sa_type
+    - node.type.sa_post
+  module:
+    - ds
+    - nomarkup
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: pattern_card
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        pattern:
+          field_templates: default
+          variant: default
+          settings:
+            image_position: ''
+            image_position_token: ''
+            image_col_classes: col-md-4
+            image_col_classes_token: ''
+            content_col_classes: col-md-8
+            content_col_classes_token: ''
+    regions:
+      image:
+        - sa_featured_image
+      header:
+        - node_title
+      content:
+        - sa_description
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: true
+          'link class': ''
+          link_target: ''
+          wrapper: h3
+          class: ''
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+_core:
+  default_config_hash: VjKKdKBL464f7d381pzsFC5m6tfpdvsnsbVyDhYtXSs
+id: node.sa_post.teaser
+targetEntityType: node
+bundle: sa_post
+mode: teaser
+content:
+  sa_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  sa_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: sa_16_9
+      link: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: '1'
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 0
+    region: image
+hidden:
+  links: true
+  published_at: true
+  sa_author: true
+  sa_author_url: true
+  sa_body: true
+  sa_category: true
+  sa_external_source: true
+  sa_related_posts: true
+  sa_robots: true
+  sa_seo_description: true
+  sa_seo_image: true
+  sa_seo_page_title: true
+  sa_type: true

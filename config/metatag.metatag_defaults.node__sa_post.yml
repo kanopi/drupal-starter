@@ -1,0 +1,46 @@
+uuid: a18963b8-202d-4ba2-9f57-3ab63133b844
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ZIqlChUX5iL3euB2aM9oK6V2-VhPLtLoGwQiPyOq3a0
+id: node__sa_post
+label: 'Content: Post'
+tags:
+  article_author: '[node:sa_author]'
+  article_modified_time: '[node:changed:custom:c]'
+  article_published_time: '[node:published:custom:c]'
+  author: '[node:sa_author]'
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:sa_description|node:sa_seo_description]'
+  image_src: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook]'
+  og_description: '[node:sa_description|node:sa_seo_description]'
+  og_image: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook]'
+  og_image_alt: '[node:sa_featured_image:entity:field_media_image:alt]'
+  og_image_height: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:height]'
+  og_image_type: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:mimetype]'
+  og_image_width: '[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:width]'
+  og_locale: en_US
+  og_site_name: '[site:name]'
+  og_title: '[node:sa_seo_page_title|node:title]'
+  og_type: article
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  referrer: unsafe-url
+  rights: 'Copyright ©[date:html_year] All rights reserved.'
+  schema_article_author: 'a:3:{s:5:"@type";s:6:"Person";s:4:"name";s:16:"[node:sa_author]";s:3:"url";s:24:"[node:sa_author_url:uri]";}'
+  schema_article_date_modified: '[node:changed:custom:c]'
+  schema_article_date_published: '[node:published:custom:c]'
+  schema_article_description: '[node:sa_description|node:sa_seo_description]'
+  schema_article_headline: '[node:sa_seo_page_title|node:title]'
+  schema_article_id: '[current-page:url:absolute]'
+  schema_article_image: 'a:5:{s:5:"@type";s:11:"ImageObject";s:20:"representativeOfPage";s:4:"True";s:3:"url";s:78:"[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:url]";s:5:"width";s:80:"[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:width]";s:6:"height";s:81:"[node:sa_featured_image:entity:field_media_image:sa_social_media_facebook:height]";}'
+  schema_article_main_entity_of_page: '[current-page:url:absolute]'
+  schema_article_name: '[node:sa_seo_page_title|node:title]'
+  schema_article_type: Article
+  title: '[node:sa_seo_page_title|node:title] | [site:name]'
+  twitter_cards_description: '[node:sa_description|node:sa_seo_description]'
+  twitter_cards_image: '[node:sa_featured_image:entity:field_media_image:sa_social_media_x:url]'
+  twitter_cards_image_alt: '[node:sa_featured_image:entity:field_media_image:alt]'
+  twitter_cards_title: '[node:sa_seo_page_title|node:title]'
+  twitter_cards_type: summary_large_image

@@ -1,0 +1,23 @@
+uuid: b8c1ae0a-4203-4d17-aaea-c3a24e9c0d3e
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: DBD38lK7lgaklG-If_Yz4-REGg9d-ybMVLV0_14eGgc
+id: paragraph.sa_header
+field_name: sa_header
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

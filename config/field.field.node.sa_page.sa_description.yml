@@ -1,0 +1,21 @@
+uuid: 33650ae2-35d1-438e-a08d-5010f2a760b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_description
+    - node.type.sa_page
+_core:
+  default_config_hash: GFvPMbd4WvAagjNSolDaqaCl-r5YH4-I4ntPcsRxdH8
+id: node.sa_page.sa_description
+field_name: sa_description
+entity_type: node
+bundle: sa_page
+label: Description
+description: 'Use this space to write a short description that is used in teaser cards and social media meta tags.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

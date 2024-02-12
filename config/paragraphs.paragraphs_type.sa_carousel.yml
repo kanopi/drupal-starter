@@ -1,0 +1,12 @@
+uuid: ffe00660-1a21-441a-a600-d6444985f6c5
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 7ZOMAOfWnrLyoDdUGqBjzkCW9nhjWKl6wc_PSLvkVNk
+id: sa_carousel
+label: Carousel
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,63 @@
+uuid: 9510bb02-77f3-4ef4-8d0e-a8109fc0eb53
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_media.sa_description
+    - field.field.paragraph.sa_media.sa_header
+    - field.field.paragraph.sa_media.sa_media
+    - field.field.paragraph.sa_media.sa_styles
+    - paragraphs.paragraphs_type.sa_media
+  module:
+    - bootstrap_layout_classes
+    - media_library
+    - text
+_core:
+  default_config_hash: O0z4RdY0_AMUSoXeJ8HDw2ZLQ3HWT1QbWDfnYn-0Wvw
+id: paragraph.sa_media.default
+targetEntityType: paragraph
+bundle: sa_media
+mode: default
+content:
+  sa_description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  sa_header:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  sa_media:
+    type: media_library_widget
+    weight: 4
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  sa_styles:
+    type: bootstrap_layout_classes_widget
+    weight: 3
+    region: content
+    settings:
+      usage: 0
+      wrapper: 1
+      container: true
+      col: true
+      text: true
+      offset: true
+      margin: true
+      padding: true
+      justify-content: true
+      custom: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

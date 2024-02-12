@@ -40,6 +40,7 @@
         "drush/drush": "^12.4.3",
         "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
+        "kanopi/saplings": "^1",
         "kanopi/shrubs": "^0.2.5",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^10",

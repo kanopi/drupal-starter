@@ -1,0 +1,3 @@
+id: security_review-field
+settings:
+  known_risky_fields: {  }

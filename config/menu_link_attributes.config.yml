@@ -1,0 +1,16 @@
+attributes:
+  class:
+    label: 'Menu link class'
+    description: 'Add a CSS class to the menu link (a)'
+  target:
+    label: 'Menu link target'
+    description: 'Set the link to open in the same window or a new one.'
+  container_class:
+    label: 'Menu item class'
+    description: 'Add a CSS class to the menu item (li)'
+  container_id:
+    label: 'Menu item ID'
+    description: 'Add a unique ID to the menu item.'
+  id:
+    label: 'Menu link ID'
+    description: 'Add a unique ID to the menu link.'

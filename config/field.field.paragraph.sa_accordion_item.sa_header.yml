@@ -1,0 +1,21 @@
+uuid: d9cf495e-b2d5-457a-8252-788c2d541601
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_header
+    - paragraphs.paragraphs_type.sa_accordion_item
+_core:
+  default_config_hash: QoqxVTDXP1qeVx_odyR5sHXTM0UONV3oN63XeQAcHa0
+id: paragraph.sa_accordion_item.sa_header
+field_name: sa_header
+entity_type: paragraph
+bundle: sa_accordion_item
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

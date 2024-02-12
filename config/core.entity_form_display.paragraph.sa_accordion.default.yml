@@ -1,0 +1,71 @@
+uuid: fb46055d-e38f-419a-9efa-3d9ffc4b37f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_accordion.sa_accordion_item
+    - field.field.paragraph.sa_accordion.sa_styles
+    - paragraphs.paragraphs_type.sa_accordion
+  module:
+    - bootstrap_layout_classes
+    - paragraphs
+_core:
+  default_config_hash: OA9YlUzmMJ67WEN6rsM8CBYr4NZdCnhs69Y3U0iNCHc
+id: paragraph.sa_accordion.default
+targetEntityType: paragraph
+bundle: sa_accordion
+mode: default
+content:
+  sa_accordion_item:
+    type: paragraphs
+    weight: 4
+    region: content
+    settings:
+      title: Item
+      title_plural: Items
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  sa_description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  sa_header:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  sa_styles:
+    type: bootstrap_layout_classes_widget
+    weight: 3
+    region: content
+    settings:
+      usage: 0
+      wrapper: 1
+      container: true
+      col: true
+      text: true
+      offset: true
+      margin: true
+      padding: true
+      justify-content: true
+      custom: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

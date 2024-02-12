@@ -1,0 +1,21 @@
+uuid: b6f3c0a6-f358-4203-bfb8-165faffa25d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_header
+    - paragraphs.paragraphs_type.sa_text
+_core:
+  default_config_hash: rWYIn5u4_d33ZcRR9mbP2YX0hX0Ahu4SukWTtPwAHec
+id: paragraph.sa_text.sa_header
+field_name: sa_header
+entity_type: paragraph
+bundle: sa_text
+label: Header
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

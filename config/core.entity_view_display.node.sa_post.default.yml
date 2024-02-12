@@ -1,0 +1,180 @@
+uuid: 2b09dced-2a8d-403a-a600-ba54a1aa1acd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sa_post.sa_author
+    - field.field.node.sa_post.sa_author_url
+    - field.field.node.sa_post.sa_body
+    - field.field.node.sa_post.sa_category
+    - field.field.node.sa_post.sa_description
+    - field.field.node.sa_post.sa_external_source
+    - field.field.node.sa_post.sa_featured_image
+    - field.field.node.sa_post.sa_related_posts
+    - field.field.node.sa_post.sa_robots
+    - field.field.node.sa_post.sa_seo_description
+    - field.field.node.sa_post.sa_seo_image
+    - field.field.node.sa_post.sa_seo_page_title
+    - field.field.node.sa_post.sa_type
+    - node.type.sa_post
+  module:
+    - ds
+    - link
+    - nomarkup
+    - text
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: pattern_post
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        pattern:
+          field_templates: default
+          variant: default
+    regions:
+      image:
+        - sa_featured_image
+      header:
+        - node_title
+      content:
+        - node_post_date
+        - sa_body
+        - sa_related_posts
+      sidebar:
+        - sa_author
+        - sa_author_url
+    fields:
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 2
+        label: hidden
+        formatter: ds_post_date_short
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: false
+          'link class': ''
+          link_target: ''
+          wrapper: h2
+          class: ''
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+_core:
+  default_config_hash: gZThdpAUmqzEr7YKbP2qLx4gqssJTgUTXvbEuUPzfkk
+id: node.sa_post.default
+targetEntityType: node
+bundle: sa_post
+mode: default
+content:
+  sa_author:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 6
+    region: sidebar
+  sa_author_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 7
+    region: sidebar
+  sa_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 3
+    region: content
+  sa_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: sa_16_9
+      link: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: '1'
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 0
+    region: image
+  sa_related_posts:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings:
+      nomarkup:
+        enabled: false
+        separator: ''
+        referenced_entity: ''
+      ds:
+        ds_limit: ''
+        ft:
+          id: pattern
+          settings:
+            pattern: card
+            pattern_mapping: {  }
+            pattern_settings:
+              card:
+                image_position: ''
+                image_position_token: ''
+                image_col_classes: col-md-4
+                image_col_classes_token: col-md-4
+                content_col_classes: col-md-8
+                content_col_classes_token: col-md-8
+            pattern_variant: default
+    weight: 5
+    region: content
+hidden:
+  links: true
+  published_at: true
+  sa_category: true
+  sa_description: true
+  sa_external_source: true
+  sa_robots: true
+  sa_seo_description: true
+  sa_seo_image: true
+  sa_seo_page_title: true
+  sa_type: true

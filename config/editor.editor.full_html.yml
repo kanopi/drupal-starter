@@ -1,0 +1,86 @@
+uuid: bbc806e2-323a-45ce-b296-86c07b6fcf9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ckeditor5
+_core:
+  default_config_hash: zADcdaHt8ExRnnNukk1nHJ43z6WPoISSreUYaPu0o_8
+format: full_html
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - undo
+      - redo
+      - heading
+      - style
+      - bold
+      - underline
+      - italic
+      - strikethrough
+      - code
+      - subscript
+      - superscript
+      - blockQuote
+      - link
+      - indent
+      - outdent
+      - bulletedList
+      - numberedList
+      - alignment
+      - removeFormat
+      - insertTable
+      - drupalMedia
+      - sourceEditing
+  plugins:
+    ckeditor5_alignment:
+      enabled_alignments:
+        - center
+        - justify
+        - left
+        - right
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_list:
+      properties:
+        reversed: true
+        startIndex: true
+      multiBlock: true
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+    ckeditor5_style:
+      styles:
+        -
+          label: 'Primary Button'
+          element: '<a class="btn btn-primary">'
+        -
+          label: 'Secondary Button'
+          element: '<a class="btn btn-secondary">'
+        -
+          label: Blockquote
+          element: '<blockquote class="blockquote">'
+        -
+          label: 'Blockquote Author'
+          element: '<p class="author">'
+        -
+          label: Aside
+          element: '<p class="aside">'
+    editor_advanced_link_link:
+      enabled_attributes:
+        - class
+        - target
+        - title
+    linkit_extension:
+      linkit_enabled: true
+      linkit_profile: bp_default
+    media_media:
+      allow_view_mode_override: true
+image_upload: {  }

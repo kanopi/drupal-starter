@@ -1,0 +1,18 @@
+// Default variables.
+@import "../configuration-import";
+
+.fieldset-legend.form-required::after,
+.form-label.form-required::after,
+.form-check-label.form-required::after,
+.required-mark::after {
+  background-image: #{escape-svg($required-mark-bg-image)};
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .fieldset-legend.form-required::after,
+  .form-label.form-required::after,
+  .form-check-label.form-required::after,
+  .required-mark::after {
+    background-image: #{escape-svg($required-mark-bg-image-contrast)};
+  }
+}

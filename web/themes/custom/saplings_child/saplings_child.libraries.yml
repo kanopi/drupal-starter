@@ -1,0 +1,13 @@
+bootstrap:
+  css:
+    theme:
+      dist/css/styles.css: { minified: true }
+
+form:
+  css:
+    component:
+      dist/css/form/form-required.css: { minified: true }
+
+am:
+  js:
+    dist/js/js/am.js: { minified: true }

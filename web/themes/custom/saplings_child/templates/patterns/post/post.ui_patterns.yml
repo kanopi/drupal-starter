@@ -1,0 +1,31 @@
+post:
+  label: "Post"
+  description: "Post: A versatile content container with customizable headers, content and a customizable sidebar. This pattern offers a wide array of display options for various types of content. Utilize it to showcase articles, news updates, or any other form of written content."
+  links:
+    - "https://getbootstrap.com/docs/5.3/components/card/"
+  category: "Post"
+  variants:
+    default:
+      label: "Default"
+  fields:
+    image:
+      type: "render"
+      label: "Image"
+      description: "Featured image."
+      preview:
+        theme: "image"
+        uri: "data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZm9udC1zaXplOiAxLjEyNXJlbTsgdGV4dC1hbmNob3I6IG1pZGRsZTsgdXNlci1zZWxlY3Q6IG5vbmU7IiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIyNTQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgc2xpY2UiIGZvY3VzYWJsZT0iZmFsc2UiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iUGxhY2Vob2xkZXI6IEltYWdlIGNhcCI+PHRpdGxlPlBsYWNlaG9sZGVyPC90aXRsZT48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjODY4ZTk2Ij48L3JlY3Q+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZpbGw9IiNkZWUyZTYiIGR5PSIuM2VtIj5JbWFnZSBjYXA8L3RleHQ+PC9zdmc+Cg=="
+        alt: "&copy; 2017 John Smith photography"
+    header:
+      type: "render"
+      label: "Title"
+      description: "Post title."
+      preview: "Featured"
+    content:
+      type: "render"
+      label: "Content"
+      description: "Body."
+    sidebar:
+      type: "render"
+      label: "Side bar"
+      description: "Side Bar."

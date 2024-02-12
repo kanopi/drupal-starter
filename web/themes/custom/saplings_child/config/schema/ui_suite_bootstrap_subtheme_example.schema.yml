@@ -1,0 +1,3 @@
+ui_suite_bootstrap_subtheme_example.settings:
+  type: ui_suite_bootstrap.settings
+  label: 'UI Suite Bootstrap Subtheme Example settings'

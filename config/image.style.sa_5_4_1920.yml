@@ -1,0 +1,25 @@
+uuid: 7e035780-68dd-41a4-b018-69f209a6eca3
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+_core:
+  default_config_hash: y9erVimmsMt46hTal4vLiz0WG8VPX-KOmTVKZZpEA6Q
+name: sa_5_4_1920
+label: '5:4 - 1920x1536'
+effects:
+  3f57b8cc-a941-42d1-be90-4cdfd84366c3:
+    uuid: 3f57b8cc-a941-42d1-be90-4cdfd84366c3
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 1536
+      crop_type: focal_point
+  b1f91ffb-399a-4431-8108-0d0eeb3f6776:
+    uuid: b1f91ffb-399a-4431-8108-0d0eeb3f6776
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

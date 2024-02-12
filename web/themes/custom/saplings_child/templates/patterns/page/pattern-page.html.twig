@@ -1,0 +1,11 @@
+<div{{attributes.addClass('node-page')}}>
+	{% if image %}
+		{{ image|add_class('page-img') }}
+	{% endif %}
+	{% if header %}
+		<div class="page-header">
+			{{ header }}
+		</div>
+	{% endif %}
+	{{ content }}
+</div>

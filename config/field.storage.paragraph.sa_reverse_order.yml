@@ -1,0 +1,20 @@
+uuid: a03bb548-0b9c-4dc3-aa59-79574e39aa73
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+_core:
+  default_config_hash: raxs506JUBCbIft-KvlJQw0ToQHSYQfyGnn-piU_nGA
+id: paragraph.sa_reverse_order
+field_name: sa_reverse_order
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

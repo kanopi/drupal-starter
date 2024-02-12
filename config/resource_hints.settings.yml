@@ -1,0 +1,13 @@
+dns_prefetch_output: 0
+dns_prefetch_resources:
+  - ''
+dns_prefetch_control: 'on'
+preconnect_output: 0
+preconnect_resources:
+  - ''
+prefetch_output: 0
+prefetch_resources:
+  - ''
+prerender_output: 0
+prerender_resources:
+  - ''

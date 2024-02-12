@@ -1,0 +1,36 @@
+uuid: e5ff2489-041e-4ed2-931b-b705d0a3aeea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_accordion_item.sa_description
+    - field.field.paragraph.sa_accordion_item.sa_header
+    - paragraphs.paragraphs_type.sa_accordion_item
+  module:
+    - text
+_core:
+  default_config_hash: JfEuRiMzOEXUYG7R2dfeMg8CGClLjC6ZjGnvpee7ksA
+id: paragraph.sa_accordion_item.default
+targetEntityType: paragraph
+bundle: sa_accordion_item
+mode: default
+content:
+  sa_description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  sa_header:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,21 @@
+uuid: 4868e708-8321-476a-9e0c-4b34a077075d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: 9zbvvezVAB2Rvx8SJgtusCEmGyUt6TwfnUxq5EKYs3E
+id: node.sa_related_posts
+field_name: sa_related_posts
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

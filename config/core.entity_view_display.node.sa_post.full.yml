@@ -1,0 +1,224 @@
+uuid: db2e3126-6443-4d84-9143-bcac415e8364
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.sa_post.sa_author
+    - field.field.node.sa_post.sa_author_url
+    - field.field.node.sa_post.sa_body
+    - field.field.node.sa_post.sa_category
+    - field.field.node.sa_post.sa_description
+    - field.field.node.sa_post.sa_external_source
+    - field.field.node.sa_post.sa_featured_image
+    - field.field.node.sa_post.sa_related_posts
+    - field.field.node.sa_post.sa_robots
+    - field.field.node.sa_post.sa_seo_description
+    - field.field.node.sa_post.sa_seo_image
+    - field.field.node.sa_post.sa_seo_page_title
+    - field.field.node.sa_post.sa_type
+    - node.type.sa_post
+  module:
+    - ds
+    - field_group
+    - link
+    - nomarkup
+    - text
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: pattern_post
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        pattern:
+          field_templates: default
+          variant: default
+    regions:
+      image:
+        - sa_featured_image
+      header:
+        - node_title
+      content:
+        - node_post_date
+        - sa_body
+        - group_card_group
+        - sa_related_posts
+      sidebar:
+        - sa_author
+        - sa_author_url
+    fields:
+      node_post_date:
+        plugin_id: node_post_date
+        weight: 2
+        label: hidden
+        formatter: ds_post_date_short
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          link: false
+          'link class': ''
+          link_target: ''
+          wrapper: h1
+          class: ''
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+  field_group:
+    group_card_group:
+      children:
+        - sa_related_posts
+      label: 'Card Group'
+      parent_name: ''
+      region: content
+      weight: 4
+      format_type: pattern_formatter
+      format_settings:
+        pattern: card_layout
+        variants:
+          accordion: default
+          alert: primary
+          button: default
+          button_group: sm
+          card: default
+          carousel: default
+          close_button: default
+          dropdown: dropdown
+          list: default
+          list_group: default
+          list_group_item: default
+          modal: sm
+          nav: default
+          navbar: default
+          navbar_nav: default
+          offcanvas: start
+          pagination: sm
+          progress: default
+          spinner: border__border_sm
+          table: default
+          page: default
+          post: default
+        pattern_mapping:
+          'fields:sa_related_posts':
+            destination: cards
+            weight: 0
+            plugin: fields
+            source: sa_related_posts
+        pattern_settings: {  }
+        show_empty_fields: 0
+_core:
+  default_config_hash: msYhk4dMP2XjTS2T1ZD0DkQEzTGoec121DlM2XX-yH4
+id: node.sa_post.full
+targetEntityType: node
+bundle: sa_post
+mode: full
+content:
+  sa_author:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 5
+    region: sidebar
+  sa_author_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: sidebar
+  sa_body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 3
+    region: content
+  sa_featured_image:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: sa_16_9
+      link: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: '1'
+      ds:
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 0
+    region: image
+  sa_related_posts:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: ''
+        referenced_entity: 0
+      ds:
+        ds_limit: ''
+        ft:
+          id: default
+          settings:
+            lb: ''
+            lb-col: false
+            classes: {  }
+    weight: 5
+    region: content
+hidden:
+  links: true
+  published_at: true
+  sa_category: true
+  sa_description: true
+  sa_external_source: true
+  sa_robots: true
+  sa_seo_description: true
+  sa_seo_image: true
+  sa_seo_page_title: true
+  sa_type: true

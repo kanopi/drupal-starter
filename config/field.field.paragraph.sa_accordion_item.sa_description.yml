@@ -1,0 +1,24 @@
+uuid: 306970a7-999b-4bbb-b135-dcab9eba50b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_description
+    - paragraphs.paragraphs_type.sa_accordion_item
+  module:
+    - text
+_core:
+  default_config_hash: jSX2WRF70E8eeZJ_s-QjxNQoQqX-e6HiFbMVfruQsaQ
+id: paragraph.sa_accordion_item.sa_description
+field_name: sa_description
+entity_type: paragraph
+bundle: sa_accordion_item
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

@@ -1,0 +1,31 @@
+uuid: 56d7e3f3-82d3-477a-97d5-2144139bcb9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_seo_image
+    - media.type.sa_featured_image
+    - node.type.sa_page
+_core:
+  default_config_hash: Zlk_dQ7S35XRDcGpY0b35-eJHxKyVm60wENRm_dKaL4
+id: node.sa_page.sa_seo_image
+field_name: sa_seo_image
+entity_type: node
+bundle: sa_page
+label: 'SEO Image'
+description: 'Use this field to overwrite the default image for SEO meta tags.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      sa_featured_image: sa_featured_image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: sa_featured_image
+field_type: entity_reference

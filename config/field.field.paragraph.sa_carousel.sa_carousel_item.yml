@@ -1,0 +1,48 @@
+uuid: ceb85201-d8b2-46c6-b552-8e2bb3eefca2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_carousel_item
+    - paragraphs.paragraphs_type.sa_carousel
+    - paragraphs.paragraphs_type.sa_carousel_item
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: WMCmEtwA6uyLWL9XnkT5yuJVjz7ZpxVfXE43qHtlxe4
+id: paragraph.sa_carousel.sa_carousel_item
+field_name: sa_carousel_item
+entity_type: paragraph
+bundle: sa_carousel
+label: 'Carousel Item'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      sa_carousel_item: sa_carousel_item
+    negate: 0
+    target_bundles_drag_drop:
+      sa_block:
+        weight: 8
+        enabled: false
+      sa_carousel:
+        weight: 9
+        enabled: false
+      sa_carousel_item:
+        weight: 7
+        enabled: true
+      sa_filtered_list:
+        weight: 10
+        enabled: false
+      sa_media:
+        weight: 11
+        enabled: false
+      sa_text:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

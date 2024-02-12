@@ -1,0 +1,18 @@
+<div{{attributes.addClass('node-post')}}>
+	{% if image %}
+		{{ image|add_class('post-img') }}
+	{% endif %}
+	{% if header %}
+		<div class="post-header mt-3 mb-3">
+			{{ header }}
+		</div>
+	{% endif %}
+	<div class="row">
+		<div class="col-md-9">
+			{{ content }}
+		</div>
+		<div class="col-md-3">
+			{{ sidebar }}
+		</div>
+	</div>
+</div>

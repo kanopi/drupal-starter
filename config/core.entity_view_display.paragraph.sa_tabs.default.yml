@@ -1,0 +1,25 @@
+uuid: 5ad29676-9902-4ffb-8486-8a9f16e8c82b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_tabs.sa_tab_item
+    - paragraphs.paragraphs_type.sa_tabs
+_core:
+  default_config_hash: WfOa4WVDk7e4ISWZGKzO3BqB-F02vnWC7MX1ussNqP0
+id: paragraph.sa_tabs.default
+targetEntityType: paragraph
+bundle: sa_tabs
+mode: default
+content:
+  field_tab_item:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  sa_tab_item: true

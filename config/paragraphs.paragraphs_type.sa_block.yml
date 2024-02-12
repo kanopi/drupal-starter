@@ -1,0 +1,12 @@
+uuid: ec6105a3-2d18-4a3c-b82f-ff007a1a8af6
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: CuVgMoqYiEraGbrMjCJ2IeTa5pzCvw031EX7-fkVRcg
+id: sa_block
+label: Block
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

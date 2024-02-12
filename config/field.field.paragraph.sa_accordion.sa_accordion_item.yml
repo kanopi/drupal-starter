@@ -1,0 +1,54 @@
+uuid: 0cf62143-578f-4875-aef5-c7fdcda3533a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_accordion_item
+    - paragraphs.paragraphs_type.sa_accordion
+    - paragraphs.paragraphs_type.sa_accordion_item
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: AJiR6XF1f4R-P9abqQmGe7iIx9ccXFAsmI6nEuNFvMA
+id: paragraph.sa_accordion.sa_accordion_item
+field_name: sa_accordion_item
+entity_type: paragraph
+bundle: sa_accordion
+label: 'Accordion Item'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      sa_accordion_item: sa_accordion_item
+    negate: 0
+    target_bundles_drag_drop:
+      sa_accordion:
+        weight: 10
+        enabled: false
+      sa_accordion_item:
+        weight: 9
+        enabled: true
+      sa_block:
+        weight: 11
+        enabled: false
+      sa_carousel:
+        weight: 12
+        enabled: false
+      sa_carousel_item:
+        weight: 13
+        enabled: false
+      sa_filtered_list:
+        weight: 14
+        enabled: false
+      sa_media:
+        weight: 15
+        enabled: false
+      sa_text:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

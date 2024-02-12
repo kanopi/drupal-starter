@@ -1,0 +1,21 @@
+uuid: 86aacc1f-3775-4752-822d-2ac29a495954
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_seo_description
+    - node.type.sa_post
+_core:
+  default_config_hash: BUD_n2FMDfU6GP_qQDrHjubI4Q_rionbEDv63IIvJwk
+id: node.sa_post.sa_seo_description
+field_name: sa_seo_description
+entity_type: node
+bundle: sa_post
+label: 'SEO Description'
+description: 'Use this field to overwrite the default description for SEO meta descriptions.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

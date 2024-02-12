@@ -1,0 +1,6 @@
+page_title: Sitemap
+message:
+  format: plain_text
+  value: ''
+plugins: {  }
+include_css: true

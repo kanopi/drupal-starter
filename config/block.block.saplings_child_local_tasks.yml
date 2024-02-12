@@ -1,0 +1,22 @@
+uuid: 1df60dc1-4057-48b5-b139-f0d8a96111e1
+langcode: en
+status: true
+dependencies:
+  theme:
+    - saplings_child
+_core:
+  default_config_hash: T0wbI6qVdThbbIqXDZFg_1VZ3_ittXBdEoUH7d7ux_E
+id: saplings_child_local_tasks
+theme: saplings_child
+region: header
+weight: 10
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

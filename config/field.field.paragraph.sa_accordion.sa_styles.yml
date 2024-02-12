@@ -1,0 +1,21 @@
+uuid: ce9e004d-0d0c-4c2d-8735-224465dcbf6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_styles
+    - paragraphs.paragraphs_type.sa_accordion
+_core:
+  default_config_hash: LhGBle3sPQbIbdDx4svThFSGWblgiBAdy3MTq6HyjUY
+id: paragraph.sa_accordion.sa_styles
+field_name: sa_styles
+entity_type: paragraph
+bundle: sa_accordion
+label: Styles
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

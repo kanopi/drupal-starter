@@ -1,0 +1,16 @@
+// Adapt path to libraries depending on your installation.
+
+// Default variables.
+@import "configuration-import";
+@import "../../../../../libraries/bootstrap/scss/root";
+
+.ck-content {
+  @import "../../../../../libraries/bootstrap/scss/reboot";
+  @import "../../../../../libraries/bootstrap/scss/type";
+  @import "../../../../../libraries/bootstrap/scss/images";
+  @import "../../../../../libraries/bootstrap/scss/containers";
+  @import "../../../../../libraries/bootstrap/scss/grid";
+  @import "../../../../../libraries/bootstrap/scss/tables";
+  @import "../../../../../libraries/bootstrap/scss/helpers";
+  @import "../../../../../libraries/bootstrap/scss/utilities/api";
+}

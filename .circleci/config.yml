@@ -1,14 +1,14 @@
 # https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs
-TERMINUS_SITE: &TERMINUS_SITE "PANTHEON_PROJECT_MACHINE_NAME"
-PANTHEON_UUID: &PANTHEON_UUID "xxx"
-THEME_NAME: &THEME_NAME "site_theme"
-THEME_PATH: &THEME_PATH "web/themes/custom/site_theme"
-CYPRESS_NODE_VERSION: &CYPRESS_NODE_VERSION "18.16.1" # Matches NVMRC file.
-CYPRESS_CIMG_PHP: &CYPRESS_CIMG_PHP "cimg/php:8.1-browsers"
-CIMG_NODE: &CIMG_NODE "cimg/node:16.16"
-CIMG_PHP: &CIMG_PHP "cimg/php:8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
-CIMG_PHP_TAG: &CIMG_PHP_TAG "8.1.16"
-CIMG_PHP_TAG_MAJOR: &CIMG_PHP_TAG_MAJOR "8.1" # This is the version of PHP set in pantheon.yml/docksal.env.
+TERMINUS_SITE: &TERMINUS_SITE "saplings-devops"
+PANTHEON_UUID: &PANTHEON_UUID "3328b28e-c1d0-4acf-851f-4f8aea61867d"
+THEME_NAME: &THEME_NAME "saplings_child"
+THEME_PATH: &THEME_PATH "web/themes/custom/saplings_child"
+CYPRESS_NODE_VERSION: &CYPRESS_NODE_VERSION "20.11.0" # Matches NVMRC file.
+CYPRESS_CIMG_PHP: &CYPRESS_CIMG_PHP "cimg/php:8.2-browsers"
+THEME_NODE_VERSION: &THEME_NODE_VERSION "20.11.0" # Matches NVMRC file.
+CIMG_PHP: &CIMG_PHP "cimg/php:8.2" # This is the version of PHP set in pantheon.yml/docksal.env.
+CIMG_PHP_TAG: &CIMG_PHP_TAG "8.2.15"
+CIMG_PHP_TAG_MAJOR: &CIMG_PHP_TAG_MAJOR "8.2" # This is the version of PHP set in pantheon.yml/docksal.env.
 
 defaults: &defaults
   docker:
@@ -50,67 +50,42 @@ orbs:
 
 jobs:
   compile-theme:
-    docker:
-      # This version of node should match whats in the theme NVM setup
-      - image: *CIMG_NODE
+    docker:      
+      - image: *CIMG_PHP
     working_directory: ~/project
     steps:
       - checkout
+      - node/install:
+          node-version: *THEME_NODE_VERSION
       - restore_cache:
-          name: Restore Node cache
           keys:
-            - node_cache-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
-            - node_cache-
+            - drupal-theme-{{ checksum "composer.lock" }}
+      
+      - run:
+          name: Composer install for theme dependencies
+          command: |
+            composer install
+      
+      - save_cache:
+          key: drupal-theme-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+
       - run:
           name: Install Node Packages.
-          command: npm install
+          command: npm ci
           path: *THEME_PATH
-      - save_cache:
-          name: Save node cache
-          key: node_cache-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
-          paths:
-            - web/themes/custom/site_theme/node_modules
+
       - run:
-          name: Run Storybook Build
+          name: Compile Assets
           command: npm run build
           path: *THEME_PATH
+
       - persist_to_workspace:
           root: *THEME_PATH
           paths:
             - dist
-      - run:
-          name: Compile Storybook
-          path: web/themes/custom/site_theme
-          command: npm run build-storybook
-      - store_artifacts:
-          path: web/themes/custom/site_theme/.out
-          destination: storybook
-      - ci-tools/post-artifact-to-github:
-          body-title: Storybook
-          search-for: storybook/index.html
-  push_storybook:
-    docker:
-      - image: *CIMG_NODE
-    working_directory: ~/project
-    steps:
-      - checkout
-      - ci-tools/copy-ssh-key
-      - restore_cache:
-          keys:
-            - theme-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
-            - theme-
-      - run:
-          name: Install Storybook
-          path: *THEME_PATH
-          command: npm install
-      - save_cache:
-          key: theme-{{ checksum "web/themes/custom/site_theme/package-lock.json" }}
-          paths:
-            - web/themes/custom/site_theme/node_modules
-      - run:
-          name: Run Storybook Deploy
-          path: web/themes/custom/site_theme
-          command: npm run deploy-storybook
+       
   cypress:
     docker:
       - image: *CYPRESS_CIMG_PHP
@@ -126,13 +101,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - drupal-{{ checksum "composer.lock" }}
+            - drupal-cypress-{{ checksum "composer.lock" }}
       - run:
           name: run Composer install for Shrubs
           command: |
             composer install
       - save_cache:
-          key: drupal-{{ checksum "composer.lock" }}
+          key: drupal-cypress-{{ checksum "composer.lock" }}
           paths:
             - vendor
       - ci-tools/copy-ssh-key
@@ -228,14 +203,7 @@ jobs:
           parameters: '{"run_post_build_tests":true}'
 
 workflows:
-  Storybook:
-    when: *build
-    jobs:
-      - push_storybook:
-          context: kanopi-code
-          filters:
-            branches:
-              only: main
+
   PHPstan:
     when: *build
     jobs:

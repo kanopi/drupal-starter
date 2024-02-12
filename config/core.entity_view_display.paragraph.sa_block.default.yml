@@ -1,0 +1,69 @@
+uuid: 8bd9541a-da65-4229-9b7d-f4f43672fdc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_block.sa_block
+    - field.field.paragraph.sa_block.sa_description
+    - field.field.paragraph.sa_block.sa_header
+    - field.field.paragraph.sa_block.sa_styles
+    - paragraphs.paragraphs_type.sa_block
+  module:
+    - block_field
+    - bootstrap_layout_classes
+    - nomarkup
+    - text
+_core:
+  default_config_hash: 65adw10QJcQDAPDxqxzUWVe5W1Nap3e6d5ozTZFQnDU
+id: paragraph.sa_block.default
+targetEntityType: paragraph
+bundle: sa_block
+mode: default
+content:
+  sa_block:
+    type: block_field
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 2
+    region: content
+  sa_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 1
+    region: content
+  sa_header:
+    type: string
+    label: hidden
+    settings:
+      class: ''
+      tag: h2
+      link: false
+      link_class: ''
+      summary: false
+      trim: 200
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 0
+    region: content
+  sa_styles:
+    type: bootstrap_layout_classes_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden: {  }

@@ -1,0 +1,37 @@
+uuid: d9d9429c-d9da-4924-91fd-e3cd3645b0e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sa_carousel.sa_carousel_item
+    - paragraphs.paragraphs_type.sa_carousel
+  module:
+    - paragraphs
+_core:
+  default_config_hash: GwIXC8jN2LWy36XdZXTkzlTh9-6tuXqLc5ehMpBtocg
+id: paragraph.sa_carousel.default
+targetEntityType: paragraph
+bundle: sa_carousel
+mode: default
+content:
+  sa_carousel_item:
+    type: paragraphs
+    weight: 0
+    region: content
+    settings:
+      title: Item
+      title_plural: Items
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,31 @@
+uuid: 3d0e9d29-9d22-446e-bfa8-95d61ffdaf07
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_carousel_image
+    - media.type.image
+    - paragraphs.paragraphs_type.sa_carousel_item
+_core:
+  default_config_hash: 9ifsGhnAAgEkXoRhXnhD14BM9V2BZ_K08DlKtZCf8vk
+id: paragraph.sa_carousel_item.sa_carousel_image
+field_name: sa_carousel_image
+entity_type: paragraph
+bundle: sa_carousel_item
+label: 'Carousel Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

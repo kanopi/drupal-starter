@@ -1,0 +1,12 @@
+uuid: 6826bba5-ca3f-4018-84a2-8e8fc51acf26
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: KWZILGUYU6zWSEzFmzSy7-nTZQnU1gQwFgD6ksZRGAQ
+id: sa_side_by_side
+label: 'Side by Side'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -28,7 +28,7 @@ lightning='\xE2\x9A\xA1'
 drop='\xF0\x9F\x92\xA7'
 shark='\xF0\x9F\xA6\x88'
 gear='\xEF\xB8\x8F'
-watch_command='fin npm run develop'
+watch_command='fin npm run watch'
 
 #-------------------------- Settings --------------------------------
 
@@ -49,12 +49,6 @@ echo -e "${yellow} ${FULL_THEME_PATH}${NC}"
 echo -e "${green}${divider}${NC}"
 cd ${FULL_THEME_PATH}
 
-# Check for and remove the 'node_modules' folder for good measure before we install.
-if [ -d "$node_modules" ]; then
-  echo "removing node_modules folder"
-  rm -R node_modules
-fi
-
 # Runs NPM Install.
 echo -e "\n${yellow} ${construction} Install NPM ${construction}${NC}"
 echo -e "${green}${divider}${NC}"
@@ -68,13 +62,12 @@ nvm alias default ${NODE_VERSION}
 nvm use
 npm ci --save patch-package
 
-# Run Storybook Develop.
-echo -e "\n${yellow} ${construction} Running Storybook Develop ${construction}${NC}"
+# Compile assets
+echo -e "\n${yellow} ${construction} Compile assets ${construction}${NC}"
 echo -e "${green}${divider}${NC}"
 npm run build
 
 # Finish.
 echo -e "\n${yellow} ${party} Theme rebuilt!!! ${reverseparty}${NC}"
 echo -e "${NC}Run ${yellow}${watch_command}${NC} to watch${NC}"
-echo -e "${NC}Then, storybook will run at ${yellow}http://storybook.${VIRTUAL_HOST}${NC}"
 echo -e "${green}${divider}${NC}"

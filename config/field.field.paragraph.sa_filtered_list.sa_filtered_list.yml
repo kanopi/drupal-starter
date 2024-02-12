@@ -1,0 +1,33 @@
+uuid: ed3a3b56-754d-4ef0-82c4-6ba515a75776
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_filtered_list
+    - paragraphs.paragraphs_type.sa_filtered_list
+  module:
+    - viewsreference
+_core:
+  default_config_hash: I3Fs9A_uCY-aMbsLjSpoFYkQeDfQ4v0l4tzWOa1MAfc
+id: paragraph.sa_filtered_list.sa_filtered_list
+field_name: sa_filtered_list
+entity_type: paragraph
+bundle: sa_filtered_list
+label: 'Filtered List'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+  plugin_types:
+    block: block
+  preselect_views: {  }
+  enabled_settings:
+    argument: argument
+    title: true
+field_type: viewsreference

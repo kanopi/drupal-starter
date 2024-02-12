@@ -1,0 +1,27 @@
+uuid: 15b2b36b-ee03-4a0c-bd85-9916f9ca8ed6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_block
+    - paragraphs.paragraphs_type.sa_block
+  module:
+    - block_field
+_core:
+  default_config_hash: z1V-0U81cjmvlh-OxgncQDIz-NLahb0Pta5wdNqeTpo
+id: paragraph.sa_block.sa_block
+field_name: sa_block
+entity_type: paragraph
+bundle: sa_block
+label: Block
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  selection: blocks
+  selection_settings:
+    plugin_ids:
+      system_powered_by_block: system_powered_by_block
+field_type: block_field

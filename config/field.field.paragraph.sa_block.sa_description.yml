@@ -1,0 +1,24 @@
+uuid: 493d4363-0b9f-4908-ba69-be9cfc98e143
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.sa_description
+    - paragraphs.paragraphs_type.sa_block
+  module:
+    - text
+_core:
+  default_config_hash: KcSnwQh7Bpt9w_QyNPkc6tDKeeYHDBqHkmqi4WB3LY4
+id: paragraph.sa_block.sa_description
+field_name: sa_description
+entity_type: paragraph
+bundle: sa_block
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

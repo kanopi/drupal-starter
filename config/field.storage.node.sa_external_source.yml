@@ -1,0 +1,21 @@
+uuid: 13673378-d75e-4d7a-b825-31eb5d5bc9a8
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+_core:
+  default_config_hash: YsXq2UC0gfDDRTEMoAQk1cik5QC9z5rQwOZJiAQrXd0
+id: node.sa_external_source
+field_name: sa_external_source
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,26 @@
+uuid: 65ccc462-6f7f-4f87-a16b-9c9d00de97cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.sa_body
+    - node.type.sa_post
+  module:
+    - text
+_core:
+  default_config_hash: urYMWaz9d8BvME24Vo6KinGjwqeBQ5gzq73KznoQgDM
+id: node.sa_post.sa_body
+field_name: sa_body
+entity_type: node
+bundle: sa_post
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

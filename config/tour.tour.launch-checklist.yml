@@ -1,0 +1,53 @@
+uuid: 8a7aa5eb-2694-4797-9545-f45172c1c167
+langcode: en
+status: true
+dependencies:
+  module:
+    - launch_checklist
+_core:
+  default_config_hash: XaAKUisEXi3okA_AKgyL1YCFlBrdOp8US78s3UtX4O4
+id: launch-checklist
+label: 'Launch Checklist'
+module: launch_checklist
+routes:
+  -
+    route_name: checklistapi.checklists.launch_checklist
+tips:
+  launch-checklist-welcome:
+    id: launch-checklist-welcome
+    plugin: text
+    label: 'Launch Checklist'
+    weight: -100
+    body: "<p>This checklist will guide you through verifying best practices have been completed before launching a site.</p>\r\n<p>Review each item, and check them off, clicking Save as you go.</p>\r\n<p>There is a link to more information on most items which could be a settings page in your site, a module page on Drupal.org, or a reference link.</p>"
+  progress:
+    id: progress
+    plugin: text
+    label: Progress
+    weight: -99
+    selector: '#checklistapi-checklist-form .progress'
+    body: 'This bar at the top will track your progress as you work through the checklist.'
+    position: bottom
+  checklists:
+    id: checklists
+    plugin: text
+    label: Checklists
+    weight: -98
+    selector: '#checklistapi-checklist-form .form-type-vertical-tabs .vertical-tabs__menu-item.first.is-selected'
+    body: 'Each tab represents a list of items to review.'
+    position: right
+  checklist-item:
+    id: checklist-item
+    plugin: text
+    label: 'Checklist item'
+    weight: -97
+    selector: .form-item-checklistapi-01-general-site-information-email
+    body: 'Review each the description and link in each item, then check the box when complete.'
+    position: bottom
+  hit-save:
+    id: hit-save
+    plugin: text
+    label: 'Do not forget to hit save!'
+    weight: -96
+    selector: '#edit-save'
+    body: 'Clicking save will record the date, time, and user who checked off the item.'
+    position: top
