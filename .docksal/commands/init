@@ -102,7 +102,7 @@ fin init-site
 # Here's where you could run the theme build.
 # Commenting it out so build finishes faster.
 # Added a comment so themers can run manually.
-# fin install-theme-tools
+fin install-theme-tools
 # fin install-critical-tools
 fin solr-create-core
 
