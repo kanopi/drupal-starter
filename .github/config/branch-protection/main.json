@@ -17,15 +17,15 @@
     "required_status_checks": {
         "strict": false,
         "contexts": [
-          "Cypress",
-          "Deployment",
-          "Lighthouse - Home",
-          "PHPcs",
-          "PHPstan",
-          "Pa11y",
-          "Rector - modules",
-          "Rector - themes"
-        ],
+            "Cypress",
+            "Deployment",
+            "Lighthouse - Home",
+            "PHPcs",
+            "PHPstan",
+            "Pa11y",
+            "Rector - modules",
+            "Rector - themes"
+        ]
     },
     "restrictions": null
 }
