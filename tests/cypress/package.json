@@ -21,6 +21,6 @@
     "mochawesome-report-generator": "^6.2.0"
   },
   "devDependencies": {
-    "cypress": "^13.3.0"
+    "cypress": "^13.6.4"
   }
 }
