@@ -1,3 +1,8 @@
+# Emulsfy theme configuration
+
+## NOTE: This repository is no longer configured to compile Emulsify.
+
+Please refer to releases before 10.2.3 for that CircleCI/Docksal code.
 
 The theme is based off the
 [Kanopi Design Component Library](https://github.com/kanopi/kdcl_basic)
@@ -17,13 +22,13 @@ The theme uses Webpack and NPM to manage packages and run scripts.
 - @TODO
 [Hot Reloading in Drupal](https://docs.emulsify.info/usage/hot-reload-drupal)
 
-#### Storybook
+## Storybook
 
 - Theme development run `fin npm run develop`. This will watch for twig, js,
  and sass changes within the components directory.
 - The development storybook URL http://storybook.${VIRTUAL_HOST}
 
-#### Storybook Webpack
+## Storybook Webpack
 For webpack storybook to work within a docksal container we needed
 to set `watchOptions` in
 `docroot/themes/custom/THEME/.storybook/webpack.config.js`
@@ -34,7 +39,7 @@ config.watchOptions = {
 }
 ```
 
-### Theme Commands
+## Theme Commands
 
 The following commands are available with Node and should be prefixed with the
 command `fin npm run`.

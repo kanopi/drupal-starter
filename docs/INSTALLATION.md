@@ -6,6 +6,10 @@ Pantheon, CircleCI, and local Docksal development.
 
 -----
 
+## Installer method
+
+@kanopians - Please use the internal, private repository.
+
 ## CLI installation method
 
 
