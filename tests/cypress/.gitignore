@@ -10,4 +10,3 @@
 cypress.env.json
 /cypress/downloads/*
 /cypress/support/shrubs
-/cypress/e2e/saplings-tests
