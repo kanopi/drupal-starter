@@ -119,21 +119,21 @@ composer.json
 "require-dev": {
     "drupal/core-dev": "^10.2",
     "drupal/devel": "^5.1",
-    "drupal/upgrade_status": "^4.0",
     "palantirnet/drupal-rector": "^0.19"
 },
 ```
-This may seem simpler than past iterations, but Upgrade Status requires PHPstan
-and PHPcs.  We just need to remember tht when we upgrade them, we need to
-upgrade the rector.php and phpstan.neon files in the root of our project.
+This may seem simpler than past iterations, but Drupal Rector requires PHPstan
+which in turn requires PHPcs.  We just need to remember that when we upgrade
+versions, we need to upgrade the rector.php and phpstan.neon files in the root
+of our project.
 
 The tests are preconfigured in the scripts section of the composer.json.  So we
 can run them locally, pre-commit or pre-push using Lefthook, and in CircleCI.
-Anywhwere the site is installed using composer with the dev modules.
+Anywhere the site is installed using composer with the dev modules.
 
-At this time, we run 4 pre-build static code tests, PHPcs, PHPstan, Rector -
-modules, and Rector - themes.  These tests are now a requirement to pass before
-code can be merged.
+At this time, we run 4 pre-build static code tests, `PHPcs`, `PHPstan`, `Rector
+- modules`, and `Rector - themes`.  These tests are now a requirement to pass
+before code can be merged.
 
 ### Post Build tests.
 

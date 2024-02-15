@@ -94,17 +94,8 @@ The project comes with [kanopi/shrubs](https://packagist.org/packages/kanopi/shr
 
 ### Pa11y Audits
 
-We have a Docksal command that will run [pa11y-ci](https://github.com/pa11y/pa11y-ci)
-audits `fin pa11y`. When the command finishes the reports are available at the
-following url pa11y.$VIRTUAL_HOST
-
-If you want to change the configuration of the Pa11y tests you can edit the
-[.pa11yci.js](/tests/pa11y/.pa11yci.js) file.
-
-Note: This was forked from [Phase2](https://github.com/phase2/pa11y-dashboard)
-
-We also have a pa11y audit that runs in CircleCI and posts a comment to the
-GitHub repository's pull request if the audit fails.
+We have a pa11y audit that runs in CircleCI and posts a comment to the GitHub
+repository's pull request if the audit fails.
 
 ### Lighthouse
 
@@ -115,13 +106,13 @@ internet.
 
 Type | Minimum Score
 -----|--------------
-accessibility | 88
-best-practices| 79
 performance | 55
-seo | 92
+accessibility | 89
+best-practices| 96
+seo | 93
 
 Developers are also encouraged to run Lighthouse locally using browser plugins,
-or Lighthouse's CLI.
+or [Lighthouse CLI](https://github.com/GoogleChrome/lighthouse?tab=readme-ov-file#using-the-node-cli).
 
 ### Backstop.js Visual Regression
 

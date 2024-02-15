@@ -46,8 +46,9 @@
         "rvtraveller/qs-composer-installer": "^1.1"
     },
     "require-dev": {
+        "drupal/coder": "^8.3",
         "drupal/core-dev": "^10.2",
-        "drupal/devel": "^5.1",        
+        "drupal/devel": "^5.1",
         "palantirnet/drupal-rector": "^0.19"
     },
     "conflict": {
@@ -172,6 +173,7 @@
             },
             "drupal/gin": {
                 "Resolve Missing Dependency 'core/once' in Gin_accent Library": "https://git.drupalcode.org/project/gin/-/merge_requests/380.patch"
+            }
         }
     },
     "config": {
