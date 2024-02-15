@@ -169,7 +169,9 @@
         "patches": {
             "drupal/core": {
                 "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe-10.2.x.patch"
-            }
+            },
+            "drupal/gin": {
+                "Resolve Missing Dependency 'core/once' in Gin_accent Library": "https://git.drupalcode.org/project/gin/-/merge_requests/380.patch"
         }
     },
     "config": {
