@@ -50,7 +50,7 @@ project.
 - [Saplings Child](docs/SAPLINGS_THEME.md) - Current theme based on
 ui_suite_bootstrap
 - [Emulsify](docs/EMULSIFY.md) - kanopi/kdcl_basic theme was built from
-Emulsify.
+Emulsify. Currently not in use.
 
 
 ## Docksal Commands
@@ -68,18 +68,18 @@ Command | Description
 `init-site` | Installs and configures Drupal.
 `install-critical-tools` | Installs tools needed for Critical CSS.
 `install-cypress` | Called from `init` to install Cypress tools.
-`install-kdcl-basic` | Project setup theme generator. [Deprecated]
 `install-theme-tools` | Installs tools needed for Critical, Storybook, etc.
 `migrate-prep-db` | Creates a second database to house a migration source.
 `npm` | Run NPM from the theme folder.
 `npx` | Run NPX from the theme folder.
 `open` | Opens browser to local site URL.
-`pa11y` | Runs the Pa11y accessibility tools suite locally.
+`rebuild` | Runs `composer install` and `fin refresh`
 `recipe-apply` | Apply Drupal contrib Recipes that have been required.
 `recipe-configure` | Configures sites for Drupal Recipes. Already run in this repo.
 `recipe-unpack` | Unpacks Composer dependencies from a Recipe to the project's composer.json.
 `refresh` | Will execute a drush sql-dump from the remote server.
 `share` | Opens a proxy server to your local computer using ngrok.io.
+`solr-create-core` | Called from `init` to create Solr core.
 `tickle` | Wakes up the remote migration source environment every 5 minutes.
 `uuid-rm` | Helper command for Drupal Recipe builders that removes UUIDs from config files.
 
