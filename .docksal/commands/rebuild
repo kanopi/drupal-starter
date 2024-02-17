@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+## Rebuild composer and Refresh DB
+##
+## Usage: fin rebuild
+## Runs fin composer install and fin refresh
+
+# Abort if anything fails
+set -e
+
+fin composer install
+
+fin refresh
