@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#: exec_target = cli
+#: exec_target = node
 
 ## Run NPM Commands
 ##

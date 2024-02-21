@@ -96,6 +96,9 @@ fin reset -f
 echo "Waiting 10s for MySQL to initialize.";
 sleep 10
 
+# Symlink Drush
+fin exec '([ ! -f /usr/local/bin/drush ] || false) && sudo ln -sF /var/www/vendor/bin/drush /usr/local/bin/drush'
+
 # Site initialization
 fin init-site
 
