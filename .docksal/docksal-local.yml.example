@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  db:
+    image: docksal/mariadb:10.4
+    platform: linux/arm64
+  cli:
+    image: docksal/cli:php8.1-3
+    platform: linux/arm64
+  web:
+    image: docksal/nginx:1.20
+    platform: linux/arm64
+  varnish:
+    image: docksal/varnish:6.6-3.1
+    platform: linux/arm64
+  solr:
+    image: "devkteam/solr:8.1.1"
+    platform: linux/arm64
