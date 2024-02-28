@@ -81,7 +81,7 @@ fin project restart
 echo -e "\n${yellow} ${lock} Finding Drush. ${lock}${NC}"
 echo -e "${NC}This should take ~1 minute and require no input.${NC}"
 echo -e "${green}${divider}${NC}"
-#fin exec '( [ ! -f /usr/local/bin/drush ] || false) && sudo ln -sF /var/www/vendor/bin/drush /usr/local/bin/drush'
+fin exec '([ -f /usr/local/bin/drush ] || true) && sudo ln -sf /var/www/vendor/bin/drush /usr/local/bin/drush'
 
 echo -e "\n${yellow} ${arm} Installing Docksal Pull command. ${arm}${NC}"
 echo -e "${NC}This should take ~1 minute and require no input.${NC}"
