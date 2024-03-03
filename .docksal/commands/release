@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+## Make a release adn deploy it to Test and Live.
+##
+## Usage: fin pantheon-release
+
+# Abort if anything fails
+set -e
+
+# Backup the environments.
+fin terminus backup:create ${hostingplatform}.dev --keep-for=365
+fin terminus backup:create ${hostingplatform}.test --keep-for=365
+fin terminus backup:create ${hostingplatform}.live --keep-for=365
+
+# Grab the live db.
+fin pull db -y --hosting-env=live
+
+# @TODO Need an IF statement here if there is any changes.
+# Export config.
+fin drush cex -y
+
+# Make a new branch.
+git checkout -b feature/live-config
+
+# Add and commit the changes.
+git add -A
+git commit -m "Configuration from live site."
+
+# Push and create a PR
+git push origin
+gh pr create --title "Configuration from live site." --body "Automatically generated pull request from the live site configurations."
+
+# Merge the project
+gh pr merge
+
+# @TODO Else (We always want to do this).
+# Get the latest tags.
+git fetch --tags origin
+
+# Create a new tag
+# @TODO How to create a new tag automatically?
+# https://stackoverflow.com/questions/3760086/automatic-tagging-of-releases
+
+# Use automatically generated release notes
+# $ gh release create {tag_version} --generate-notes
+
+# Get the release notes
+# gh release view {tag_version} --jq <expression_to_grab_the_copy_we_need_and_set_a_release_notes_variable>
+
+# Deploy to Test
+# fin terminus env:deploy --sync-content --note {release_notes} --cc --updatedb -- ${hostingplatform}.test
+
+# Deploy to Live
+# fin terminus env:deploy --note {release_notes} --cc --updatedb -- ${hostingplatform}.live
+
+# Post release notes and release URL to Slack.
+# @TODO use gh release view {tag_version} --jq <to_get_the_url_of_the_release_also>
+# @TODO actually post it.
