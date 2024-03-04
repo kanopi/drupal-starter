@@ -61,10 +61,12 @@ var_release_url=$(gh release view $var_tag_new --json url --jq .url | cat)
 var_release_tag=$(gh release view $var_tag_new --json tagName --jq .tagName | cat)
 
 # Deploy to Test
-# fin terminus env:deploy --sync-content --note $var_tag_new --cc --updatedb -- ${hostingplatform}.test
+# fin terminus env:deploy --sync-content --note $var_release_notes --cc --updatedb -- ${hostingplatform}.test
 
 # Deploy to Live
-# fin terminus env:deploy --note $var_tag_new --cc --updatedb -- ${hostingplatform}.live
+prod_release_command='fin terminus env:deploy --note $var_release_notes --cc --updatedb -- ${hostingplatform}.live'
+echo -e "Once you have thoroughly tested the ${hostingplatform}.test environment, you can deploy to live using the following command"
+echo -e "$prod_release_command"
 
 # Post release notes and release URL to Slack.
 # @TODO Print these variable Title: $var_release_tag Body: $var_release_notes Link: $var_release_url, 
