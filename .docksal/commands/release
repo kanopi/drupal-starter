@@ -16,6 +16,7 @@ fin terminus backup:create ${hostingplatform}.live --keep-for=365
 fin pull db -y --hosting-env=live
 
 # @TODO Need an IF statement here if there is any changes.
+# How to use `drush cex --diff` or `drush cim --diff` to tell?
 # =================================================================
 
 # Make a new branch.
