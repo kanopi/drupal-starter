@@ -8,43 +8,9 @@
 set -e
 
 # Backup the environments.
-fin terminus backup:create ${hostingplatform}.dev --keep-for=365
-fin terminus backup:create ${hostingplatform}.test --keep-for=365
-fin terminus backup:create ${hostingplatform}.live --keep-for=365
-
-# Grab the live db.
-fin pull db -y --hosting-env=live
-
-# @TODO Need an IF statement here if there is any changes.
-# This is an idea:
-# var_config_status=$(fin drush config:status 2>&1 | grep "No differences")
-# if [[ "$var_config_status" != "[notice] No differences between DB and sync directory." ]]
-# then
-#     echo -e "If statement."
-# else
-#     echo -e "Else statement"
-# fi
-# echo -e "Statement: $var_config_status"
-# =================================================================
-
-# Make a new branch.
-git checkout -b feature/live-config
-
-# Export and commit config.
-fin drush config:export -y --commit --message="Automated configuration capture from live database"
-
-# Push and create a PR.
-git push origin
-gh pr create --title "Configuration from live site." --body "Automatically generated pull request from the live site configurations."
-
-# Merge the pull request.
-gh pr merge
-
-# Delete the branch.
-git branch -D feature/live-config
-
-# @TODO Else (We always want to do this).
-# =================================================================
+fin terminus backup:create ${hostingsite}.dev --keep-for=365
+fin terminus backup:create ${hostingsite}.test --keep-for=365
+fin terminus backup:create ${hostingsite}.live --keep-for=365
 
 # Create a new tag
 var_release_previous=$(gh release view)
