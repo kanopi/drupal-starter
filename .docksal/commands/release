@@ -16,7 +16,15 @@ fin terminus backup:create ${hostingplatform}.live --keep-for=365
 fin pull db -y --hosting-env=live
 
 # @TODO Need an IF statement here if there is any changes.
-# How to use `drush cex --diff` or `drush cim --diff` to tell?
+# This is an idea:
+# var_config_status=$(fin drush config:status 2>&1 | grep "No differences")
+# if [[ "$var_config_status" != "[notice] No differences between DB and sync directory." ]]
+# then
+#     echo -e "If statement."
+# else
+#     echo -e "Else statement"
+# fi
+# echo -e "Statement: $var_config_status"
 # =================================================================
 
 # Make a new branch.
