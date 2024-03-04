@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-## Make a release adn deploy it to Test and Live.
+## Make a new release and deploys it.
 ##
-## Usage: fin pantheon-release
+## Usage: fin release
 
 # Abort if anything fails
 set -e
