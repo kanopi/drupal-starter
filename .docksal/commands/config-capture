@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+## Capture Configuration from a any environment.
+##
+## Usage: fin config-capture [environment id]
+## Defaults to the primary environment but can take an environment name as a parameter: fin capture-config pr-123
+
+# Abort if anything fails
+set -e
+
+ENVIRONMENT=${1:-"$hostingenv"}
+
+# Sets todays datetime.
+var_date=$(date +"%Y-%m-%d-%H-%M-%S")
+
+# Install the terminus-rsync-plugin plugin.
+echo -e "Install the terminus-rsync-plugin plugin"
+fin terminus self:plugin:install terminus-rsync-plugin
+
+# Export the config to private files.
+echo -e "Export the config to private files"
+fin terminus drush ${hostingsite}.${ENVIRONMENT} -- cex --destination=sites/default/files/private/config-capture-${var_date} -y
+
+# Sync the files down.
+echo -e "Sync the files down"
+fin terminus rsync ${hostingsite}.${ENVIRONMENT}:files/private/config-capture-${var_date}/ ./config
+
+# If there are changes, stage them.  If not, exit.
+if `git status | grep -q "nothing to commit"`; then
+  echo -p "No changes to commit."
+else
+  # Make a new branch.
+  echo -e "Make a new branch"
+  git checkout -b feature/config-capture-${ENVIRONMENT}-${var_date}
+
+  # Reset permissions on changed files.
+  echo -e "Reset permissions on changed files"
+  git diff-files --name-only --diff-filter=d | xargs -L 1 chmod 755
+
+  # Add and commit changes.
+  echo -e "Add and commit changes"
+  git add -A
+  git commit -m="Automated configuration capture from ${ENVIRONMENT} database on ${var_date}"
+
+  # Push and create a PR.
+  echo -e "Push and create a PR"
+  git push origin
+  gh pr create --title "Configuration from ${ENVIRONMENT} site - ${var_date}." --body "Automatically generated pull request from the ${ENVIRONMENT} site configurations on ${var_date}." --draft
+fi
