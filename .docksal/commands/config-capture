@@ -25,25 +25,10 @@ fin terminus drush ${hostingsite}.${ENVIRONMENT} -- cex --destination=sites/defa
 echo -e "Sync the files down"
 fin terminus rsync ${hostingsite}.${ENVIRONMENT}:files/private/config-capture-${var_date}/ ./config
 
-# If there are changes, stage them.  If not, exit.
-if `git status | grep -q "nothing to commit"`; then
-  echo -p "No changes to commit."
-else
-  # Make a new branch.
-  echo -e "Make a new branch"
-  git checkout -b feature/config-capture-${ENVIRONMENT}-${var_date}
+# Reset permissions on the sync'd files.
+echo -e "Reset permissions on changed files"
+find ./config/ -type f | xargs chmod 644
 
-  # Reset permissions on changed files.
-  echo -e "Reset permissions on changed files"
-  git diff-files --name-only --diff-filter=d | xargs -L 1 chmod 755
-
-  # Add and commit changes.
-  echo -e "Add and commit changes"
-  git add -A
-  git commit -m="Automated configuration capture from ${ENVIRONMENT} database on ${var_date}"
-
-  # Push and create a PR.
-  echo -e "Push and create a PR"
-  git push origin
-  gh pr create --title "Configuration from ${ENVIRONMENT} site - ${var_date}." --body "Automatically generated pull request from the ${ENVIRONMENT} site configurations on ${var_date}." --draft
-fi
+# Sync the files down.
+echo -e "Here are the differences:"
+git status
