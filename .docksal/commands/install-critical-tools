@@ -44,8 +44,26 @@ echo -e "${green}${divider}${NC}"
 sudo apt-get --allow-releaseinfo-change update
 sudo apt-get install -yq --no-install-recommends libgbm1 libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 libnss3
 
+# Move to the theme.
+echo -e "\n${yellow} ${rocket} To the theme! ${rocket}${NC}"
+echo -e "${yellow} ${FULL_THEME_PATH}${NC}"
+echo -e "${green}${divider}${NC}"
+cd ${FULL_THEME_PATH}
+
+# Runs NPM Install.
+echo -e "\n${yellow} ${construction} Install NPM ${construction}${NC}"
+echo -e "${green}${divider}${NC}"
+source ~/.nvm/nvm.sh
+source ~/.bashrc
+echo "NVM version: $(nvm --version)"
+NODE_VERSION=$(cat ${FULL_THEME_PATH}/.nvmrc)
+echo "Theme node version: ${NODE_VERSION}"
+nvm install ${NODE_VERSION}
+nvm alias default ${NODE_VERSION}
+nvm use
+npm ci --save patch-package
+
 # Finish.
 echo -e "\n${yellow} ${party} Critical CSS Tools installed. ${reverseparty}${NC}"
-echo -e "${NC}@TODO Move Critical out of theme folder.${NC}"
 echo -e "${NC}Run ${yellow}${critical_command}${NC} to compile critical css.${NC}"
 echo -e "${green}${divider}${NC}"
