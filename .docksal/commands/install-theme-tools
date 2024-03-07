@@ -40,7 +40,7 @@ FULL_THEME_PATH="${DOCROOT_PATH}/${THEME}"
 
 # Theme initialization.
 echo -e "\n${yellow} ${shark} Building tools needed for the theme. ${shark}${NC}\n"
-echo -e "${NC}This should take ~8 minutes on an empty cache.${NC}"
+echo -e "${NC}This should take ~2 minutes on an empty cache.${NC}"
 echo -e "${green}${divider}${NC}"
 
 # Move to the theme.
