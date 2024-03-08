@@ -13,9 +13,15 @@ ENVIRONMENT=${1:-"$hostingenv"}
 # Sets todays datetime.
 var_date=$(date +"%Y-%m-%d-%H-%M-%S")
 
-# Install the terminus-rsync-plugin plugin.
-echo -e "Install the terminus-rsync-plugin plugin"
-fin terminus self:plugin:install terminus-rsync-plugin
+# Check if the terminus-rsync-plugin exists.
+# wc = word count. -l prints the number of lines.
+# tr = translating or deleting characters. -s replaces repeated characters.
+var_count=$(fin terminus self:plugin:list --format=list --field=Name | grep 'terminus-rsync-plugin' | wc -l | tr -s " ");
+if [[ "$var_count" -eq "0" ]]; then
+  # Install the terminus-rsync-plugin plugin.
+  echo -e "Install the terminus-rsync-plugin plugin"
+  fin terminus self:plugin:install terminus-rsync-plugin
+fi
 
 # Export the config to private files.
 echo -e "Export the config to private files"
