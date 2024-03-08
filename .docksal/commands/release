@@ -8,11 +8,28 @@
 set -e
 
 # Backup the environments.
+echo -e "Backup Dev"
 fin terminus backup:create ${hostingsite}.dev --keep-for=365
-fin terminus backup:create ${hostingsite}.test --keep-for=365
-fin terminus backup:create ${hostingsite}.live --keep-for=365
 
-# Create a new tag
+# Check Test enviroment exists
+# wc = word count. -l prints the number of lines.
+# tr = translating or deleting characters. -s replaces repeated characters.
+var_test_count=$(fin terminus env:list --field=id ${hostingsite} | grep 'test' | wc -l | tr -s " ");
+if [[ "$var_test_count" -eq "0" ]]; then
+  # Backup Test.
+  echo -e "Backup Test"
+  fin terminus backup:create ${hostingsite}.test --keep-for=365
+fi
+
+# Check Live enviroment exists
+var_live_count=$(fin terminus env:list --field=id ${hostingsite} | grep 'live' | wc -l | tr -s " ");
+if [[ "$var_live_count" -eq "0" ]]; then
+  # Backup Test.
+  echo -e "Backup Test"
+  fin terminus backup:create ${hostingsite}.live --keep-for=365
+fi
+
+# Create a new tag.
 var_release_previous=$(gh release view)
 if [ -z "$var_release_previous" ]; then
     var_tag_new=0.0.1
@@ -34,14 +51,10 @@ var_release_notes=$(gh release view $var_tag_new --json body --jq .body | cat)
 var_release_url=$(gh release view $var_tag_new --json url --jq .url | cat)
 var_release_tag=$(gh release view $var_tag_new --json tagName --jq .tagName | cat)
 
-# Deploy to Test
+echo -e "Deploy to test"
 # fin terminus env:deploy --sync-content --note $var_release_notes --cc --updatedb -- ${hostingplatform}.test
 
 # Deploy to Live
 prod_release_command='fin terminus env:deploy --note $var_release_notes --cc --updatedb -- ${hostingplatform}.live'
 echo -e "Once you have thoroughly tested the ${hostingplatform}.test environment, you can deploy to live using the following command"
 echo -e "$prod_release_command"
-
-# Post release notes and release URL to Slack.
-# @TODO Print these variable Title: $var_release_tag Body: $var_release_notes Link: $var_release_url, 
-# @TODO actually post it.
