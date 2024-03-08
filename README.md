@@ -78,6 +78,7 @@ Command | Description
 `recipe-configure` | Configures sites for Drupal Recipes. Already run in this repo.
 `recipe-unpack` | Unpacks Composer dependencies from a Recipe to the project's composer.json.
 `refresh` | Will execute a drush sql-dump from the remote server.
+`release` | Creates a new release on GitHub and deploys it to Pantheon test environment.
 `share` | Opens a proxy server to your local computer using ngrok.io.
 `solr-create-core` | Called from `init` to create Solr core.
 `tickle` | Wakes up the remote migration source environment every 5 minutes.
