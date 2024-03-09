@@ -35,6 +35,6 @@ fin terminus rsync ${hostingsite}.${ENVIRONMENT}:files/private/config-capture-${
 echo -e "Reset permissions on changed files"
 find ./config/ -type f | xargs chmod 644
 
-# Sync the files down.
+# Show the differences.
 echo -e "Here are the differences:"
 git status
