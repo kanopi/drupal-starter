@@ -173,6 +173,9 @@
             },
             "drupal/gin": {
                 "Resolve Missing Dependency 'core/once' in Gin_accent Library": "https://git.drupalcode.org/project/gin/-/merge_requests/380.patch"
+            },
+            "drupal/ui_patterns_settings": {
+                "ui_patterns_settings.module - array_unshift()": "https://git.drupalcode.org/project/ui_patterns_settings/-/merge_requests/21.patch"
             }
         }
     },
