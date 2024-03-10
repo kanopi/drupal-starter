@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+## Capture Configuration from a any environment.
+##
+## Usage: fin config-capture [environment id]
+## Defaults to the primary environment but can take an environment name as a parameter: fin capture-config pr-123
+
+# Abort if anything fails
+set -e
+
+ENVIRONMENT=${1:-"$hostingenv"}
+
+# Sets todays datetime.
+var_date=$(date +"%Y-%m-%d-%H-%M-%S")
+
+# Check if the terminus-rsync-plugin exists.
+# wc = word count. -l prints the number of lines.
+# tr = translating or deleting characters. -s replaces repeated characters.
+var_count=$(fin terminus self:plugin:list --format=list --field=Name | grep 'terminus-rsync-plugin' | wc -l | tr -s " ");
+if [[ "$var_count" -eq "0" ]]; then
+  # Install the terminus-rsync-plugin plugin.
+  echo -e "Install the terminus-rsync-plugin plugin"
+  fin terminus self:plugin:install terminus-rsync-plugin
+fi
+
+# Export the config to private files.
+echo -e "Export the config to private files"
+fin terminus drush ${hostingsite}.${ENVIRONMENT} -- cex --destination=sites/default/files/private/config-capture-${var_date} -y
+
+# Sync the files down.
+echo -e "Sync the files down"
+fin terminus rsync ${hostingsite}.${ENVIRONMENT}:files/private/config-capture-${var_date}/ ./config
+
+# Reset permissions on the sync'd files.
+echo -e "Reset permissions on changed files"
+find ./config/ -type f | xargs chmod 644
+
+# Show the differences.
+echo -e "Here are the differences:"
+git status

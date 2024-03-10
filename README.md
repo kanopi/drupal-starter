@@ -60,6 +60,7 @@ the command `fin`.
 
 Command | Description
 --------|------------
+`config-capture` | Exports config from environments and downloads them.
 `critical` | Run Critical CSS.
 `cypress` | Run Cypress inside Docksal. ie. `fin cypress open`.
 `cypress-users` | Adds users Cypress can be used to test. Called from `fin refresh`.
