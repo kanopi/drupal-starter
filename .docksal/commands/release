@@ -48,7 +48,7 @@ var_release_url=$(gh release view $var_tag_new --json url --jq .url | cat)
 
 # Deploy to test.
 echo -e "Deploy to test"
-# fin terminus env:deploy --sync-content --note $var_release_notes --cc --updatedb -- ${hostingsite}.test
+fin terminus env:deploy --sync-content --note $var_release_notes --cc --updatedb -- ${hostingsite}.test
 
 # Deploy to Live.
 prod_release_command='fin terminus env:deploy --note $var_release_notes --cc --updatedb -- ${hostingsite}.live'
