@@ -35,7 +35,7 @@ var_release_previous=$(gh release view)
 if [ -z "$var_release_previous" ]; then
     var_tag_new=0.0.1
 else
-    var_tag_new=$(gh release view --json name --jq .name | awk -F. '{OFS="."; $NF+=1; print $0}')
+    var_tag_new=$(gh release view --json tagName --jq .tagName | awk -F. '{OFS="."; $NF+=1; print $0}')
 fi
 
 # Create a new release.
@@ -48,10 +48,10 @@ var_release_url=$(gh release view $var_tag_new --json url --jq .url | cat)
 
 # Deploy to test.
 echo -e "Deploy to test"
-# fin terminus env:deploy --sync-content --note $var_release_notes --cc --updatedb -- ${hostingplatform}.test
+# fin terminus env:deploy --sync-content --note $var_release_notes --cc --updatedb -- ${hostingsite}.test
 
 # Deploy to Live.
-prod_release_command='fin terminus env:deploy --note $var_release_notes --cc --updatedb -- ${hostingplatform}.live'
+prod_release_command='fin terminus env:deploy --note $var_release_notes --cc --updatedb -- ${hostingsite}.live'
 echo -e "Once you have thoroughly tested the ${hostingplatform}.test environment, you can deploy to live using the following command"
 echo -e "$prod_release_command"
 
