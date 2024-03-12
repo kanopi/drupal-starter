@@ -1,15 +1,26 @@
 <?php
 
+// phpcs:ignoreFile
+
 /**
  * @file
  * Local settings that are copied via fin init.
  */
 
-// Docksal DB connection settings.
+// Docksal Default DB connection settings.
 $databases['default']['default'] = [
   'database' => 'default',
-  'username' => 'user',
-  'password' => 'user',
+  'username' => 'root',
+  'password' => 'root',
+  'host' => 'db',
+  'driver' => 'mysql',
+];
+
+// Docksal Migration DB connection settings.
+$databases['migrate']['default'] = [
+  'database' => 'default',
+  'username' => 'root',
+  'password' => 'root',
   'host' => 'db',
   'driver' => 'mysql',
 ];
@@ -17,6 +28,9 @@ $databases['default']['default'] = [
 // Workaround for permission issues with NFS shares in Vagrant.
 $settings['file_chmod_directory'] = 0777;
 $settings['file_chmod_file'] = 0666;
+
+//Enable access to rebuild.php.
+$settings['rebuild_access'] = TRUE;
 
 // Skip file system permissions hardening.
 $settings['skip_permissions_hardening'] = TRUE;

@@ -72,7 +72,7 @@ fix_permissions () {
 init_settings () {
   echo -e "${yellow} ${construction} Copy settings files for local development. ${construction}${NC}"
   echo -e "${green}${divider}${NC}"
-  ln -sf "${PROJECT_ROOT}/.docksal/etc/conf/settings.php" "${SITEDIR_PATH}/settings.local.php"
+  ln -sf "${PROJECT_ROOT}/.docksal/etc/conf/settings.kanopi.php" "${SITEDIR_PATH}/settings.kanopi.php"
   ln -sf "${PROJECT_ROOT}/.docksal/etc/conf/development.services.yml" "${DOCROOT_PATH}/sites/development.services.yml"
 }
 
