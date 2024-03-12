@@ -61,8 +61,8 @@ types of packages to.
 
 ## drupal/core-composer-scaffold
 
-In the extras section of the composer.json, you will also find a drupal-scaffold
- section.
+In the extras section of the composer.json, you will also find a
+`drupal-scaffold` section.
 
 ```
 "drupal-scaffold": {
@@ -78,8 +78,12 @@ In the extras section of the composer.json, you will also find a drupal-scaffold
             "append": "assets/custom-robots.txt"
         },
         "[web-root]/sites/default/settings.php": {
-            "append": "assets/pantheon_setting_defaults.inc"
+            "mode": "replace",
+            "path": "assets/initial.settings.php",
+            "overwrite": false
         },
+        "[web-root]/sites/default/settings.migration.php": "assets/settings.migration.php",
+        "[web-root]/sites/example.settings.local.php": "assets/example.settings.local.php",
         "[web-root]/sites/development.services.yml": false
     }
 }
@@ -91,19 +95,20 @@ This allows us to:
 3. Alter the files from the standard Drupal core installation without making
 changes to Drupal core's git.
 
-In our starter we use scaffolding to alter the files for two different
-scenarios.
+These files we alter are kept in `/assets` directory.
+They are modified using one of the following scenarios:
 
-1. Ignore files
-  * .htaccess (becuase we don't need it)
-  * development.services.yml (becuase we server our own)
+1. Skip files 
+  * .htaccess - because we don't need it
+  * development.services.yml - we use docksal to create our own version
+  * example.settings.local.php - we use comment out everything in lieu of our 
+  custom `settings.kanopi.php` file. We leave this just in case a developer 
+  needs to add settings on their local using the Drupal way.
 2. Append additional information to existing files.
   * robots.txt
-  * settings.php
-
-These files are kept in /assets and allow us to keep the original settings.php
-and robots.txt files in the default state, but add the customizations we need
-for our project.
+3. Replace assets
+  * settings.php - better inclusion of alternate settings files and settings
+  * settings.migration.php - for connecting to cloud-based source database
 
 ## Testing
 

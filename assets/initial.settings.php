@@ -1,3 +1,61 @@
+<?php
+
+// phpcs:ignoreFile
+
+/**
+ * @file
+ * Kanopi configuration file.
+ *
+ * IMPORTANT NOTE:
+ * Do not modify this file. This file is maintained by Pantheon.
+ */
+
+/**
+ * Load services definition file.
+ */
+$settings['container_yamls'][] = __DIR__ . '/services.yml';
+
+/**
+ * Include the Pantheon-specific settings file.
+ *
+ * n.b. The settings.pantheon.php file makes some changes
+ *      that affect all environments that this site
+ *      exists in.  Always include this file, even in
+ *      a local development environment, to ensure that
+ *      the site settings remain consistent.
+ */
+include __DIR__ . "/settings.pantheon.php";
+
+/**
+ * Include the migration configuration settings file.
+ * 
+ * This file will be used to reach out to the cloud-based source database.
+ */
+$migration_settings = __DIR__ . "/settings.migration.php";
+if (file_exists($migration_settings)) {
+  include $migration_settings;
+}
+
+/**
+ * Include the Kanopi-specific development environment settings file.
+ * 
+ * This file includes all the settings needed to keep Kanopi development
+ * environments in sync. There is also an override of the migration
+ * database to use a local container instead of the cloud-based source.
+ */
+$local_settings = __DIR__ . "/settings.kanopi.php";
+if (file_exists($local_settings)) {
+  include $local_settings;
+}
+
+/**
+ * If there is a local settings file, then include it
+ */
+$local_settings = __DIR__ . "/settings.local.php";
+if (file_exists($local_settings)) {
+  include $local_settings;
+}
+
 # /**
 #  * Configure Redis.
 #  */
