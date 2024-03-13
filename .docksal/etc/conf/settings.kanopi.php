@@ -29,7 +29,7 @@ $databases['migrate']['default'] = [
 $settings['file_chmod_directory'] = 0777;
 $settings['file_chmod_file'] = 0666;
 
-//Enable access to rebuild.php.
+// Enable access to rebuild.php.
 $settings['rebuild_access'] = TRUE;
 
 // Skip file system permissions hardening.
