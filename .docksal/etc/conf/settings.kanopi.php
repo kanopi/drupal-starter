@@ -18,7 +18,7 @@ $databases['default']['default'] = [
 
 // Docksal Migration DB connection settings.
 $databases['migrate']['default'] = [
-  'database' => 'default',
+  'database' => 'migrate',
   'username' => 'root',
   'password' => 'root',
   'host' => 'db',
