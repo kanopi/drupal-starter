@@ -72,26 +72,13 @@ In the extras section of the composer.json, you will also find a
         "web-root": "./web"
     },
     "allowed-packages": [
-        "pantheon-systems/drupal-integrations"
-    ],
-    "file-mapping": {
-        "[web-root]/.htaccess": false,
-        "[web-root]/robots.txt": {
-            "append": "assets/custom-robots.txt"
-        },
-        "[web-root]/sites/default/settings.php": {
-            "mode": "replace",
-            "path": "assets/initial.settings.php",
-            "overwrite": false
-        },
-        "[web-root]/sites/default/settings.migration.php": "assets/settings.migration.php",
-        "[web-root]/sites/example.settings.local.php": "assets/example.settings.local.php",
-        "[web-root]/sites/development.services.yml": false
-    }
+        "pantheon-systems/drupal-integrations",
+        "kanopi/drupal-integrations"
+    ]
 }
 ```
 
-This allows us to:
+The [kanopi/drupal-integrations](https://github.com/kanopi/drupal-integrations) package allows us to:
 1. Define the web-root of the project.
 2. Allow the Pantheon package to be applied after composer install
 3. Alter the files from the standard Drupal core installation without making
