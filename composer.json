@@ -27,6 +27,10 @@
             "url": "https://asset-packagist.org"
         },
         {
+            "type": "composer",
+            "url": "https://kanopi.github.io/composer"
+        },
+        {
             "type": "vcs",
             "url": "https://gitlab.ewdev.ca/yonas.legesse/drupal-recipe-unpack.git"
         }
@@ -40,6 +44,7 @@
         "drush/drush": "^12.4.3",
         "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
+        "kanopi/drupal-integrations": "10.x-dev",
         "kanopi/shrubs": "^0.2.5",
         "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^10",
@@ -154,22 +159,9 @@
                 "web-root": "./web"
             },
             "allowed-packages": [
-                "pantheon-systems/drupal-integrations"
-            ],
-            "file-mapping": {
-                "[web-root]/.htaccess": false,
-                "[web-root]/robots.txt": {
-                    "append": "assets/custom-robots.txt"
-                },
-                "[web-root]/sites/default/settings.php": {
-                    "mode": "replace",
-                    "path": "assets/initial.settings.php",
-                    "overwrite": false
-                },
-                "[web-root]/sites/default/settings.migration.php": "assets/settings.migration.php",
-                "[web-root]/sites/example.settings.local.php": "assets/example.settings.local.php",
-                "[web-root]/sites/development.services.yml": false
-            }
+                "pantheon-systems/drupal-integrations",
+                "kanopi/drupal-integrations"
+            ]
         },
         "patches": {
             "drupal/core": {
