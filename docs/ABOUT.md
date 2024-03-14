@@ -112,17 +112,17 @@ They are modified using one of the following scenarios:
   * settings.php - better inclusion of alternate settings files and settings
   * settings.migration.php - for connecting to cloud-based source database
 
-### File Details
+### Settings File Details
 
 **initial.settings.php**: this file is used to replace Drupal Core's `settings.php` file.
-It uses the same process that the `pantheon-systems/drupal-integrations` package uses but
+It uses the same process that the [`pantheon-systems/drupal-integrations`](https://github.com/pantheon-systems/drupal-integrations) package uses but
 sets up the alternate settings files we use in our build cycle. We include the
 settings files in this order:
 
-1. pantheon - will exist on all environment
-2. migration - will exist on all environment
-3. kanopi - will only exist on local environment (see docksal `init-site` command)
-4. local - will only exist on local environment if the developer creates it
+1. settings.pantheon.php - will exist on all environment
+2. settings.migration.php - will exist on all environment
+3. settings.kanopi.php - will only exist on local environment (see docksal `init-site` command)
+4. settings.local.php - will only exist on local environment if the developer creates it
  
 
 **settings.migration.php**: this file uses Pantheon's code to use the `migrate_source_db__url` 
