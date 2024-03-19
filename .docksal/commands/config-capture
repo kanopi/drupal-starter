@@ -13,6 +13,9 @@ ENVIRONMENT=${1:-"$hostingenv"}
 # Sets todays datetime.
 var_date=$(date +"%Y-%m-%d-%H-%M-%S")
 
+# Login
+fin terminus -n auth:login --machine-token="$SECRET_TERMINUS_TOKEN"
+
 # Check if the terminus-rsync-plugin exists.
 # wc = word count. -l prints the number of lines.
 # tr = translating or deleting characters. -s replaces repeated characters.
