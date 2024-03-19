@@ -61,8 +61,10 @@ types of packages to.
 
 ## drupal/core-composer-scaffold
 
-In the extras section of the composer.json, you will also find a drupal-scaffold
- section.
+### Setup and configuration
+
+In the extras section of the composer.json, you will also find a
+`drupal-scaffold` section.
 
 ```
 "drupal-scaffold": {
@@ -70,40 +72,51 @@ In the extras section of the composer.json, you will also find a drupal-scaffold
         "web-root": "./web"
     },
     "allowed-packages": [
-        "pantheon-systems/drupal-integrations"
-    ],
-    "file-mapping": {
-        "[web-root]/.htaccess": false,
-        "[web-root]/robots.txt": {
-            "append": "assets/custom-robots.txt"
-        },
-        "[web-root]/sites/default/settings.php": {
-            "append": "assets/pantheon_setting_defaults.inc"
-        },
-        "[web-root]/sites/development.services.yml": false
-    }
+        "pantheon-systems/drupal-integrations",
+        "kanopi/drupal-integrations"
+    ]
 }
 ```
 
-This allows us to:
+The [kanopi/drupal-integrations](https://github.com/kanopi/drupal-integrations) package allows us to:
 1. Define the web-root of the project.
 2. Allow the Pantheon package to be applied after composer install
 3. Alter the files from the standard Drupal core installation without making
 changes to Drupal core's git.
 
-In our starter we use scaffolding to alter the files for two different
-scenarios.
+These files we alter are kept in `/assets` directory.
+They are modified using one of the following scenarios:
 
-1. Ignore files
-  * .htaccess (becuase we don't need it)
-  * development.services.yml (becuase we server our own)
+1. Skip files 
+  * .htaccess - because we don't need it
+  * development.services.yml - we use docksal to create our own version
+  * example.settings.local.php - we use comment out everything in lieu of our 
+  custom `settings.kanopi.php` file. We leave this just in case a developer 
+  needs to add settings on their local using the Drupal way.
 2. Append additional information to existing files.
   * robots.txt
-  * settings.php
+3. Replace assets
+  * settings.php - better inclusion of alternate settings files and settings
+  * settings.migration.php - for connecting to cloud-based source database
 
-These files are kept in /assets and allow us to keep the original settings.php
-and robots.txt files in the default state, but add the customizations we need
-for our project.
+### Settings File Details
+
+**initial.settings.php**: this file is used to replace Drupal Core's `settings.php` file.
+It uses the same process that the [`pantheon-systems/drupal-integrations`](https://github.com/pantheon-systems/drupal-integrations) package uses but
+sets up the alternate settings files we use in our build cycle. We include the
+settings files in this order:
+
+1. settings.pantheon.php - will exist on all environment
+2. settings.migration.php - will exist on all environment
+3. settings.kanopi.php - will only exist on local environment (see docksal `init-site` command)
+4. settings.local.php - will only exist on local environment if the developer creates it
+ 
+
+**settings.migration.php**: this file uses Pantheon's code to use the `migrate_source_db__url` 
+variable stored in the `sites/default/private/secrets.json` file to connect to a remote
+database. This is mostly used in the multidev and production environments but can be used
+in local environments. To get the data for the `migrate_source_db__url`, run this command:
+`terminus connection:info SITE.ENV --field=mysql_url`.
 
 ## Testing
 

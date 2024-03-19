@@ -7,8 +7,8 @@
 # Abort if anything fails
 set -e
 
-## Create local Drupal 7 database to facilitate migrations.
-fin db create d7
+## Create local source database to facilitate migrations.
+fin db create migrate
 
-## Populate Drupal 7 database from a multidev.
-fin pull db --db-name=d7 -y --hosting-platform=${hostingplatform} --hosting-site=${MIGRATE_DB_SOURCE} --hosting-env=${MIGRATE_DB_ENV}
+## Populate source database from a multidev.
+fin pull db --db-name=migrate -y --hosting-platform=${hostingplatform} --hosting-site=${MIGRATE_DB_SOURCE} --hosting-env=${MIGRATE_DB_ENV}

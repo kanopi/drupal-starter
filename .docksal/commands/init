@@ -109,6 +109,12 @@ fin solr-create-core
 # Database
 fin refresh
 
+#  Migration
+if [[ "${MIGRATE_DB_SOURCE}" != "" ]]; then
+  echo -e "\n${yellow} ${key} Setting up for migration. ${key}${NC}"
+  fin migrate-prep-db
+fi
+
 
 echo -e "\n${yellow} ${key} Logging you in. ${key}${NC}"
 echo -e "${NC}This should take ~1 minute and require no input.${NC}"
