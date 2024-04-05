@@ -59,3 +59,8 @@
 *.ttf     -text diff
 *.woff    -text diff
 *.woff2   -text diff
+
+# Uncomment to ignore Archbee configuration files.
+# .archbee.yaml export-ignore
+# docs/SUMMARY.md export-ignore
+
