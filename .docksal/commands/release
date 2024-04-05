@@ -7,6 +7,15 @@
 # Abort if anything fails
 set -e
 
+# Installing GH to check if repo exists.
+var_brew_gh=$(brew list gh || true)
+if [[ "${var_brew_gh}" == "" ]]; then
+  echo -e "\n${green}Install GitHub CLI.${NC}"
+  echo -e "${divider}"
+  # Installs GitHub CLI.
+  brew install gh
+fi
+
 # Backup the environments.
 echo -e "Backup Dev"
 fin terminus backup:create ${hostingsite}.dev --keep-for=365
