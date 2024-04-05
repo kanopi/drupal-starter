@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+## Make a new release and deploys it.
+##
+## Usage: fin release
+
+# Abort if anything fails
+set -e
+
+# Installing GH to check if repo exists.
+var_brew_gh=$(brew list gh || true)
+if [[ "${var_brew_gh}" == "" ]]; then
+  echo -e "\n${green}Install GitHub CLI.${NC}"
+  echo -e "${divider}"
+  # Installs GitHub CLI.
+  brew install gh
+fi
+
+# Backup the environments.
+echo -e "Backup Dev"
+fin terminus backup:create ${hostingsite}.dev --keep-for=365
+
+# Check Test enviroment exists
+# wc = word count. -l prints the number of lines.
+# tr = translating or deleting characters. -s replaces repeated characters.
+var_test_count=$(fin terminus env:list --field=id ${hostingsite} | grep 'test' | wc -l | tr -s " ");
+if [[ "$var_test_count" -eq "0" ]]; then
+  # Backup Test.
+  echo -e "Backup Test"
+  fin terminus backup:create ${hostingsite}.test --keep-for=365
+fi
+
+# Check Live enviroment exists
+var_live_count=$(fin terminus env:list --field=id ${hostingsite} | grep 'live' | wc -l | tr -s " ");
+if [[ "$var_live_count" -eq "0" ]]; then
+  # Backup Test.
+  echo -e "Backup Test"
+  fin terminus backup:create ${hostingsite}.live --keep-for=365
+fi
+
+# Get the latest release and up it by 1.
+# @TODO This strips anything after the last number like beta/alpha/rc.
+var_release_previous=$(gh release view)
+if [ -z "$var_release_previous" ]; then
+    var_tag_new=0.0.1
+else
+    var_tag_new=$(gh release view --json tagName --jq .tagName | awk -F. '{OFS="."; $NF+=1; print $0}')
+fi
+
+# Create a new release.
+echo -e "Push new release: $var_tag_new"
+gh release create $var_tag_new --generate-notes
+
+# Get release notes.
+var_release_notes=$(gh release view $var_tag_new --json body --jq .body | cat)
+var_release_url=$(gh release view $var_tag_new --json url --jq .url | cat)
+
+# Deploy to test.
+echo -e "Deploy to test"
+fin terminus env:deploy --sync-content --note $var_release_notes --cc --updatedb -- ${hostingsite}.test
+
+# Deploy to Live.
+prod_release_command='fin terminus env:deploy --note $var_release_notes --cc --updatedb -- ${hostingsite}.live'
+echo -e "Once you have thoroughly tested the ${hostingplatform}.test environment, you can deploy to live using the following command"
+echo -e "$prod_release_command"
+
+# Print release notes.
+echo -e "$var_release_notes"
