@@ -16,4 +16,4 @@ project.
 - [Saplings Child](SAPLINGS_THEME.md) - Current theme based on
 ui_suite_bootstrap
 - [Emulsify](EMULSIFY.md) - kanopi/kdcl_basic theme was built from
-Emulsify. Currently not in new starts.
+Emulsify. Currently not used in new projects.
