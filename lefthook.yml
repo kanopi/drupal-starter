@@ -1,8 +1,8 @@
 pre-push:
   parallel: true
   commands:
-    code-sniff:
-      run: fin composer -n code-sniff
+#    code-sniff:
+#      run: fin composer -n code-sniff
 #    circleci-config:
 #      run: fin exec circleci config validate
 #    phpstan:

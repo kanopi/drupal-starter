@@ -28,6 +28,11 @@ include __DIR__ . "/settings.pantheon.php";
 $settings['config_sync_directory'] = '../config/';
 
 /**
+ * Exclude certain modules from config.
+ */
+$settings['config_exclude_modules'] = ['devel', 'twig_vardumper'];
+
+/**
  * If there is a local settings file, then include it
  */
 $local_settings = __DIR__ . "/settings.local.php";
