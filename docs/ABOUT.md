@@ -77,9 +77,6 @@ In the extras section of the composer.json, you will also find a drupal-scaffold
         "[web-root]/robots.txt": {
             "append": "assets/custom-robots.txt"
         },
-        "[web-root]/sites/default/settings.php": {
-            "append": "assets/pantheon_setting_defaults.inc"
-        },
         "[web-root]/sites/development.services.yml": false
     }
 }
@@ -99,11 +96,13 @@ scenarios.
   * development.services.yml (becuase we server our own)
 2. Append additional information to existing files.
   * robots.txt
-  * settings.php
 
-These files are kept in /assets and allow us to keep the original settings.php
-and robots.txt files in the default state, but add the customizations we need
-for our project.
+These files are kept in /assets and allow us to keep the robots.txt file in the
+default state, but add the customizations we need for our project.
+
+We had some projects where the `settings.php` file was appended too but the
+Kanopi approach now is to commit all changes as needed to `web/sites/default/settings.php`
+as that is a standard practice.
 
 ## Testing
 
