@@ -37,6 +37,7 @@
         "drupal/core-composer-scaffold": "^10.2",
         "drupal/core-recommended": "^10.2",
         "drupal/core-vendor-hardening": "^10.2",
+        "drupal/redis": "^1.7",
         "drush/drush": "^12.4.3",
         "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
@@ -160,9 +161,6 @@
                 "[web-root]/.htaccess": false,
                 "[web-root]/robots.txt": {
                     "append": "assets/custom-robots.txt"
-                },
-                "[web-root]/sites/default/settings.php": {
-                    "append": "assets/pantheon_setting_defaults.inc"
                 },
                 "[web-root]/sites/development.services.yml": false
             }
