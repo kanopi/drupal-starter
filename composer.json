@@ -124,7 +124,6 @@
             "drupal/core": "-p2"
         },
         "installer-types": [
-            "drupal-library",
             "npm-asset",
             "bower-asset",
             "quicksilver-script",
