@@ -168,9 +168,6 @@
         "patches": {
             "drupal/core": {
                 "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe-10.2.x.patch"
-            },
-            "drupal/ui_patterns_settings": {
-                "ui_patterns_settings.module - array_unshift()": "https://git.drupalcode.org/project/ui_patterns_settings/-/merge_requests/21.patch"
             }
         }
     },
