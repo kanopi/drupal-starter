@@ -28,15 +28,15 @@
         },
         {
             "type": "vcs",
-            "url": "https://gitlab.ewdev.ca/yonas.legesse/drupal-recipe-unpack.git"
+            "url": "https://github.com/woredeyonas/Drupal-Recipe-Unpack.git"
         }
     ],
     "require": {
-        "composer/installers": "*",
+        "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7.3",
-        "drupal/core-composer-scaffold": "^10.2",
-        "drupal/core-recommended": "^10.2",
-        "drupal/core-vendor-hardening": "^10.2",
+        "drupal/core-composer-scaffold": "^10.3",
+        "drupal/core-recommended": "^10.3",
+        "drupal/core-vendor-hardening": "^10.3",
         "drupal/redis": "^1.7",
         "drush/drush": "^12.4.3",
         "ewcomposer/unpack": "dev-master",
@@ -48,9 +48,9 @@
     },
     "require-dev": {
         "drupal/coder": "^8.3",
-        "drupal/core-dev": "^10.2",
+        "drupal/core-dev": "^10.3",
         "drupal/devel": "^5.1",
-        "palantirnet/drupal-rector": "^0.19"
+        "palantirnet/drupal-rector": "^0.20.3"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -124,14 +124,10 @@
             "drupal/core": "-p2"
         },
         "installer-types": [
-            "drupal-library",
             "npm-asset",
             "bower-asset",
-            "quicksilver-script",
             "cypress-support",
-            "cypress-e2e",
-            "drupal-recipe",
-            "drupal-custom-theme"
+            "cypress-e2e"
         ],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
@@ -141,12 +137,12 @@
                 "type:npm-asset"
             ],
             "drush/contrib/{$name}": ["type:drupal-drush"],
+            "recipes/{$name}": ["type:drupal-recipe"],
             "tests/cypress/cypress/support/{$name}": ["type:cypress-support"],
             "tests/cypress/cypress/e2e/{$name}": ["type:cypress-e2e"],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/recipes/contrib/{$name}": ["type:drupal-recipe"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
@@ -166,12 +162,7 @@
             }
         },
         "patches": {
-            "drupal/core": {
-                "Drupal Recipes - https://www.drupal.org/project/distributions_recipes": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe-10.2.x.patch"
-            },
-            "drupal/ui_patterns_settings": {
-                "ui_patterns_settings.module - array_unshift()": "https://git.drupalcode.org/project/ui_patterns_settings/-/merge_requests/21.patch"
-            }
+            "drupal/core": { }
         }
     },
     "config": {
