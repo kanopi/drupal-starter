@@ -18,3 +18,20 @@ services:
       service: solr
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/solr/conf:/opt/solr/server/solr/configsets/solr8/conf
+
+  node:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: cli
+    hostname: node
+    image: devkteam/node:latest
+    platform: linux/amd64
+    environment:
+      - THEME
+      - THEMENAME
+      - NODE_OPTIONS
+    expose:
+      - 6006
+    labels:
+      - io.docksal.virtual-host=storybook.${VIRTUAL_HOST},storybook.${VIRTUAL_HOST}.*
+      - io.docksal.virtual-port=6006
