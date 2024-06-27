@@ -7,7 +7,7 @@ drush_version: 10
 build_step: false
 search:
   version: 8
-enforce_https: full+subdomains
+enforce_https: full
 protected_web_paths:
   - /private/
   - /sites/default/files/private/
