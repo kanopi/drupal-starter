@@ -44,6 +44,8 @@ setting this repository up for the first time.
 reasoning behind it.
 - [Testing](docs/TESTING.md) - Details about all the testing available in this
 project.
+- [Creating Default Content](docs/DEFAULT_CONTENT.md) - Instructions on how to
+use the Default Content module to create default content for a recipe.
 
 
 ## Theme Commands and Setup Documentation
