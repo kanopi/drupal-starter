@@ -4,15 +4,15 @@ PANTHEON_UUID: &PANTHEON_UUID "xxx"
 THEME_NAME: &THEME_NAME "saplings_child"
 THEME_PATH: &THEME_PATH "web/themes/custom/saplings_child"
 CYPRESS_NODE_VERSION: &CYPRESS_NODE_VERSION "20.11.0" # Matches NVMRC file.
-CYPRESS_CIMG_PHP: &CYPRESS_CIMG_PHP "cimg/php:8.2-browsers"
+CYPRESS_CIMG_PHP: &CYPRESS_CIMG_PHP "cimg/php:8.3-browsers"
 THEME_NODE_VERSION: &THEME_NODE_VERSION "20.11.0" # Matches NVMRC file.
-CIMG_PHP: &CIMG_PHP "cimg/php:8.2" # This is the version of PHP set in pantheon.yml/docksal.env.
-CIMG_PHP_TAG: &CIMG_PHP_TAG "8.2.15"
-CIMG_PHP_TAG_MAJOR: &CIMG_PHP_TAG_MAJOR "8.2" # This is the version of PHP set in pantheon.yml/docksal.env.
+CIMG_PHP: &CIMG_PHP "cimg/php:8.3" # This is the version of PHP set in pantheon.yml/docksal.env.
+CIMG_PHP_TAG: &CIMG_PHP_TAG "8.3.8"
+CIMG_PHP_TAG_MAJOR: &CIMG_PHP_TAG_MAJOR "8.3" # This is the version of PHP set in pantheon.yml/docksal.env.
 
 defaults: &defaults
   docker:
-    - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
+    - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.3
   working_directory: ~/example_drops_8_composer
   environment:
     TZ: "/usr/share/zoneinfo/America/Los_Angeles"
