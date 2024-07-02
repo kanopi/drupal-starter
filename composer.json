@@ -42,9 +42,8 @@
         "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/shrubs": "^0.2.5",
-        "oomphinc/composer-installers-extender": "2.0.0",
-        "pantheon-systems/drupal-integrations": "^10",
-        "rvtraveller/qs-composer-installer": "^1.1"
+        "oomphinc/composer-installers-extender": "^2.0.0",
+        "pantheon-systems/drupal-integrations": "^10"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
