@@ -22,33 +22,13 @@ unpack_command='fin recipe-unpack org/recipe-name'
 
 #-------------------------- Execution ------------------------------
 
-# Configure Composer Patches.
-fin composer config allow-plugins.cweagans/composer-patches true
-fin composer require cweagans/composer-patches
-
-# Add Drupal core patch for recipes to composer.json and update core.
-composer config extra.patches --merge --json '{"drupal/core": {"Allow recipes to be applied": "https://git.drupalcode.org/project/distributions_recipes/-/raw/patch/recipe.patch"}}'
-fin composer update drupal/core
-
 # Configure the location recipes go when required.
-fin composer config allow-plugins.oomphinc/composer-installers-extender
-fin composer config extra.installer-types --merge --json '["drupal-recipe"]'
-fin composer config extra.installer-paths --merge --json '{"web/recipes/contrib/{$name}": ["type:drupal-recipe"]}'
-# Saplings also requires a custom theme to be required.
-fin composer config extra.installer-types --merge --json '["drupal-custom-theme"]'
-fin composer config extra.installer-paths --merge --json '{"web/themes/custom/{$name}": ["type:drupal-custom-theme"]}'
-fin composer require oomphinc/composer-installers-extender
+fin composer config extra.installer-paths --merge --json '{"/recipes/{$name}": ["type:drupal-recipe"]}'
 
 # Requires Drupal Recipe Unpack.
 fin composer config allow-plugins.ewcomposer/unpack true
 fin composer config repo.recipe-unpack vcs https://gitlab.ewdev.ca/yonas.legesse/drupal-recipe-unpack.git
 fin composer require ewcomposer/unpack:1.x-dev@dev
-
-# Update .gitignore
-echo -e "\n${yellow} Update your .gitignore file manually and add the following: ${NC}"
-echo -e "/web/recipes/.gitignore"
-echo -e "/web/recipes/contrib/"
-echo -e "${green}${divider}${NC}"
 
 # Complete
 echo -e "\n${yellow} ${party} Your project is now ready to apply recipes! ${reverseparty}${NC}"
