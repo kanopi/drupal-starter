@@ -21,6 +21,10 @@ $settings['file_chmod_file'] = 0666;
 // Skip file system permissions hardening.
 $settings['skip_permissions_hardening'] = TRUE;
 
+// Lets set the hash salt to a random id.
+$ID = md5(getenv('VIRTUAL_HOST'));
+$settings['hash_salt'] = $ID;
+
 // Disable local development caching.
 $settings['cache']['bins']['render'] = 'cache.backend.null';
 $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
