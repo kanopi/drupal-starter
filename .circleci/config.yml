@@ -211,8 +211,13 @@ jobs:
 #          include_job_number_field: false
 #          include_project_field: false
 #          webhook: https://hooks.slack.com/services/T02BTKQ5F/B0225B1RPV1/9999111100000
-      - ci-tools/trigger-pipeline:
-          parameters: '{"run_post_build_tests":true}'
+      - when:
+          condition:
+            not:
+              equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - ci-tools/trigger-pipeline:
+                parameters: '{"run_post_build_tests":true}'
 
 workflows:
 
