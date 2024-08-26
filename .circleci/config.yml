@@ -23,24 +23,7 @@ defaults: &defaults
     THEME_NAME: *THEME_NAME
     DEFAULT_BRANCH: main
 
-# Adds Variable to run workflows after the build happens.
-after_build: &after_build << pipeline.parameters.run_post_build_tests >>
-
-# Adds Variable to run workflows with the build, and saves data for after_build.
-build: &build
-  not:
-    or:
-      - << pipeline.parameters.run_post_build_tests >>
-      - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ api, << pipeline.trigger_source >> ]
-
 version: 2.1
-
-# Adds CircleCI parameters to run the post build tests.
-parameters:
-  run_post_build_tests:
-    type: boolean
-    default: false
 
 orbs:
   ci-tools: kanopi/ci-tools@2
@@ -50,7 +33,7 @@ orbs:
 
 jobs:
   compile-theme:
-    docker:      
+    docker:
       - image: *CIMG_PHP
     working_directory: ~/project
     steps:
@@ -64,12 +47,12 @@ jobs:
       - restore_cache:
           name: Restore Node cache
           keys:
-            - node-theme-{{ checksum "web/themes/custom/saplings_child/package-lock.json" }}            
-      
+            - node-theme-{{ checksum "web/themes/custom/saplings_child/package-lock.json" }}
+
       - run:
           name: Composer install for theme dependencies
           command: |
-            composer install    
+            composer install
 
       - run:
           name: Install Node Packages.
@@ -97,7 +80,7 @@ jobs:
           root: *THEME_PATH
           paths:
             - dist
-       
+
   cypress:
     docker:
       - image: *CYPRESS_CIMG_PHP
@@ -211,18 +194,10 @@ jobs:
 #          include_job_number_field: false
 #          include_project_field: false
 #          webhook: https://hooks.slack.com/services/T02BTKQ5F/B0225B1RPV1/9999111100000
-      - when:
-          condition:
-            not:
-              equal: [ main, << pipeline.git.branch >> ]
-          steps:
-            - ci-tools/trigger-pipeline:
-                parameters: '{"run_post_build_tests":true}'
 
 workflows:
 
   PHPstan:
-    when: *build
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -238,7 +213,6 @@ workflows:
               ignore:
                 - main
   PHPcs:
-    when: *build
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -254,7 +228,6 @@ workflows:
               ignore:
                 - main
   Rector - modules:
-    when: *build
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -270,7 +243,6 @@ workflows:
               ignore:
                 - main
   Rector - themes:
-    when: *build
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -286,7 +258,9 @@ workflows:
               ignore:
                 - main
   Deployment:
-    when: *build
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - compile-theme:
           context: kanopi-code
@@ -297,10 +271,9 @@ workflows:
               ignore: /^dependabot/
           requires:
             - compile-theme
-  Cypress:
-    when: *after_build
-    jobs:
       - cypress:
+          requires:
+            - deploy-to-pantheon
           context: kanopi-code
           pre-steps:
             - ci-tools/set-pantheon-url
@@ -320,10 +293,10 @@ workflows:
                 body-prefix: ":white_check_mark: Test runner: **$CIRCLE_NODE_INDEX / $CIRCLE_NODE_TOTAL** "
                 body-title: "Passing Cypress Run"
                 search-for: "results/mocha-report/mochawesome.html"
-  Lighthouse - home:
-    when: *after_build
-    jobs:
+
       - ci-tools/lighthouse:
+          requires:
+            - deploy-to-pantheon
           context: kanopi-code
           pre-steps:
             - ci-tools/set-pantheon-url:
@@ -338,10 +311,10 @@ workflows:
             branches:
               ignore:
                 - main
-  Pa11y:
-    when: *after_build
-    jobs:
+
       - ci-tools/pa11y:
+          requires:
+            - deploy-to-pantheon
           context: kanopi-code
           urls: "${PR_ENV_URL}"
           # Replace the primary URL with a Pantheon multidev URL.
@@ -358,66 +331,64 @@ workflows:
             branches:
               ignore:
                 - main
-#  Structured data testing tool:
-#    when: *after_build
-#    jobs:
-#      - ci-tools/sdtt:
-#          context: kanopi-code
-#          url: "${PR_ENV_URL}"
-#          # Replace the primary URL with a Pantheon multidev URL.
-#          pre-steps:
-#            - ci-tools/set-pantheon-url:
-#                site-id: *TERMINUS_SITE
-#                store-as: PR_ENV_URL
-#          # Posts a link to the report to the PR.
-#          post-steps:
-#            - ci-tools/post-artifact-to-github:
-#                body-prefix: "Click here to view the report:"
-#                body-title: "❌ Structured Data Testing Tool failure - Homepage"
-#                search-for: tmp/sdtt-results.txt
-#                when: 'on_fail'
-#          filters:
-#            branches:
-#              ignore:
-#                - main
-#  Backstop visual regression:
-#    when: *after_build
-#    jobs:
-#      - ci-tools/backstopjs:
-#          context: kanopi-code
-#          # Defines the pages, and gives them a label.
-#          # It is a comma separated list.
-#          # Add as many as you need.
-#          # urls: '/|Homepage,/style-guide|Style Guide'
-#          # URLs now loaded in backstop.json
-#          # Load additional configuration from the backstop.json file.
-#          # See https://github.com/garris/BackstopJS#advanced-scenarios.
-#          advanced-config: true
-#          # Sets the URL to test to be the Pantheon multidev.
-#          search-find: 'TEST_URL'
-#          search-replace: '${TEST_URL}'
-#          pre-steps:
-#            - ci-tools/set-pantheon-url:
-#                site-id: *TERMINUS_SITE
-#                store-as: TEST_URL
-#            - ci-tools/set-pantheon-url:
-#                site-id: *TERMINUS_SITE
-#                site-env: "dev"
-#                store-as: REFERENCE_URL
-#          # Posts a link to the report to the PR.
-#          post-steps:
-#            - ci-tools/post-artifact-to-github:
-#                body-prefix: "❌ There was a failure. Click here to view the report:"
-#                body-title: BackstopJS
-#                search-for: html_report/index.html
-#                when: 'on_fail'
-#          # Don't run it on main because that is the url it tests against.
-#          filters:
-#            branches:
-#              ignore: main
-  # Runs composer updates at midnight every day.
-  # Exports configuration and commits.
-  # Pushes to a single branch and makes pull requests on GitHub.
+
+      - ci-tools/sdtt:
+          requires:
+            - deploy-to-pantheon
+          context: kanopi-code
+          url: "${PR_ENV_URL}"
+          # Replace the primary URL with a Pantheon multidev URL.
+          pre-steps:
+            - ci-tools/set-pantheon-url:
+                site-id: *TERMINUS_SITE
+                store-as: PR_ENV_URL
+          # Posts a link to the report to the PR.
+          post-steps:
+            - ci-tools/post-artifact-to-github:
+                body-prefix: "Click here to view the report:"
+                body-title: "❌ Structured Data Testing Tool failure - Homepage"
+                search-for: tmp/sdtt-results.txt
+                when: 'on_fail'
+          filters:
+            branches:
+              ignore:
+                - main
+
+      - ci-tools/backstopjs:
+          requires:
+            - deploy-to-pantheon
+          context: kanopi-code
+          # Defines the pages, and gives them a label.
+          # It is a comma separated list.
+          # Add as many as you need.
+          # urls: '/|Homepage,/style-guide|Style Guide'
+          # URLs now loaded in backstop.json
+          # Load additional configuration from the backstop.json file.
+          # See https://github.com/garris/BackstopJS#advanced-scenarios.
+          advanced-config: true
+          # Sets the URL to test to be the Pantheon multidev.
+          search-find: 'TEST_URL'
+          search-replace: '${TEST_URL}'
+          pre-steps:
+            - ci-tools/set-pantheon-url:
+                site-id: *TERMINUS_SITE
+                store-as: TEST_URL
+            - ci-tools/set-pantheon-url:
+                site-id: *TERMINUS_SITE
+                site-env: "dev"
+                store-as: REFERENCE_URL
+          # Posts a link to the report to the PR.
+          post-steps:
+            - ci-tools/post-artifact-to-github:
+                body-prefix: "❌ There was a failure. Click here to view the report:"
+                body-title: BackstopJS
+                search-for: html_report/index.html
+                when: 'on_fail'
+          # Don't run it on main because that is the url it tests against.
+          filters:
+            branches:
+              ignore: main
+
   automated-updates:
     when:
       and:
