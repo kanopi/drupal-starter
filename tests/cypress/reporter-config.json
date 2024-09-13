@@ -6,7 +6,7 @@
         "json": false,
         "overwrite": false,
         "reportDir": "cypress/results",
-        "reportFilename": "[status]-[name]-[datetime]",
+        "reportFilename": "[status]--[name]--[datetime]",
         "timestamp": "default"
     },
     "mochaJunitReporterReporterOptions": {
