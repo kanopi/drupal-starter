@@ -32,9 +32,6 @@ key='\xF0\x9F\x94\x91'
 lock='\xF0\x9F\x94\x92'
 arm='\xF0\x9F\x92\xAA'
 
-fin=$(which fin)
-[[ -f ${fin} ]] && source $fin
-
 LEFTHOOK=$(which lefthook || true)
 if [[ "${LEFTHOOK}" == "" ]]; then
   echo -e "\n${yellow} ${construction} Initializing githooks... ${construction}${NC}\n"
