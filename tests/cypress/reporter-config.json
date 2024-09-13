@@ -4,9 +4,10 @@
         "charts": true,
         "html": true,
         "json": false,
+        "overwrite": false,
         "reportDir": "cypress/results",
-        "reportFilename": "[status]-[name]",
-        "overwrite": false
+        "reportFilename": "[status]-[name]-[datetime]",
+        "timestamp": "default"
     },
     "mochaJunitReporterReporterOptions": {
         "mochaFile": "cypress/junit/[hash].xml"
