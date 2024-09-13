@@ -1,12 +1,13 @@
 {
-  "reporterEnabled": "mochawesome, mocha-junit-reporter, spec, json",
-  "mochawesomeReporterOptions": {
-    "reportDir": "cypress/results",
-    "overwrite": false,
-    "html": true,
-    "json": true
-  },
-  "mochaJunitReporterReporterOptions": {
-    "mochaFile": "cypress/junit/[hash].xml"
-  }
+    "reporterEnabled": "mochawesome, mocha-junit-reporter, spec, json",
+    "mochawesomeReporterOptions": {
+        "html": true,
+        "json": false,
+        "reportDir": "cypress/results",
+        "reportFilename": "[status]-[name]",
+        "overwrite": false
+    },
+    "mochaJunitReporterReporterOptions": {
+        "mochaFile": "cypress/junit/[hash].xml"
+    }
 }
