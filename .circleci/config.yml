@@ -257,6 +257,21 @@ workflows:
             branches:
               ignore:
                 - main
+  Twig lint:
+    jobs:
+      - ci-tools/composer:
+          tag: *CIMG_PHP_TAG
+          name: "Twig lint"
+          context: kanopi-code
+          command: 'twig-lint'
+          save-output: true
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          report-title: ":x: twig-lint"
+          filters:
+            branches:
+              ignore:
+                - main
   Deployment:
     when:
       not:
