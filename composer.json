@@ -50,7 +50,8 @@
         "drupal/core-dev": "^10.3",
         "drupal/default_content": "^2.0@alpha",
         "drupal/devel": "^5.1",
-        "palantirnet/drupal-rector": "^0.20.3"
+        "palantirnet/drupal-rector": "^0.20.3",
+        "vincentlanglet/twig-cs-fixer": "^3"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -83,24 +84,36 @@
             "vendor/bin/phpstan analyse --memory-limit=-1 web/modules/custom web/themes/custom"
         ],
         "rector-modules": [
-             "Composer\\Config::disableProcessTimeout",
-             "vendor/bin/rector process web/modules/custom/ --dry-run"
-         ],
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/modules/custom/ --dry-run"
+        ],
         "rector-themes": [
-             "Composer\\Config::disableProcessTimeout",
-             "vendor/bin/rector process web/themes/custom/ --dry-run"
-         ],
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/themes/custom/ --dry-run"
+        ],
         "rector-fix-modules": [
-             "Composer\\Config::disableProcessTimeout",
-             "vendor/bin/rector process web/modules/custom/"
-         ],
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/modules/custom/"
+        ],
         "rector-fix-themes": [
-             "Composer\\Config::disableProcessTimeout",
-             "vendor/bin/rector process web/themes/custom/"
-         ],
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/themes/custom/"
+        ],
         "rector-fix": [
             "@rector-fix-modules",
             "@rector-fix-themes"
+        ],
+        "twig-lint-modules": "vendor/bin/twig-cs-fixer lint docroot/modules/custom",
+        "twig-lint-themes": "vendor/bin/twig-cs-fixer lint docroot/themes/custom",
+        "twig-lint": [
+            "@twig-lint-modules",
+            "@twig-lint-themes"
+        ],
+        "twig-fix-modules": "vendor/bin/twig-cs-fixer lint --fix docroot/modules/custom",
+        "twig-fix-themes": "vendor/bin/twig-cs-fixer lint --fix docroot/themes/custom",
+        "twig-fix": [
+            "@twig-fix-modules",
+            "@twig-fix-themes"
         ],
         "code-check": [
             "@phpstan",
@@ -130,21 +143,41 @@
             "cypress-e2e"
         ],
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
+            "web/core": [
+                "type:drupal-core"
+            ],
             "web/libraries/{$name}": [
                 "type:drupal-library",
                 "type:bower-asset",
                 "type:npm-asset"
             ],
-            "drush/contrib/{$name}": ["type:drupal-drush"],
-            "recipes/{$name}": ["type:drupal-recipe"],
-            "tests/cypress/cypress/support/{$name}": ["type:cypress-support"],
-            "tests/cypress/cypress/e2e/{$name}": ["type:cypress-e2e"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "recipes/{$name}": [
+                "type:drupal-recipe"
+            ],
+            "tests/cypress/cypress/support/{$name}": [
+                "type:cypress-support"
+            ],
+            "tests/cypress/cypress/e2e/{$name}": [
+                "type:cypress-e2e"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/private/scripts/quicksilver/{$name}/": [
+                "type:quicksilver-script"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
         },
         "drupal-scaffold": {
             "locations": {
@@ -160,9 +193,6 @@
                 },
                 "[web-root]/sites/development.services.yml": false
             }
-        },
-        "patches": {
-            "drupal/core": { }
         }
     },
     "config": {

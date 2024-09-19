@@ -108,6 +108,12 @@ Command | Description
 `rector-fix-modules` | Refactors deprecations on the custom modules folder
 `rector-fix-themes` | Refactors deprecations on the custom themes folder
 `rector-fix` | Runs `rector-fix-modules` and `rector-fix-themes`
+`twig-lint-modules` | Runs Twig-CS-Fixer on the custom modules folder
+`twig-lint-themes` | Runs Twig-CS-Fixer on the custom themes folder
+`twig-lint` | Runs `twig-lint-modules` and `twig-lint-themes`
+`twig-fix-modules` | Runs Twig-CS-Fixer with the fix option on custom modules
+`twig-fix-themes` | Runs Twig-CS-Fixer with the fix option on custom themes
+`twig-fix` | Runs `twig-fix-modules` and `twig-fix-themes`
 `code-check` | Runs `phpstan` `rector-modules` `rector-themes` `code-sniff`
 `prepare-for-pantheon` | Used by CircleCI for Pantheon
 `build-assets` | Used by CircleCI for Pantheon
