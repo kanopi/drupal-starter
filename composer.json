@@ -210,7 +210,8 @@
             "oomphinc/composer-installers-extender": true,
             "rvtraveller/qs-composer-installer": true,
             "ewcomposer/unpack": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "tbachert/spi": false
         }
     }
 }
