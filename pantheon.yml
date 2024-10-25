@@ -5,6 +5,8 @@ database:
   version: 10.6
 drush_version: 10
 build_step: false
+new_relic:
+  drupal_hooks: true
 search:
   version: 8
 enforce_https: full
