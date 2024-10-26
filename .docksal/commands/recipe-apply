@@ -4,7 +4,7 @@
 
 ## Apply a Drupal Recipe that has been installed using composer.
 ##
-## Usage: fin recipe-apply [name]
+## Usage: fin recipe-apply /path/to/[recipe_name]
 ##
 
 # Abort if anything fails
@@ -14,6 +14,6 @@ DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 
 cd ${DOCROOT_PATH}
 
-php core/scripts/drupal recipe ../recipes/"$@"
+php core/scripts/drupal recipe "$@"
 
 drush cr
