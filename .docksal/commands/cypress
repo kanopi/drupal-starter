@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-## Run NPM Commands
+## Run Cypress Commands
 ##
-## Usage: fin cypress [arguments]
+## Usage: fin cypress [command] [URL with no http(s)://]
+## Defaults to //$VIRTUAL_HOST
 ##
 
 # Abort if anything fails
@@ -14,4 +15,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 cd ${PROJECT_ROOT}/tests/cypress
 nvm use
-CYPRESS_BASE_URL="http://${VIRTUAL_HOST}" ./node_modules/.bin/cypress  "$@"
+
+ENVIRONMENT=${2:-"$VIRTUAL_HOST"}
+
+
+CYPRESS_BASE_URL="//${ENVIRONMENT}" ./node_modules/.bin/cypress  "$@"
