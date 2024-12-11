@@ -14,6 +14,6 @@ DOCROOT_PATH="${PROJECT_ROOT}/${DOCROOT}"
 
 cd ${DOCROOT_PATH}
 
+drush cr
 php core/scripts/drupal recipe "$@"
-
 drush cr
