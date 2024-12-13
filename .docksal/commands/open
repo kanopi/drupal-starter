@@ -4,4 +4,4 @@
 ##
 ## Usage: fin open
 
-open https://${VIRTUAL_HOST}${NC}
+open //${VIRTUAL_HOST}${NC}
