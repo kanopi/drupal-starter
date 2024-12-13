@@ -1,8 +1,8 @@
 {
     "name": "kanopi/drupal-starter",
     "description": "Project template for modern Drupal projects with composer and docksal",
-    "type": "project",
     "license": "GPL-2.0+",
+    "type": "project",
     "authors": [
         {
             "name": "Sean Dietrich <sean@kanopistudios.com>",
@@ -17,6 +17,32 @@
             "role": "Custodian"
         }
     ],
+    "require": {
+        "composer/installers": "^2.3",
+        "cweagans/composer-patches": "^1.7.3",
+        "drupal/core-composer-scaffold": "^10.4",
+        "drupal/core-recommended": "^10.4",
+        "drupal/core-vendor-hardening": "^10.4",
+        "drupal/redis": "^1.7",
+        "drush/drush": "^13",
+        "ewcomposer/unpack": "dev-master",
+        "joachim-n/composer-manifest": "^1.0",
+        "kanopi/shrubs": "^0.2.5",
+        "oomphinc/composer-installers-extender": "^2.0.0",
+        "pantheon-systems/drupal-integrations": "^10"
+    },
+    "require-dev": {
+        "drupal/coder": "^8.3",
+        "drupal/core-dev": "^10.4",
+        "drupal/default_content": "^2.0@alpha",
+        "drupal/devel": "^5.1",
+        "ergebnis/composer-normalize": "^2.45",
+        "palantirnet/drupal-rector": "^0.20.3",
+        "vincentlanglet/twig-cs-fixer": "^3"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
     "repositories": [
         {
             "type": "composer",
@@ -31,31 +57,6 @@
             "url": "https://github.com/woredeyonas/Drupal-Recipe-Unpack.git"
         }
     ],
-    "require": {
-        "composer/installers": "^2.3",
-        "cweagans/composer-patches": "^1.7.3",
-        "drupal/core-composer-scaffold": "^10.3",
-        "drupal/core-recommended": "^10.3",
-        "drupal/core-vendor-hardening": "^10.3",
-        "drupal/redis": "^1.7",
-        "drush/drush": "^13",
-        "ewcomposer/unpack": "dev-master",
-        "joachim-n/composer-manifest": "^1.0",
-        "kanopi/shrubs": "^0.2.5",
-        "oomphinc/composer-installers-extender": "^2.0.0",
-        "pantheon-systems/drupal-integrations": "^10"
-    },
-    "require-dev": {
-        "drupal/coder": "^8.3",
-        "drupal/core-dev": "^10.3",
-        "drupal/default_content": "^2.0@alpha",
-        "drupal/devel": "^5.1",
-        "palantirnet/drupal-rector": "^0.20.3",
-        "vincentlanglet/twig-cs-fixer": "^3"
-    },
-    "conflict": {
-        "drupal/drupal": "*"
-    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
@@ -63,85 +64,44 @@
             "scripts/composer/ScriptHandler.php"
         ]
     },
-    "scripts": {
-        "lint-php": "find web/modules/custom web/themes/custom -not -path '*/node_modules/*' -name '*.php' -exec php -l {} \\;",
-        "code-sniff-modules": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
-        "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
-        "code-sniff": [
-            "@code-sniff-modules",
-            "@code-sniff-themes"
-        ],
-        "code-fix-modules": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
-        "code-fix-themes": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
-        "code-fix": [
-            "@code-fix-modules",
-            "@code-fix-themes",
-            "@rector-fix",
-            "@lint-php"
-        ],
-        "phpstan": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/phpstan analyse --memory-limit=-1 web/modules/custom web/themes/custom"
-        ],
-        "rector-modules": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/rector process web/modules/custom/ --dry-run"
-        ],
-        "rector-themes": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/rector process web/themes/custom/ --dry-run"
-        ],
-        "rector-fix-modules": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/rector process web/modules/custom/"
-        ],
-        "rector-fix-themes": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/rector process web/themes/custom/"
-        ],
-        "rector-fix": [
-            "@rector-fix-modules",
-            "@rector-fix-themes"
-        ],
-        "twig-lint-modules": "vendor/bin/twig-cs-fixer lint docroot/modules/custom",
-        "twig-lint-themes": "vendor/bin/twig-cs-fixer lint docroot/themes/custom",
-        "twig-lint": [
-            "@twig-lint-modules",
-            "@twig-lint-themes"
-        ],
-        "twig-fix-modules": "vendor/bin/twig-cs-fixer lint --fix docroot/modules/custom",
-        "twig-fix-themes": "vendor/bin/twig-cs-fixer lint --fix docroot/themes/custom",
-        "twig-fix": [
-            "@twig-fix-modules",
-            "@twig-fix-themes"
-        ],
-        "code-check": [
-            "@phpstan",
-            "@rector-modules",
-            "@rector-themes",
-            "@code-sniff"
-        ],
-        "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
-        "build-assets": [
-            "composer install --optimize-autoloader --no-dev"
-        ],
-        "post-autoload-dump": [
-            "[ ! -f rector.php ] && cp vendor/palantirnet/drupal-rector/rector.php . || true",
-            "vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer || true"
-        ]
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-vendor-hardening": true,
+            "ergebnis/composer-normalize": true,
+            "ewcomposer/unpack": true,
+            "joachim-n/composer-manifest": true,
+            "oomphinc/composer-installers-extender": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "rvtraveller/qs-composer-installer": true,
+            "tbachert/spi": false
+        },
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
     },
     "extra": {
-        "enable-patching": true,
         "composer-exit-on-patch-failure": true,
-        "patchLevel": {
-            "drupal/core": "-p2"
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "pantheon-systems/drupal-integrations"
+            ],
+            "file-mapping": {
+                "[web-root]/.htaccess": false,
+                "[web-root]/robots.txt": {
+                    "append": "assets/custom-robots.txt"
+                },
+                "[web-root]/sites/development.services.yml": false
+            },
+            "locations": {
+                "web-root": "./web"
+            }
         },
-        "installer-types": [
-            "npm-asset",
-            "bower-asset",
-            "cypress-support",
-            "cypress-e2e"
-        ],
+        "enable-patching": true,
         "installer-paths": {
             "web/core": [
                 "type:drupal-core"
@@ -179,39 +139,81 @@
                 "type:drupal-custom-theme"
             ]
         },
-        "drupal-scaffold": {
-            "locations": {
-                "web-root": "./web"
-            },
-            "allowed-packages": [
-                "pantheon-systems/drupal-integrations"
-            ],
-            "file-mapping": {
-                "[web-root]/.htaccess": false,
-                "[web-root]/robots.txt": {
-                    "append": "assets/custom-robots.txt"
-                },
-                "[web-root]/sites/development.services.yml": false
-            }
+        "installer-types": [
+            "npm-asset",
+            "bower-asset",
+            "cypress-support",
+            "cypress-e2e"
+        ],
+        "patchLevel": {
+            "drupal/core": "-p2"
         }
     },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "composer/installers": true,
-            "cweagans/composer-patches": true,
-            "phpstan/extension-installer": true,
-            "drupal/core-composer-scaffold": true,
-            "drupal/core-vendor-hardening": true,
-            "joachim-n/composer-manifest": true,
-            "oomphinc/composer-installers-extender": true,
-            "rvtraveller/qs-composer-installer": true,
-            "ewcomposer/unpack": true,
-            "php-http/discovery": true,
-            "tbachert/spi": false
-        }
+    "scripts": {
+        "post-autoload-dump": [
+            "[ ! -f rector.php ] && cp vendor/palantirnet/drupal-rector/rector.php . || true",
+            "vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer || true"
+        ],
+        "build-assets": [
+            "composer install --optimize-autoloader --no-dev"
+        ],
+        "code-check": [
+            "@phpstan",
+            "@rector-modules",
+            "@rector-themes",
+            "@code-sniff"
+        ],
+        "code-fix": [
+            "@code-fix-modules",
+            "@code-fix-themes",
+            "@rector-fix",
+            "@lint-php"
+        ],
+        "code-fix-modules": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
+        "code-fix-themes": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
+        "code-sniff": [
+            "@code-sniff-modules",
+            "@code-sniff-themes"
+        ],
+        "code-sniff-modules": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
+        "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
+        "lint-php": "find web/modules/custom web/themes/custom -not -path '*/node_modules/*' -name '*.php' -exec php -l {} \\;",
+        "phpstan": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/phpstan analyse --memory-limit=-1 web/modules/custom web/themes/custom"
+        ],
+        "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
+        "rector-fix": [
+            "@rector-fix-modules",
+            "@rector-fix-themes"
+        ],
+        "rector-fix-modules": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/modules/custom/"
+        ],
+        "rector-fix-themes": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/themes/custom/"
+        ],
+        "rector-modules": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/modules/custom/ --dry-run"
+        ],
+        "rector-themes": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/themes/custom/ --dry-run"
+        ],
+        "twig-fix": [
+            "@twig-fix-modules",
+            "@twig-fix-themes"
+        ],
+        "twig-fix-modules": "vendor/bin/twig-cs-fixer lint --fix docroot/modules/custom",
+        "twig-fix-themes": "vendor/bin/twig-cs-fixer lint --fix docroot/themes/custom",
+        "twig-lint": [
+            "@twig-lint-modules",
+            "@twig-lint-themes"
+        ],
+        "twig-lint-modules": "vendor/bin/twig-cs-fixer lint docroot/modules/custom",
+        "twig-lint-themes": "vendor/bin/twig-cs-fixer lint docroot/themes/custom"
     }
 }

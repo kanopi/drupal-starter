@@ -3,7 +3,7 @@
     "mochawesomeReporterOptions": {
         "charts": true,
         "html": true,
-        "json": false,
+        "json": true,
         "overwrite": false,
         "reportDir": "cypress/results",
         "reportFilename": "[status]--[name]--[datetime]",
