@@ -18,5 +18,4 @@ nvm use
 
 ENVIRONMENT=${2:-"$VIRTUAL_HOST"}
 
-
 CYPRESS_BASE_URL="http://${ENVIRONMENT}" ./node_modules/.bin/cypress  "$@"
