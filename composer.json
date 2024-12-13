@@ -20,9 +20,10 @@
     "require": {
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7.3",
-        "drupal/core-composer-scaffold": "^10.3",
-        "drupal/core-recommended": "^10.3",
-        "drupal/core-vendor-hardening": "^10.3",
+        "drupal/core-composer-scaffold": "^10.4",
+        "drupal/core-recommended": "^10.4",
+        "drupal/core-vendor-hardening": "^10.4",
+        "drupal/redis": "^1.7",
         "drush/drush": "^12.4.3",
         "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
@@ -32,7 +33,7 @@
     },
     "require-dev": {
         "drupal/coder": "^8.3",
-        "drupal/core-dev": "^10.3",
+        "drupal/core-dev": "^10.4",
         "drupal/default_content": "^2.0@alpha",
         "drupal/devel": "^5.1",
         "ergebnis/composer-normalize": "^2.45",
