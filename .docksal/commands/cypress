@@ -16,6 +16,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 cd ${PROJECT_ROOT}/tests/cypress
 nvm use
 
-ENVIRONMENT=${2:-"$VIRTUAL_HOST"}
+ENVIRONMENT=${2:-"https://$VIRTUAL_HOST"}
 
-CYPRESS_BASE_URL="http://${ENVIRONMENT}" ./node_modules/.bin/cypress  "$@"
+CYPRESS_BASE_URL="https://${ENVIRONMENT}" ./node_modules/.bin/cypress  "$@"
