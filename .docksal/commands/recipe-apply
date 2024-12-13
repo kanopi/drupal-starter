@@ -3,8 +3,10 @@
 #: exec_target = cli
 
 ## Apply a Drupal Recipe that has been installed using composer.
-##
-## Usage: fin recipe-apply /path/to/[recipe_name]
+## For contrib recipes:
+## Example: fin recipe-apply ../recipes/recipe-name
+## For core recipes:
+## Example: fin recipe-apply core/recipes/standard
 ##
 
 # Abort if anything fails
