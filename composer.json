@@ -24,7 +24,7 @@
         "drupal/core-recommended": "^10.4",
         "drupal/core-vendor-hardening": "^10.4",
         "drupal/redis": "^1.7",
-        "drush/drush": "^12.4.3",
+        "drush/drush": "^13",
         "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/shrubs": "^0.2.5",
