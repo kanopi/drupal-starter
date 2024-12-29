@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+## Description: Get the database.
+## Usage: refresh
+## Example: "ddev refresh"
+## OSTypes: darwin
+
+green='\033[0;32m'
+yellow='\033[1;33m'
+NC='\033[0m'
+divider='===================================================\n'
+
+# Database.
+echo -e "\n${yellow} Get database from Pantheon. ${NC}"
+echo -e "${green}${divider}${NC}"
+ddev db_pull_command

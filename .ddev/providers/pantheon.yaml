@@ -36,7 +36,7 @@
 # `ddev exec terminus site:list` will show available sites
 
 environment_variables:
-  project: yourproject.dev
+  project: saplingscms.dev
 
 auth_command:
   command: |
