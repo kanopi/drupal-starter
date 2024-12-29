@@ -45,7 +45,6 @@ if [[ "${LEFTHOOK}" == "" ]]; then
 fi
 
 #-------------------------- Execution -------------------------------------
-#-------------------------- Execution -------------------------------------
 # Initializing Githooks
 echo -e "\n${yellow} ${construction} Initializing githooks. ${construction}${NC}"
 echo -e "${NC}This should require no input.${NC}"
@@ -98,14 +97,14 @@ fin init-site
 
 # Here's where you could run the theme build.
 # Commenting it out so build finishes faster.
-# Added a comment so themers can run manually.
 # fin install-theme-tools
 # fin install-critical-tools
+
+# Create Solr container.
 fin solr-create-core
 
-# Database
+# Get the database from the server.
 fin refresh
-
 
 echo -e "\n${yellow} ${key} Logging you in. ${key}${NC}"
 echo -e "${NC}This should take ~1 minute and require no input.${NC}"
@@ -118,5 +117,4 @@ echo -e "Visit ${yellow}http://${VIRTUAL_HOST}${NC} in a web browser.${NC}"
 echo -e "Run ${yellow}${theme_tools_command}${NC} to work on the theme."
 echo -e "Run ${yellow}${critical_tools_command}${NC} to install tools for Critical CSS."
 echo -e "${green}${divider}${NC}"
-
 #-------------------------- END: Execution --------------------------------
