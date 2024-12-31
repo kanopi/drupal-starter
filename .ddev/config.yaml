@@ -7,21 +7,21 @@ xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
 database:
-    type: mariadb
-    version: "10.11"
+  type: mariadb
+  version: "10.11"
 use_dns_when_possible: true
 composer_version: "2"
 web_environment:
-    # Used in all Docksal and Critical CSS commands.
-    - THEME="themes/custom/saplings_child"
-    # Used in install-theme-tools to rename the theme.
-    - THEMENAME="saplings_child"
-    # Hosting Variables.
-    - hostingsite="saplingscms"
-    - hostingenv="dev"
-    # Update with the Pantheon D7 machine name and environment.
-    - MIGRATE_DB_SOURCE="pantheon_d7_project_machine_name"
-    - MIGRATE_DB_ENV="dev"
+  # Used in all Docksal and Critical CSS commands.
+  - THEME=themes/custom/saplings_child
+  # Used in install-theme-tools to rename the theme.
+  - THEMENAME=saplings_child
+  # Hosting Variables.
+  - hostingsite=saplingscms
+  - hostingenv=dev
+  # Update with the Pantheon D7 machine name and environment.
+  - MIGRATE_DB_SOURCE=pantheon_d7_project_machine_name
+  - MIGRATE_DB_ENV=dev
 corepack_enable: true
 
 # Key features of DDEV's config.yaml:

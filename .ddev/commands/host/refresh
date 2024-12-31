@@ -12,15 +12,24 @@ divider='===================================================\n'
 
 ENVIRONMENT=${1:-"$hostingenv"}
 
-# Database.
-echo -e "\n${yellow} Get database from Pantheon. ${NC}"
-echo -e "${green}${divider}${NC}"
-ddev pull pantheon --skip-files --y --env=${ENVIRONMENT}
+# Issue to add environment selection.
+# https://github.com/ddev/ddev/issues/4760
 
-cd ${DDEV_APPROOT}/${DDEV_DOCROOT}
+cd ${DDEV_APPROOT}
 
-echo "Update Drupal DB"
-fin drush updatedb -y
+# Check if the file exists
+if [ -f "config/core.extension.yml" ]; then
+  echo -e "\n${yellow} Get database from Pantheon. ${NC}"
+  echo -e "${green}${divider}${NC}"
+  ddev pull pantheon --skip-files -y
 
-echo "Clear cache"
-fin drush cr -y
+  echo -e "Update Drupal DB"
+  ddev drush updatedb -y
+
+  echo -e "Clear cache"
+  ddev drush cr -y
+else
+  echo -e "\n${yellow} No config, installing Drupal. ${NC}"
+  echo -e "${green}${divider}${NC}"
+  ddev drush si -y minimal
+fi
