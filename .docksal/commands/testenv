@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-## Initialize stack and site (full reset)
+## Initialize stack and testing environment
 ##
-## Usage: fin init
+## Usage: fin testenv [environment_name] [optional profile_or recipe]
 
 # Abort if anything fails
 set -e
@@ -32,24 +32,20 @@ key='\xF0\x9F\x94\x91'
 lock='\xF0\x9F\x94\x92'
 arm='\xF0\x9F\x92\xAA'
 
-LEFTHOOK=$(which lefthook || true)
-if [[ "${LEFTHOOK}" == "" ]]; then
-  echo -e "\n${yellow} ${construction} Initializing githooks... ${construction}${NC}\n"
-  echo -e "${NC}If you don't have Lefthook installed, this will ask for your password twice.${NC}"
-  echo -e "${NC}Installing Lefthook.${NC}"
-  ARCH=$(uname -m)
-  sudo curl -fsSL -o /usr/local/bin/lefthook "https://github.com/evilmartians/lefthook/releases/download/v0.7.7/lefthook_0.7.7_MacOS_${ARCH}"
-  echo -e "${NC}Setting Lefthook permissions.${NC}"
-  sudo chmod +x /usr/local/bin/lefthook
-  echo -e "${green}${divider}${NC}"
+#-------------------------- Execution -------------------------------------
+
+# Check if at least one argument is provided.
+if [ -z "$1" ]; then
+    echo "Usage: $0 <input1> [input2]"
+    exit 1
 fi
 
-#-------------------------- Execution -------------------------------------
-# Initializing Githooks
-echo -e "\n${yellow} ${construction} Initializing githooks. ${construction}${NC}"
-echo -e "${NC}This should require no input.${NC}"
-echo -e "${green}${divider}${NC}"
-lefthook install
+# Set the variables from the inputs.
+# Minimal profile is used is another is not provided.
+ENVNAME=$1
+PROFILERECIPE=${2:-minimal}
+
+sed -i '' "s/^hostingsite=\".*\"/hostingsite=\"$ENVNAME\"/" .docksal/docksal.env
 
 echo -e "\n${yellow} ${construction} Initializing NVM... ${construction}${NC}\n"
 echo -e "${NC}This should require no input.${NC}"
@@ -79,11 +75,6 @@ echo -e "${NC}This should take ~1 minute and require no input.${NC}"
 echo -e "${green}${divider}${NC}"
 fin exec '([ -f /usr/local/bin/drush ] || true) && sudo ln -sf /var/www/vendor/bin/drush /usr/local/bin/drush'
 
-echo -e "\n${yellow} ${arm} Installing Docksal Pull command. ${arm}${NC}"
-echo -e "${NC}This should take ~1 minute and require no input.${NC}"
-echo -e "${green}${divider}${NC}"
-fin addon install --global pull
-
 # Stack initialization
 echo -e "\n${yellow} ${shark} Building Docksal container. ${shark}${NC}"
 echo -e "${NC}This should take ~3 minutes and require no input.${NC}"
@@ -97,24 +88,23 @@ fin init-site
 
 # Here's where you could run the theme build.
 # Commenting it out so build finishes faster.
+# Added a comment so themers can run manually.
 # fin install-theme-tools
 # fin install-critical-tools
-
-# Create Solr container.
 fin solr-create-core
 
-# Get the database from the server.
-fin refresh
+# Database
+fin drush si -y $PROFILERECIPE
 
 echo -e "\n${yellow} ${key} Logging you in. ${key}${NC}"
 echo -e "${NC}This should take ~1 minute and require no input.${NC}"
 echo -e "${green}${divider}${NC}"
-fin drush uli --uid=2
+fin drush uli
 
 # Complete
 echo -e "\n${yellow} ${party} Build complete!!! ${reverseparty}${NC}"
-echo -e "Visit ${yellow}http://${VIRTUAL_HOST}${NC} in a web browser.${NC}"
 echo -e "Run ${yellow}${theme_tools_command}${NC} to work on the theme."
 echo -e "Run ${yellow}${critical_tools_command}${NC} to install tools for Critical CSS."
 echo -e "${green}${divider}${NC}"
+
 #-------------------------- END: Execution --------------------------------

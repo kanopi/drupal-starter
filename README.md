@@ -84,6 +84,7 @@ Command | Description
 `release` | Creates a new release on GitHub and deploys it to Pantheon test environment.
 `share` | Opens a proxy server to your local computer using ngrok.io.
 `solr-create-core` | Called from `init` to create Solr core.
+`testenv` | Creates a new site similar to `init`, but with a local database. Helpful for testing and contributing.
 `tickle` | Wakes up the remote migration source environment every 5 minutes.
 `uuid-rm` | Helper command for Drupal Recipe builders that removes UUIDs from config files.
 
