@@ -8,9 +8,11 @@ services:
       - THEMENAME
       - MIGRATE_DB_SOURCE
       - MIGRATE_DB_ENV
+      # Manually compile Chromium for Critical.
+      - PUPPETEER_SKIP_DOWNLOAD=true
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
     volumes:
       - ${PROJECT_ROOT}/.docksal/etc/drush:/etc/drush:ro
-
   solr:
     image: "devkteam/solr:8"
     extends:
