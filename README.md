@@ -60,33 +60,33 @@ Emulsify. Currently not used in new projects.
 The following commands are available with Docksal and should be prefixed with
 the command `fin`.
 
-Command | Description
---------|------------
-`config-capture` | Exports config from environments and downloads them.
-`critical` | Run Critical CSS.
-`cypress` | Run Cypress inside Docksal. ie. `fin cypress open`.
-`cypress-users` | Adds users Cypress can be used to test. Called from `fin refresh`.
-`composer` | Composer wrapper that executes within the CLI container.
-`init` | Init Command that starts the project from scratch.
-`init-site` | Installs and configures Drupal.
-`install-critical-tools` | Installs tools needed for Critical CSS.
-`install-cypress` | Called from `init` to install Cypress tools.
-`install-theme-tools` | Installs tools needed for Critical, Storybook, etc.
-`migrate-prep-db` | Creates a second database to house a migration source.
-`npm` | Run NPM from the theme folder.
-`npx` | Run NPX from the theme folder.
-`open` | Opens browser to local site URL.
-`rebuild` | Runs `composer install` and `fin refresh`
-`recipe-apply` | Apply Drupal contrib Recipes that have been required.
-`recipe-configure` | Configures sites for Drupal Recipes. Already run in this repo.
-`recipe-unpack` | Unpacks Composer dependencies from a Recipe to the project's composer.json.
-`refresh` | Will execute a drush sql-dump from the remote server.
-`release` | Creates a new release on GitHub and deploys it to Pantheon test environment.
-`share` | Opens a proxy server to your local computer using ngrok.io.
-`solr-create-core` | Called from `init` to create Solr core.
-`testenv` | Creates a new site similar to `init`, but with a local database. Helpful for testing and contributing.
-`tickle` | Wakes up the remote migration source environment every 5 minutes.
-`uuid-rm` | Helper command for Drupal Recipe builders that removes UUIDs from config files.
+| Command                 | Description                                                                         |
+|-------------------------|-------------------------------------------------------------------------------------|
+| `config-capture`        | Exports config from environments and downloads them.                                |
+| `critical`              | Run Critical CSS.                                                                   |
+| `cypress`               | Run Cypress inside Docksal. ie. `fin cypress open`.                                 |
+| `cypress-users`         | Adds users Cypress can be used to test. Called from `fin refresh`.                  |
+| `composer`              | Composer wrapper that executes within the CLI container.                            |
+| `init`                  | Init Command that starts the project from scratch.                                  |
+| `init-site`             | Installs and configures Drupal.                                                     |
+| `install-critical-tools`| Installs tools needed for Critical CSS.                                             |
+| `install-cypress`       | Called from `init` to install Cypress tools.                                        |
+| `install-theme-tools`   | Installs tools needed for Critical, Storybook, etc.                                 |
+| `migrate-prep-db`       | Creates a second database to house a migration source.                              |
+| `npm`                   | Run NPM from the theme folder.                                                      |
+| `npx`                   | Run NPX from the theme folder.                                                      |
+| `open`                  | Opens browser to local site URL.                                                    |
+| `rebuild`               | Runs `composer install` and `fin refresh`.                                          |
+| `recipe-apply`          | Apply Drupal contrib Recipes that have been required.                               |
+| `recipe-configure`      | Configures sites for Drupal Recipes. Already run in this repo.                      |
+| `recipe-unpack`         | Unpacks Composer dependencies from a Recipe to the project's composer.json.         |
+| `refresh`               | Will execute a drush sql-dump from the remote server.                               |
+| `release`               | Creates a new release on GitHub and deploys it to Pantheon test environment.        |
+| `share`                 | Opens a proxy server to your local computer using ngrok.io.                         |
+| `solr-create-core`      | Called from `init` to create Solr core.                                             |
+| `testenv`               | Creates a new site similar to `init`, but with a local db for testing/contributing. |
+| `tickle`                | Wakes up the remote migration source environment every 5 minutes.                   |
+| `uuid-rm`               | Helper command for Drupal Recipe builders that removes UUIDs from config files.     |
 
 
 ## Composer Commands
@@ -94,31 +94,31 @@ Command | Description
 The following commands are available with Composer and should be prefixed with
 the command `fin composer`.
 
-Command | Description
---------|------------
-`lint-php` | Analyzes custom modules for programmatic and stylistic errors
-`code-sniff-modules` | Runs PHPcs on the custom modules folder
-`code-sniff-themes` | Runs PHPcs on the custom themes folder
-`code-sniff` | Runs `code-sniff-modules` and `code-sniff-themes`
-`code-fix-modules` | Runs PHPcbf on the custom modules folder
-`code-fix-themes` | Runs PHPcbf on the custom themes folder
-`code-fix` | Runs `code-fix-modules` `code-fix-themes` `rector-fix` `lint-php`
-`phpstan` | PHPStan finds errors in custom modules and themes.
-`rector-modules` | Dry run of finding deprecations in custom modules
-`rector-themes` | Dry run of finding deprecations in custom themes
-`rector-fix-modules` | Refactors deprecations on the custom modules folder
-`rector-fix-themes` | Refactors deprecations on the custom themes folder
-`rector-fix` | Runs `rector-fix-modules` and `rector-fix-themes`
-`twig-lint-modules` | Runs Twig-CS-Fixer on the custom modules folder
-`twig-lint-themes` | Runs Twig-CS-Fixer on the custom themes folder
-`twig-lint` | Runs `twig-lint-modules` and `twig-lint-themes`
-`twig-fix-modules` | Runs Twig-CS-Fixer with the fix option on custom modules
-`twig-fix-themes` | Runs Twig-CS-Fixer with the fix option on custom themes
-`twig-fix` | Runs `twig-fix-modules` and `twig-fix-themes`
-`code-check` | Runs `phpstan` `rector-modules` `rector-themes` `code-sniff`
-`prepare-for-pantheon` | Used by CircleCI for Pantheon
-`build-assets` | Used by CircleCI for Pantheon
-`post-autoload-dump` | Used by CircleCI for Pantheon
+| Command                | Description                                                       |
+|------------------------|-------------------------------------------------------------------|
+| `lint-php`            | Analyzes custom modules for programmatic and stylistic errors.     |
+| `code-sniff-modules`  | Runs PHPcs on the custom modules folder.                           |
+| `code-sniff-themes`   | Runs PHPcs on the custom themes folder.                            |
+| `code-sniff`          | Runs `code-sniff-modules` and `code-sniff-themes`.                 |
+| `code-fix-modules`    | Runs PHPcbf on the custom modules folder.                          |
+| `code-fix-themes`     | Runs PHPcbf on the custom themes folder.                           |
+| `code-fix`            | Runs `code-fix-modules` `code-fix-themes` `rector-fix` `lint-php`. |
+| `phpstan`             | PHPStan finds errors in custom modules and themes.                 |
+| `rector-modules`      | Dry run of finding deprecations in custom modules.                 |
+| `rector-themes`       | Dry run of finding deprecations in custom themes.                  |
+| `rector-fix-modules`  | Refactors deprecations on the custom modules folder.               |
+| `rector-fix-themes`   | Refactors deprecations on the custom themes folder.                |
+| `rector-fix`          | Runs `rector-fix-modules` and `rector-fix-themes`.                 |
+| `twig-lint-modules`   | Runs Twig-CS-Fixer on the custom modules folder.                   |
+| `twig-lint-themes`    | Runs Twig-CS-Fixer on the custom themes folder.                    |
+| `twig-lint`           | Runs `twig-lint-modules` and `twig-lint-themes`.                   |
+| `twig-fix-modules`    | Runs Twig-CS-Fixer with the fix option on custom modules.          |
+| `twig-fix-themes`     | Runs Twig-CS-Fixer with the fix option on custom themes.           |
+| `twig-fix`            | Runs `twig-fix-modules` and `twig-fix-themes`.                     |
+| `code-check`          | Runs `phpstan` `rector-modules` `rector-themes` `code-sniff`.      |
+| `prepare-for-pantheon`| Used by CircleCI for Pantheon.                                     |
+| `build-assets`        | Used by CircleCI for Pantheon.                                     |
+| `post-autoload-dump`  | Used by CircleCI for Pantheon.                                     |
 
 
 ## Deployments
