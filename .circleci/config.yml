@@ -435,7 +435,7 @@ workflows:
     when:
       and:
         - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-        - matches: { "pattern": "^cron job", "value": << pipeline.schedule.name >> }
+        - matches: { "pattern": "^cron job.*", "value": << pipeline.schedule.name >> }
     jobs:
       - ci-tools/terminus-job:
           context: kanopi-code
