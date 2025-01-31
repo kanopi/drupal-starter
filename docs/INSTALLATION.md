@@ -246,3 +246,78 @@ pushed to Pantheon.  It is a two commit process.
   * Validate CircleCI job and deployment to multidev.
   * Merge the PR.
   * Validate CircleCI job deployment and Pantheon Dev site.
+
+
+### Configuring Cron on CircleCI for use with Pantheon
+
+Cron can be ran two different ways.
+
+1. Accessing through the URL provided on the Status Report.
+2. Using Drush through Terminus.
+
+What can happen sometimes is that we don't configure cron to run which then makes it so
+we manually need to run it. Within the `.circleci/config.yml` there is now a workflow
+titled `run_cron` that will run a terminus command then drush then the core cron command.
+
+Running the URL process on Pantheon can timeout and is sometimes not recommended for a
+Cron Process that takes longer than 60 seconds.
+
+Running Drush through Terminus is the next possible way. With this there are no time-out
+restrictions. This is usually done by running the following command in the terminal.
+
+```sh
+terminus drush site-id.site-env -- core:cron
+```
+
+We have made it so that this can be automated and done through CircleCI.
+
+To configure
+
+* Go to the project in CircleCI.
+* Click on Project Settings
+* Click Triggers
+* Click Add Trigger
+* Select Schedule from the Trigger type
+* Configure the Trigger
+  * Trigger Name: (The name should be prefixed with the words "cron job", example "cron job test")
+  * Trigger Description: (This is a description about what this trigger does)
+  * Pipeline to run: (This can stay as is)
+  * Repeats: Weekly
+  * Repeats on these days: (Select all 7 days)
+  * Repeats on these months: (Select all 12 months)
+  * Start Time: (See Note 1)
+  * Repeats Per Hour: (See Note 2)
+  * Branch of Tag Name: (Set to whatever the name of the main branch is in the project)
+  * Pipeline Parameters
+    * Click Add Parameters
+      * Name: cron_env
+      * Type: string
+      * Value: (Name of the environment on Pantheon to run cron on defaults to `live`)
+      * Click Add Parameters
+  * Attribution: Leave it as it is (Scheduling System)
+  * Click Save Trigger
+
+**NOTE 1** Configuring the Start time will depend on the need of the project. This is what hour the
+cron should be ran. Usually in live it is recommended to run maybe once an hour so all the items would
+be checked. But in other environments maybe it only needs to be ran in the morning so only specific times
+would be selected. Gauge the need of the project.
+
+**NOTE 2** Configuring the Repeats Per Hour will also dependo n the need of the project. If you aren't doing
+something that relies heavily on cron running maybe it's only 1. There may be times where you need the cron
+to run every 15 minutes and so setting to 4 is necessary. There are also times where you rely heavily on cron
+and there for need it to run every 6 minutes so setting to 12 is required. 12 is the max number we can set this
+to which means that we can only run this every 6 minutes.
+
+**NOTE** While this is only configured to run with Pantheon the same sort of concept can
+be adapted to run on any other type of job.
+
+```yaml
+workflows:
+  workflow_name:
+    when:
+      and:
+        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - matches: { "pattern": "^(example prefix).*", "value": << pipeline.schedule.name >> }
+    jobs:
+      ...
+```
