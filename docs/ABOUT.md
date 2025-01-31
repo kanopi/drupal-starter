@@ -54,7 +54,7 @@ types of packages to.
     "web/modules/contrib/{$name}": ["type:drupal-module"],
     "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"],
     "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-    "web/recipes/contrib/{$name}": ["type:drupal-recipe"],
+    "recipes/{$name}": ["type:drupal-recipe"],
     "web/themes/contrib/{$name}": ["type:drupal-theme"]
 },
 ```
