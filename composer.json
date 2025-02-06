@@ -23,13 +23,12 @@
         "drupal/core-composer-scaffold": "^11.1",
         "drupal/core-recommended": "^11.1",
         "drupal/core-vendor-hardening": "^11.1",
-        "drupal/redis": "^1.7",
         "drush/drush": "^13",
         "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/shrubs": "^0.2.5",
         "oomphinc/composer-installers-extender": "^2.0.0",
-        "pantheon-systems/drupal-integrations": "^10"
+        "pantheon-systems/drupal-integrations": "^11"
     },
     "require-dev": {
         "drupal/coder": "^8.3",

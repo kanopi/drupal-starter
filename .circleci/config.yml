@@ -25,6 +25,11 @@ defaults: &defaults
 
 version: 2.1
 
+parameters:
+  cron_env:
+    type: string
+    default: live
+
 orbs:
   ci-tools: kanopi/ci-tools@2
   cms-updates: kanopi/cms-updates@2
@@ -420,3 +425,22 @@ workflows:
           update-method: composer
           context: kanopi-code
           php-version: *CIMG_PHP_TAG_MAJOR
+
+  # Run Cron Job on the provided Environment
+  # To use setup a new trigger in CircleCI and have 
+  # it start with the name "cron job" it can be anything
+  # example is "cron job dev". The parameter cron_env should
+  # be added and set to be the name of the env to reference for Pantheon.
+  run_cron:
+    when:
+      and:
+        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - matches: { "pattern": "^cron job.*", "value": << pipeline.schedule.name >> }
+    jobs:
+      - ci-tools/terminus-job:
+          context: kanopi-code
+          name: "Run Cron"
+          site-id: *TERMINUS_SITE
+          site-env: << pipeline.parameters.cron_env >>
+          command: drush
+          arguments: core:cron
