@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+## Description: Install and set up theme development tools in DDEV
+## Usage: install-theme-tools
+## Example: ddev install-theme-tools
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Helper functions --------------------------------
+
+green='\033[0;32m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+divider='===================================================\n'
+construction='\xF0\x9F\x9A\xA7'
+party='\xF0\x9F\x8E\x88 \xF0\x9F\x8E\x89 \xF0\x9F\x8E\x8A'
+reverseparty='\xF0\x9F\x8E\x8A \xF0\x9F\x8E\x89 \xF0\x9F\x8E\x88'
+rocket='\xF0\x9F\x9A\x80'
+shark='\xF0\x9F\xA6\x88'
+
+#-------------------------- Settings --------------------------------
+
+# Define paths.
+FULL_THEME_PATH="/var/www/html/${DDEV_DOCROOT}/${THEME}"
+
+#-------------------------- Execution -------------------------------------
+
+# Theme initialization message
+echo -e "\n ${shark} ${yellow} Installing theme development tools. ${NC} ${shark}\n"
+echo -e "${green}${divider}${NC}"
+
+# Move to the theme directory
+echo -e "\n ${rocket} ${yellow} Navigating to theme directory: ${FULL_THEME_PATH} ${NC} ${rocket}"
+echo -e "${green}${divider}${NC}"
+cd "${FULL_THEME_PATH}"
+
+# Install NPM dependencies
+echo -e "\n ${construction} ${yellow} Installing NPM dependencies. ${NC} ${construction}"
+echo -e "${green}${divider}${NC}"
+
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
+source ~/.bashrc
+echo "NVM version: $(nvm --version)"
+
+# Use Node version specified in .nvmrc
+NODE_VERSION=$(cat "${FULL_THEME_PATH}/.nvmrc")
+echo "Using Node.js version: ${NODE_VERSION}"
+nvm install "${NODE_VERSION}"
+nvm alias default "${NODE_VERSION}"
+nvm use
+npm ci --save patch-package
+
+# Compile theme assets
+echo -e "\n ${construction} ${yellow} Compiling theme assets. ${NC} ${construction}"
+echo -e "${green}${divider}${NC}"
+npm run build
+
+# Completion message
+echo -e "\n ${party} ${yellow} Theme setup complete! ${NC} ${reverseparty}"
+echo -e "To start watching for file changes, run: ${yellow}ddev npm run watch${NC}"
+echo -e "${green}${divider}${NC}"
