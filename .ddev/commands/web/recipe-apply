@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+## Description: Apply a Drupal Recipe.
+## Usage: recipe-apply <recipe-path>
+## Example: ddev recipe-apply ../recipes/recipe-name
+## Example: ddev recipe-apply core/recipes/standard
+
+# Abort if anything fails
+set -e
+
+# Define the Drupal root inside DDEV
+DOCROOT_PATH="/var/www/html/${DDEV_DOCROOT}"
+
+# Ensure we're in the correct directory
+cd "${DOCROOT_PATH}"
+
+# Clear cache before applying the recipe
+echo -e "\n 🧹  Clearing cache before applying recipe."
+drush cr
+
+# Apply the recipe
+echo -e "\n 📦  Applying Drupal Recipe: $@"
+php core/scripts/drupal recipe "$@"
+
+# Clear cache again after applying the recipe
+echo -e "\n 🧹  Clearing cache after applying recipe."
+drush cr
+
+echo -e "\n ✅  Recipe applied successfully!\n"

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+## Description: Continuously wake up a Pantheon environment.
+## Usage: tickle
+## Example: ddev tickle
+
+# Abort if anything fails
+set -e
+
+# Ensure required environment variables exist.
+if [ -z "${MIGRATE_DB_SOURCE}" ] || [ -z "${MIGRATE_DB_ENV}" ]; then
+    echo -e " ❌  Error: MIGRATE_DB_SOURCE and MIGRATE_DB_ENV environment variables must be set."
+    exit 1
+fi
+
+echo -e "\n ✅  Logging into Terminus. \n"
+terminus auth:login
+
+echo -e "\n ⏰  Starting Pantheon wake-up loop for ${MIGRATE_DB_SOURCE}.${MIGRATE_DB_ENV}.\n"
+
+# Infinite loop to wake the Pantheon environment every 5 minutes (300 seconds).
+while true
+do
+    TIMESTAMP=$(date)
+    echo -e "\n 📅  ${TIMESTAMP} - Waking up ${MIGRATE_DB_SOURCE}.${MIGRATE_DB_ENV}."
+    terminus env:wake "${MIGRATE_DB_SOURCE}.${MIGRATE_DB_ENV}"
+    echo -e "\n ⏳  Sleeping for 5 minutes..."
+    sleep 300
+done
