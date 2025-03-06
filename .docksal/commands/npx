@@ -2,9 +2,9 @@
 
 #: exec_target = cli
 
-## Run NPM Commands
+## Run NPX Commands
 ##
-## Usage: fin npm [arguments]
+## Usage: fin npx [arguments]
 ##
 
 # Abort if anything fails
