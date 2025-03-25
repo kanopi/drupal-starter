@@ -206,13 +206,13 @@
             "@twig-fix-modules",
             "@twig-fix-themes"
         ],
-        "twig-fix-modules": "vendor/bin/twig-cs-fixer lint --fix docroot/modules/custom",
-        "twig-fix-themes": "vendor/bin/twig-cs-fixer lint --fix docroot/themes/custom",
+        "twig-fix-modules": "vendor/bin/twig-cs-fixer lint --fix web/modules/custom",
+        "twig-fix-themes": "vendor/bin/twig-cs-fixer lint --fix web/themes/custom",
         "twig-lint": [
             "@twig-lint-modules",
             "@twig-lint-themes"
         ],
-        "twig-lint-modules": "vendor/bin/twig-cs-fixer lint docroot/modules/custom",
-        "twig-lint-themes": "vendor/bin/twig-cs-fixer lint docroot/themes/custom"
+        "twig-lint-modules": "vendor/bin/twig-cs-fixer lint web/modules/custom",
+        "twig-lint-themes": "vendor/bin/twig-cs-fixer lint web/themes/custom"
     }
 }
