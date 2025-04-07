@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+## Description: Initialize stack and testing environment in DDEV.
+## Usage: testenv [environment_name] [optional profile_or_recipe]
+## Example: ddev testenv my-env minimal
+## OSTypes: darwin
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Helper functions ------------------------------
+
+green='\033[0;32m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+divider='===================================================\n'
+construction='\xF0\x9F\x9A\xA7'
+lock='\xF0\x9F\x94\x92'
+party='\xF0\x9F\x8E\x88 \xF0\x9F\x8E\x89 \xF0\x9F\x8E\x8A'
+reverseparty='\xF0\x9F\x8E\x8A \xF0\x9F\x8E\x89 \xF0\x9F\x8E\x88'
+shark='\xF0\x9F\xA6\x88'
+key='\xF0\x9F\x94\x91'
+
+#-------------------------- Execution -------------------------------------
+
+# Check if at least one argument is provided.
+if [ -z "$1" ]; then
+    echo -e "\n ❌  Usage: ddev testenv <environment_name> [optional profile_or_recipe]"
+    exit 1
+fi
+
+# Set the variables from the inputs.
+# Default to "minimal" profile if not provided.
+ENVNAME=$1
+PROFILERECIPE=${2:-minimal}
+
+echo -e "\n${construction} ${yellow} Initializing test environment: ${ENVNAME} ${NC} ${construction}"
+echo -e "${green}${divider}${NC}"
+
+# Ensure we are in the project root.
+cd ${DDEV_APPROOT}
+
+echo -e "\n${construction} ${yellow} Initializing Cypress.${NC} ${construction}\n"
+echo -e "This should require no input."
+echo -e "${green}${divider}${NC}"
+ddev install-cypress
+
+# Run site installation with the given profile/recipe
+ddev drush si -y $PROFILERECIPE
+
+# Log in
+echo -e "\n ${key} ${yellow} Logging you in. ${NC} ${key}"
+ddev drush uli
+
+# Complete
+echo -e "\n ${party} ${yellow} Build complete!!! ${NC} ${reverseparty}"
+echo -e "${green}${divider}${NC}"

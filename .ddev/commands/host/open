@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+## Description: Opens the project URL in the default browser (alias for ddev launch)
+## Usage: open
+## Example: ddev open
+
+ddev launch

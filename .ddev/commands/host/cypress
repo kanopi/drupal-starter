@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+## Description: Run Cypress Commands
+## Usage: cypress [command]
+## Example: "ddev cypress [command] [URL with no http(s)://] (Defaults to DDEV URL)"
+## OSTypes: darwin
+
+# Abort if anything fails
+set -e
+
+# Make sure NVM works
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+cd ${DDEV_APPROOT}/tests/cypress
+nvm use
+
+ENVIRONMENT=${2:-"https://$DDEV_HOSTNAME"}
+
+CYPRESS_BASE_URL="${ENVIRONMENT}" ./node_modules/.bin/cypress  "$@"
