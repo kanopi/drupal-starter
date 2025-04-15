@@ -33,3 +33,6 @@ else
   echo -e "${green}${divider}${NC}"
   ddev drush si -y minimal
 fi
+
+echo "Add Cypress users"
+ddev cypress-users
