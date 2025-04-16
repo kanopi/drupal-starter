@@ -7,6 +7,8 @@ drush_version: 10
 build_step: false
 new_relic:
   drupal_hooks: true
+object_cache:
+  version: 6.2
 search:
   version: 8
 enforce_https: full
