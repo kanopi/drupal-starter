@@ -46,6 +46,12 @@ echo -e "This should require no input."
 echo -e "${green}${divider}${NC}"
 ddev install-cypress
 
+# Site initialization.
+echo -e "\n${construction} ${yellow} Composer install...${NC} ${construction}\n"
+echo -e "This should require no input."
+echo -e "${green}${divider}${NC}"
+ddev composer install
+
 # Run site installation with the given profile/recipe
 ddev drush si -y $PROFILERECIPE
 
