@@ -54,6 +54,33 @@ ui_suite_bootstrap
 - [Emulsify](docs/EMULSIFY.md) - kanopi/kdcl_basic theme was built from
 Emulsify. Currently not used in new projects.
 
+## DDEV Commands
+
+The following commands are available with DDEV and should be prefixed with
+the command `ddev`.
+
+| Command Name             | Container | Short Description                                     | Usage Syntax                        |
+| ------------------------ | --------- | ----------------------------------------------------- | ----------------------------------- |
+| `cypress`                | host      | Run Cypress commands with optional environment target | `ddev cypress [command]`            |
+| `cypress-users`          | host      | Create default admin user for Cypress testing         | `ddev cypress-users`                |
+| `init`                   | host      | Initialize local development environment              | `ddev init`                         |
+| `install-cypress`        | host      | Install node packages for Cypress on local machine    | `ddev install-cypress`              |
+| `open`                   | host      | Open the project URL in the default browser           | `ddev open`                         |
+| `phpmyadmin`             | host      | Launch PhpMyAdmin                                     | `ddev phpmyadmin`                   |
+| `rebuild`                | host      | Run composer install and refresh database             | `ddev rebuild`                      |
+| `refresh`                | host      | Pull database from hosting environment (Pantheon)     | `ddev refresh`                      |
+| `testenv`                | host      | Initialize stack and testing environment              | `ddev testenv [env_name] [profile]` |
+| `install-critical-tools` | web       | Install tools needed for Critical CSS generation      | `ddev install-critical-tools`       |
+| `install-theme-tools`    | web       | Install and set up theme development tools            | `ddev install-theme-tools`          |
+| `migrate-prep-db`        | web       | Create and configure a migration database             | `ddev migrate-prep-db`              |
+| `npm`                    | web       | Run npm commands inside the theme directory           | `ddev npm`                          |
+| `npx`                    | web       | Run npx commands inside the theme directory           | `ddev npx`                          |
+| `recipe-apply`           | web       | Apply a Drupal recipe                                 | `ddev recipe-apply <recipe-path>`   |
+| `recipe-unpack`          | web       | Unpack a Drupal recipe into composer.json             | `ddev recipe-unpack [package-name]` |
+| `tickle`                 | web       | Continuously wake a Pantheon environment              | `ddev tickle`                       |
+| `uuid-rm`                | web       | Remove UUIDs and \_core metadata from config files    | `ddev uuid-rm [path/to/folder]`     |
+
+
 
 ## Docksal Commands
 

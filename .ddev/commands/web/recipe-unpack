@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+## Description: Unpack a Drupal Recipe into the project's composer.json
+## Usage: recipe-unpack [organization/package-name]
+## Example: ddev recipe-unpack kanopi/saplings
+
+# Abort if anything fails
+set -e
+
+# Ensure a package name is provided.
+if [ -z "$1" ]; then
+    echo -e "\n ❌  Error: No package name provided."
+    echo -e "\n 🔹  Usage: ddev recipe-unpack [organization/package-name]"
+    exit 1
+fi
+
+# Run composer unpack with the provided package.
+echo -e "\n 📦  Unpacking Drupal Recipe: $@"
+composer unpack "$@"
+
+echo -e "\n ✅  Recipe successfully unpacked!\n"
