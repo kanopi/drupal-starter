@@ -28,11 +28,11 @@ if [ -f "config/core.extension.yml" ]; then
 
   echo -e "Clear cache"
   ddev drush cr -y
+
+  echo "Add Cypress users"
+  ddev cypress-users
 else
   echo -e "\n${yellow} No config, installing Drupal. ${NC}"
   echo -e "${green}${divider}${NC}"
   ddev drush si -y minimal
 fi
-
-echo "Add Cypress users"
-ddev cypress-users
