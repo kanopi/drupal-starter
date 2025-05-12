@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+## Description: Create and configure the migration database inside the DDEV web container
+## Usage: migrate-prep-db
+## Example: ddev migrate-prep-db
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Helper functions --------------------------------
+
+green='\033[0;32m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+divider='===================================================\n'
+database_icon='\xF0\x9F\x93\x80'
+down_arrow='\xE2\xAC\x86'
+
+#-------------------------- Settings --------------------------------
+
+# Migration database name
+MIGRATE_DB_NAME="d7"
+
+#-------------------------- Execution -------------------------------------
+
+# Ensure the script is running inside the DDEV web container
+if [ -z "$DDEV_HOSTNAME" ]; then
+    echo -e "\n ❌ ${yellow} This command must be run inside the DDEV web container. ${NC}"
+    echo -e "Use: ${green}ddev migrate-prep-db${NC} instead of running it manually."
+    exit 1
+fi
+
+# Step 1: Create the Drupal 7 database
+echo -e "\n ${database_icon} ${yellow} Creating migration database: ${MIGRATE_DB_NAME} ${NC} ${database_icon}"
+echo -e "${green}${divider}${NC}"
+
+mysql -e "CREATE DATABASE IF NOT EXISTS ${MIGRATE_DB_NAME};"
+echo -e "\n ✅  Migration database '${MIGRATE_DB_NAME}' is ready.\n"
+
+# Step 2: Import the database dump from a remote source
+if [ -z "${MIGRATE_DB_SOURCE}" ] || [ -z "${MIGRATE_DB_ENV}" ]; then
+    echo -e "\n ❌ ${yellow} MIGRATE_DB_SOURCE and MIGRATE_DB_ENV environment variables must be set inside the web container. ${NC}"
+    exit 1
+fi
+
+echo -e "\n ${down_arrow} ${yellow} Pulling database from ${MIGRATE_DB_SOURCE} (${MIGRATE_DB_ENV}). ${NC} ${down_arrow}"
+echo -e "${green}${divider}${NC}"
+
+drush sql-drop -y --database="${MIGRATE_DB_NAME}"
+drush sql-sync @${MIGRATE_DB_SOURCE}.${MIGRATE_DB_ENV} @self --target-database=${MIGRATE_DB_NAME} -y
+
+echo -e "\n ✅ Migration database '${MIGRATE_DB_NAME}' is now populated.\n"
+echo -e "${green}${divider}${NC}"

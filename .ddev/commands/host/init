@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+## Description: Initialize local development.
+## Usage: init
+## Example: "ddev init"
+## OSTypes: darwin
+
+#-------------------------- Helper functions ------------------------------
+
+green='\033[0;32m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+divider='===================================================\n'
+check='\xE2\x9C\x85'
+construction='\xF0\x9F\x9A\xA7'
+crossmark='\xE2\x9D\x8C'
+hospital='\xF0\x9F\x8F\xA5'
+party='\xF0\x9F\x8E\x88 \xF0\x9F\x8E\x89 \xF0\x9F\x8E\x8A'
+reverseparty='\xF0\x9F\x8E\x8A \xF0\x9F\x8E\x89 \xF0\x9F\x8E\x88'
+rocket='\xF0\x9F\x9A\x80'
+silhouette='\xF0\x9F\x91\xA4'
+lightning='\xE2\x9A\xA1'
+drop='\xF0\x9F\x92\xA7'
+shark='\xF0\x9F\xA6\x88'
+gear='\xEF\xB8\x8F'
+theme_tools_command='ddev install-theme-tools'
+critical_tools_command='ddev install-critical-tools'
+key='\xF0\x9F\x94\x91'
+lock='\xF0\x9F\x94\x92'
+arm='\xF0\x9F\x92\xAA'
+
+LEFTHOOK=$(which lefthook || true)
+if [[ "${LEFTHOOK}" == "" ]]; then
+  echo -e "\n${construction} ${yellow} Checking for Lefthook.${NC} ${construction}\n"
+  echo -e "If you don't have Lefthook installed, this will ask for your password twice."
+  echo -e "Installing Lefthook."
+  ARCH=$(uname -m)
+  sudo curl -fsSL -o /usr/local/bin/lefthook "https://github.com/evilmartians/lefthook/releases/download/v0.7.7/lefthook_0.7.7_MacOS_${ARCH}"
+  echo -e "Setting Lefthook permissions."
+  sudo chmod +x /usr/local/bin/lefthook
+  echo -e "${green}${divider}${NC}"
+fi
+
+#-------------------------- Execution -------------------------------------
+# Initializing Githooks
+echo -e "\n${construction} ${yellow} Initializing Lefthook.${NC} ${construction}"
+echo -e "This should require no input."
+echo -e "${green}${divider}${NC}"
+lefthook install
+
+echo -e "\n${construction} ${yellow} Initializing NVM...${NC} ${construction}\n"
+echo -e "This should require no input."
+echo -e "${green}${divider}${NC}"
+NVM_DIR="${HOME}/.nvm"
+if [[ ! -d "$NVM_DIR" ]]; then
+    echo -e "Installing NVM."
+    echo -e "${green}${divider}${NC}"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
+
+# Start the project.
+echo -e "\n${rocket} ${yellow} Starting DDEV.${NC} ${rocket}"
+echo -e "${green}${divider}${NC}"
+ddev start -y
+
+# Auth.
+echo -e "\n${key} ${yellow} Adding keys.${NC} ${key}"
+echo -e "${green}${divider}${NC}"
+ddev auth ssh
+
+echo -e "\n${construction} ${yellow} Initializing Cypress...${NC} ${construction}\n"
+echo -e "This should require no input."
+echo -e "${green}${divider}${NC}"
+ddev install-cypress
+
+# Site initialization.
+echo -e "\n${construction} ${yellow} Composer install...${NC} ${construction}\n"
+echo -e "This should require no input."
+echo -e "${green}${divider}${NC}"
+ddev composer install
+
+# Here's where you could run the theme build.
+# Commenting it out so build finishes faster.
+# Added a comment so themers can run manually.
+# fin install-theme-tools
+# fin install-critical-tools
+# fin solr-create-core
+
+# Get the database.
+ddev refresh
+
+# Logging into to Drupal.
+echo -e "\n${lock} ${yellow} Logging you in.${NC} ${lock}"
+echo -e "This should take ~1 minute and require no input."
+echo -e "${green}${divider}${NC}"
+
+cd ${DDEV_APPROOT}
+
+if [ -f "config/core.extension.yml" ]; then
+  ddev drush uli --uid=2
+else
+  echo -e "\n${yellow}Don't forget to block user 1!${NC}"
+  ddev drush uli
+fi
+
+# Complete.
+echo -e "\n${party} ${yellow} Build complete!!!${NC} ${reverseparty}"
+echo -e "Visit ${yellow}${DDEV_PRIMARY_URL}${NC} in a web browser."
+echo -e "Run ${yellow}${theme_tools_command}${NC} to work on the theme."
+echo -e "Run ${yellow}${critical_tools_command}${NC} to install tools for Critical CSS."
+echo -e "${green}${divider}${NC}"

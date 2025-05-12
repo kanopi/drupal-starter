@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+## Description: Get the database.
+## Usage: refresh
+## Example: "ddev refresh"
+## OSTypes: darwin
+
+green='\033[0;32m'
+yellow='\033[1;33m'
+NC='\033[0m'
+divider='===================================================\n'
+
+ENVIRONMENT=${1:-"$hostingenv"}
+
+# Issue to add environment selection.
+# https://github.com/ddev/ddev/issues/4760
+
+cd ${DDEV_APPROOT}
+
+# Check if the file exists
+if [ -f "config/core.extension.yml" ]; then
+  echo -e "\n${yellow} Get database from Pantheon. ${NC}"
+  echo -e "${green}${divider}${NC}"
+  ddev pull pantheon --skip-files -y
+
+  echo -e "Update Drupal DB"
+  ddev drush updatedb -y
+
+  echo -e "Clear cache"
+  ddev drush cr -y
+
+  echo "Add Cypress users"
+  ddev cypress-users
+else
+  echo -e "\n${yellow} No config, installing Drupal. ${NC}"
+  echo -e "${green}${divider}${NC}"
+  ddev drush si -y minimal
+fi
