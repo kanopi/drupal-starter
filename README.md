@@ -54,13 +54,36 @@ ui_suite_bootstrap
 - [Emulsify](docs/EMULSIFY.md) - kanopi/kdcl_basic theme was built from
 Emulsify. Currently not used in new projects.
 
+## Local Development with DDEV
+
+### Installing DDEV
+
+If you don't have DDEV installed:
+
+1. [Install DDEV](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
+2. Ensure you have a compatible Docker provider such as Docker Desktop,
+   OrbStack, or Lima:
+   [Docker Installation](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/)
+3. **Important:** Turn off Docksal or Lando before starting DDEV to avoid port
+   conflicts.
+
+### Configure Pantheon Access
+
+Generate a [Pantheon Machine Token](https://pantheon.io/docs/machine-tokens/)
+and add it to your global DDEV config at `~/.ddev/global_config.yaml`:
+
+```yaml
+web_environment:
+  - TERMINUS_MACHINE_TOKEN=your_token
+```
+
 ## DDEV Commands
 
 The following commands are available with DDEV and should be prefixed with
 the command `ddev`.
 
 | Command Name             | Container | Short Description                                     | Usage Syntax                        |
-| ------------------------ | --------- | ----------------------------------------------------- | ----------------------------------- |
+|--------------------------|-----------|-------------------------------------------------------|-------------------------------------|
 | `cypress`                | host      | Run Cypress commands with optional environment target | `ddev cypress [command]`            |
 | `cypress-users`          | host      | Create default admin user for Cypress testing         | `ddev cypress-users`                |
 | `init`                   | host      | Initialize local development environment              | `ddev init`                         |
@@ -80,6 +103,13 @@ the command `ddev`.
 | `tickle`                 | web       | Continuously wake a Pantheon environment              | `ddev tickle`                       |
 | `uuid-rm`                | web       | Remove UUIDs and \_core metadata from config files    | `ddev uuid-rm [path/to/folder]`     |
 
+### Still to do for DDEV
+
+- [ ] Add support for Pantheon Solr
+- [ ] Add command: `migrate-prep-db`
+- [ ] Add command: `config-capture`
+- [ ] Add command: `critical`
+- [ ] Add command: `release`
 
 
 ## Docksal Commands
@@ -121,8 +151,8 @@ the command `fin`.
 The following commands are available with Composer and should be prefixed with
 the command `fin composer`.
 
-| Command                | Description                                                       |
-|------------------------|-------------------------------------------------------------------|
+| Command               | Description                                                        |
+|-----------------------|--------------------------------------------------------------------|
 | `lint-php`            | Analyzes custom modules for programmatic and stylistic errors.     |
 | `code-sniff-modules`  | Runs PHPcs on the custom modules folder.                           |
 | `code-sniff-themes`   | Runs PHPcs on the custom themes folder.                            |
