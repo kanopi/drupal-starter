@@ -42,7 +42,6 @@ echo -e "${green}${divider}${NC}"
 
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
-source ~/.bashrc
 echo "NVM version: $(nvm --version)"
 
 # Use Node version specified in .nvmrc
@@ -51,7 +50,7 @@ echo "Using Node.js version: ${NODE_VERSION}"
 nvm install "${NODE_VERSION}"
 nvm alias default "${NODE_VERSION}"
 nvm use
-npm ci --save patch-package
+npm install --save patch-package
 
 # Compile theme assets
 echo -e "\n ${construction} ${yellow} Compiling theme assets. ${NC} ${construction}"
