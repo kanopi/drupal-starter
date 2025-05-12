@@ -13,9 +13,9 @@ use_dns_when_possible: true
 composer_version: "2"
 web_environment:
   # Used in all Docksal and Critical CSS commands.
-  - THEME=themes/custom/saplings_child
+  - THEME=themes/custom/arbor
   # Used in install-theme-tools to rename the theme.
-  - THEMENAME=saplings_child
+  - THEMENAME=arbor
   # Hosting Variables.
   - hostingsite=saplingscms
   - hostingenv=dev
