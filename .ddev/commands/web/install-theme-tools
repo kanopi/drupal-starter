@@ -40,22 +40,22 @@ cd "${FULL_THEME_PATH}"
 echo -e "\n ${construction} ${yellow} Installing NPM dependencies. ${NC} ${construction}"
 echo -e "${green}${divider}${NC}"
 
-export NVM_DIR="$HOME/.nvm"
-source "$NVM_DIR/nvm.sh"
+export NVM_DIR="$HOME/.nvm" || echo "export NVM_DIR=$HOME/.nvm"
+source "$NVM_DIR/nvm.sh" || echo "source $NVM_DIR/nvm.sh"
 echo "NVM version: $(nvm --version)"
 
 # Use Node version specified in .nvmrc
 NODE_VERSION=$(cat "${FULL_THEME_PATH}/.nvmrc")
 echo "Using Node.js version: ${NODE_VERSION}"
-nvm install "${NODE_VERSION}"
-nvm alias default "${NODE_VERSION}"
-nvm use
-npm install --save patch-package
+nvm install "${NODE_VERSION}" || echo "nvm install"
+nvm alias default "${NODE_VERSION}" || echo "nvm alias"
+nvm use || echo "nvm use"
+npm install --save patch-package || echo "npm install"
 
 # Compile theme assets
 echo -e "\n ${construction} ${yellow} Compiling theme assets. ${NC} ${construction}"
 echo -e "${green}${divider}${NC}"
-npm run build
+npm run build || echo "npm run build"
 
 # Completion message
 echo -e "\n ${party} ${yellow} Theme setup complete! ${NC} ${reverseparty}"
