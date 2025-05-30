@@ -12,11 +12,21 @@ module.exports = defineConfig({
 
   viewportWidth: 1350,
   viewportHeight: 940,
-
+  retries: {
+    // Configure retry attempts for `cypress run`
+    runMode: 3,
+    // Configure retry attempts for `cypress open`
+    openMode: 0
+  },
   e2e: {
     responseTimeout: 20000,
     setupNodeEvents(on, config) {
          on('task', {downloadFile})
     },
+    env: {
+      "visitHeaders" : {
+        "Deterrence-Bypass" : "1"
+      }
+    }
   }
 });
