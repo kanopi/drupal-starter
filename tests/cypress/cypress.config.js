@@ -18,5 +18,10 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
          on('task', {downloadFile})
     },
+    env: {
+      "visitHeaders" : {
+        "Deterrence-Bypass" : "1"
+      }
+    }
   }
 });

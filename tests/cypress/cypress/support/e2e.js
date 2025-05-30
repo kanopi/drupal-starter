@@ -13,6 +13,19 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+/**
+ * Overwrite the visit() command to support setting headers globally.
+ */
+Cypress.Commands.overwrite("visit", (originalVisit, url, options = {}) => {
+  const globalHeaders = Cypress.env('visitHeaders') || {};
+
+  // Combine global and specific headers from the unique call of visit().
+  const headers = Object.assign({}, globalHeaders, options.headers);
+
+  // Call the real visit with the merged headers
+  return originalVisit(url, { ...options, headers });
+});
+
 // Import commands.js using ES2015 syntax:
 import './commands'
 
