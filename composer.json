@@ -20,11 +20,10 @@
     "require": {
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7.3",
-        "drupal/core-composer-scaffold": "^11.1",
-        "drupal/core-recommended": "^11.1",
-        "drupal/core-vendor-hardening": "^11.1",
+        "drupal/core-composer-scaffold": "^11.2",
+        "drupal/core-recommended": "^11.2",
+        "drupal/core-vendor-hardening": "^11.2",
         "drush/drush": "^13",
-        "ewcomposer/unpack": "dev-master",
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/shrubs": "^0.2.5",
         "oomphinc/composer-installers-extender": "^2.0.0",
@@ -32,11 +31,11 @@
     },
     "require-dev": {
         "drupal/coder": "^8.3",
-        "drupal/core-dev": "^11.1",
+        "drupal/core-dev": "^11.2",
         "drupal/default_content": "^2.0@alpha",
-        "drupal/devel": "^5.1",
+        "drupal/devel": "^5.4",
         "ergebnis/composer-normalize": "^2.45",
-        "palantirnet/drupal-rector": "^0.20.3",
+        "palantirnet/drupal-rector": "^0.21.0",
         "vincentlanglet/twig-cs-fixer": "^3"
     },
     "conflict": {
