@@ -91,7 +91,7 @@ the command `ddev`.
 | `open`                   | host      | Open the project URL in the default browser           | `ddev open`                         |
 | `phpmyadmin`             | host      | Launch PhpMyAdmin                                     | `ddev phpmyadmin`                   |
 | `rebuild`                | host      | Run composer install and refresh database             | `ddev rebuild`                      |
-| `refresh`                | host      | Pull database from hosting environment (Pantheon)     | `ddev refresh`                      |
+| `refresh`                | host      | Pull database from host. Takes env arg. -f to force   | `ddev refresh [env] -f`             |
 | `testenv`                | host      | Initialize stack and testing environment              | `ddev testenv [env_name] [profile]` |
 | `install-critical-tools` | web       | Install tools needed for Critical CSS generation      | `ddev install-critical-tools`       |
 | `install-theme-tools`    | web       | Install and set up theme development tools            | `ddev install-theme-tools`          |
