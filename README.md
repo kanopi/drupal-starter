@@ -72,9 +72,8 @@ If you don't have DDEV installed:
 Generate a [Pantheon Machine Token](https://pantheon.io/docs/machine-tokens/)
 and add it to your global DDEV config at `~/.ddev/global_config.yaml`:
 
-```yaml
-web_environment:
-  - TERMINUS_MACHINE_TOKEN=your_token
+```shell
+ddev config global --web-environment-add=TERMINUS_MACHINE_TOKEN=your_token_here
 ```
 
 ## DDEV Commands

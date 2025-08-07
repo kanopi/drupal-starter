@@ -36,13 +36,29 @@ done
 
 cd ${DDEV_APPROOT}
 
+# Ensure terminus authentication before any terminus operations
+echo -e "\n${yellow} Authenticating with Terminus... ${NC}"
+# Get TERMINUS_MACHINE_TOKEN from web container environment
+TERMINUS_MACHINE_TOKEN=$(ddev exec printenv TERMINUS_MACHINE_TOKEN 2>/dev/null)
+if [ -z "${TERMINUS_MACHINE_TOKEN:-}" ]; then
+  echo -e "${red}TERMINUS_MACHINE_TOKEN environment variable is not set in the web container. Please configure it in your global ddev config.${NC}"
+  exit 1
+fi
+
+# Authenticate with terminus using the machine token
+if ! ddev exec bash -c "terminus auth:login --machine-token=\"${TERMINUS_MACHINE_TOKEN}\""; then
+  echo -e "${red}Failed to authenticate with Terminus. Please check your TERMINUS_MACHINE_TOKEN.${NC}"
+  exit 1
+fi
+echo -e "${green}Successfully authenticated with Terminus.${NC}"
+
 # Check if the file exists
 if [ -f "config/core.extension.yml" ]; then
   echo -e "\n${yellow} Get database from Pantheon environment: ${ENVIRONMENT}. ${NC}"
   echo -e "${green}${divider}${NC}"
   # Extract site name from DDEV project name or use configured project.
   SITE_NAME="${DDEV_PROJECT:-$(grep 'project:' ${DDEV_APPROOT}/.ddev/providers/pantheon.yaml | cut -d: -f2 | cut -d. -f1 | xargs)}"
-  
+
   # Set the site environment for backup operations.
   if [ "$ENVIRONMENT" != "dev" ]; then
     SITE_ENV="${SITE_NAME}.${ENVIRONMENT}"
@@ -51,18 +67,18 @@ if [ -f "config/core.extension.yml" ]; then
     SITE_ENV="${SITE_NAME}.dev"
     PULL_ENV_FLAG=""
   fi
-  
+
   echo "Checking for database backup on ${SITE_ENV}..."
-  
+
   # Check if there's a database backup and get its timestamp.
   LATEST_BACKUP_TIMESTAMP=$(ddev exec bash -c "terminus backup:list ${SITE_ENV} --element=database --format=list --field=date" 2>/dev/null | head -1)
-  
+
   # Calculate current time and 12-hour threshold.
   CURRENT_TIME=$(date +%s)
   TWELVE_HOURS_AGO=$((CURRENT_TIME - 43200))  # 12 hours = 43200 seconds
-  
+
   CREATE_NEW_BACKUP=false
-  
+
   # Check if force flag is set
   if [ "$FORCE_BACKUP" = true ]; then
     echo -e "${yellow}Force flag detected. Creating new backup regardless of age.${NC}"
@@ -73,7 +89,7 @@ if [ -f "config/core.extension.yml" ]; then
   else
     # Extract integer part of timestamp for comparison
     BACKUP_TIME=${LATEST_BACKUP_TIMESTAMP%.*}
-    
+
     if [ "$BACKUP_TIME" -lt "$TWELVE_HOURS_AGO" ]; then
       BACKUP_AGE_HOURS=$(( (CURRENT_TIME - BACKUP_TIME) / 3600 ))
       echo -e "${yellow}Latest backup is ${BACKUP_AGE_HOURS} hours old (older than 12 hours).${NC}"
@@ -83,7 +99,7 @@ if [ -f "config/core.extension.yml" ]; then
       echo -e "${green}Recent backup found (${BACKUP_AGE_HOURS} hours old): ${LATEST_BACKUP_TIMESTAMP}${NC}"
     fi
   fi
-  
+
   if [ "$CREATE_NEW_BACKUP" = true ]; then
     echo -e "${yellow}Creating new backup for ${SITE_ENV}...${NC}"
     if ddev exec bash -c "terminus backup:create ${SITE_ENV} --element=database -y"; then
@@ -96,7 +112,7 @@ if [ -f "config/core.extension.yml" ]; then
       exit 1
     fi
   fi
-  
+
   # Now perform the pull operation
   if [ -n "$PULL_ENV_FLAG" ]; then
     ddev pull pantheon --skip-files -y $PULL_ENV_FLAG
