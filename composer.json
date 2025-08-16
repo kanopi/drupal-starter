@@ -170,12 +170,22 @@
             "@code-sniff-modules",
             "@code-sniff-themes"
         ],
+        "code-sniff-ci": [
+            "@code-sniff-modules-ci",
+            "@code-sniff-themes-ci"
+        ],
         "code-sniff-modules": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
+        "code-sniff-modules-ci": "vendor/bin/phpcs --report=junit --report-file=phpcs-modules-report.xml --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
         "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
+        "code-sniff-themes-ci": "vendor/bin/phpcs --report=junit --report-file=phpcs-themes-report.xml --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
         "lint-php": "find web/modules/custom web/themes/custom -not -path '*/node_modules/*' -name '*.php' -exec php -l {} \\;",
         "phpstan": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/phpstan analyse --memory-limit=-1 web/modules/custom web/themes/custom"
+        ],
+        "phpstan-ci": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/phpstan analyse --memory-limit=-1 --error-format=junit --no-progress web/modules/custom web/themes/custom > phpstan-report.xml"
         ],
         "prepare-for-pantheon": "DrupalProject\\composer\\ScriptHandler::prepareForPantheon",
         "rector-fix": [
@@ -190,6 +200,10 @@
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/rector process web/themes/custom/"
         ],
+        "rector-check": [
+            "@rector-modules",
+            "@rector-themes"
+        ],
         "rector-modules": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/rector process web/modules/custom/ --dry-run"
@@ -197,6 +211,18 @@
         "rector-themes": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/rector process web/themes/custom/ --dry-run"
+        ],
+        "rector-check-ci": [
+            "@rector-modules-ci",
+            "@rector-themes-ci"
+        ],
+        "rector-modules-ci": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/modules/custom/ --dry-run --output-format=junit > rector-modules-report.xml"
+        ],
+        "rector-themes-ci": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/themes/custom/ --dry-run --output-format=junit > rector-themes-report.xml"
         ],
         "twig-fix": [
             "@twig-fix-modules",
@@ -209,6 +235,13 @@
             "@twig-lint-themes"
         ],
         "twig-lint-modules": "vendor/bin/twig-cs-fixer lint web/modules/custom",
-        "twig-lint-themes": "vendor/bin/twig-cs-fixer lint web/themes/custom"
+        "twig-lint-themes": "vendor/bin/twig-cs-fixer lint web/themes/custom",
+        "twig-lint-ci": [
+            "@twig-lint-modules-ci",
+            "@twig-lint-themes-ci"
+        ],
+        "twig-lint-modules-ci": "vendor/bin/twig-cs-fixer lint web/modules/custom --report=junit > twig-modules-report.xml",
+        "twig-lint-themes-ci": "vendor/bin/twig-cs-fixer lint web/themes/custom --report=junit > twig-themes-report.xml"
+
     }
 }
