@@ -29,6 +29,9 @@ parameters:
   cron_env:
     type: string
     default: live
+  workflow:
+    type: string
+    default: ''
 
 orbs:
   ci-tools: kanopi/ci-tools@2
@@ -203,6 +206,9 @@ jobs:
 workflows:
 
   PHPstan:
+    when:
+      and:
+        - equal: [ "", << pipeline.parameters.workflow >> ]
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -218,6 +224,9 @@ workflows:
               ignore:
                 - main
   PHPcs:
+    when:
+      and:
+        - equal: [ "", << pipeline.parameters.workflow >> ]
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -233,6 +242,9 @@ workflows:
               ignore:
                 - main
   Rector - modules:
+    when:
+      and:
+        - equal: [ "", << pipeline.parameters.workflow >> ]
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -248,6 +260,9 @@ workflows:
               ignore:
                 - main
   Rector - themes:
+    when:
+      and:
+        - equal: [ "", << pipeline.parameters.workflow >> ]
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -263,6 +278,9 @@ workflows:
               ignore:
                 - main
   Twig lint:
+    when:
+      and:
+        - equal: [ "", << pipeline.parameters.workflow >> ]
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -279,8 +297,8 @@ workflows:
                 - main
   Deployment:
     when:
-      not:
-        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+      and:
+        - equal: [ "", << pipeline.parameters.workflow >> ]
     jobs:
       - compile-theme:
           context: kanopi-code
@@ -412,9 +430,7 @@ workflows:
   automated-updates:
     when:
       and:
-        # Looks for a trigger to run in the CircleCI project with the "automatic updates" name.
-        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-        - equal: [ "automatic updates", << pipeline.schedule.name >> ]
+        - equal: [ "automatic updates", << pipeline.parameters.workflow >> ]
     jobs:
       - cms-updates/run-update:
           cms: drupal
@@ -434,8 +450,7 @@ workflows:
   run_cron:
     when:
       and:
-        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-        - matches: { "pattern": "^cron job.*", "value": << pipeline.schedule.name >> }
+        - equal: [ "cron job", << pipeline.parameters.workflow >> ]
     jobs:
       - ci-tools/terminus-job:
           context: kanopi-code
