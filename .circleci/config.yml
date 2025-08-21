@@ -209,6 +209,9 @@ workflows:
           name: "PHPstan"
           context: kanopi-code
           command: 'phpstan-ci'
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          eport-title: ":x: phpstan"
           filters:
             branches:
               ignore:
@@ -226,6 +229,9 @@ workflows:
           name: "PHPcs"
           context: kanopi-code
           command: 'code-sniff-ci'
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          eport-title: ":x: phpcs"
           filters:
             branches:
               ignore:
@@ -248,6 +254,9 @@ workflows:
           name: "Rector modules"
           context: kanopi-code
           command: 'rector-modules-ci'
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          eport-title: ":x: rector-modules"
           filters:
             branches:
               ignore:
@@ -265,6 +274,9 @@ workflows:
           name: "Rector themes"
           context: kanopi-code
           command: 'rector-themes-ci'
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          eport-title: ":x: rector-themes"
           filters:
             branches:
               ignore:
@@ -282,6 +294,9 @@ workflows:
           name: "Twig lint"
           context: kanopi-code
           command: 'twig-lint-ci'
+          post-to-github: true
+          post-artifact-to-github-when: on_fail
+          eport-title: ":x: twig-lint"
           filters:
             branches:
               ignore:
