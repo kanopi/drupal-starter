@@ -231,7 +231,7 @@ workflows:
           command: 'code-sniff-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
-          eport-title: ":x: phpcs"
+          report-title: ":x: phpcs"
           filters:
             branches:
               ignore:
@@ -256,7 +256,7 @@ workflows:
           command: 'rector-modules-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
-          eport-title: ":x: rector-modules"
+          report-title: ":x: rector-modules"
           filters:
             branches:
               ignore:
@@ -276,7 +276,7 @@ workflows:
           command: 'rector-themes-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
-          eport-title: ":x: rector-themes"
+          report-title: ":x: rector-themes"
           filters:
             branches:
               ignore:
@@ -296,7 +296,7 @@ workflows:
           command: 'twig-lint-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
-          eport-title: ":x: twig-lint"
+          report-title: ":x: twig-lint"
           filters:
             branches:
               ignore:
