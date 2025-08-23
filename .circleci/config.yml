@@ -211,7 +211,7 @@ workflows:
           command: 'phpstan-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
-          eport-title: ":x: phpstan"
+          report-title: ":x: phpstan"
           filters:
             branches:
               ignore:
