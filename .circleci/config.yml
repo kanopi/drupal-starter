@@ -208,8 +208,7 @@ workflows:
           tag: *CIMG_PHP_TAG
           name: "PHPstan"
           context: kanopi-code
-          command: 'phpstan'
-          save-output: true
+          command: 'phpstan-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
           report-title: ":x: phpstan"
@@ -217,14 +216,19 @@ workflows:
             branches:
               ignore:
                 - main
+          post-steps:
+            - store_test_results:
+                path: phpstan-report.xml
+            - store_artifacts:
+                path: phpstan-report.xml
+                destination: phpstan
   PHPcs:
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
           name: "PHPcs"
           context: kanopi-code
-          command: 'code-sniff'
-          save-output: true
+          command: 'code-sniff-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
           report-title: ":x: phpcs"
@@ -232,14 +236,24 @@ workflows:
             branches:
               ignore:
                 - main
+          post-steps:
+            - store_test_results:
+                path: phpcs-modules-report.xml
+            - store_artifacts:
+                path: phpcs-modules-report.xml
+                destination: phpcs-modules
+            - store_test_results:
+                path: phpcs-themes-report.xml
+            - store_artifacts:
+                path: phpcs-themes-report.xml
+                destination: phpcs-themes
   Rector - modules:
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
           name: "Rector modules"
           context: kanopi-code
-          command: 'rector-modules'
-          save-output: true
+          command: 'rector-modules-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
           report-title: ":x: rector-modules"
@@ -247,14 +261,19 @@ workflows:
             branches:
               ignore:
                 - main
+          post-steps:
+            - store_test_results:
+                path: rector-modules-report.xml
+            - store_artifacts:
+                path: rector-modules-report.xml
+                destination: rector-modules
   Rector - themes:
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
           name: "Rector themes"
           context: kanopi-code
-          command: 'rector-themes'
-          save-output: true
+          command: 'rector-themes-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
           report-title: ":x: rector-themes"
@@ -262,14 +281,19 @@ workflows:
             branches:
               ignore:
                 - main
+          post-steps:
+            - store_test_results:
+                path: rector-themes-report.xml
+            - store_artifacts:
+                path: rector-themes-report.xml
+                destination: rector-themes
   Twig lint:
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
           name: "Twig lint"
           context: kanopi-code
-          command: 'twig-lint'
-          save-output: true
+          command: 'twig-lint-ci'
           post-to-github: true
           post-artifact-to-github-when: on_fail
           report-title: ":x: twig-lint"
@@ -277,6 +301,17 @@ workflows:
             branches:
               ignore:
                 - main
+          post-steps:
+            - store_test_results:
+                path: twig-modules-report.xml
+            - store_artifacts:
+                path: twig-modules-report.xml
+                destination: twig-modules
+            - store_test_results:
+                path: twig-themes-report.xml
+            - store_artifacts:
+                path: twig-themes-report.xml
+                destination: twig-themes
   Deployment:
     when:
       not:
