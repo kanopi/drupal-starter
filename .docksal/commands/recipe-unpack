@@ -10,4 +10,4 @@
 # Abort if anything fails
 set -e
 
-composer unpack "$@"
+composer drupal:recipe-unpack "$@"
