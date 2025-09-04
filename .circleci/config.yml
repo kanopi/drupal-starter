@@ -23,12 +23,20 @@ defaults: &defaults
     THEME_NAME: *THEME_NAME
     DEFAULT_BRANCH: main
 
+# Default workflow append to all items.
+default_workflow: &default_workflow
+  when:
+    and:
+      - equal: [ "", << pipeline.parameters.workflow >> ]
+
 version: 2.1
 
 parameters:
+  # Cron Env to run items on. Default is live
   cron_env:
     type: string
     default: live
+  # Workflow to run. Default is empty.
   workflow:
     type: string
     default: ''
@@ -206,9 +214,7 @@ jobs:
 workflows:
 
   PHPstan:
-    when:
-      and:
-        - equal: [ "", << pipeline.parameters.workflow >> ]
+    <<: *default_workflow
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -224,9 +230,7 @@ workflows:
               ignore:
                 - main
   PHPcs:
-    when:
-      and:
-        - equal: [ "", << pipeline.parameters.workflow >> ]
+    <<: *default_workflow
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -242,9 +246,7 @@ workflows:
               ignore:
                 - main
   Rector - modules:
-    when:
-      and:
-        - equal: [ "", << pipeline.parameters.workflow >> ]
+    <<: *default_workflow
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -260,9 +262,7 @@ workflows:
               ignore:
                 - main
   Rector - themes:
-    when:
-      and:
-        - equal: [ "", << pipeline.parameters.workflow >> ]
+    <<: *default_workflow
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -278,9 +278,7 @@ workflows:
               ignore:
                 - main
   Twig lint:
-    when:
-      and:
-        - equal: [ "", << pipeline.parameters.workflow >> ]
+    <<: *default_workflow
     jobs:
       - ci-tools/composer:
           tag: *CIMG_PHP_TAG
@@ -296,9 +294,7 @@ workflows:
               ignore:
                 - main
   Deployment:
-    when:
-      and:
-        - equal: [ "", << pipeline.parameters.workflow >> ]
+    <<: *default_workflow
     jobs:
       - compile-theme:
           context: kanopi-code
@@ -427,6 +423,15 @@ workflows:
             branches:
               ignore: main
 
+  # Run Automated Updates
+  #
+  # To use setup a new trigger in CircleCI.
+  # Set the name of the job to be anything.
+  # The parameter workflow should be added and set it
+  # to "automatic updates".
+  #
+  # To manually trigger pipeline set the parameters:
+  # workflow = "automatic updates"
   automated-updates:
     when:
       and:
@@ -443,10 +448,15 @@ workflows:
           php-version: *CIMG_PHP_TAG_MAJOR
 
   # Run Cron Job on the provided Environment
-  # To use setup a new trigger in CircleCI and have 
-  # it start with the name "cron job" it can be anything
-  # example is "cron job dev". The parameter cron_env should
-  # be added and set to be the name of the env to reference for Pantheon.
+  #
+  # To use setup a new trigger in CircleCI.
+  # Set the name of the job to be anything.
+  # The parameter cron_env should be added and 
+  # set to be the name of the env to reference for Pantheon.
+  #
+  # To manually trigger pipeline set the parameters:
+  # workflow = "cron job"
+  # cron_env = "live"
   run_cron:
     when:
       and:
