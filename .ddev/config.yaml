@@ -17,8 +17,8 @@ web_environment:
   # Used in install-theme-tools to rename the theme.
   - THEMENAME=arbor
   # Hosting Variables.
-  - hostingsite=saplingscms
-  - hostingenv=dev
+  - PANTHEON_SITE=saplingscms
+  - PANTHEON_ENV=dev
   # Update with the Pantheon D7 machine name and environment.
   - MIGRATE_DB_SOURCE=pantheon_d7_project_machine_name
   - MIGRATE_DB_ENV=dev

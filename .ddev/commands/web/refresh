@@ -1,0 +1,189 @@
+#!/usr/bin/env bash
+
+## Refresh DB
+## Description: Downloads the database from the provider. Defaults to the primary environment but can take an environment name as a parameter.
+## Usage: refresh [environment id]
+## Example: ddev refresh pr-123
+## Flags: [{"Name":"force","Shorthand":"f","Usage":"Force creation of new backup regardless of age"}]
+
+green='\033[0;32m'
+yellow='\033[1;33m'
+red='\033[0;31m'
+NC='\033[0m'
+divider='===================================================\n'
+
+DOCROOT_PATH="${DDEV_APPROOT=}/${DDEV_DOCROOT}"
+
+# Parse command line arguments
+FORCE_BACKUP=false
+# Get hostingenv from environment, default to 'dev' if not set
+ENVIRONMENT="$PANTHEON_ENV"
+if [ -z "$ENVIRONMENT" ]; then
+  ENVIRONMENT="dev"
+fi
+
+for arg in "$@"; do
+  case $arg in
+    --force|-f)
+      FORCE_BACKUP=true
+      shift
+      ;;
+    *)
+      # Skip DDEV internal parameters (like "2") and set environment if valid
+      if [ "$arg" != "2" ] && [ -z "$ENVIRONMENT_SET" ]; then
+        ENVIRONMENT="$arg"
+        ENVIRONMENT_SET=true
+      fi
+      shift
+      ;;
+  esac
+done
+
+cd ${DDEV_APPROOT}
+
+# Ensure terminus authentication before any terminus operations
+echo -e "\n${yellow} Authenticating with Terminus... ${NC}"
+# Get TERMINUS_MACHINE_TOKEN from environment
+TERMINUS_MACHINE_TOKEN=$(printenv TERMINUS_MACHINE_TOKEN 2>/dev/null)
+if [ -z "${TERMINUS_MACHINE_TOKEN:-}" ]; then
+  echo -e "${red}TERMINUS_MACHINE_TOKEN environment variable is not set in the web container. Please configure it in your global ddev config.${NC}"
+  exit 1
+fi
+
+# Authenticate with terminus using the machine token
+if ! terminus auth:login --machine-token="${TERMINUS_MACHINE_TOKEN}"; then
+  echo -e "${red}Failed to authenticate with Terminus. Please check your TERMINUS_MACHINE_TOKEN.${NC}"
+  exit 1
+fi
+echo -e "${green}Successfully authenticated with Terminus.${NC}"
+
+
+echo -e "\n${yellow} Get database from Pantheon environment: ${ENVIRONMENT}. ${NC}"
+echo -e "${green}${divider}${NC}"
+# Extract site name from PANTHEON_SITE environment variable or fall back to DDEV project name.
+SITE_NAME="${PANTHEON_SITE:-$DDEV_PROJECT}"
+
+# Set the site environment for backup operations.
+if [ "$ENVIRONMENT" != "dev" ]; then
+  SITE_ENV="${SITE_NAME}.${ENVIRONMENT}"
+  PULL_ENV_FLAG="--environment=project=${SITE_NAME}.${ENVIRONMENT}"
+else
+  SITE_ENV="${SITE_NAME}.dev"
+  PULL_ENV_FLAG=""
+fi
+
+# Define the local database dump file path
+DB_DUMP="/tmp/pantheon_backup.${SITE_ENV}.sql.gz"
+
+echo -e "\nChecking for local database dump file..."
+
+# Calculate current time and 12-hour threshold.
+CURRENT_TIME=$(date +%s)
+TWELVE_HOURS_AGO=$((CURRENT_TIME - 43200))  # 12 hours = 43200 seconds
+
+DOWNLOAD_NEW_BACKUP=false
+
+# Check if force flag is set
+if [ "$FORCE_BACKUP" = true ]; then
+  echo -e "${yellow}Force flag detected. Will download fresh backup regardless of local file age.${NC}"
+  DOWNLOAD_NEW_BACKUP=true
+else
+  # Check if local dump file exists and its age
+  if [ -f "$DB_DUMP" ]; then
+    # Get file modification time using a more reliable method
+    # Use ls -l and extract the timestamp, then convert to epoch
+    LOCAL_FILE_TIME=""
+
+    # Try different methods to get the file modification time
+    if [ -z "$LOCAL_FILE_TIME" ]; then
+      # Method 1: Try stat with format specifier (GNU/Linux style)
+      LOCAL_FILE_TIME=$(stat -c %Y "$DB_DUMP" 2>/dev/null)
+    fi
+
+    if [ -z "$LOCAL_FILE_TIME" ]; then
+      # Method 2: Try stat with format specifier (BSD/macOS style)
+      LOCAL_FILE_TIME=$(stat -f %m "$DB_DUMP" 2>/dev/null)
+    fi
+
+    if [ -z "$LOCAL_FILE_TIME" ]; then
+      # Method 3: Use date command with file reference
+      LOCAL_FILE_TIME=$(date -r "$DB_DUMP" +%s 2>/dev/null)
+    fi
+
+
+    # Ensure we got a valid timestamp (numeric value)
+    if [ -n "$LOCAL_FILE_TIME" ] && echo "$LOCAL_FILE_TIME" | grep -q '^[0-9][0-9]*$'; then
+      if [ "$LOCAL_FILE_TIME" -lt "$TWELVE_HOURS_AGO" ]; then
+        LOCAL_AGE_HOURS=$(( (CURRENT_TIME - LOCAL_FILE_TIME) / 3600 ))
+        echo -e "${yellow}Local dump file is ${LOCAL_AGE_HOURS} hours old (older than 12 hours).${NC}"
+        DOWNLOAD_NEW_BACKUP=true
+      else
+        LOCAL_AGE_HOURS=$(( (CURRENT_TIME - LOCAL_FILE_TIME) / 3600 ))
+        echo -e "${green}Recent local dump file found (${LOCAL_AGE_HOURS} hours old). Using existing file.${NC}"
+      fi
+    else
+      echo -e "${yellow}Could not determine local file age (got: '$LOCAL_FILE_TIME'). Will download fresh backup.${NC}"
+      DOWNLOAD_NEW_BACKUP=true
+    fi
+  else
+    echo -e "${yellow}No local dump file found.${NC}"
+    DOWNLOAD_NEW_BACKUP=true
+  fi
+fi
+
+CREATE_NEW_BACKUP=false
+
+if [ "$DOWNLOAD_NEW_BACKUP" = true ]; then
+  echo -e "\nChecking for database backup on ${SITE_ENV}..."
+
+  # Check if there's a database backup and get its timestamp.
+  LATEST_BACKUP_TIMESTAMP=$(terminus backup:list ${SITE_ENV} --element=database --format=list --field=date 2>/dev/null | head -1)
+
+  # Check if force flag is set
+  if [ "$FORCE_BACKUP" = true ]; then
+    echo -e "${yellow}Force flag detected. Creating new backup regardless of age.${NC}"
+    CREATE_NEW_BACKUP=true
+  elif [ -z "$LATEST_BACKUP_TIMESTAMP" ]; then
+    echo -e "${yellow}No database backup found.${NC}"
+    CREATE_NEW_BACKUP=true
+  else
+    # Extract integer part of timestamp for comparison
+    BACKUP_TIME=${LATEST_BACKUP_TIMESTAMP%.*}
+
+    if [ "$BACKUP_TIME" -lt "$TWELVE_HOURS_AGO" ]; then
+      BACKUP_AGE_HOURS=$(( (CURRENT_TIME - BACKUP_TIME) / 3600 ))
+      echo -e "${yellow}Latest backup is ${BACKUP_AGE_HOURS} hours old (older than 12 hours).${NC}"
+      CREATE_NEW_BACKUP=true
+    else
+      BACKUP_AGE_HOURS=$(( (CURRENT_TIME - BACKUP_TIME) / 3600 ))
+      echo -e "${green}Recent backup found (${BACKUP_AGE_HOURS} hours old): ${LATEST_BACKUP_TIMESTAMP}${NC}"
+    fi
+  fi
+fi
+
+if [ "$CREATE_NEW_BACKUP" = true ]; then
+  echo -e "${yellow}Creating new backup for ${SITE_ENV}...${NC}"
+  if terminus backup:create ${SITE_ENV} --element=database -y; then
+    echo -e "${green}Backup created successfully.${NC}"
+    # Wait a moment for the backup to be processed
+    echo "Waiting for backup to complete..."
+    sleep 10
+  else
+    echo -e "${red}Failed to create backup for ${SITE_ENV}. Exiting.${NC}"
+    exit 1
+  fi
+fi
+
+# Download the database backup using terminus if needed
+if [ "$DOWNLOAD_NEW_BACKUP" = true ]; then
+  echo -e "\nDownloading database backup from ${SITE_ENV}..."
+  terminus backup:get ${SITE_ENV} --element=database --to=${DB_DUMP}
+else
+  echo -e "\nUsing existing local database dump file."
+fi
+
+echo -e "\nReset DB"
+drush sql-drop -y
+
+echo -e "\nImport DB"
+gunzip -c ${DB_DUMP} | drush sql-cli

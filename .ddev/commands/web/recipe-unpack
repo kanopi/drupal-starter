@@ -16,6 +16,6 @@ fi
 
 # Run composer unpack with the provided package.
 echo -e "\n 📦  Unpacking Drupal Recipe: $@"
-composer unpack "$@"
+composer drupal:recipe-unpack "$@"
 
 echo -e "\n ✅  Recipe successfully unpacked!\n"
