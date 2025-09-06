@@ -27,6 +27,7 @@
         "drush/drush": "^13",
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/shrubs": "^0.2.5",
+        "mglaman/phpstan-drupal": "^2.0",
         "oomphinc/composer-installers-extender": "^2.0.0",
         "pantheon-systems/drupal-integrations": "^11"
     },
