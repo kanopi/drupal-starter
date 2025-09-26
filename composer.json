@@ -36,6 +36,7 @@
         "drupal/default_content": "^2.0@alpha",
         "drupal/devel": "^5.4",
         "ergebnis/composer-normalize": "^2.45",
+        "mglaman/phpstan-drupal": "^2.0",
         "palantirnet/drupal-rector": "^0.21.0",
         "vincentlanglet/twig-cs-fixer": "^3"
     },
