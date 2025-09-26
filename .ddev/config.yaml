@@ -1,4 +1,4 @@
-name: drupal-starter
+# name: drupal-starter
 type: drupal
 docroot: web
 php_version: "8.3"
