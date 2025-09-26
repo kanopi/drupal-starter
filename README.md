@@ -90,7 +90,6 @@ the command `ddev`.
 | `open`                   | host      | Open the project URL in the default browser           | `ddev open`                         |
 | `phpmyadmin`             | host      | Launch PhpMyAdmin                                     | `ddev phpmyadmin`                   |
 | `rebuild`                | host      | Run composer install and refresh database             | `ddev rebuild`                      |
-| `refresh`                | host      | Pull database from host. Takes env arg. -f to force   | `ddev refresh [env] -f`             |
 | `testenv`                | host      | Initialize stack and testing environment              | `ddev testenv [env_name] [profile]` |
 | `install-critical-tools` | web       | Install tools needed for Critical CSS generation      | `ddev install-critical-tools`       |
 | `install-theme-tools`    | web       | Install and set up theme development tools            | `ddev install-theme-tools`          |
@@ -99,6 +98,7 @@ the command `ddev`.
 | `npx`                    | web       | Run npx commands inside the theme directory           | `ddev npx`                          |
 | `recipe-apply`           | web       | Apply a Drupal recipe                                 | `ddev recipe-apply <recipe-path>`   |
 | `recipe-unpack`          | web       | Unpack a Drupal recipe into composer.json             | `ddev recipe-unpack [package-name]` |
+| `refresh`                | web       | Pull database from host. Takes env arg. -f to force   | `ddev refresh [env] -f`             |
 | `tickle`                 | web       | Continuously wake a Pantheon environment              | `ddev tickle`                       |
 | `uuid-rm`                | web       | Remove UUIDs and \_core metadata from config files    | `ddev uuid-rm [path/to/folder]`     |
 
