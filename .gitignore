@@ -145,3 +145,6 @@ Thumbs.db
 /robots.txt
 /update.php
 /web.config
+
+# Claude
+.claude/settings.local.json
