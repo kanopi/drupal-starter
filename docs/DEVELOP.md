@@ -1,23 +1,45 @@
 # Developer Instructions.
 
-## Step #1: Docksal environment setup
+## Step #1: DDEV environment setup
 
-If you don't have Docker Desktop and Docksal set up, complete this step.
+If you don't have Docker Desktop and DDEV set up, complete this step.
 
 **This is a one time setup.**
 
-Follow [Docksal install instructions](https://docs.docksal.io/getting-started/setup/)
+Follow [DDEV install instructions](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
+
+### Configure Pantheon Access
+
+Generate a [Pantheon Machine Token](https://pantheon.io/docs/machine-tokens/)
+and add it to your global DDEV config:
+
+```bash
+ddev config global --web-environment-add=TERMINUS_MACHINE_TOKEN=your_token_here
+```
 
 ## Step #2: Project setup
 
 1. Clone this repo into your Projects directory.
 1. Change directory to the cloned folder.
-1. Make your own version of the `docksal-local.env` file from the example
-and add your `SECRET_TERMINUS_TOKEN` to the file.
-    * You don't need to do this if you set your token globally in Docksal
-1. Initialize the site with `fin init`
-1. Once the site has been initialized you'll get a url
-to go to in your browser to start dev'ing.
+1. Configure DDEV:
+   ```bash
+   ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
+   ddev start
+   ```
+1. Install the Kanopi DDEV add-on:
+   ```bash
+   ddev add-on get kanopi/ddev-kanopi-drupal
+   ```
+1. Configure the add-on (it will prompt for project settings):
+   ```bash
+   ddev project-configure
+   ```
+1. Initialize the site:
+   ```bash
+   ddev project-init
+   ```
+1. Once the site has been initialized you'll get a URL
+to go to in your browser to start developing.
 
 
 ## Installing Modules
@@ -25,9 +47,9 @@ to go to in your browser to start dev'ing.
 Modules are installed using composer.
 The process for installing a module would be the following:
 
-```
-fin composer require [organization]/[package]
+```bash
+ddev composer require [organization]/[package]
 ```
 
-The standard composer command is used but with the Docksal specific command 
-`fin` prepended to the beginning.
+The standard composer command is used but with the DDEV specific command
+`ddev` prepended to the beginning.

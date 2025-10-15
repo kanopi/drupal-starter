@@ -53,25 +53,37 @@ Run `gh repo-config apply` to apply the configuration to GitHub.
 
 -----
 
-### Start Docksal
+### Configure DDEV
 
-* Edit `.docksal/docksal.env`
-  * Update `hostingsite` to the `<repo_name>` used above.  This should also be your Pantheon `<site_name>` used below.
-* Run `fin start`
+* Configure DDEV for Pantheon:
+  ```bash
+  ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
+  ddev start
+  ```
+
+* Install the Kanopi DDEV add-on:
+  ```bash
+  ddev add-on get kanopi/ddev-kanopi-drupal
+  ```
+
+* Configure the add-on with project details (this will prompt for the Pantheon site name):
+  ```bash
+  ddev project-configure
+  ```
 
 
 -----
 
 ### Create the site in Pantheon
 
-`fin terminus site:create --org=<org_id> —-region=<region> -- <site_name> <label> <upstream_id>`
+`ddev terminus site:create --org=<org_id> —-region=<region> -- <site_name> <label> <upstream_id>`
 
 * `site_name` - Machine name of the project
 * `label` - Friendly project name
 * `upstream_id` - Currently *Drupal 10 Start State* - `7f9fd7d4-77ec-4e6b-a73f-d32b93a1c6b1`
-* Run `fin terminus upstream:list` to see all.
+* Run `ddev terminus upstream:list` to see all.
 * `org_id` - The UUID of your Pantheon organization.
-* Run `fin terminus org:list` to see all.
+* Run `ddev terminus org:list` to see all.
 * `region` Codes for which region to create the site.
 * `au` - Australia
 * `ca` - Canada
@@ -83,7 +95,7 @@ Kanopians: [Link more complete Cacher](https://snippets.cacher.io/snippet/667c30
 
 ### Install Drupal using the minimal install profile
 
-`fin terminus drush <site_name>.dev -- site-install minimal -y --site-name=<drupal_site_name> --account-name=<account_name> --account-mail=<account_mail> --site-mail=<site_mail>`
+`ddev terminus drush <site_name>.dev -- site-install minimal -y --site-name=<drupal_site_name> --account-name=<account_name> --account-mail=<account_mail> --site-mail=<site_mail>`
 
 * `drupal_site_name` - Friendly name of the site.
 * `account_name` - User 1's machine name.
@@ -93,24 +105,14 @@ Kanopians: [Link more complete Cacher](https://snippets.cacher.io/snippet/667c30
 
 ### Add Redis to the Pantheon site
 
-`fin terminus redis:enable <site_id>`
+`ddev terminus redis:enable <site_id>`
 
 See [A note about Redis on Pantheon](#a-note-about-redis-on-pantheon) below.
 
 
-### Configure Docksal
-
-@TODO See UI method below until this is documented.
-
-
-### Configure CircleCI
-
-@TODO See UI method below until this is documented.
-
-
 ### Site Build Drupal
 
-@TODO See UI method below until this is documented.
+For complete setup documentation, please refer to the UI Installation Method below or use the automated installer script.
 
 -----
 
@@ -165,29 +167,29 @@ things will not work).
 * Click Create button
 
 
-### Configure Docksal
+### Configure DDEV
 
 * Clone the new repo to your local.
 * Create a development branch.
-* Make the project specific changes listed below.
-* Docksal
-    * docksal.env
-        * Update `hostingsite` to the machine name of the project in Pantheon
-        * Update `THEME` to the name of the theme folder
-        * `hostingenv` is set to `dev` to start but when you release the
-        project to production it should be changed to `live`
-        ~~* Run `fin install-kdcl-basic` after you have set the~~
-        ~~theme name that you want.~~
-    * settings.php
-        * `.docksal/etc/conf/settings.php` is used for
-        the local settings file for drupal.
-    * vhost-overrides.conf
-        * `.docksal/etc/nginx/vhost-overrides.conf`
-        * Update the proxy url to use the pantheon machine name
-         for the site you just created.
-    * .pa11yci.js
-        * Update the urls you would like to test in the array
-        * Update README's pally section with the links to the correct urls.
+* Configure DDEV:
+    ```bash
+    ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
+    ddev start
+    ```
+* Install the Kanopi DDEV add-on:
+    ```bash
+    ddev add-on get kanopi/ddev-kanopi-drupal
+    ```
+* Configure the add-on (this will prompt for project-specific settings):
+    ```bash
+    ddev project-configure
+    ```
+    * Set the Pantheon site machine name
+    * Set the theme folder name
+    * Set the default environment (usually `dev`)
+* .pa11yci.js
+    * Update the urls you would like to test in the array
+    * Update README's pally section with the links to the correct urls.
 * CircleCI
     * `config.yml`
         * Update the `TERMINUS_SITE` variable in line 2
@@ -199,8 +201,8 @@ things will not work).
         uncomment the slack portion.
         You will need to create a new CircleCI slack integration
         for the channel you want to post updates too & update the webhook URL.
-* Run `fin init` to validate your local site.
-* Run `fin drush cex -y`
+* Run `ddev project-init` to validate your local site.
+* Run `ddev drush cex -y`
 * On a development branch, git add, commit and push all local changes.
 * Create a PR in github.
 * CircleCI won't run this time because we haven't set it up yet.

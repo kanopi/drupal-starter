@@ -9,51 +9,60 @@ This is a modern Drupal 11 starter project configured for Pantheon hosting with 
 - Drupal Recipes system for modular functionality
 - Component-based architecture using Saplings theme system
 - Comprehensive testing and code quality tools
-- Both DDEV and Docksal local development support
+- DDEV local development using the kanopi/ddev-kanopi-drupal add-on
 
 ## Development Commands
 
 ### Local Development Setup
 
-**DDEV (Recommended):**
+This project uses the [kanopi/ddev-kanopi-drupal](https://github.com/kanopi/ddev-kanopi-drupal) add-on which provides 27+ custom commands.
+
+**Initial Setup:**
 ```bash
-ddev init                    # Initialize local environment
-ddev rebuild                 # Run composer install and refresh database
-ddev refresh [env] -f        # Pull database from environment
-ddev install-theme-tools     # Install theme development tools
-ddev npm                     # Run npm commands in theme directory
+ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
+ddev start
+ddev add-on get kanopi/ddev-kanopi-drupal
+ddev project-configure       # Interactive configuration for project settings
+ddev project-init            # Initialize with dependencies and database
 ```
 
-**Docksal (Legacy):**
+**Common Commands:**
 ```bash
-fin init                     # Initialize project from scratch
-fin rebuild                  # Run composer install and refresh
-fin refresh                  # Pull database from remote
-fin npm                      # Run NPM from theme folder
+ddev project-init            # Initialize local environment from scratch
+ddev db-rebuild              # Run composer install and refresh database
+ddev db-refresh [env] -f     # Pull database from environment (smart backup detection)
+ddev theme-install           # Install theme development tools
+ddev theme-npm <command>     # Run npm commands in theme directory
+ddev theme-watch             # Watch theme files for changes
+ddev drupal-open             # Open site in browser
+ddev drupal-uli              # Generate one-time login link
 ```
+
+For complete command reference, see the [add-on documentation](https://kanopi.github.io/ddev-kanopi-drupal/commands/).
 
 ### Code Quality and Testing
 
 **Linting and Code Standards:**
 ```bash
-# Run with composer (prefix with `ddev` or `fin composer`)
-composer code-check          # Run all code quality checks
-composer code-fix           # Fix all code style issues
-composer phpstan            # Run static analysis
-composer lint-php           # PHP syntax checking
+# Run with composer (prefix with `ddev composer`)
+ddev composer code-check          # Run all code quality checks
+ddev composer code-fix           # Fix all code style issues
+ddev composer phpstan            # Run static analysis
+ddev composer lint-php           # PHP syntax checking
 
 # Individual tools
-composer code-sniff-modules  # PHPcs on custom modules
-composer code-sniff-themes   # PHPcs on custom themes
-composer twig-lint          # Twig template linting
-composer rector-modules     # Drupal deprecation analysis
+ddev composer code-sniff-modules  # PHPcs on custom modules
+ddev composer code-sniff-themes   # PHPcs on custom themes
+ddev composer twig-lint          # Twig template linting
+ddev composer rector-modules     # Drupal deprecation analysis
 ```
 
 **Testing:**
 ```bash
 # Cypress E2E testing
-ddev cypress open           # Open Cypress GUI
-ddev cypress run            # Run tests headlessly
+ddev cypress-install        # Install Cypress dependencies
+ddev cypress-run open       # Open Cypress GUI
+ddev cypress-run run        # Run tests headlessly
 ddev cypress-users          # Create test users
 
 # In Cypress directory
@@ -113,9 +122,11 @@ This project uses Drupal 11's recipe system extensively:
 
 ## Development Environment Variables
 
-Create `.env` file in project root for local development:
-```
-TERMINUS_MACHINE_TOKEN=your_pantheon_token
+The DDEV add-on manages environment variables through `ddev project-configure`. Variables are stored in `.ddev/config.yaml` (web_environment section).
+
+Global credentials should be set once:
+```bash
+ddev config global --web-environment-add=TERMINUS_MACHINE_TOKEN=your_pantheon_token
 ```
 
 ## Common Workflows
@@ -128,9 +139,9 @@ TERMINUS_MACHINE_TOKEN=your_pantheon_token
 
 ### Theme Development
 ```bash
-ddev install-theme-tools     # Install build dependencies
-ddev npm run build           # Build assets
-ddev npm run watch           # Watch for changes
+ddev theme-install           # Install build dependencies
+ddev theme-build             # Build assets
+ddev theme-watch             # Watch for changes
 ```
 
 ### Deployment Process
@@ -152,10 +163,10 @@ Before committing code, ensure:
 
 ### Making Code Changes
 1. Create feature branch from `main`
-2. Run `ddev rebuild` to ensure clean environment
+2. Run `ddev db-rebuild` to ensure clean environment
 3. Make your changes
 4. Test locally with appropriate commands above
-5. Export any configuration changes
+5. Export any configuration changes with `ddev drush cex`
 6. Commit and push (triggers MultiDev environment on Pantheon)
 
 ### Working with Custom Modules/Themes

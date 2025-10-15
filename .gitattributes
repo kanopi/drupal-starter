@@ -48,6 +48,7 @@ core/.phpstan-baseline.php text eol=lf whitespace=blank-at-eol,-blank-at-eof,-sp
 # Define binary file attributes.
 # - Do not treat them as text.
 # - Include binary diff in patches instead of "binary files differ."
+*.avif    -text diff
 *.eot     -text diff
 *.exe     -text diff
 *.gif     -text diff
@@ -62,7 +63,3 @@ core/.phpstan-baseline.php text eol=lf whitespace=blank-at-eol,-blank-at-eof,-sp
 *.ttf     -text diff
 *.woff    -text diff
 *.woff2   -text diff
-
-# Uncomment to ignore Archbee configuration files.
-# .archbee.yaml export-ignore
-# docs/SUMMARY.md export-ignore

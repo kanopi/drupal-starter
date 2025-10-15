@@ -56,7 +56,7 @@ Emulsify. Currently not used in new projects.
 
 ## Local Development with DDEV
 
-### Installing DDEV
+### Prerequisites
 
 If you don't have DDEV installed:
 
@@ -70,85 +70,61 @@ If you don't have DDEV installed:
 ### Configure Pantheon Access
 
 Generate a [Pantheon Machine Token](https://pantheon.io/docs/machine-tokens/)
-and add it to your global DDEV config at `~/.ddev/global_config.yaml`:
+and add it to your global DDEV config:
 
 ```shell
 ddev config global --web-environment-add=TERMINUS_MACHINE_TOKEN=your_token_here
 ```
 
+### Setup Instructions
+
+After cloning this repository, configure DDEV for the project:
+
+1. **Configure DDEV:**
+   ```shell
+   ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
+   ddev start
+   ```
+
+2. **Install the Kanopi DDEV add-on:**
+   ```shell
+   ddev add-on get kanopi/ddev-kanopi-drupal
+   ```
+
+3. **Configure the add-on:**
+   ```shell
+   ddev project-configure
+   ```
+
+4. **Initialize your environment:**
+   ```shell
+   ddev project-init
+   ```
+
 ## DDEV Commands
 
-The following commands are available with DDEV and should be prefixed with
-the command `ddev`.
+This project uses the [kanopi/ddev-kanopi-drupal](https://github.com/kanopi/ddev-kanopi-drupal) add-on which provides 27+ custom commands for Drupal development.
 
-| Command Name             | Container | Short Description                                     | Usage Syntax                        |
-|--------------------------|-----------|-------------------------------------------------------|-------------------------------------|
-| `cypress`                | host      | Run Cypress commands with optional environment target | `ddev cypress [command]`            |
-| `cypress-users`          | host      | Create default admin user for Cypress testing         | `ddev cypress-users`                |
-| `init`                   | host      | Initialize local development environment              | `ddev init`                         |
-| `install-cypress`        | host      | Install node packages for Cypress on local machine    | `ddev install-cypress`              |
-| `open`                   | host      | Open the project URL in the default browser           | `ddev open`                         |
-| `phpmyadmin`             | host      | Launch PhpMyAdmin                                     | `ddev phpmyadmin`                   |
-| `rebuild`                | host      | Run composer install and refresh database             | `ddev rebuild`                      |
-| `testenv`                | host      | Initialize stack and testing environment              | `ddev testenv [env_name] [profile]` |
-| `install-critical-tools` | web       | Install tools needed for Critical CSS generation      | `ddev install-critical-tools`       |
-| `install-theme-tools`    | web       | Install and set up theme development tools            | `ddev install-theme-tools`          |
-| `migrate-prep-db`        | web       | Create and configure a migration database             | `ddev migrate-prep-db`              |
-| `npm`                    | web       | Run npm commands inside the theme directory           | `ddev npm`                          |
-| `npx`                    | web       | Run npx commands inside the theme directory           | `ddev npx`                          |
-| `recipe-apply`           | web       | Apply a Drupal recipe                                 | `ddev recipe-apply <recipe-path>`   |
-| `recipe-unpack`          | web       | Unpack a Drupal recipe into composer.json             | `ddev recipe-unpack [package-name]` |
-| `refresh`                | web       | Pull database from host. Takes env arg. -f to force   | `ddev refresh [env] -f`             |
-| `tickle`                 | web       | Continuously wake a Pantheon environment              | `ddev tickle`                       |
-| `uuid-rm`                | web       | Remove UUIDs and \_core metadata from config files    | `ddev uuid-rm [path/to/folder]`     |
+For a complete command reference, see the [add-on documentation](https://kanopi.github.io/ddev-kanopi-drupal/commands/).
 
-### Still to do for DDEV
+### Common Commands
 
-- [ ] Add support for Pantheon Solr
-- [ ] Add command: `migrate-prep-db`
-- [ ] Add command: `config-capture`
-- [ ] Add command: `critical`
-- [ ] Add command: `release`
-
-
-## Docksal Commands
-
-The following commands are available with Docksal and should be prefixed with
-the command `fin`.
-
-| Command                 | Description                                                                         |
-|-------------------------|-------------------------------------------------------------------------------------|
-| `config-capture`        | Exports config from environments and downloads them.                                |
-| `critical`              | Run Critical CSS.                                                                   |
-| `cypress`               | Run Cypress inside Docksal. ie. `fin cypress open`.                                 |
-| `cypress-users`         | Adds users Cypress can be used to test. Called from `fin refresh`.                  |
-| `composer`              | Composer wrapper that executes within the CLI container.                            |
-| `init`                  | Init Command that starts the project from scratch.                                  |
-| `init-site`             | Installs and configures Drupal.                                                     |
-| `install-critical-tools`| Installs tools needed for Critical CSS.                                             |
-| `install-cypress`       | Called from `init` to install Cypress tools.                                        |
-| `install-theme-tools`   | Installs tools needed for Critical, Storybook, etc.                                 |
-| `migrate-prep-db`       | Creates a second database to house a migration source.                              |
-| `npm`                   | Run NPM from the theme folder.                                                      |
-| `npx`                   | Run NPX from the theme folder.                                                      |
-| `open`                  | Opens browser to local site URL.                                                    |
-| `rebuild`               | Runs `composer install` and `fin refresh`.                                          |
-| `recipe-apply`          | Apply Drupal contrib Recipes that have been required.                               |
-| `recipe-configure`      | Configures sites for Drupal Recipes. Already run in this repo.                      |
-| `recipe-unpack`         | Unpacks Composer dependencies from a Recipe to the project's composer.json.         |
-| `refresh`               | Will execute a drush sql-dump from the remote server.                               |
-| `release`               | Creates a new release on GitHub and deploys it to Pantheon test environment.        |
-| `share`                 | Opens a proxy server to your local computer using ngrok.io.                         |
-| `solr-create-core`      | Called from `init` to create Solr core.                                             |
-| `testenv`               | Creates a new site similar to `init`, but with a local db for testing/contributing. |
-| `tickle`                | Wakes up the remote migration source environment every 5 minutes.                   |
-| `uuid-rm`               | Helper command for Drupal Recipe builders that removes UUIDs from config files.     |
+| Command | Description |
+|---------|-------------|
+| `ddev project-init` | Initialize environment with dependencies and database |
+| `ddev db-refresh [env] [-f]` | Pull database from Pantheon environment |
+| `ddev drupal-open` | Open the site in your browser |
+| `ddev drupal-uli` | Generate a one-time login link |
+| `ddev theme-install` | Set up theme development tools |
+| `ddev theme-watch` | Watch theme files for changes |
+| `ddev recipe-apply <path>` | Apply a Drupal recipe |
+| `ddev cypress-run` | Run Cypress E2E tests |
 
 
 ## Composer Commands
 
 The following commands are available with Composer and should be prefixed with
-the command `fin composer`.
+the command `ddev composer`.
 
 | Command               | Description                                                        |
 |-----------------------|--------------------------------------------------------------------|
