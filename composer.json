@@ -73,7 +73,6 @@
             "oomphinc/composer-installers-extender": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
-            "rvtraveller/qs-composer-installer": true,
             "tbachert/spi": false
         },
         "optimize-autoloader": true,
