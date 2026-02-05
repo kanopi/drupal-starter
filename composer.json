@@ -213,18 +213,6 @@
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/rector process web/themes/custom/ --dry-run"
         ],
-        "rector-check-ci": [
-            "@rector-modules-ci",
-            "@rector-themes-ci"
-        ],
-        "rector-modules-ci": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/rector process web/modules/custom/ --dry-run --output-format=junit > rector-modules-report.xml"
-        ],
-        "rector-themes-ci": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/rector process web/themes/custom/ --dry-run --output-format=junit > rector-themes-report.xml"
-        ],
         "twig-fix": [
             "@twig-fix-modules",
             "@twig-fix-themes"
