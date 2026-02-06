@@ -267,7 +267,7 @@ workflows:
           tag: *CIMG_PHP_TAG
           name: "Rector modules"
           context: kanopi-code
-          command: 'rector-modules-ci'
+          command: 'rector-modules'
           post-to-github: true
           post-artifact-to-github-when: on_fail
           report-title: ":x: rector-modules"
@@ -275,12 +275,6 @@ workflows:
             branches:
               ignore:
                 - main
-          post-steps:
-            - store_test_results:
-                path: rector-modules-report.xml
-            - store_artifacts:
-                path: rector-modules-report.xml
-                destination: rector-modules
   Rector - themes:
     <<: *default_workflow
     jobs:
@@ -288,7 +282,7 @@ workflows:
           tag: *CIMG_PHP_TAG
           name: "Rector themes"
           context: kanopi-code
-          command: 'rector-themes-ci'
+          command: 'rector-themes'
           post-to-github: true
           post-artifact-to-github-when: on_fail
           report-title: ":x: rector-themes"
@@ -296,12 +290,6 @@ workflows:
             branches:
               ignore:
                 - main
-          post-steps:
-            - store_test_results:
-                path: rector-themes-report.xml
-            - store_artifacts:
-                path: rector-themes-report.xml
-                destination: rector-themes
   Twig lint:
     <<: *default_workflow
     jobs:

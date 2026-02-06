@@ -179,6 +179,12 @@
         "code-sniff-themes": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
         "code-sniff-themes-ci": "vendor/bin/phpcs --report=junit --report-file=phpcs-themes-report.xml --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
         "lint-php": "find web/modules/custom web/themes/custom -not -path '*/node_modules/*' -name '*.php' -exec php -l {} \\;",
+        "phpcs": "vendor/bin/phpcs --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom web/themes/custom ",
+        "phpcbf": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom web/themes/custom ",
+        "rector": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/rector process web/modules/custom/  web/themes/custom/"
+        ],
         "phpstan": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/phpstan analyse --memory-limit=-1 web/modules/custom web/themes/custom"
@@ -211,18 +217,6 @@
         "rector-themes": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/rector process web/themes/custom/ --dry-run"
-        ],
-        "rector-check-ci": [
-            "@rector-modules-ci",
-            "@rector-themes-ci"
-        ],
-        "rector-modules-ci": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/rector process web/modules/custom/ --dry-run --output-format=junit > rector-modules-report.xml"
-        ],
-        "rector-themes-ci": [
-            "Composer\\Config::disableProcessTimeout",
-            "vendor/bin/rector process web/themes/custom/ --dry-run --output-format=junit > rector-themes-report.xml"
         ],
         "twig-fix": [
             "@twig-fix-modules",
