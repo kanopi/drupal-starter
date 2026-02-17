@@ -337,7 +337,7 @@ workflows:
           context: kanopi-code
           filters:
             branches:
-              ignore: /^dependabot/
+              ignore: /^dependabot\/.*/
           requires:
             - compile-theme
       - cypress:
