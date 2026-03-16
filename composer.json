@@ -164,9 +164,20 @@
             "@rector-fix",
             "@lint-php"
         ],
+        "phpcbf": [
+            "@code-fix-modules",
+            "@code-fix-themes"
+        ],
+        "rector": [
+            "@rector-fix"
+        ],
         "code-fix-modules": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/modules/custom ",
         "code-fix-themes": "vendor/bin/phpcbf --ignore=*/node_modules/* --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,info,txt,md,yml web/themes/custom ",
         "code-sniff": [
+            "@code-sniff-modules",
+            "@code-sniff-themes"
+        ],
+        "phpcs": [
             "@code-sniff-modules",
             "@code-sniff-themes"
         ],
