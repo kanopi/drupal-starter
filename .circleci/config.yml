@@ -486,7 +486,7 @@ workflows:
   #
   # To use setup a new trigger in CircleCI.
   # Set the name of the job to be anything.
-  # The parameter cron_env should be added and 
+  # The parameter cron_env should be added and
   # set to be the name of the env to reference for Pantheon.
   #
   # To manually trigger pipeline set the parameters:
