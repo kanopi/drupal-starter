@@ -333,6 +333,9 @@ workflows:
     jobs:
       - compile-theme:
           context: kanopi-code
+          filters:
+            branches:
+              ignore: /^dependabot\/.*/
       - deploy-to-pantheon:
           context: kanopi-code
           filters:
