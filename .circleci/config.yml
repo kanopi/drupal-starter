@@ -228,6 +228,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: phpstan-report.xml
@@ -249,6 +250,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: phpcs-modules-report.xml
@@ -275,6 +277,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: rector-modules-report.xml
@@ -296,6 +299,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: rector-themes-report.xml
@@ -317,6 +321,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: twig-modules-report.xml
