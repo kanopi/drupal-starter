@@ -27,13 +27,13 @@ workflows:
         script: private/scripts/drush_config_import/drush_config_import.php
       - type: webphp
         description: Log to New Relic
-        script: private/scripts/sync_code/new_relic_deploy.php
+        script: private/scripts/quicksilver/new-relic-deploy/new-relic-deploy.php
   # Log to New Relic when deploying to test or live.
   deploy:
     after:
       - type: webphp
         description: Log to New Relic
-        script: private/scripts/deploy/new_relic_deploy.php
+        script: private/scripts/quicksilver/new-relic-deploy/new-relic-deploy.php
       - type: webphp
         description: Database updates, config import.
         script: private/scripts/drush_config_import/drush_config_import.php
