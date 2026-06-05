@@ -101,6 +101,39 @@ After cloning this repository, configure DDEV for the project:
    ddev project-init
    ```
 
+5. **Set up New Relic deploy markers (one-time, per site):**
+
+   This starter logs a deploy marker to New Relic on every Pantheon
+   `sync_code` and `deploy` (see `pantheon.yml`). The Quicksilver script is
+   Pantheon's canonical `new_relic_deploy.php`, vendored via Composer from
+   [`pantheon-systems/quicksilver-examples`](https://github.com/pantheon-systems/quicksilver-examples/tree/main/new_relic_deploy).
+   It reads the New Relic API key from a Pantheon secret, so **each new site
+   created from this starter must complete the following once** or the script
+   will exit with `ALERT! No New Relic metadata could be found.`
+
+   1. In the Pantheon Dashboard, activate **New Relic Performance Monitoring**
+      (New Relic Pro) for the site.
+   2. Create a [New Relic **User key**](https://one.newrelic.com/launcher/api-keys-ui.api-keys-launcher)
+      (a User key — not a license/ingest key).
+   3. Store it as a site secret named `new_relic_api_key` using the
+      [Terminus Secrets Manager plugin](https://docs.pantheon.io/terminus/plugins/directory#secrets-manager).
+      The secret **must** use `--type=runtime` and a scope that includes `web`:
+      ```shell
+      terminus secret:site:set <site> new_relic_api_key --scope=web --type=runtime <NEW_RELIC_USER_KEY>
+      ```
+      > The secret name must stay `new_relic_api_key` to match `pantheon.yml`
+      > and the script. If you rename it, update both.
+   4. Verify it was stored:
+      ```shell
+      terminus secret:site:list <site>
+      ```
+   5. Trigger a deploy (or run a `sync_code`) and confirm a deployment marker
+      appears in New Relic for the environment.
+
+   See Pantheon's
+   [New Relic Deploy README](https://github.com/pantheon-systems/quicksilver-examples/blob/main/new_relic_deploy/README.md)
+   for full details.
+
 ## DDEV Commands
 
 This project uses the [kanopi/ddev-kanopi-drupal](https://github.com/kanopi/ddev-kanopi-drupal) add-on which provides 27+ custom commands for Drupal development.
