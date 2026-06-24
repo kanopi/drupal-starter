@@ -28,19 +28,8 @@ else
   terminus -n build:env:push "$TERMINUS_SITE.dev" --yes
 fi
 
-# Clear Drupal cache
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- cr
-
-# Import config
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- config-import --yes
-
-
-# Update the Drupal database
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- updatedb -y
-
-
-# Clear Drupal cache
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- cr
+# Run updatedb, config-import, and cache-rebuild
+terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- deploy -y
 
 # Clear the environment cache
 terminus -n env:clear-cache $TERMINUS_SITE.$TERMINUS_ENV
