@@ -28,8 +28,7 @@
         "joachim-n/composer-manifest": "^1.0",
         "kanopi/shrubs": "^0.2.5",
         "oomphinc/composer-installers-extender": "^2.0.0",
-        "pantheon-systems/drupal-integrations": "^11",
-        "pantheon-systems/quicksilver-examples": "2025.04.01"
+        "pantheon-systems/drupal-integrations": "^11"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
@@ -52,19 +51,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "_comment": "Pantheon's canonical New Relic deploy script (NerdGraph + pantheon_get_secret). quicksilver-examples is not a Composer package, so it's defined inline as a quicksilver-script and pinned to a commit. Requires a Pantheon secret named new_relic_api_key.",
-            "type": "package",
-            "package": {
-                "name": "pantheon-systems/quicksilver-examples",
-                "version": "2025.04.01",
-                "type": "quicksilver-script",
-                "dist": {
-                    "url": "https://github.com/pantheon-systems/quicksilver-examples/archive/ebc53ffacb95ac46150def409789db772c584df0.zip",
-                    "type": "zip"
-                }
-            }
         }
     ],
     "minimum-stability": "dev",
@@ -152,8 +138,7 @@
             "npm-asset",
             "bower-asset",
             "cypress-support",
-            "cypress-e2e",
-            "quicksilver-script"
+            "cypress-e2e"
         ],
         "patchLevel": {
             "drupal/core": "-p2"

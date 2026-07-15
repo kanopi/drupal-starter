@@ -12,7 +12,6 @@
 /web/themes/contrib/
 /web/profiles/.gitignore
 /web/profiles/contrib/
-/web/private/scripts/quicksilver
 /web/.eslintrc.json
 /web/recipes/.gitignore
 /web/recipes/contrib/
