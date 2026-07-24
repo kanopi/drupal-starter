@@ -28,19 +28,9 @@ else
   terminus -n build:env:push "$TERMINUS_SITE.dev" --yes
 fi
 
-# Clear Drupal cache
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- cr
-
-# Import config
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- config-import --yes
-
-
-# Update the Drupal database
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- updatedb -y
-
-
-# Clear Drupal cache
-terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- cr
+# Database updates, config import and post-update hooks all run on the
+# environment via the sync_code Quicksilver hook (see pantheon.yml). Running
+# them again from here would duplicate the work.
 
 # Clear the environment cache
 terminus -n env:clear-cache $TERMINUS_SITE.$TERMINUS_ENV
