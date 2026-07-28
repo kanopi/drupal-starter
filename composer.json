@@ -20,25 +20,27 @@
     "require": {
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7.3",
-        "drupal/core-composer-scaffold": "^11.2",
-        "drupal/core-recipe-unpack": "^11",
-        "drupal/core-recommended": "^11.2",
-        "drupal/core-vendor-hardening": "^11.2",
+        "drupal/core-composer-scaffold": "^11.4",
+        "drupal/core-recipe-unpack": "^11.4",
+        "drupal/core-recommended": "^11.4",
+        "drupal/core-vendor-hardening": "^11.4",
+        "drupal/pantheon_advanced_page_cache": "^2.4",
         "drush/drush": "^13",
         "joachim-n/composer-manifest": "^1.0",
-        "kanopi/shrubs": "^0.2.5",
         "oomphinc/composer-installers-extender": "^2.0.0",
         "pantheon-systems/drupal-integrations": "^11"
     },
     "require-dev": {
-        "drupal/coder": "^8.3",
-        "drupal/core-dev": "^11.2",
+        "drupal/coder": "^9.0",
         "drupal/default_content": "^2.0@alpha",
-        "drupal/devel": "^5.4",
-        "ergebnis/composer-normalize": "^2.45",
-        "mglaman/phpstan-drupal": "^2.0",
-        "palantirnet/drupal-rector": "^0.21.0",
-        "vincentlanglet/twig-cs-fixer": "^3"
+        "drupal/devel": "^5.5",
+        "ergebnis/composer-normalize": "^2.52",
+        "kanopi/shrubs": "^0.2.16",
+        "mglaman/phpstan-drupal": "^2.1",
+        "palantirnet/drupal-rector": "^1.1",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.2",
+        "vincentlanglet/twig-cs-fixer": "^4.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -146,7 +148,6 @@
     },
     "scripts": {
         "post-autoload-dump": [
-            "[ ! -f rector.php ] && cp vendor/palantirnet/drupal-rector/rector.php . || true",
             "vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer || true"
         ],
         "build-assets": [
