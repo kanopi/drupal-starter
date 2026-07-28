@@ -31,15 +31,16 @@
         "pantheon-systems/drupal-integrations": "^11"
     },
     "require-dev": {
-        "drupal/coder": "^8.3",
-        "drupal/core-dev": "^11.4",
+        "drupal/coder": "^9.0",
         "drupal/default_content": "^2.0@alpha",
-        "drupal/devel": "^5.4",
-        "ergebnis/composer-normalize": "^2.45",
-        "kanopi/shrubs": "^0.2.5",
-        "mglaman/phpstan-drupal": "^2.0",
-        "palantirnet/drupal-rector": "^1.0",
-        "vincentlanglet/twig-cs-fixer": "^3"
+        "drupal/devel": "^5.5",
+        "ergebnis/composer-normalize": "^2.52",
+        "kanopi/shrubs": "^0.2.16",
+        "mglaman/phpstan-drupal": "^2.1",
+        "palantirnet/drupal-rector": "^1.1",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^2.2",
+        "vincentlanglet/twig-cs-fixer": "^4.0"
     },
     "conflict": {
         "drupal/drupal": "*"
