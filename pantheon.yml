@@ -23,8 +23,8 @@ workflows:
   sync_code:
     after:
       - type: webphp
-        description: Database updates, config import.
-        script: private/scripts/drush_config_import/drush_config_import.php
+        description: Drush deploy (database updates, config import, post-updates).
+        script: private/scripts/drush_deploy/drush_deploy.php
       - type: webphp
         description: Log to New Relic
         script: private/scripts/sync_code/new_relic_deploy.php
@@ -35,5 +35,5 @@ workflows:
         description: Log to New Relic
         script: private/scripts/deploy/new_relic_deploy.php
       - type: webphp
-        description: Database updates, config import.
-        script: private/scripts/drush_config_import/drush_config_import.php
+        description: Drush deploy (database updates, config import, post-updates).
+        script: private/scripts/drush_deploy/drush_deploy.php
