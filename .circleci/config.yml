@@ -228,6 +228,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: phpstan-report.xml
@@ -249,6 +250,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: phpcs-modules-report.xml
@@ -275,6 +277,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: rector-modules-report.xml
@@ -296,6 +299,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: rector-themes-report.xml
@@ -317,6 +321,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^dependabot\/.*/
           post-steps:
             - store_test_results:
                 path: twig-modules-report.xml
@@ -333,6 +338,9 @@ workflows:
     jobs:
       - compile-theme:
           context: kanopi-code
+          filters:
+            branches:
+              ignore: /^dependabot\/.*/
       - deploy-to-pantheon:
           context: kanopi-code
           filters:
@@ -486,7 +494,7 @@ workflows:
   #
   # To use setup a new trigger in CircleCI.
   # Set the name of the job to be anything.
-  # The parameter cron_env should be added and 
+  # The parameter cron_env should be added and
   # set to be the name of the env to reference for Pantheon.
   #
   # To manually trigger pipeline set the parameters:
