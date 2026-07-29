@@ -1,6 +1,6 @@
 {
     "name": "kanopi/drupal-starter",
-    "description": "Project template for modern Drupal projects with composer and docksal",
+    "description": "Project template for modern Drupal projects with composer and DDEV",
     "license": "GPL-2.0+",
     "type": "project",
     "authors": [

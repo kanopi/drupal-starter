@@ -1,7 +1,7 @@
 # Installation
 
 Instructions on how to install and configure this Drupal project template for
-Pantheon, CircleCI, and local Docksal development.
+Pantheon, CircleCI, and local DDEV development.
 
 
 -----
@@ -58,7 +58,6 @@ Run `gh repo-config apply` to apply the configuration to GitHub.
 * Configure DDEV for Pantheon:
   ```bash
   ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
-  ddev start
   ```
 
 * Install the Kanopi DDEV add-on:
@@ -174,7 +173,6 @@ things will not work).
 * Configure DDEV:
     ```bash
     ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
-    ddev start
     ```
 * Install the Kanopi DDEV add-on:
     ```bash
@@ -231,9 +229,8 @@ Circleci job will still not happen.
 
 We have removed all opinions about which modules should be installed in Drupal.
 
-Instead, we have created the [kanopi/saplings](https://www.github.com/kanopi/saplings)
-Drupal recipe to require, intsall, and configure the modules and content types we 
-use on most Drupal builds.  Please visit that repository to continue using that.
+Instead, apply the Drupal Recipes that require, install, and configure the
+modules and content types your build needs.
 
 
 ### A note about Redis on Pantheon.

@@ -7,7 +7,7 @@ for a recipe.
 
 The module is required in the dev section.  It is not required in production.
 
-fin drush en -y default_content
+ddev drush en -y default_content
 
 ## Exporting content
 
@@ -43,4 +43,4 @@ dcer gets all the dependencies of the entity you are exporting.
 
 4. Disable the module when done.
 
-fin drush pmu -y default_content
+ddev drush pmu -y default_content

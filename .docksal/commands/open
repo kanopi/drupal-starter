@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-## Opens browser to virtualhost
-##
-## Usage: fin open
-
-open //${VIRTUAL_HOST}${NC}

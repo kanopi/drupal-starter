@@ -24,7 +24,6 @@ ddev config global --web-environment-add=TERMINUS_MACHINE_TOKEN=your_token_here
 1. Configure DDEV:
    ```bash
    ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
-   ddev start
    ```
 1. Install the Kanopi DDEV add-on:
    ```bash

@@ -8,7 +8,7 @@ creaing the best possible product.
 The following tests are run using the composer.json scripts section. They can be
  run locally, and are run in CircleCI.
 
-Preface each command with `fin composer`
+Preface each command with `ddev composer`
 
 ### PHP Linting
 

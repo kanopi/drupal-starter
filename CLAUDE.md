@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a modern Drupal 11 starter project configured for Pantheon hosting with comprehensive development tooling. It includes:
 
 - Drupal Recipes system for modular functionality
-- Component-based architecture using Saplings theme system
+- Component-based architecture using UI Patterns
 - Comprehensive testing and code quality tools
 - DDEV local development using the kanopi/ddev-kanopi-drupal add-on
 
@@ -20,7 +20,6 @@ This project uses the [kanopi/ddev-kanopi-drupal](https://github.com/kanopi/ddev
 **Initial Setup:**
 ```bash
 ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
-ddev start
 ddev add-on get kanopi/ddev-kanopi-drupal
 ddev project-configure       # Interactive configuration for project settings
 ddev project-init            # Initialize with dependencies and database
@@ -80,14 +79,13 @@ ddev recipe-unpack [package-name]   # Unpack recipe dependencies
 ## Architecture
 
 ### Theme System
-- **Primary Theme:** `saplings_child` - Custom child theme based on `ui_suite_bootstrap`
+- **Primary Theme:** `arbor` - Custom subtheme based on `ui_suite_bootstrap`
 - **Admin Theme:** `gin` - Modern admin interface
 - **Pattern Library:** Uses UI Patterns for component-based development
 - **Build Process:** Webpack-based compilation in theme directories
 
 ### Content Architecture
-- **Saplings Component System:** Modular paragraph-based components for flexible page building
-- **Content Types:** Page (`sa_page`) and Post (`sa_post`) with component fields
+- **Component System:** Modular paragraph-based components for flexible page building
 - **Media Management:** Structured media types with focal point support
 
 ### Custom Code Structure
@@ -107,11 +105,9 @@ This project uses Drupal 11's recipe system extensively:
 - Recipes are in `/recipes/` directory
 - Each recipe includes `recipe.yml` with dependencies and config
 - Use `ddev recipe-apply` to install recipes
-- Custom recipes follow Saplings naming convention (`saplings-*`)
 
 ### Component Development
-- Paragraph types prefixed with `sa_` (Saplings Architecture)
-- Components use consistent field naming: `sa_header`, `sa_description`, `sa_background`, etc.
+- Components use consistent field naming across paragraph types
 - UI Patterns for template organization in theme
 
 ### Code Organization
@@ -171,7 +167,7 @@ Before committing code, ensure:
 
 ### Working with Custom Modules/Themes
 - Custom modules: `/web/modules/custom/`
-- Custom themes: `/web/themes/custom/arbor/` and `/web/themes/custom/saplings_child/`
+- Custom themes: `/web/themes/custom/arbor/`
 - Always run code quality checks before committing
 
 ## Pantheon-Specific Notes

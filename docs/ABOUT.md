@@ -3,11 +3,7 @@
 [kanopi/drupal-starter](https://www.github.com/kanopi/drupal-starter) is
 opinionless about Drupal.
 
-What does have Drupal opinions is our new suite of Drupal Recipes called
-[kanopi/saplings](https://www.github.com/kanopi/saplings).
-
-Explore the Saplings respository to choose your own adventure and apply the
-functionality you need for your Drupal site in minutes.
+Apply the Drupal Recipes you need to add the functionality your site requires.
 
 What kanopi/drupal-starter does have opinions about is scaffolding and testing.
 
@@ -127,7 +123,7 @@ versions, we need to upgrade the rector.php and phpstan.neon files in the root
 of our project.
 
 The tests are preconfigured in the scripts section of the composer.json.  So we
-can run them locally, pre-commit or pre-push using Lefthook, and in CircleCI.
+can run them locally and in CircleCI.
 Anywhere the site is installed using composer with the dev modules.
 
 At this time, we run 4 pre-build static code tests, `PHPcs`, `PHPstan`, `Rector
