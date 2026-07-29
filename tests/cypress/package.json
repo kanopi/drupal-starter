@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": ">=16"
+    "node": "^20.1.0 || ^22.0.0 || >=24.0.0"
   },
   "scripts": {
     "delete:reports": "rm cypress/results/* || true",
@@ -11,16 +11,16 @@
     "merge:reports": "npx mochawesome-merge 'cypress/results/*.json' > cypress/mochawesome.json; npx marge -o cypress/results/mocha-report cypress/mochawesome.json"
   },
   "dependencies": {
-    "@ngneat/falso": "^6.3.0",
-    "cypress-downloadfile": "^1.2.3",
-    "cypress-multi-reporters": "^1.6.1",
-    "dotenv": "^16.0.1",
+    "@ngneat/falso": "^8.0.2",
+    "cypress-downloadfile": "^1.2.4",
+    "cypress-multi-reporters": "^2.0.5",
+    "dotenv": "^17.4.2",
     "dotenv-parse-variables": "^2.0.0",
-    "mocha-junit-reporter": "^2.0.2",
-    "mochawesome": "^7.1.3",
-    "mochawesome-report-generator": "^6.2.0"
+    "mocha-junit-reporter": "^2.2.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-report-generator": "^6.3.2"
   },
   "devDependencies": {
-    "cypress": "^13.6.4"
+    "cypress": "^15.19.0"
   }
 }
