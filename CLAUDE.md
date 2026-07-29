@@ -175,4 +175,4 @@ Before committing code, ensure:
 - Uses `pantheon.yml` for platform configuration
 - Custom workflows for automated config imports
 - Protected paths configured for security
-- PHP 8.3 and MySQL 10.6 runtime
+- PHP 8.4 and MySQL 10.6 runtime
