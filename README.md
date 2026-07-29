@@ -1,5 +1,5 @@
 # [Drupal Starter](https://example.com/)
-This is the Drupal Composer Project with docksal configuration to easily get a
+This is the Drupal Composer Project with DDEV configuration to easily get a
 site started.
 
 Features:
@@ -7,7 +7,7 @@ Features:
 - Configured for Pantheon hosting
 - Unopinionated Modern Drupal Installation
 - Composer Installation
-- Docksal Local Development Configuration
+- DDEV Local Development Configuration
 - CircleCI Deployment and Testing configuration
 
 Please make this README as project specific as possible. Delete the things that
@@ -49,10 +49,8 @@ use the Default Content module to create default content for a recipe.
 
 
 ## Theme Commands and Setup Documentation
-- [Saplings Child](docs/SAPLINGS_THEME.md) - Current theme based on
+- [Arbor](docs/ARBOR_THEME.md) - Current theme based on
 ui_suite_bootstrap
-- [Emulsify](docs/EMULSIFY.md) - kanopi/kdcl_basic theme was built from
-Emulsify. Currently not used in new projects.
 
 ## Local Development with DDEV
 
@@ -64,8 +62,8 @@ If you don't have DDEV installed:
 2. Ensure you have a compatible Docker provider such as Docker Desktop,
    OrbStack, or Lima:
    [Docker Installation](https://ddev.readthedocs.io/en/stable/users/install/docker-installation/)
-3. **Important:** Turn off Docksal or Lando before starting DDEV to avoid port
-   conflicts.
+3. **Important:** Turn off any other local development environment (such as
+   Lando) before starting DDEV to avoid port conflicts.
 
 ### Configure Pantheon Access
 
@@ -83,7 +81,6 @@ After cloning this repository, configure DDEV for the project:
 1. **Configure DDEV:**
    ```shell
    ddev config --project-type=drupal11 --docroot=web --database=mariadb:10.6
-   ddev start
    ```
 
 2. **Install the Kanopi DDEV add-on:**

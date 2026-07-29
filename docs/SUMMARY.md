@@ -13,7 +13,5 @@ project.
 
 
 ## Theme Commands and Setup
-- [Saplings Child](SAPLINGS_THEME.md) - Current theme based on
+- [Arbor](ARBOR_THEME.md) - Current theme based on
 ui_suite_bootstrap
-- [Emulsify](EMULSIFY.md) - kanopi/kdcl_basic theme was built from
-Emulsify. Currently not used in new projects.

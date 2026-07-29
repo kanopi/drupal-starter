@@ -134,12 +134,6 @@ if ($_ENV['PANTHEON_ENVIRONMENT']) {
     $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
     $config['environment_indicator.indicator']['name'] = 'Development (Do not enter content)';
     break;
-  case 'docksal':
-    // Blue.
-    $config['environment_indicator.indicator']['bg_color'] = '#0550e6';
-    $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
-    $config['environment_indicator.indicator']['name'] = 'Docksal';
-    break;
   default:
     // Multidev catchall/Purple.
     $config['environment_indicator.indicator']['bg_color'] = '#4300bf';
