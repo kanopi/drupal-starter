@@ -171,6 +171,7 @@ jobs:
     steps:
       - checkout
       - ci-tools/copy-ssh-key
+      - ci-tools/github-app-token
       - ci-tools/remove-files:
           docroot: "web"
       - attach_workspace:
