@@ -172,8 +172,6 @@ jobs:
       - checkout
       - ci-tools/copy-ssh-key
       - ci-tools/github-app-token
-      - ci-tools/remove-files:
-          docroot: "web"
       - attach_workspace:
           at: /tmp/workspace
       - run:
@@ -193,6 +191,11 @@ jobs:
           key: drupal-{{ checksum "composer.lock" }}
           paths:
             - vendor
+      # Runs after the Composer build so files Composer installs (core's
+      # CHANGELOG.txt, INSTALL.txt, etc.) are removed too. Add project files,
+      # such as a custom theme README, with the comma-separated `files` option.
+      - ci-tools/remove-files:
+          docroot: "web"
       - run:
           name: Copy compiled theme assets.
           environment:
