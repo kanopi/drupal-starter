@@ -26,11 +26,14 @@ then
 else
   # Push to the dev environment
   terminus -n build:env:push "$TERMINUS_SITE.dev" --yes
+  TERMINUS_ENV="dev"
 fi
 
-# Database updates, config import and post-update hooks all run on the
-# environment via the sync_code Quicksilver hook (see pantheon.yml). Running
-# them again from here would duplicate the work.
+# build:env:create does not trigger the sync_code Quicksilver hook on a new
+# multidev, so run drush deploy (updatedb, config:import, deploy hooks) here.
+# On existing environments Quicksilver also runs it; drush deploy is safe to
+# repeat.
+terminus -n drush "$TERMINUS_SITE.$TERMINUS_ENV" -- deploy -y
 
 # Clear the environment cache
 terminus -n env:clear-cache $TERMINUS_SITE.$TERMINUS_ENV
