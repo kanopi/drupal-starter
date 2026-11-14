@@ -107,6 +107,12 @@ jobs:
       TERMINUS_SITE: *TERMINUS_SITE
       PANTHEON_UUID: *PANTHEON_UUID
     resource_class: large
+    # Fixed source IPs so Pantheon/Cloudflare can allowlist CI traffic; the
+    # CI-Testing/1.0 token does not cover rate limits (429) or
+    # payload-triggered WAF challenges. Docker executor only; needs a
+    # Performance or Scale plan and uses network-transfer credits.
+    # https://circleci.com/docs/guides/security/ip-ranges/
+    circleci_ip_ranges: true
     steps:
       - ci-tools/set-variables
       - checkout
@@ -130,7 +136,8 @@ jobs:
           command: terminus -n auth:login --machine-token="$TERMINUS_TOKEN"
       - run:
           name: Prime Cache
-          command: curl -I "${SITE_URL}"
+          # CI-Testing/1.0 is the user-agent token Pantheon's CDN allowlists.
+          command: curl -I -A "curl CI-Testing/1.0" "${SITE_URL}"
       - run:
           name: Set Variables
           command: |
@@ -398,6 +405,11 @@ workflows:
             - deploy-to-pantheon
           context: kanopi-code
           urls: "${PR_ENV_URL}"
+          # The orb default plus the CI-Testing/1.0 user agent that Pantheon's
+          # CDN allowlists. pa11y needs both userAgent and the User-Agent
+          # header to apply it to the first request. Keep in sync with the
+          # orb's config-default when bumping kanopi/ci-tools.
+          config-default: '{"defaults":{"chromeLaunchConfig":{"args":["--no-sandbox"]},"userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome Safari/537.36 CI-Testing/1.0","headers":{"Deterrence-Bypass":1,"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome Safari/537.36 CI-Testing/1.0"},"hideElements":"iframe[src*=\"https://i.liadm.com\"], iframe[src*=\"googletagmanager\"], iframe[src*=\"google-analytics\"], iframe[src*=\"facebook.com\"], iframe[src*=\"doubleclick\"], iframe[src*=\"googlesyndication\"], iframe[src*=\"googleadservices\"], iframe[src*=\"linkedin.com\"], iframe[src*=\"twitter.com\"], iframe[src*=\"youtube.com\"], iframe[src*=\"vimeo.com\"], iframe[title=\"\"], iframe:not([title])"}}'
           # Replace the primary URL with a Pantheon multidev URL.
           pre-steps:
             - ci-tools/set-pantheon-url:
